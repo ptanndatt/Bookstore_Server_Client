@@ -40,8 +40,6 @@ dependencies {
     implementation("com.microsoft.sqlserver:mssql-jdbc:12.3.0.jre20-preview")
 // https://mvnrepository.com/artifact/org.projectlombok/lombok
     compileOnly("org.projectlombok:lombok:1.18.24")
-
-
 }
 
 group = "vn.N10_PTUD_v1"
