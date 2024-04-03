@@ -5,6 +5,8 @@
 plugins {
     `java-library`
     `maven-publish`
+    kotlin("jvm") version "1.6.10"
+    kotlin("kapt") version "1.6.10"
 }
 
 repositories {
@@ -33,13 +35,23 @@ dependencies {
 // https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-testing
     testImplementation("org.hibernate.orm:hibernate-testing:6.4.4.Final")
 // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.1")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
 // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine
-    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.10.1")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.9.2")
 // https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc
-    implementation("com.microsoft.sqlserver:mssql-jdbc:12.3.0.jre20-preview")
+//    implementation("com.microsoft.sqlserver:mssql-jdbc:12.3.0.jre20-preview")
 // https://mvnrepository.com/artifact/org.projectlombok/lombok
     compileOnly("org.projectlombok:lombok:1.18.24")
+    kapt("org.projectlombok:lombok:1.18.8")
+    // https://mvnrepository.com/artifact/log4j/log4j
+    implementation("log4j:log4j:1.2.17")
+// https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api
+    implementation("org.apache.logging.log4j:log4j-api:2.17.1")
+// https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
+    implementation("org.apache.logging.log4j:log4j-core:2.17.1")
+// https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc
+    implementation("com.microsoft.sqlserver:mssql-jdbc:11.2.2.jre17")
+
 }
 
 group = "vn.N10_PTUD_v1"
@@ -59,4 +71,9 @@ tasks.withType<JavaCompile>() {
 
 tasks.withType<Javadoc>() {
     options.encoding = "UTF-8"
+}
+
+tasks.test {
+    useJUnitPlatform()
+    include("**/*Test.*")
 }
