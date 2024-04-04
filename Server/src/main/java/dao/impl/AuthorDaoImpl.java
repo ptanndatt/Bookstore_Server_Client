@@ -12,6 +12,7 @@ package dao.impl;/*
  */
 
 import dao.AuthorDao;
+import jakarta.persistence.Entity;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import models.Author;
@@ -59,21 +60,66 @@ public class AuthorDaoImpl implements AuthorDao {
 
     @Override
     public boolean updateAuthor(Author author) {
+        EntityTransaction tr = null;
+        try {
+            tr = em.getTransaction();
+            tr.begin();
+            em.merge(author);
+            tr.commit();
+            return true;
+        } catch (Exception e) {
+            tr.rollback();
+            e.printStackTrace();
+        }
         return false;
     }
 
     @Override
     public boolean deleteAuthor(String idAuthor) {
-        return false;
+        EntityTransaction tr = em.getTransaction();
+        try {
+            tr.begin();
+            Author author = em.find(Author.class, idAuthor);
+            em.remove(author);
+            tr.commit();
+            return true;
+        } catch (Exception e) {
+            tr.rollback();
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
     public boolean checkIdAuthor(String idAuthor) {
-        return false;
+        EntityTransaction tr = em.getTransaction();
+        try {
+            tr.begin();
+            Author author = em.find(Author.class, idAuthor);
+            if (author == null) {
+                return false;
+            }
+            return true;
+        } catch (Exception e) {
+            tr.rollback();
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
     public List<Author> getLatestAuthorID() {
+        EntityTransaction tr = em.getTransaction();
+        try {
+            tr.begin();
+            String hql = "FROM Author ORDER BY authorId DESC";
+            List<Author> authors = em.createQuery(hql, Author.class).getResultList();
+            tr.commit();
+            return authors;
+        } catch (Exception e) {
+            tr.rollback();
+            e.printStackTrace();
+        }
         return null;
     }
 }
