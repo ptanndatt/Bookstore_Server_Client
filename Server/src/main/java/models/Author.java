@@ -11,13 +11,12 @@ package models;/*
  * @version:    1.0
  */
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -29,10 +28,25 @@ import java.util.List;
 @NoArgsConstructor
 public class Author {
     @Id
+    @GenericGenerator(
+            name = "A",
+            strategy = "util.CustomIdGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(name = "prefix", value = "A")
+            }
+    )
+    @GeneratedValue(generator = "A")
     private String authorId;
     private String authorName;
     private LocalDate date;
     private int numberOfWorks;
     @OneToMany(mappedBy = "authorId")
+    @ToString.Exclude
     private List<Book> books;
+
+    public Author(String authorName, LocalDate date, int numberOfWorks) {
+        this.authorName = authorName;
+        this.date = date;
+        this.numberOfWorks = numberOfWorks;
+    }
 }
