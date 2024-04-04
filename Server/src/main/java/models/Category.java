@@ -11,27 +11,56 @@ package models;/*
  * @version:    1.0
  */
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.List;
 
 @Table(name = "Category")
 @Entity
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@Setter
+//@AllArgsConstructor
+//@NoArgsConstructor
 public class Category {
     @Id
+    @GenericGenerator(
+            name = "C",
+            strategy = "util.CustomIdGenerator",
+            parameters = {
+                    @org.hibernate.annotations.Parameter(name = "prefix", value = "C")
+            }
+    )
+    @GeneratedValue(generator = "C")
     private String idCategory;
     private String categoryName;
     private int bookQuantity;
     private String description;
     @OneToMany(mappedBy = "categoryId")
     private List<Book> books;
+
+    public Category(String idCategory) {
+        this.idCategory = idCategory;
+    }
+
+    public Category() {
+
+    }
+
+    public Category(String categoryName, int bookQuantity, String description) {
+        this.categoryName = categoryName;
+        this.bookQuantity = bookQuantity;
+        this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "idCategory='" + idCategory + '\'' +
+                ", categoryName='" + categoryName + '\'' +
+                ", bookQuantity=" + bookQuantity +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }
