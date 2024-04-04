@@ -24,6 +24,8 @@ public class Main {
             em.getTransaction().begin();
             Author author = new Author();
             Category category = new Category();
+//            IdGenerator idGenerator = new IdGenerator();
+//            idGenerator.generateId(category, "C");
             ProductType productType = new ProductType();
             Merchandise merchandise = new Merchandise();
             Supplier supplier = new Supplier();

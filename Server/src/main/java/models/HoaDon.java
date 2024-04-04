@@ -53,9 +53,7 @@ public class HoaDon {
         super();
         this.idDonHang = idDonHang;
     }
-
-    public HoaDon() {
-    }
+    
 
     @Override
     public String toString() {
