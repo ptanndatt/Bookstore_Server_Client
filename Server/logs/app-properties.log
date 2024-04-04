@@ -1076,3 +1076,29 @@ Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: ALTER TABLE only all
 [INFO ] 04-04-2024 15:11:31 [Test worker] Log - null20240404140216
 [INFO ] 04-04-2024 15:11:31 [Test worker] Log - null20240404140003
 [INFO ] 04-04-2024 15:11:31 [Test worker] Log - null20240404012003
+[INFO ] 04-04-2024 15:29:09 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Student MSSQL]
+[INFO ] 04-04-2024 15:29:09 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[WARN ] 04-04-2024 15:29:09 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
+[INFO ] 04-04-2024 15:29:09 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
+[WARN ] 04-04-2024 15:29:09 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 04-04-2024 15:29:09 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 04-04-2024 15:29:09 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 04-04-2024 15:29:09 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 04-04-2024 15:29:09 [Test worker] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 04-04-2024 15:29:09 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[INFO ] 04-04-2024 15:29:11 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
+[INFO ] 04-04-2024 15:29:11 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@7a247711] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 04-04-2024 15:29:12 [Test worker] Log - Add author successfully
+[INFO ] 04-04-2024 15:30:17 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Student MSSQL]
+[INFO ] 04-04-2024 15:30:17 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[WARN ] 04-04-2024 15:30:17 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
+[INFO ] 04-04-2024 15:30:17 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
+[WARN ] 04-04-2024 15:30:17 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 04-04-2024 15:30:17 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 04-04-2024 15:30:17 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 04-04-2024 15:30:17 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 04-04-2024 15:30:17 [Test worker] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 04-04-2024 15:30:17 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[INFO ] 04-04-2024 15:30:19 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
+[INFO ] 04-04-2024 15:30:19 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@69ab2d6a] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 04-04-2024 15:30:54 [Test worker] Log - Author(authorId=null20240404152912, authorName=Hoangle, date=2024-04-04, numberOfWorks=6)
