@@ -15,7 +15,6 @@ import dao.CategoryDao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
-import lombok.extern.log4j.Log4j2;
 import models.Category;
 
 import util.HibernateUtil;
@@ -64,6 +63,98 @@ public class CategoryDaoImpl implements CategoryDao {
 //            Log.error("Error adding category");
             e.printStackTrace();
             return false;
+        }
+    }
+
+    @Override
+    public boolean updateCategory(Category category) {
+        EntityTransaction tr = null;
+        try {
+            tr = em.getTransaction();
+            tr.begin();
+            Category c = em.find(Category.class, category.getIdCategory());
+            if (c == null) {
+                Log.error("Category not found");
+                return false;
+            } else {
+                c.setCategoryName(category.getCategoryName());
+                c.setBookQuantity(category.getBookQuantity());
+                c.setDescription(category.getDescription());
+                em.merge(category);
+                tr.commit();
+                Log.info("Updated category successfully");
+                return true;
+            }
+        } catch (Exception e) {
+            tr.rollback();
+            Log.error("Error updating category");
+            return false;
+        }
+    }
+
+    @Override
+    public boolean deleteCategory(String idCategory) {
+        EntityTransaction tr = null;
+        try {
+            tr = em.getTransaction();
+            tr.begin();
+            Category category = em.find(Category.class, idCategory);
+            if (category == null) {
+                Log.error("Category not found");
+                return false;
+            } else {
+                em.remove(category);
+                tr.commit();
+                Log.info("Deleted category successfully");
+                return true;
+            }
+        } catch (Exception e) {
+            tr.rollback();
+            Log.error("Error deleting category");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean checkIdCategory(String idCategory) {
+        EntityTransaction tr = em.getTransaction();
+        try {
+            tr.begin();
+            Category category = em.find(Category.class, idCategory);
+            if (category == null) {
+                Log.error("Category not found");
+                return false;
+            } else {
+                Log.info("Category found");
+                return true;
+            }
+        } catch (Exception e) {
+            tr.rollback();
+            Log.error("Error checking category");
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public List<String> getLatestCategoryID() {
+        String categoryID = null;
+        EntityTransaction tr = em.getTransaction();
+        try {
+            tr.begin();
+            String hql = "SELECT c.idCategory FROM Category c ORDER BY c.idCategory DESC";
+            TypedQuery<String> query = em.createQuery(hql, String.class);
+//            query.setMaxResults(1);
+            List<String> categoryIDs = query.getResultList();
+            tr.commit();
+            Log.info("Retrieved latest category ID successfully");
+            return categoryIDs;
+        } catch (Exception e) {
+            tr.rollback();
+            Log.error("Error retrieving latest category ID");
+            e.printStackTrace();
+            return null;
         }
     }
 }

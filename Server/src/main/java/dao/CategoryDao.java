@@ -19,4 +19,12 @@ public interface CategoryDao {
     List<Category> getAllCategory();
 
     boolean addCategory(Category category);
+
+    boolean updateCategory(Category category);
+
+    boolean deleteCategory(String idCategory);
+
+    boolean checkIdCategory(String idCategory);
+
+    List<String> getLatestCategoryID();
 }

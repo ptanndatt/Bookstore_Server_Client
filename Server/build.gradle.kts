@@ -5,9 +5,9 @@
 plugins {
     `java-library`
     `maven-publish`
-    kotlin("jvm") version "1.6.10"
-    kotlin("kapt") version "1.6.10"
 }
+
+
 
 repositories {
     mavenLocal()
@@ -42,7 +42,10 @@ dependencies {
 //    implementation("com.microsoft.sqlserver:mssql-jdbc:12.3.0.jre20-preview")
 // https://mvnrepository.com/artifact/org.projectlombok/lombok
     compileOnly("org.projectlombok:lombok:1.18.24")
-    kapt("org.projectlombok:lombok:1.18.8")
+    annotationProcessor("org.projectlombok:lombok:1.18.24")
+
+    testCompileOnly("org.projectlombok:lombok:1.18.24")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.24")
     // https://mvnrepository.com/artifact/log4j/log4j
     implementation("log4j:log4j:1.2.17")
 // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api

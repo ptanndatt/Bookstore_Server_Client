@@ -15,6 +15,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
@@ -22,7 +23,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "Merchandise")
-public class Merchandise extends Product{
+@EqualsAndHashCode(callSuper = false)
+public class Merchandise extends Product {
     private int quantitySold;
     private double revenue;
     private double profit;

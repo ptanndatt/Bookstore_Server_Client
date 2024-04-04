@@ -45,8 +45,6 @@ public class KhachHang {
         this.idKhachHang = idKhachHang;
     }
 
-    public KhachHang() {
-    }
 
     @Override
     public String toString() {
