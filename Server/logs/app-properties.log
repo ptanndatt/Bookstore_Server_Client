@@ -1402,3 +1402,185 @@ Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: ALTER TABLE only all
 [INFO ] 05-04-2024 16:12:43 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
 [INFO ] 05-04-2024 16:12:43 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@18887028] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
 [INFO ] 05-04-2024 16:12:44 [Test worker] Log - Product type exist
+[INFO ] 05-04-2024 16:59:15 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Student MSSQL]
+[INFO ] 05-04-2024 16:59:15 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[WARN ] 05-04-2024 16:59:15 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
+[INFO ] 05-04-2024 16:59:15 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
+[WARN ] 05-04-2024 16:59:15 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 05-04-2024 16:59:15 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 05-04-2024 16:59:15 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 05-04-2024 16:59:15 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 05-04-2024 16:59:15 [Test worker] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 05-04-2024 16:59:15 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[INFO ] 05-04-2024 16:59:17 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
+[INFO ] 05-04-2024 16:59:17 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@514dc5f4] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 05-04-2024 17:00:15 [Test worker] Log - Add supplier successfully
+[INFO ] 05-04-2024 17:01:09 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Student MSSQL]
+[INFO ] 05-04-2024 17:01:09 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[WARN ] 05-04-2024 17:01:09 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
+[INFO ] 05-04-2024 17:01:09 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
+[WARN ] 05-04-2024 17:01:10 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 05-04-2024 17:01:10 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 05-04-2024 17:01:10 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 05-04-2024 17:01:10 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 05-04-2024 17:01:10 [Test worker] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 05-04-2024 17:01:10 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[INFO ] 05-04-2024 17:01:11 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
+[INFO ] 05-04-2024 17:01:11 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@514dc5f4] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 05-04-2024 17:01:14 [Test worker] Log - Add supplier successfully
+[INFO ] 05-04-2024 17:02:14 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Student MSSQL]
+[INFO ] 05-04-2024 17:02:14 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[WARN ] 05-04-2024 17:02:14 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
+[INFO ] 05-04-2024 17:02:14 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
+[WARN ] 05-04-2024 17:02:14 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 05-04-2024 17:02:14 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 05-04-2024 17:02:14 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 05-04-2024 17:02:14 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 05-04-2024 17:02:14 [Test worker] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 05-04-2024 17:02:14 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[INFO ] 05-04-2024 17:02:16 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
+[INFO ] 05-04-2024 17:02:16 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@7a247711] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 05-04-2024 17:03:12 [Test worker] Log - Add supplier successfully
+[INFO ] 05-04-2024 17:03:55 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Student MSSQL]
+[INFO ] 05-04-2024 17:03:55 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[WARN ] 05-04-2024 17:03:55 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
+[INFO ] 05-04-2024 17:03:55 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
+[WARN ] 05-04-2024 17:03:55 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 05-04-2024 17:03:55 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 05-04-2024 17:03:55 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 05-04-2024 17:03:55 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 05-04-2024 17:03:55 [Test worker] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 05-04-2024 17:03:55 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[INFO ] 05-04-2024 17:03:57 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
+[INFO ] 05-04-2024 17:03:57 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@7a247711] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 05-04-2024 17:04:27 [Test worker] Log - Add supplier successfully
+[INFO ] 05-04-2024 17:26:35 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Student MSSQL]
+[INFO ] 05-04-2024 17:26:36 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[WARN ] 05-04-2024 17:26:36 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
+[INFO ] 05-04-2024 17:26:36 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
+[WARN ] 05-04-2024 17:26:36 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 05-04-2024 17:26:36 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 05-04-2024 17:26:36 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 05-04-2024 17:26:36 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 05-04-2024 17:26:36 [Test worker] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 05-04-2024 17:26:36 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[INFO ] 05-04-2024 17:26:38 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
+[INFO ] 05-04-2024 17:26:38 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@45f8415b] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 05-04-2024 17:26:57 [Test worker] Log - Supplier(supplierId=null20240405170427, supplierName=Hoangle, address=23213213dsadsa, phoneNumber=123456)
+[INFO ] 05-04-2024 17:28:41 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Student MSSQL]
+[INFO ] 05-04-2024 17:28:41 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[WARN ] 05-04-2024 17:28:41 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
+[INFO ] 05-04-2024 17:28:41 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
+[WARN ] 05-04-2024 17:28:41 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 05-04-2024 17:28:41 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 05-04-2024 17:28:41 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 05-04-2024 17:28:41 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 05-04-2024 17:28:41 [Test worker] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 05-04-2024 17:28:41 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[INFO ] 05-04-2024 17:28:43 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
+[INFO ] 05-04-2024 17:28:43 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@505a8582] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 05-04-2024 17:30:21 [Test worker] Log - Update supplier successfully
+[INFO ] 05-04-2024 17:31:17 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Student MSSQL]
+[INFO ] 05-04-2024 17:31:17 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[WARN ] 05-04-2024 17:31:17 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
+[INFO ] 05-04-2024 17:31:17 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
+[WARN ] 05-04-2024 17:31:17 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 05-04-2024 17:31:17 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 05-04-2024 17:31:17 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 05-04-2024 17:31:17 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 05-04-2024 17:31:17 [Test worker] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 05-04-2024 17:31:17 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[INFO ] 05-04-2024 17:31:19 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
+[INFO ] 05-04-2024 17:31:19 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@57afe44b] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 05-04-2024 17:32:17 [Test worker] Log - Delete supplier successfully
+[INFO ] 05-04-2024 17:32:32 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Student MSSQL]
+[INFO ] 05-04-2024 17:32:32 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[WARN ] 05-04-2024 17:32:32 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
+[INFO ] 05-04-2024 17:32:32 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
+[WARN ] 05-04-2024 17:32:32 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 05-04-2024 17:32:32 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 05-04-2024 17:32:32 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 05-04-2024 17:32:32 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 05-04-2024 17:32:32 [Test worker] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 05-04-2024 17:32:32 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[INFO ] 05-04-2024 17:32:34 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
+[INFO ] 05-04-2024 17:32:34 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@57afe44b] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 05-04-2024 17:33:01 [Test worker] Log - Add supplier successfully
+[INFO ] 05-04-2024 17:33:22 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Student MSSQL]
+[INFO ] 05-04-2024 17:33:22 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[WARN ] 05-04-2024 17:33:22 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
+[INFO ] 05-04-2024 17:33:22 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
+[WARN ] 05-04-2024 17:33:22 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 05-04-2024 17:33:22 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 05-04-2024 17:33:22 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 05-04-2024 17:33:22 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 05-04-2024 17:33:22 [Test worker] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 05-04-2024 17:33:22 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[INFO ] 05-04-2024 17:33:25 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
+[INFO ] 05-04-2024 17:33:25 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@505a8582] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 05-04-2024 17:34:21 [Test worker] Log - SupplierId is exist
+[INFO ] 05-04-2024 17:37:52 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Student MSSQL]
+[INFO ] 05-04-2024 17:37:52 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[WARN ] 05-04-2024 17:37:52 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
+[INFO ] 05-04-2024 17:37:52 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
+[WARN ] 05-04-2024 17:37:52 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 05-04-2024 17:37:53 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 05-04-2024 17:37:53 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 05-04-2024 17:37:53 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 05-04-2024 17:37:53 [Test worker] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 05-04-2024 17:37:53 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[INFO ] 05-04-2024 17:37:55 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
+[INFO ] 05-04-2024 17:37:55 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@28f8ce2e] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 05-04-2024 17:39:31 [Test worker] Log - Add supplier successfully
+[INFO ] 05-04-2024 17:39:44 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Student MSSQL]
+[INFO ] 05-04-2024 17:39:44 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[WARN ] 05-04-2024 17:39:44 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
+[INFO ] 05-04-2024 17:39:44 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
+[WARN ] 05-04-2024 17:39:44 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 05-04-2024 17:39:44 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 05-04-2024 17:39:44 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 05-04-2024 17:39:44 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 05-04-2024 17:39:44 [Test worker] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 05-04-2024 17:39:44 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[INFO ] 05-04-2024 17:39:46 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
+[INFO ] 05-04-2024 17:39:46 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@28f8ce2e] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 05-04-2024 17:40:07 [Test worker] Log - null20240405173931
+[INFO ] 05-04-2024 17:40:07 [Test worker] Log - null20240405173301
+[INFO ] 05-04-2024 17:42:12 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Student MSSQL]
+[INFO ] 05-04-2024 17:42:13 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[WARN ] 05-04-2024 17:42:13 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
+[INFO ] 05-04-2024 17:42:13 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
+[WARN ] 05-04-2024 17:42:13 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 05-04-2024 17:42:13 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 05-04-2024 17:42:13 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 05-04-2024 17:42:13 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 05-04-2024 17:42:13 [Test worker] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 05-04-2024 17:42:13 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[INFO ] 05-04-2024 17:42:15 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
+[INFO ] 05-04-2024 17:42:15 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@57afe44b] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 05-04-2024 17:43:04 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Student MSSQL]
+[INFO ] 05-04-2024 17:43:04 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[WARN ] 05-04-2024 17:43:04 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
+[INFO ] 05-04-2024 17:43:04 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
+[WARN ] 05-04-2024 17:43:04 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 05-04-2024 17:43:04 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 05-04-2024 17:43:04 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 05-04-2024 17:43:04 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 05-04-2024 17:43:04 [Test worker] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 05-04-2024 17:43:04 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[INFO ] 05-04-2024 17:43:06 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
+[INFO ] 05-04-2024 17:43:06 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@28f8ce2e] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 05-04-2024 17:44:49 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Student MSSQL]
+[INFO ] 05-04-2024 17:44:49 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[WARN ] 05-04-2024 17:44:49 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
+[INFO ] 05-04-2024 17:44:49 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
+[WARN ] 05-04-2024 17:44:49 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 05-04-2024 17:44:49 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 05-04-2024 17:44:49 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 05-04-2024 17:44:49 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 05-04-2024 17:44:49 [Test worker] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 05-04-2024 17:44:49 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[INFO ] 05-04-2024 17:44:51 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
+[INFO ] 05-04-2024 17:44:51 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@28f8ce2e] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 05-04-2024 17:45:26 [Test worker] Log - Supplier(supplierId=null20240405173931, supplierName=Hoangle, address=23213213dsadsa, phoneNumber=123456)
+[INFO ] 05-04-2024 17:45:26 [Test worker] Log - Supplier(supplierId=null20240405173301, supplierName=Hoangle, address=23213213dsadsa, phoneNumber=123456)

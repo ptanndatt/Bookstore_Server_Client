@@ -26,7 +26,7 @@ public interface SupplierDao {
 
     boolean checkSupplierId(String id);
 
-    List<String> getLatestSupplierId();
+    List<Supplier> getLatestSupplierId();
 
 
 }
