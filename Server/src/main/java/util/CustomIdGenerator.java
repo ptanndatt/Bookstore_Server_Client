@@ -11,6 +11,7 @@ package util;/*
  * @version:    1.0
  */
 
+import lombok.*;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.IdentifierGenerator;
@@ -19,17 +20,19 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+@NoArgsConstructor
+@AllArgsConstructor
+
+@Data
 public class CustomIdGenerator implements IdentifierGenerator {
     private String prefix;
-
-    public void setPrefix(String prefix) {
-        this.prefix = prefix;
-    }
 
     @Override
     public Serializable generate(SharedSessionContractImplementor session, Object object) throws HibernateException {
         LocalDateTime currentDateTime = LocalDateTime.now();
         String formattedDateTime = currentDateTime.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+        System.out.println(prefix + formattedDateTime);
+
         return prefix + formattedDateTime;
     }
 }

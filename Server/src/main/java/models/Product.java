@@ -30,6 +30,7 @@ public abstract class Product {
     @GenericGenerator(name = "P", strategy = "util.CustomIdGenerator", parameters = {
             @org.hibernate.annotations.Parameter(name = "prefix", value = "P")
     })
+    @Column(name = "productId")
     protected String productId;
     protected String productName;
     @ManyToOne
@@ -44,6 +45,9 @@ public abstract class Product {
     protected int quantity;
     protected double importPrice;
     protected double discountPrice;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="promotionId")
+    protected Promotion promotion;
 
     public abstract double tax();
 

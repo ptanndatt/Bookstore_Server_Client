@@ -8,12 +8,16 @@
         <class>models.Author</class>
         <class>models.Book</class>
         <class>models.Category</class>
-        <class>models.HoaDon</class>
-        <class>models.KhachHang</class>
+        <class>models.Role</class>
+        <class>models.Account</class>
         <class>models.Merchandise</class>
-        <class>models.NhanSu</class>
+        <class>models.Employee</class>
         <class>models.ProductType</class>
         <class>models.Supplier</class>
+        <class>models.Customer</class>
+        <class>models.Bill</class>
+        <class>models.Promotion</class>
+        <class>models.DetailsBill</class>
         <properties>
             <property name="jakarta.persistence.jdbc.url"
                       value="jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true"/>
