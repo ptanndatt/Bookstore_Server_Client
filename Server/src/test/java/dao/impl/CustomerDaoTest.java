@@ -9,6 +9,7 @@ import org.junit.jupiter.api.TestInstance;
 import util.GenderEnum;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class CustomerDaoTest {
@@ -21,16 +22,10 @@ public class CustomerDaoTest {
     void tearDown() {
         customerDao=null;
     }
+
     @Test
-    void testAddCustomer() {
-        Customer customer=new Customer("Vinh","0355420475","vinh38254","Ben Tre",GenderEnum.getById(1).getDescription(),LocalDate.of(2003,9,1));
-        boolean result=customerDao.addCustomer(customer);
-        System.out.println(result);
+    void testFindCustomer() {
+        List<Customer> customers=customerDao.findCustomerByText("V");
+        System.out.println(customers);
     }
-//    @Test
-//    void testDeleteCustomer() {
-//        String id= "null20240404230541";
-//        boolean result=customerDao.deleteCustomer(id);
-//        System.out.println(result);
-//    }
 }

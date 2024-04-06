@@ -3,7 +3,7 @@ package util;
 public enum GenderEnum {
 
         Nam(1, "Nam"),
-        Nu(0, "Nữ");
+        Nu(0, "Nu");
 
         private final int value;
         private final String description;

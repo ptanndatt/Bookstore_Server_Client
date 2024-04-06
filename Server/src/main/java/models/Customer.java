@@ -4,26 +4,25 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Objects;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import util.GenderEnum;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
 
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode
 @Entity
 @Table(name="Customer")
+@NamedQueries({
+		@NamedQuery(name = "Customer.findByText",query = "SELECT c FROM Customer c WHERE c.name LIKE :text OR c.phone LIKE :text "
+				                  + "OR c.email LIKE :text OR c.address LIKE :text OR c.idCustomer LIKE :text")
+})
 public class Customer {
 	@Id
     @Column(name = "customerId", nullable = false)
@@ -37,12 +36,13 @@ public class Customer {
 	private String idCustomer;
 	@Column(name = "customerName")
 	private String name;
+	@Column(name="phone")
 	private String phone;
 	private String email;
 	private String address;
 	private String gender;
-	private LocalDate birth;
-	public Customer(String name, String phone, String email, String address, String gender, LocalDate birth) {
+	private Date birth;
+	public Customer(String name, String phone, String email, String address, String gender, Date birth) {
 		super();
 		this.name = name;
 		this.phone = phone;
