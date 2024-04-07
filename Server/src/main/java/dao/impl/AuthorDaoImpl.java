@@ -48,6 +48,9 @@ public class AuthorDaoImpl implements AuthorDao {
         EntityTransaction tr = em.getTransaction();
         try {
             tr.begin();
+            if (!em.contains(author)) {
+                author = em.merge(author);
+            }
             em.persist(author);
             tr.commit();
             return true;
