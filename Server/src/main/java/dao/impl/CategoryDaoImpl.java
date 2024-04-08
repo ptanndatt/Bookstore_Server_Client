@@ -53,14 +53,17 @@ public class CategoryDaoImpl implements CategoryDao {
     public boolean addCategory(Category category) {
         EntityTransaction tr = em.getTransaction();
         try {
-            tr.begin();
+            if (!tr.isActive()) {
+                tr.begin();
+            }
+            if (!em.contains(category)) {
+                category = em.merge(category);
+            }
             em.persist(category);
             tr.commit();
-//            Log.info("Added category successfully");
             return true;
         } catch (Exception e) {
             tr.rollback();
-//            Log.error("Error adding category");
             e.printStackTrace();
             return false;
         }

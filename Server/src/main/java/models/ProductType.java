@@ -26,20 +26,13 @@ import java.util.List;
 @NoArgsConstructor
 public class ProductType {
     @Id
-    @GenericGenerator(
-            name = "PT",
-            strategy = "util.CustomIdGenerator",
-            parameters = {
-                    @org.hibernate.annotations.Parameter(name = "prefix", value = "PT")
-            }
-    )
-    @GeneratedValue(generator = "PT")
     private String productTypeId;
     private String productTypeName;
     @OneToMany(mappedBy = "productTypeId")
     private List<Product> products;
 
-    public ProductType(String productTypeName) {
+    public ProductType(String productTypeId, String productTypeName) {
+        this.productTypeId = productTypeId;
         this.productTypeName = productTypeName;
     }
 
