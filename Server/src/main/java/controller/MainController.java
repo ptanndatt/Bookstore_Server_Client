@@ -3,9 +3,11 @@ package controller;
 import models.Author;
 import models.Category;
 import models.ProductType;
+import models.Supplier;
 import service.AuthorDaoImplService;
 import service.CategoryDaoImplService;
 import service.ProductTypeDaoImplService;
+import service.SupplierDaoImplService;
 
 import java.util.List;
 
@@ -13,6 +15,7 @@ public class MainController {
     private AuthorDaoImplService authorDaoImplService = new AuthorDaoImplService();
     private CategoryDaoImplService categoryDaoImplService = new CategoryDaoImplService();
     private ProductTypeDaoImplService productTypeDaoImplService = new ProductTypeDaoImplService();
+    private SupplierDaoImplService supplierDaoImplService = new SupplierDaoImplService();
 
     // author
     public List<Author> getAllAuthor() {
@@ -91,6 +94,31 @@ public class MainController {
 
     public boolean checkProductTypeExist(String id) {
         return productTypeDaoImplService.checkProductTypeExist(id);
+    }
+
+    // supplier
+    public List<Supplier> getAllSuppliers() {
+        return supplierDaoImplService.getAllSuppliers();
+    }
+
+    public boolean addSupplier(Supplier supplier) {
+        return supplierDaoImplService.addSupplier(supplier);
+    }
+
+    public boolean updateSupplier(Supplier supplier) {
+        return supplierDaoImplService.updateSupplier(supplier);
+    }
+
+    public boolean deleteSupplier(String id) {
+        return supplierDaoImplService.deleteSupplier(id);
+    }
+
+    public boolean checkSupplierId(String id) {
+        return supplierDaoImplService.checkSupplierId(id);
+    }
+
+    public List<Supplier> getLatestSupplierId() {
+        return supplierDaoImplService.getLatestSupplierId();
     }
 
 }
