@@ -44,7 +44,12 @@ public class SupplierDaoImpl implements SupplierDao {
         EntityTransaction tr = null;
         try {
             tr = em.getTransaction();
-            tr.begin();
+            if (!tr.isActive()) {
+                tr.begin();
+            }
+            if (!em.contains(supplier)) {
+                supplier = em.merge(supplier);
+            }
             em.persist(supplier);
             tr.commit();
             return true;

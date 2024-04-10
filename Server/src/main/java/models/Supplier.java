@@ -27,14 +27,6 @@ import java.util.List;
 @NoArgsConstructor
 public class Supplier {
     @Id
-    @GenericGenerator(
-            name = "S",
-            strategy = "util.CustomIdGenerator",
-            parameters = {
-                    @org.hibernate.annotations.Parameter(name = "prefix", value = "S")
-            }
-    )
-    @GeneratedValue(generator = "S")
     private String supplierId;
     private String supplierName;
     private String address;
@@ -43,7 +35,8 @@ public class Supplier {
     @ToString.Exclude
     private List<Product> products;
 
-    public Supplier(String address, String phoneNumber, String supplierName) {
+    public Supplier(String supplierId, String address, String phoneNumber, String supplierName) {
+        this.supplierId = supplierId;
         this.supplierName = supplierName;
         this.address = address;
         this.phoneNumber = phoneNumber;

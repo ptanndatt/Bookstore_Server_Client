@@ -48,6 +48,9 @@ public class AuthorDaoImpl implements AuthorDao {
         EntityTransaction tr = em.getTransaction();
         try {
             tr.begin();
+            if (!em.contains(author)) {
+                author = em.merge(author);
+            }
             em.persist(author);
             tr.commit();
             return true;
@@ -121,5 +124,48 @@ public class AuthorDaoImpl implements AuthorDao {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public boolean decreaseNumberOfBooks(String idAuthor) {
+        EntityTransaction tr = em.getTransaction();
+        try {
+            if (!tr.isActive()) {
+                tr.begin();
+            }
+            Author author = em.find(Author.class, idAuthor);
+            if (author != null) {
+                int numberOfWorks = author.getNumberOfWorks();
+                if (numberOfWorks > 0) {
+                    author.setNumberOfWorks(numberOfWorks - 1);
+                    em.merge(author);
+                    tr.commit();
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            tr.rollback();
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean increaseNumberOfBooks(String idAuthor) {
+        EntityTransaction tr = em.getTransaction();
+        try {
+            if (!tr.isActive()) {
+                tr.begin();
+            }
+            Author author = em.find(Author.class, idAuthor);
+            author.setNumberOfWorks(author.getNumberOfWorks() + 1);
+            em.merge(author);
+            tr.commit();
+            return true;
+        } catch (Exception e) {
+            tr.rollback();
+            e.printStackTrace();
+        }
+        return false;
     }
 }

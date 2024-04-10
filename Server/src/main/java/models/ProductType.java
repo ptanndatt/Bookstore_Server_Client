@@ -15,7 +15,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.util.List;
@@ -27,21 +26,13 @@ import java.util.List;
 @NoArgsConstructor
 public class ProductType {
     @Id
-    @GenericGenerator(
-            name = "P",
-            strategy = "util.CustomIdGenerator",
-            parameters = {
-                    @org.hibernate.annotations.Parameter(name = "prefix", value = "P")
-            }
-    )
-    @GeneratedValue(generator = "P")
     private String productTypeId;
     private String productTypeName;
     @OneToMany(mappedBy = "productTypeId")
-    @ToString.Exclude
     private List<Product> products;
 
-    public ProductType(String productTypeName) {
+    public ProductType(String productTypeId, String productTypeName) {
+        this.productTypeId = productTypeId;
         this.productTypeName = productTypeName;
     }
 

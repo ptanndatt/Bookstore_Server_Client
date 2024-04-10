@@ -53,14 +53,17 @@ public class CategoryDaoImpl implements CategoryDao {
     public boolean addCategory(Category category) {
         EntityTransaction tr = em.getTransaction();
         try {
-            tr.begin();
+            if (!tr.isActive()) {
+                tr.begin();
+            }
+            if (!em.contains(category)) {
+                category = em.merge(category);
+            }
             em.persist(category);
             tr.commit();
-//            Log.info("Added category successfully");
             return true;
         } catch (Exception e) {
             tr.rollback();
-//            Log.error("Error adding category");
             e.printStackTrace();
             return false;
         }
@@ -120,7 +123,9 @@ public class CategoryDaoImpl implements CategoryDao {
     public boolean checkIdCategory(String idCategory) {
         EntityTransaction tr = em.getTransaction();
         try {
-            tr.begin();
+            if (!tr.isActive()) {
+                tr.begin();
+            }
             Category category = em.find(Category.class, idCategory);
             if (category == null) {
                 Log.error("Category not found");
@@ -157,4 +162,47 @@ public class CategoryDaoImpl implements CategoryDao {
             return null;
         }
     }
+
+    @Override
+    public boolean decreaseNumberOfCategory(String idCategory) {
+        EntityTransaction tr = em.getTransaction();
+        try {
+            if (!tr.isActive()) {
+                tr.begin();
+            }
+            Category category = em.find(Category.class, idCategory);
+            if (category != null) {
+                int bookQuantity = category.getBookQuantity();
+                if (bookQuantity > 0) {
+                    category.setBookQuantity(bookQuantity - 1);
+                    tr.commit();
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            tr.rollback();
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    @Override
+    public boolean increaseNumberOfCategory(String idCategory) {
+        EntityTransaction tr = em.getTransaction();
+        try {
+            if (!tr.isActive()) {
+                tr.begin();
+            }
+            Category category = em.find(Category.class, idCategory);
+            category.setBookQuantity(category.getBookQuantity() + 1);
+            tr.commit();
+            return true;
+        } catch (Exception e) {
+            tr.rollback();
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
 }

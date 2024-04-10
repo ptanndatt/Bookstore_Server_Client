@@ -66,10 +66,12 @@ public class ProductTypeDaoImpl implements ProductTypeDao {
         EntityTransaction tr = null;
         try {
             tr = em.getTransaction();
-            if (!checkProductTypeExist(productType.getProductTypeId())) {
-                return false;
+            if (!tr.isActive()) {
+                tr.begin();
             }
-            tr.begin();
+            if (!em.contains(productType)) {
+                productType = em.merge(productType);
+            }
             em.persist(productType);
             tr.commit();
             return true;
