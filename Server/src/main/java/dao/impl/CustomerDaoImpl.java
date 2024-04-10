@@ -49,8 +49,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public boolean deleteCustomer(String customerID) {
-        {
-            EntityTransaction tr = em.getTransaction();
+        EntityTransaction tr = em.getTransaction();
             try {
                 tr.begin();
                 Customer customer=em.find(Customer.class, customerID);
@@ -62,8 +61,6 @@ public class CustomerDaoImpl implements CustomerDao {
                 e.printStackTrace();
                 return false;
             }
-        }
-
     }
 
     @Override

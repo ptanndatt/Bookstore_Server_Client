@@ -25,13 +25,6 @@ import java.util.List;
 //@NoArgsConstructor
 public class Category {
     @Id
-    @GenericGenerator(
-            name = "C",
-            strategy = "util.CustomIdGenerator",
-            parameters = {
-                    @org.hibernate.annotations.Parameter(name = "prefix", value = "C")
-            }
-    )
     @GeneratedValue(generator = "C")
     private String idCategory;
     private String categoryName;

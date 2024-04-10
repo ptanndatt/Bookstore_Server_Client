@@ -148,7 +148,7 @@ public class ManagerView extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-//                switchToPanel(new QuanLyNhanVienView());
+                switchToPanel(new EmployeeManagementView());
 
             }
         });
