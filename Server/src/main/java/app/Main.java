@@ -20,7 +20,6 @@ import java.awt.*;
 
 public class Main {
     public static void main(String[] args) {
-<<<<<<< HEAD
         EntityManager em = null;
         try {
             HibernateUtil hibernateUtil = HibernateUtil.getInstance();
@@ -36,7 +35,7 @@ public class Main {
             Book book = new Book();
             HoaDon hoaDon = new HoaDon();
             KhachHang khachHang = new KhachHang();
-            NhanSu nhanSu = new NhanSu();
+//            NhanSu nhanSu = new NhanSu();
             em.persist(author);
             em.persist(category);
             em.persist(productType);
@@ -45,13 +44,13 @@ public class Main {
             em.persist(book);
             em.persist(hoaDon);
             em.persist(khachHang);
-            em.persist(nhanSu);
+//            em.persist(nhanSu);
             em.getTransaction().commit();
         } catch (
                 Exception e) {
             if (em != null && em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
-=======
+
 //        EntityManager em = null;
 //        try {
 //            HibernateUtil hibernateUtil = HibernateUtil.getInstance();
@@ -97,13 +96,13 @@ public class Main {
 //                em.close();
 //            }
 //        }
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                ManagerView view = new ManagerView();
-                view.setVisible(true);
->>>>>>> bc09ac6bc71855fd0fe3a69e903491144071f6c2
+                EventQueue.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        ManagerView view = new ManagerView();
+                        view.setVisible(true);
+                    }
+                });
             }
-        });
-    }
-}
+        }
+    }}

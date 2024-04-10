@@ -11,13 +11,12 @@ package util;/*
  * @version:    1.0
  */
 
-<<<<<<< HEAD
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-=======
+
 import lombok.*;
->>>>>>> bc09ac6bc71855fd0fe3a69e903491144071f6c2
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.IdentifierGenerator;
@@ -28,10 +27,7 @@ import java.time.format.DateTimeFormatter;
 
 @NoArgsConstructor
 @AllArgsConstructor
-<<<<<<< HEAD
-=======
 
->>>>>>> bc09ac6bc71855fd0fe3a69e903491144071f6c2
 @Data
 public class CustomIdGenerator implements IdentifierGenerator {
     private String prefix;
@@ -41,10 +37,6 @@ public class CustomIdGenerator implements IdentifierGenerator {
         LocalDateTime currentDateTime = LocalDateTime.now();
         String formattedDateTime = currentDateTime.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
         System.out.println(prefix + formattedDateTime);
-<<<<<<< HEAD
-=======
-
->>>>>>> bc09ac6bc71855fd0fe3a69e903491144071f6c2
         return prefix + formattedDateTime;
     }
 }
