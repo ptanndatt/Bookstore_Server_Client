@@ -48,9 +48,12 @@ public class AuthorDaoImpl implements AuthorDao {
         EntityTransaction tr = em.getTransaction();
         try {
             tr.begin();
+<<<<<<< HEAD
             if (!em.contains(author)) {
                 author = em.merge(author);
             }
+=======
+>>>>>>> bc09ac6bc71855fd0fe3a69e903491144071f6c2
             em.persist(author);
             tr.commit();
             return true;
@@ -125,6 +128,7 @@ public class AuthorDaoImpl implements AuthorDao {
         }
         return null;
     }
+<<<<<<< HEAD
 
     @Override
     public boolean decreaseNumberOfBooks(String idAuthor) {
@@ -168,4 +172,6 @@ public class AuthorDaoImpl implements AuthorDao {
         }
         return false;
     }
+=======
+>>>>>>> bc09ac6bc71855fd0fe3a69e903491144071f6c2
 }

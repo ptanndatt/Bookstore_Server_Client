@@ -27,8 +27,11 @@ public interface AuthorDao {
     boolean checkIdAuthor(String idAuthor);
 
     List<Author> getLatestAuthorID();
+<<<<<<< HEAD
 
     boolean decreaseNumberOfBooks(String idAuthor);
     
     boolean increaseNumberOfBooks(String idAuthor);
+=======
+>>>>>>> bc09ac6bc71855fd0fe3a69e903491144071f6c2
 }

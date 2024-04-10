@@ -50,5 +50,3 @@ public class Book extends Product {
         return super.importPrice + (super.importPrice * 0.55) + tax();
     }
 }
-
-

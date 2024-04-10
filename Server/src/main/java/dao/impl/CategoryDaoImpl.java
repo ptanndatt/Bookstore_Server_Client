@@ -53,6 +53,7 @@ public class CategoryDaoImpl implements CategoryDao {
     public boolean addCategory(Category category) {
         EntityTransaction tr = em.getTransaction();
         try {
+<<<<<<< HEAD
             if (!tr.isActive()) {
                 tr.begin();
             }
@@ -64,6 +65,16 @@ public class CategoryDaoImpl implements CategoryDao {
             return true;
         } catch (Exception e) {
             tr.rollback();
+=======
+            tr.begin();
+            em.persist(category);
+            tr.commit();
+//            Log.info("Added category successfully");
+            return true;
+        } catch (Exception e) {
+            tr.rollback();
+//            Log.error("Error adding category");
+>>>>>>> bc09ac6bc71855fd0fe3a69e903491144071f6c2
             e.printStackTrace();
             return false;
         }
@@ -123,9 +134,13 @@ public class CategoryDaoImpl implements CategoryDao {
     public boolean checkIdCategory(String idCategory) {
         EntityTransaction tr = em.getTransaction();
         try {
+<<<<<<< HEAD
             if (!tr.isActive()) {
                 tr.begin();
             }
+=======
+            tr.begin();
+>>>>>>> bc09ac6bc71855fd0fe3a69e903491144071f6c2
             Category category = em.find(Category.class, idCategory);
             if (category == null) {
                 Log.error("Category not found");
@@ -162,6 +177,7 @@ public class CategoryDaoImpl implements CategoryDao {
             return null;
         }
     }
+<<<<<<< HEAD
 
     @Override
     public boolean decreaseNumberOfCategory(String idCategory) {
@@ -205,4 +221,6 @@ public class CategoryDaoImpl implements CategoryDao {
     }
 
 
+=======
+>>>>>>> bc09ac6bc71855fd0fe3a69e903491144071f6c2
 }

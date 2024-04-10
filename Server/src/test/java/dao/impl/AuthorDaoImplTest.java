@@ -81,7 +81,11 @@ public class AuthorDaoImplTest {
     void testGetLatestAuthorID() {
         authorDaoImpl.getLatestAuthorID().forEach(author -> Log.info(author.toString()));
     }
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> bc09ac6bc71855fd0fe3a69e903491144071f6c2
     @AfterAll
     void tearDown() {
         authorDaoImpl = null;
