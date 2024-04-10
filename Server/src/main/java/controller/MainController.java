@@ -1,13 +1,7 @@
 package controller;
 
-import models.Author;
-import models.Category;
-import models.ProductType;
-import models.Supplier;
-import service.AuthorDaoImplService;
-import service.CategoryDaoImplService;
-import service.ProductTypeDaoImplService;
-import service.SupplierDaoImplService;
+import models.*;
+import service.*;
 
 import java.util.List;
 
@@ -16,6 +10,7 @@ public class MainController {
     private CategoryDaoImplService categoryDaoImplService = new CategoryDaoImplService();
     private ProductTypeDaoImplService productTypeDaoImplService = new ProductTypeDaoImplService();
     private SupplierDaoImplService supplierDaoImplService = new SupplierDaoImplService();
+    private BookDaoImplService bookDaoImplService = new BookDaoImplService();
 
     // author
     public List<Author> getAllAuthor() {
@@ -42,6 +37,14 @@ public class MainController {
         return authorDaoImplService.getLatestAuthorID();
     }
 
+    public boolean decreaseNumberOfBooks(String idAuthor) {
+        return authorDaoImplService.decreaseNumberOfBooks(idAuthor);
+    }
+
+    public boolean increaseNumberOfBooks(String idAuthor) {
+        return authorDaoImplService.increaseNumberOfBooks(idAuthor);
+    }
+
     // category
     public List<Category> getAllCategory() {
         return categoryDaoImplService.getAllCategory();
@@ -65,6 +68,14 @@ public class MainController {
 
     public List<String> getLatestCategoryID() {
         return categoryDaoImplService.getLatestCategoryID();
+    }
+
+    public boolean decreaseNumberOfCategory(String idCategory) {
+        return categoryDaoImplService.decreaseNumberOfCategory(idCategory);
+    }
+
+    public boolean increaseNumberOfCategory(String idCategory) {
+        return categoryDaoImplService.increaseNumberOfCategory(idCategory);
     }
 
     // product type
@@ -119,6 +130,68 @@ public class MainController {
 
     public List<Supplier> getLatestSupplierId() {
         return supplierDaoImplService.getLatestSupplierId();
+    }
+
+    // book
+    public List<Book> getAllBook() {
+        return bookDaoImplService.getAllBook();
+    }
+
+    public boolean addBook(Book book) {
+        return bookDaoImplService.addBook(book);
+    }
+
+    public boolean updateBook(Book book) {
+        return bookDaoImplService.updateBook(book);
+    }
+
+    public boolean deleteBook(String idBook) {
+        return bookDaoImplService.deleteBook(idBook);
+    }
+
+    public boolean checkIdBook(String idBook) {
+        return bookDaoImplService.checkIdBook(idBook);
+    }
+
+    public List<String> getLatestBookID() {
+        return bookDaoImplService.getLatestBookID();
+    }
+
+    public List<Book> loadComboBoxByProductType(String productTypeId) {
+        return bookDaoImplService.loadComboBoxByProductType(productTypeId);
+    }
+
+    public List<Book> loadComboBoxByPublisher(String publisherId) {
+        return bookDaoImplService.loadComboBoxByPublisher(publisherId);
+    }
+
+    public List<Book> loadComboBoxByAuthor(String authorId) {
+        return bookDaoImplService.loadComboBoxByAuthor(authorId);
+    }
+
+    public List<Book> loadComboBoxByCategory(String categoryId) {
+        return bookDaoImplService.loadComboBoxByCategory(categoryId);
+    }
+
+    public List<Book> searchBook(String search) {
+        return bookDaoImplService.searchBook(search);
+    }
+
+
+    public List<Book> findCategoryIdByName(String name) {
+        return bookDaoImplService.findCategoryIdByName(name);
+    }
+
+    public List<Book> findSupplierByName(String name) {
+        return bookDaoImplService.findSupplierByName(name);
+    }
+
+    public List<Book> findBookByProductType(String name) {
+        return bookDaoImplService.findBookByProductType(name);
+    }
+
+    public List<Book> findBookByAuthor(String name) {
+        return bookDaoImplService.findBookByAuthor(name);
     }
 
 }

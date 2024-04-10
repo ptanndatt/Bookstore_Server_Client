@@ -31,4 +31,12 @@ public class AuthorDaoImplService {
     public List<Author> getLatestAuthorID() {
         return authorDaoImpl.getLatestAuthorID();
     }
+
+    public boolean decreaseNumberOfBooks(String idAuthor) {
+        return authorDaoImpl.decreaseNumberOfBooks(idAuthor);
+    }
+
+    public boolean increaseNumberOfBooks(String idAuthor) {
+        return authorDaoImpl.increaseNumberOfBooks(idAuthor);
+    }
 }

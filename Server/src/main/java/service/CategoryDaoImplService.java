@@ -31,4 +31,12 @@ public class CategoryDaoImplService {
     public List<String> getLatestCategoryID() {
         return categoryDaoImpl.getLatestCategoryID();
     }
+
+    public boolean decreaseNumberOfCategory(String idCategory) {
+        return categoryDaoImpl.decreaseNumberOfCategory(idCategory);
+    }
+
+    public boolean increaseNumberOfCategory(String idCategory) {
+        return categoryDaoImpl.increaseNumberOfCategory(idCategory);
+    }
 }

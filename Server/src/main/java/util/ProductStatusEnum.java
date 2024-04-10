@@ -1,8 +1,8 @@
 package util;
 
 public enum ProductStatusEnum {
-    DANG_KINH_DOANH(1, "Đang kinh doanh"),
-    NGUNG_KINH_DOANH(0, "Ngừng kinh doanh");
+    ACTIVE(1, "Đang kinh doanh"),
+    INACTIVE(0, "Ngừng kinh doanh");
 
     private final int value;
     private final String description;
@@ -26,7 +26,7 @@ public enum ProductStatusEnum {
                 return e;
             }
         }
-        return DANG_KINH_DOANH;
+        return ACTIVE;
     }
 
     public static ProductStatusEnum getByName(String name) {
@@ -35,6 +35,6 @@ public enum ProductStatusEnum {
                 return e;
             }
         }
-        return DANG_KINH_DOANH;
+        return INACTIVE;
     }
 }
