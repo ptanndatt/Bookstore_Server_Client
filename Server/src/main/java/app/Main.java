@@ -33,7 +33,7 @@ public class Main {
             Merchandise merchandise = new Merchandise();
             Supplier supplier = new Supplier();
             Book book = new Book();
-            HoaDon hoaDon = new HoaDon();
+//            HoaDon hoaDon = new HoaDon();
             KhachHang khachHang = new KhachHang();
 //            NhanSu nhanSu = new NhanSu();
             em.persist(author);
@@ -42,7 +42,7 @@ public class Main {
             em.persist(merchandise);
             em.persist(supplier);
             em.persist(book);
-            em.persist(hoaDon);
+//            em.persist(hoaDon);
             em.persist(khachHang);
 //            em.persist(nhanSu);
             em.getTransaction().commit();
