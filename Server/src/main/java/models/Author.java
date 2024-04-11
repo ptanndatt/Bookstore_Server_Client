@@ -28,14 +28,14 @@ import java.util.List;
 @NoArgsConstructor
 public class Author {
     @Id
-    @GenericGenerator(
-            name = "A",
-            strategy = "util.CustomIdGenerator",
-            parameters = {
-                    @org.hibernate.annotations.Parameter(name = "prefix", value = "A")
-            }
-    )
-    @GeneratedValue(generator = "A")
+//    @GenericGenerator(
+//            name = "A",
+//            strategy = "util.CustomIdGenerator",
+//            parameters = {
+//                    @org.hibernate.annotations.Parameter(name = "prefix", value = "A")
+//            }
+//    )
+//    @GeneratedValue(generator = "A")
     private String authorId;
     private String authorName;
     private LocalDate date;
@@ -44,9 +44,10 @@ public class Author {
     @ToString.Exclude
     private List<Book> books;
 
-    public Author(String authorName, LocalDate date, int numberOfWorks) {
+    public Author(String authorId, String authorName, LocalDate date) {
+        this.authorId = authorId;
         this.authorName = authorName;
         this.date = date;
-        this.numberOfWorks = numberOfWorks;
     }
+
 }

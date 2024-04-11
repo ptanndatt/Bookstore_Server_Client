@@ -11,6 +11,11 @@ package util;/*
  * @version:    1.0
  */
 
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import lombok.*;
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
@@ -32,7 +37,6 @@ public class CustomIdGenerator implements IdentifierGenerator {
         LocalDateTime currentDateTime = LocalDateTime.now();
         String formattedDateTime = currentDateTime.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
         System.out.println(prefix + formattedDateTime);
-
         return prefix + formattedDateTime;
     }
 }

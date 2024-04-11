@@ -13,6 +13,7 @@ package models;/*
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
@@ -26,11 +27,6 @@ import util.ProductStatusEnum;
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Product {
     @Id
-    @GeneratedValue(generator = "P")
-    @GenericGenerator(name = "P", strategy = "util.CustomIdGenerator", parameters = {
-            @org.hibernate.annotations.Parameter(name = "prefix", value = "P")
-    })
-    @Column(name = "productId")
     protected String productId;
     protected String productName;
     @ManyToOne
@@ -45,9 +41,6 @@ public abstract class Product {
     protected int quantity;
     protected double importPrice;
     protected double discountPrice;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="promotionId")
-    protected Promotion promotion;
 
     public abstract double tax();
 

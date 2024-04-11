@@ -44,7 +44,6 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
     private JButton btnXuatExecl;
     private SimpleDateFormat dfNgaySinh;
     private JTabbedPane tabbedPane;
-    private
     public EmployeeManagementView() {
         dfNgaySinh = new SimpleDateFormat("dd/MM/yyyy");
 

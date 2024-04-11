@@ -11,13 +11,12 @@ package models;/*
  * @version:    1.0
  */
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.util.List;
 
@@ -33,5 +32,13 @@ public class Supplier {
     private String address;
     private String phoneNumber;
     @OneToMany(mappedBy = "supplierId")
+    @ToString.Exclude
     private List<Product> products;
+
+    public Supplier(String supplierId, String address, String phoneNumber, String supplierName) {
+        this.supplierId = supplierId;
+        this.supplierName = supplierName;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+    }
 }
