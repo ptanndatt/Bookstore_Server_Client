@@ -28,14 +28,6 @@ import java.util.List;
 @NoArgsConstructor
 public class Author {
     @Id
-//    @GenericGenerator(
-//            name = "A",
-//            strategy = "util.CustomIdGenerator",
-//            parameters = {
-//                    @org.hibernate.annotations.Parameter(name = "prefix", value = "A")
-//            }
-//    )
-//    @GeneratedValue(generator = "A")
     private String authorId;
     private String authorName;
     private LocalDate date;

@@ -31,7 +31,7 @@ public class Supplier {
     private String supplierName;
     private String address;
     private String phoneNumber;
-    @OneToMany(mappedBy = "supplierId")
+    @OneToMany(mappedBy = "supplierId", cascade = CascadeType.ALL)
     @ToString.Exclude
     private List<Product> products;
 
@@ -40,5 +40,9 @@ public class Supplier {
         this.supplierName = supplierName;
         this.address = address;
         this.phoneNumber = phoneNumber;
+    }
+
+    public Supplier(String supplierId) {
+        this.supplierId = supplierId;
     }
 }

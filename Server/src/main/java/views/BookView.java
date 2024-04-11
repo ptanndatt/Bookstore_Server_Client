@@ -652,7 +652,7 @@ public class BookView extends JPanel
         for (int rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
             Row row = sheet.getRow(rowIndex);
             if (row != null) {
-                ProductType lsp = new ProductType();
+                ProductType lsp = new ProductType(row.getCell(2).getStringCellValue());
                 lsp.setProductTypeId(row.getCell(0).getStringCellValue());
                 lsp.setProductTypeName(row.getCell(1).getStringCellValue());
 

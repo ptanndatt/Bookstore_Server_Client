@@ -15,7 +15,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.util.List;
 
@@ -28,7 +27,7 @@ public class ProductType {
     @Id
     private String productTypeId;
     private String productTypeName;
-    @OneToMany(mappedBy = "productTypeId")
+    @OneToMany(mappedBy = "productTypeId", cascade = CascadeType.ALL)
     private List<Product> products;
 
     public ProductType(String productTypeId, String productTypeName) {
@@ -36,4 +35,7 @@ public class ProductType {
         this.productTypeName = productTypeName;
     }
 
+    public ProductType(String productTypeId) {
+        this.productTypeId = productTypeId;
+    }
 }
