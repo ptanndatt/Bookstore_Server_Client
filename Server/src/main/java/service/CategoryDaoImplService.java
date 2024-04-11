@@ -2,6 +2,7 @@ package service;
 
 import dao.impl.CategoryDaoImpl;
 import models.Category;
+import models.Merchandise;
 
 import java.util.List;
 

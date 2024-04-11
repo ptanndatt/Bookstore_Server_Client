@@ -508,7 +508,7 @@ public class BookView extends JPanel
         if (table.getSelectedRow() == -1) {
             Date currentTime = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-            String formattedTime = "B" + sdf.format(currentTime);
+            String formattedTime = "S" + sdf.format(currentTime);
             txtIdSanPham.setText(formattedTime);
         }
     }

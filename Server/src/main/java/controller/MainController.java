@@ -11,7 +11,7 @@ public class MainController {
     private ProductTypeDaoImplService productTypeDaoImplService = new ProductTypeDaoImplService();
     private SupplierDaoImplService supplierDaoImplService = new SupplierDaoImplService();
     private BookDaoImplService bookDaoImplService = new BookDaoImplService();
-
+    private MerchandiseDaoImplService merchandiseDaoImplService = new MerchandiseDaoImplService();
     // author
     public List<Author> getAllAuthor() {
         return authorDaoImplService.getAllAuthor();
@@ -192,6 +192,30 @@ public class MainController {
 
     public List<Book> findBookByAuthor(String name) {
         return bookDaoImplService.findBookByAuthor(name);
+    }
+
+
+    // Merchandise
+    public List<Merchandise> getAllMerchandise() {
+        return merchandiseDaoImplService.getAllMerchandise();
+    }
+    public boolean addMerchandise(Merchandise merchandise) {
+        return merchandiseDaoImplService.addMerchandise(merchandise);
+    }
+    public boolean checkIdExist(String id) {
+        return merchandiseDaoImplService.checkIdExist(id);
+    }
+    public boolean updateMerchandise(Merchandise merchandise) {
+        return merchandiseDaoImplService.updateMerchandise(merchandise);
+    }
+    public boolean deleteMerchandise(String id) {
+        return merchandiseDaoImplService.deleteMerchandise(id);
+    }
+    public List<Merchandise> findBookByProductTypeMerchandise(String name) {
+        return merchandiseDaoImplService.findByProductTypeMerchandise(name);
+    }
+    public List<Merchandise> findSupplierByNameMerchandise(String name) {
+        return merchandiseDaoImplService.findSupplierByNameMerchandise(name);
     }
 
 }
