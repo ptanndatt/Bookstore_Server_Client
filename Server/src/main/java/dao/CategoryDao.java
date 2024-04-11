@@ -27,4 +27,10 @@ public interface CategoryDao {
     boolean checkIdCategory(String idCategory);
 
     List<String> getLatestCategoryID();
+
+    boolean decreaseNumberOfCategory(String idCategory);
+
+    boolean increaseNumberOfCategory(String idCategory);
+    
+
 }

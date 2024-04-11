@@ -14,7 +14,7 @@ package app;/*
 import jakarta.persistence.EntityManager;
 import models.*;
 import util.HibernateUtil;
-import view.ManagerView;
+import views.ManagerView;
 
 import java.awt.*;
 
@@ -27,8 +27,6 @@ public class Main {
 //            em.getTransaction().begin();
 //            Author author = new Author();
 //            Category category = new Category();
-////            IdGenerator idGenerator = new IdGenerator();
-////            idGenerator.generateId(category, "C");
 //            ProductType productType = new ProductType();
 //            Merchandise merchandise = new Merchandise();
 //            Supplier supplier = new Supplier();
@@ -65,6 +63,7 @@ public class Main {
 //                em.close();
 //            }
 //        }
+
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {

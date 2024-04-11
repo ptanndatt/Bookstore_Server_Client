@@ -28,7 +28,6 @@ import java.util.List;
 @NoArgsConstructor
 public class Author {
     @Id
-    @GeneratedValue(generator = "A")
     private String authorId;
     private String authorName;
     private LocalDate date;
@@ -37,9 +36,9 @@ public class Author {
     @ToString.Exclude
     private List<Book> books;
 
-    public Author(String authorName, LocalDate date, int numberOfWorks) {
+    public Author(String authorId, String authorName, LocalDate date) {
+        this.authorId = authorId;
         this.authorName = authorName;
         this.date = date;
-        this.numberOfWorks = numberOfWorks;
     }
 }

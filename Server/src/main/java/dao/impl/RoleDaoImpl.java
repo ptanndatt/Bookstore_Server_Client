@@ -4,6 +4,7 @@ import dao.RoleDao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
+import models.Customer;
 import models.Role;
 import util.HibernateUtil;
 
@@ -46,19 +47,25 @@ public class RoleDaoImpl implements RoleDao {
         }
     }
     @Override
-    public ArrayList<Role> getAllRole() {
-        ArrayList<Role> roles = null;
+    public List<Role> getAllRole() {
+        List<Role> roles = null;
         EntityTransaction tr = em.getTransaction();
         try {
             tr.begin();
             String hql = "FROM Role";
             TypedQuery<Role> query = em.createQuery(hql, Role.class);
-            roles = (ArrayList<Role>) query.getResultList();
+            roles = query.getResultList();
             tr.commit();
         } catch (Exception e) {
             tr.rollback();
             e.printStackTrace();
         }
         return roles;
+    }
+
+    public Role findRoleByText(String text) {
+        return em.createQuery("SELECT r from Role r where r.roleName =:text", Role.class)
+                .setParameter("text", text) // %text% for similarity
+                .getSingleResult();
     }
 }

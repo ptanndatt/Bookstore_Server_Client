@@ -3,6 +3,7 @@ package models;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "Employee")
@@ -31,17 +33,11 @@ public class Employee {
 	protected String gender;
 	@Column(name = "status",columnDefinition = "NVARCHAR(20)")
 	protected String status;
-
-
-	public Employee(String name, String phone, String address, String email, Date birth, String gender, String status) {
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="roleId")
+	protected Role role;
+	public Employee(String idEmployee) {
 		this.idEmployee = idEmployee;
-		this.name = name;
-		this.phone = phone;
-		this.address = address;
-		this.email = email;
-		this.birth = birth;
-		this.gender = gender;
-		this.status = status;
 	}
 
 	@Override

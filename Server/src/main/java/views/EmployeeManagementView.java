@@ -1,6 +1,7 @@
-package view;
+package views;
 
 import com.toedter.calendar.JDateChooser;
+import controller.MainController;
 import dao.impl.AccountDaoImpl;
 import dao.impl.EmployeeDaoImpl;
 import dao.impl.RoleDaoImpl;
@@ -12,12 +13,16 @@ import util.GeneratorIDAuto;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 import static javax.swing.JColorChooser.showDialog;
@@ -67,16 +72,13 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
     private JTable tbChucVu;
     private DefaultTableModel modelChucVu;
     private SimpleDateFormat dfNgaySinh;
-    private EmployeeDaoImpl daoNhanSu;
-    private RoleDaoImpl roleDao;
-    private AccountDaoImpl accountDao;
+    private MainController mainController;
     private GeneratorIDAuto autoID;
+
+    private JTabbedPane tabbedPane;
     public EmployeeManagementView() {
         dfNgaySinh = new SimpleDateFormat("dd/MM/yyyy");
-        daoNhanSu = new EmployeeDaoImpl();
-        roleDao=new RoleDaoImpl();
-        daoNhanSu=new EmployeeDaoImpl();
-        accountDao=new AccountDaoImpl();
+        mainController=new MainController();
         autoID=new GeneratorIDAuto();
         Employee employee = new Employee();
         Role role=new Role();
@@ -265,13 +267,28 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         txtDiaChi.addKeyListener(this);
         txtEmail.addKeyListener(this);
         txtsdt.addKeyListener(this);
+        txtTenNV.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                txtID.setText(autoID.autoID("E"));
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+            }
+        });
         loadComboxBoxRole();
         loadDataRoleTabble();
+        loadData();
     }
     private void addRole(){
         String tenChucVu = txtTenChucVu.getText();
         Role role=new Role(tenChucVu);
-        roleDao.addRole(role);
+        mainController.addRole(role);
         JOptionPane.showMessageDialog(this,"Thêm thành công");
         modelChucVu.addRow(new Object[] {role.getIdRole(),role.getRoleName()});
         loadComboxBoxRole();
@@ -280,7 +297,7 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
     }
     private void loadDataRoleTabble() {
         modelChucVu.setRowCount(0);
-        for (Role role : roleDao.getAllRole() ) {
+        for (Role role : mainController.getAllRole() ) {
             modelChucVu.addRow(new Object[] { role.getIdRole(),role.getRoleName()
             });
 
@@ -288,7 +305,7 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
     }
     private void addEmployee() {
 
-        String id = autoID.autoID("C");
+        String id = txtID.getText();
         String ten = txtTenNV.getText();
         String email= txtEmail.getText();
         String sdt=txtsdt.getText();
@@ -298,22 +315,55 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         String GioiTinh=rbNam.isSelected()?"Nam":"Nữ";
         String trangThai=cbTrangThai.getSelectedItem().toString();
 
-        String chucVu=cbChucVu.getSelectedItem().toString();
+        String chucVuSelected=cbChucVu.getSelectedItem().toString();
+        Role chucVu= mainController.findRoleByText(chucVuSelected);
         Date ngayLap = new Date(System.currentTimeMillis());
         String matkhau="1111";
-        Employee employee = new Employee(ten,sdt,diaChi,email,ngaySinh,GioiTinh,trangThai);
+        Employee employee = new Employee(id,ten,sdt,diaChi,email,ngaySinh,GioiTinh,trangThai,chucVu);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
         String hasdPassword = passwordEncoder.encode(matkhau);
         Account tk=new Account(employee,matkhau,ngayLap);
         System.out.println(hasdPassword);
 
         if(valiDate()) {
-            daoNhanSu.addEmployee(employee);
-            accountDao.addAccount(tk);
-
-            modelNhanVien.addRow(new Object[] {employee.getIdEmployee(), ten, sdt,email, diaChi,dfNgaySinh.format(employee.getBirth()),employee.getGender(),chucVu,trangThai });
+            mainController.addEmployee(employee);
+            mainController.addAccount(tk);
+            modelNhanVien.addRow(new Object[] {employee.getIdEmployee(), ten, sdt,email, diaChi,dfNgaySinh.format(employee.getBirth()),employee.getGender(),chucVu.getRoleName(),trangThai });
             JOptionPane.showMessageDialog(this, "Thêm thành công");
         }
+    }
+    private void loadData() {
+        modelNhanVien.setRowCount(0);
+        for (Employee employee : mainController.getAllEmployees()) {
+            modelNhanVien.addRow(new Object[] { employee.getIdEmployee(), employee.getName(),employee.getPhone(), employee.getEmail(),employee.getAddress(),dfNgaySinh.format(employee.getBirth()),employee.getGender(),employee.getRole().getRoleName(),employee.getStatus()
+            });
+
+        }
+    }
+    private void updateEmployee() {
+        String id = modelNhanVien.getValueAt(tableNhanVien.getSelectedRow(), 0).toString();
+        String ten = txtTenNV.getText();
+        String diaChi = txtDiaChi.getText();
+        String soDienThoai = txtsdt.getText();
+        String email = txtEmail.getText();
+        java.util.Date date = chooserNgaySinh.getDate();
+        Date ngaySinh = new Date(date.getYear(), date.getMonth(), date.getDate());
+        String gioiTinh=rbNam.isSelected()?"Nam":"Nữ";
+        String trangThaiValue=cbTrangThai.getSelectedItem().toString();
+        String chucVuSelected =cbChucVu.getSelectedItem().toString();
+        Role chucVu = mainController.findRoleByText(chucVuSelected);
+        Employee employee=new Employee(id,ten,soDienThoai,diaChi,email,ngaySinh,gioiTinh,trangThaiValue,chucVu);
+        if(valiDate()) {
+            try {
+                mainController.updateEmployee(employee);
+                loadData();
+                JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Cập nhật thất bại");
+            }
+        }
+
     }
     public boolean valiDate() {
 
@@ -394,11 +444,24 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         dialog.setVisible(true);
     }
     private void loadComboxBoxRole() {
-        ArrayList<Role> listChucVu = roleDao.getAllRole();
         cbChucVu.removeAllItems();
-        for (Role role : listChucVu) {
+        for (Role role : mainController.getAllRole()) {
             cbChucVu.addItem(role.getRoleName());
         }
+    }
+    private void reload() {
+        txtID.setText("");
+        txtTenNV.setText("");
+        txtDiaChi.setText("");
+        txtsdt.setText("");
+        txtEmail.setText("");
+        rbNam.setSelected(true);
+        rbNu.setSelected(false);
+        cbChucVu.setSelectedItem(false);
+        cbTrangThai.setSelectedItem("Đang làm việc");
+        chooserNgaySinh.setDate(new java.util.Date());
+        txtTenNV.requestFocus();
+        loadData();
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -411,6 +474,12 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         }
         if(o.equals(btnThemNV)) {
             addEmployee();
+        }
+        if(o.equals(btnCapNhatNV)) {
+            updateEmployee();
+        }
+        if(o.equals(btnLamMoi)) {
+            reload();
         }
     }
 
@@ -431,7 +500,25 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
+        int row = tableNhanVien.getSelectedRow();
+        txtID.setText(modelNhanVien.getValueAt(row, 0).toString());
+        txtTenNV.setText(modelNhanVien.getValueAt(row, 1).toString());
+        txtsdt.setText(modelNhanVien.getValueAt(row, 2).toString());
+        txtEmail.setText(modelNhanVien.getValueAt(row, 3).toString());
+        txtDiaChi.setText(modelNhanVien.getValueAt(row, 4).toString());
+        String ngaySinh=modelNhanVien.getValueAt(row, 5).toString();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        java.util.Date valueNgaySinh = null;
+        try {
+            valueNgaySinh =dateFormat.parse(ngaySinh);
+        } catch (ParseException ex) {
+            throw new RuntimeException(ex);
+        }
+        chooserNgaySinh.setDate(valueNgaySinh);
+        rbNam.setSelected(modelNhanVien.getValueAt(row, 6).toString()=="Nam");
+        rbNu.setSelected(modelNhanVien.getValueAt(row,6).toString()=="Nữ");
+        cbChucVu.setSelectedItem(modelNhanVien.getValueAt(row,7).toString());
+        cbTrangThai.setSelectedItem(modelNhanVien.getValueAt(row,8).toString());
     }
 
     @Override

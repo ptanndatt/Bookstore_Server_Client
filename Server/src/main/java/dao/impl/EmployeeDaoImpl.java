@@ -16,7 +16,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         em = HibernateUtil.getInstance().getEntityManager();
     }
     @Override
-    public List<Employee> getAllEmployeeBy() {
+    public List<Employee> getAllEmployees() {
         List<Employee> employees = null;
         EntityTransaction tr = em.getTransaction();
         try {
@@ -77,5 +77,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public List<Employee> findEmployeeByText(String text) {
+        return em.createQuery("SELECT e FROM Employee e WHERE e.name LIKE :text OR e.phone LIKE :text OR e.email LIKE :text OR e.address LIKE :text OR e.idEmployee LIKE :text",Employee.class)
+                .setParameter("text", "%" + text + "%") // %text% for similarity
+                .getResultList();
     }
 }

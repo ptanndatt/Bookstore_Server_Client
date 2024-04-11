@@ -19,7 +19,7 @@ public class HibernateUtil {
     private EntityManager entityManager;
 
     public HibernateUtil() {
-        entityManager = Persistence.createEntityManagerFactory("JPA_ORM_Student MSSQL").createEntityManager();
+        entityManager = Persistence.createEntityManagerFactory("JPA_ORM_Bookstore MSSQL").createEntityManager();
     }
 
     public synchronized static HibernateUtil getInstance() {

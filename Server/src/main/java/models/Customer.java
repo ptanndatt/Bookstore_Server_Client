@@ -19,10 +19,6 @@ import jakarta.persistence.NamedQuery;
 @EqualsAndHashCode
 @Entity
 @Table(name="Customer")
-@NamedQueries({
-		@NamedQuery(name = "Customer.findByText",query = "SELECT c FROM Customer c WHERE c.name LIKE :text OR c.phone LIKE :text "
-				                  + "OR c.email LIKE :text OR c.address LIKE :text OR c.idCustomer LIKE :text")
-})
 public class Customer {
 	@Id
     @Column(name = "customerId", nullable = false,columnDefinition = "NVARCHAR(255)",unique = true)

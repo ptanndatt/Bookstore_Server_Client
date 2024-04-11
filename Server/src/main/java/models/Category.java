@@ -25,7 +25,6 @@ import java.util.List;
 //@NoArgsConstructor
 public class Category {
     @Id
-    @GeneratedValue(generator = "C")
     private String idCategory;
     private String categoryName;
     private int bookQuantity;
@@ -41,10 +40,12 @@ public class Category {
 
     }
 
-    public Category(String categoryName, int bookQuantity, String description) {
+    public Category(String idCategory, String categoryName, int bookQuantity, String description) {
+        this.idCategory = idCategory;
         this.categoryName = categoryName;
         this.bookQuantity = bookQuantity;
         this.description = description;
+
     }
 
     @Override

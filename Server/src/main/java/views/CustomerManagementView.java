@@ -1,5 +1,5 @@
 
-package view;
+package views;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -7,37 +7,21 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.sql.Connection;
 import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -46,26 +30,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.RowFilter;
-import javax.swing.SwingUtilities;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.plaf.basic.BasicSplitPaneUI.KeyboardHomeHandler;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 
 import controller.MainController;
-import dao.impl.CustomerDaoImpl;
 import models.Customer;
-import org.apache.commons.lang3.Validate;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.codehaus.plexus.util.dag.DAG;
 
 import com.toedter.calendar.JDateChooser;
 import util.GeneratorIDAuto;
@@ -106,6 +77,7 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
     public CustomerManagementView() {
         dfNgaySinh = new SimpleDateFormat("dd/MM/yyyy");
         autoID = new GeneratorIDAuto();
+        mainController = new MainController();
         Customer customer = new Customer();
         setLayout(new BorderLayout());
         this.setBackground(new Color(102, 255, 255));
@@ -269,6 +241,20 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
 
             }
         });
+        txtTenKH.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                txtId.setText(autoID.autoID("C"));
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+            }
+        });
         loadData();
     }
     private void handleSearch(String text) {
@@ -283,7 +269,7 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
         }
     }
     private void addCustomer() {
-        String id= autoID.autoID("C");
+        String id= txtId.getText();
         String tenKhachHang = txtTenKH.getText();
         String email= txtEmail.getText();
         String sdt=txtsdt.getText();
@@ -376,7 +362,7 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
         }
     }
     private void updateCustomer() {
-        String id = txtId.getText();
+        String id=modelKhachHang.getValueAt(tableKH.getSelectedRow(), 0).toString();
         String ten = txtTenKH.getText();
         String diaChi = txtDiaChi.getText();
         String soDienThoai = txtsdt.getText();
@@ -388,7 +374,7 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
         Customer customer = new Customer(id,ten,soDienThoai,email,diaChi,gioiTinh,ngaySinh);
         if(valiDate()) {
             try {
-                mainController.update(customer);
+                mainController.updateCustomer(customer);
                 loadData();
                 JOptionPane.showMessageDialog(this, "Cập nhật thành công");
             } catch (Exception e) {
@@ -407,9 +393,9 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
                 int HopThoai = JOptionPane.showConfirmDialog(this, "Bạn có muốn xoá dòng này không?", "Cảnh báo",
                         JOptionPane.YES_NO_OPTION);
                 if (HopThoai == JOptionPane.YES_OPTION) {
+                    String manv = modelKhachHang.getValueAt(row, 0).toString();
+                    mainController.deleteCustomer(manv);
                     modelKhachHang.removeRow(row);
-                    String manv = txtId.getText();
-                    mainController.delete(manv);
                     reload();
                     JOptionPane.showMessageDialog(this, "Xoá khách hàng thành công");
                 }
@@ -481,22 +467,16 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         java.util.Date valueNgaySinh = null;
         try {
-            valueNgaySinh =dateFormat.parse(ngaySinh);
+            valueNgaySinh = dateFormat.parse(ngaySinh);
         } catch (ParseException ex) {
             throw new RuntimeException(ex);
         }
 
         chooserNgaySinh.setDate(valueNgaySinh);
 //        System.out.println(modelKhachHang.getValueAt(row, 6).toString());
-        if(modelKhachHang.getValueAt(row, 6).toString().equals("Nam")){
-            rbNam.setSelected(true);
-            rbNu.setSelected(false);}
-        else{
-            rbNu.setSelected(true);
-            rbNam.setSelected(false);
-        }
+        rbNam.setSelected(modelKhachHang.getValueAt(row, 6).toString() == "Nam");
+        rbNu.setSelected(modelKhachHang.getValueAt(row, 6).toString() == "Nữ");
     }
-
     @Override
     public void mousePressed(MouseEvent e) {
 
