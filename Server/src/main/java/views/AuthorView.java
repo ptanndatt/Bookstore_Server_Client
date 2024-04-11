@@ -84,13 +84,6 @@ public class AuthorView extends JFrame implements ActionListener, MouseListener,
 
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            AuthorView mainFrame = new AuthorView();
-            mainFrame.setVisible(true);
-        });
-    }
-
     private void updateIdAuther() {
         if (table.getSelectedRow() == -1) {
             Date currentTime = new Date();

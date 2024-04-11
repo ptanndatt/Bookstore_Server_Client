@@ -1,8 +1,10 @@
+
 package controller;
 
 import models.*;
 import service.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainController {
@@ -12,6 +14,87 @@ public class MainController {
     private SupplierDaoImplService supplierDaoImplService = new SupplierDaoImplService();
     private BookDaoImplService bookDaoImplService = new BookDaoImplService();
     private MerchandiseDaoImplService merchandiseDaoImplService = new MerchandiseDaoImplService();
+
+    private CustomerDaoImplService customerDaoImplService = new CustomerDaoImplService();
+    private EmployeeDaoImplService employeeDaoImplService = new EmployeeDaoImplService();
+    private AccountDaoImplService accountDaoImplService = new AccountDaoImplService();
+    private RoleDaoImplService roleDaoImplService = new RoleDaoImplService();
+
+    //Customer
+    public List<Customer> getAllCustomers() {
+        return customerDaoImplService.getAllCustomers();
+    }
+
+    public boolean addCustomer(Customer customer) {
+        return customerDaoImplService.addCustomer(customer);
+    }
+
+    public boolean updateCustomer(Customer customer) {
+        return customerDaoImplService.updateCustomer(customer);
+    }
+
+    public boolean deleteCustomer(String id) {
+        return customerDaoImplService.deleteCustomer(id);
+    }
+
+    public List<Customer> findCustomerByText(String text) {
+        return customerDaoImplService.findCustomerByText(text);
+    }
+
+    //Account
+    public List<Account> getAllAccount() {
+        return accountDaoImplService.getAllAccount();
+    }
+
+    public boolean addAccount(Account account) {
+        return accountDaoImplService.addAccount(account);
+    }
+
+    public boolean updateAccount(Account account) {
+        return accountDaoImplService.updateAccount(account);
+    }
+
+    public boolean deleteAccount(String id) {
+        return accountDaoImplService.deleteAccount(id);
+    }
+
+    //Role
+    public List<Role> getAllRole() {
+        return roleDaoImplService.getAllRole();
+    }
+
+    public boolean addRole(Role role) {
+        return roleDaoImplService.addRole(role);
+    }
+
+    public boolean deleteRole(String id) {
+        return roleDaoImplService.deleteRole(id);
+    }
+
+    public Role findRoleByText(String text) {
+        return roleDaoImplService.findRoleByText(text);
+    }
+
+    //Employee
+    public List<Employee> getAllEmployees() {
+        return employeeDaoImplService.getAllEmployees();
+    }
+
+    public boolean addEmployee(Employee employee) {
+        return employeeDaoImplService.addEmployee(employee);
+    }
+
+    public boolean updateEmployee(Employee employee) {
+        return employeeDaoImplService.updateEmployee(employee);
+    }
+
+    public boolean deleteEmployee(String id) {
+        return employeeDaoImplService.deleteEmployee(id);
+    }
+
+    public List<Employee> findEmployeeByText(String text) {
+        return employeeDaoImplService.findEmployeeByText(text);
+    }
 
     // author
     public List<Author> getAllAuthor() {

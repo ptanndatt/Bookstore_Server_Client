@@ -1,9 +1,7 @@
 
-package view;
+package views;
 
 import java.awt.BorderLayout;
-import java.awt.Image;
-import java.awt.Panel;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;

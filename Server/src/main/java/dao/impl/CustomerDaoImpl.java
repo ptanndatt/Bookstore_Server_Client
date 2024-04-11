@@ -49,8 +49,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public boolean deleteCustomer(String customerID) {
-        {
-            EntityTransaction tr = em.getTransaction();
+        EntityTransaction tr = em.getTransaction();
             try {
                 tr.begin();
                 Customer customer=em.find(Customer.class, customerID);
@@ -62,8 +61,6 @@ public class CustomerDaoImpl implements CustomerDao {
                 e.printStackTrace();
                 return false;
             }
-        }
-
     }
 
     @Override
@@ -85,7 +82,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public List<Customer> findCustomerByText(String text) {
-        return em.createNamedQuery("Customer.findByText",Customer.class)
+        return em.createQuery("SELECT c FROM Customer c WHERE c.name LIKE :text OR c.phone LIKE :text OR c.email LIKE :text OR c.address LIKE :text OR c.idCustomer LIKE :text",Customer.class)
                 .setParameter("text", "%" + text + "%") // %text% for similarity
                 .getResultList();
 

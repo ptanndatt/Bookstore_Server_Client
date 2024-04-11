@@ -19,27 +19,18 @@ import jakarta.persistence.NamedQuery;
 @EqualsAndHashCode
 @Entity
 @Table(name="Customer")
-@NamedQueries({
-		@NamedQuery(name = "Customer.findByText",query = "SELECT c FROM Customer c WHERE c.name LIKE :text OR c.phone LIKE :text "
-				                  + "OR c.email LIKE :text OR c.address LIKE :text OR c.idCustomer LIKE :text")
-})
 public class Customer {
 	@Id
-    @Column(name = "customerId", nullable = false)
-
-	@GenericGenerator(
-
-            name = "KH", strategy = "util.CustomIdGenerator", parameters = {
-			@org.hibernate.annotations.Parameter(name = "prefix", value = "KH")
-    })
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "KH")
+    @Column(name = "customerId", nullable = false,columnDefinition = "NVARCHAR(255)",unique = true)
 	private String idCustomer;
-	@Column(name = "customerName")
+	@Column(name = "customerName",columnDefinition = "NVARCHAR(255)")
 	private String name;
 	@Column(name="phone")
 	private String phone;
 	private String email;
+	@Column(name = "address",columnDefinition = "NVARCHAR(255)")
 	private String address;
+	@Column(name = "gender",columnDefinition = "NVARCHAR(5)")
 	private String gender;
 	private Date birth;
 	public Customer(String name, String phone, String email, String address, String gender, Date birth) {

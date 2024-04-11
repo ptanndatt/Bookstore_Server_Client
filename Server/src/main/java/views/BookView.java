@@ -109,6 +109,10 @@ public class BookView extends JPanel
     private DecimalFormat df;
     private Timer timer;
 
+    public BookView() {
+        init();
+    }
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -128,11 +132,6 @@ public class BookView extends JPanel
             }
         });
     }
-
-    public BookView() {
-        init();
-    }
-
 
     private void init() {
         timer = new Timer(1000, new ActionListener() {

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/Bookstore_Server_Client.iml" filepath="$PROJECT_DIR$/.idea/Bookstore_Server_Client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/QuanLyHieuSach.main.iml" filepath="$PROJECT_DIR$/.idea/modules/QuanLyHieuSach.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/QuanLyHieuSach.test.iml" filepath="$PROJECT_DIR$/.idea/modules/QuanLyHieuSach.test.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,5 +1,5 @@
 
-package view;
+package views;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -7,37 +7,21 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.sql.Connection;
 import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -46,30 +30,16 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.RowFilter;
-import javax.swing.SwingUtilities;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.plaf.basic.BasicSplitPaneUI.KeyboardHomeHandler;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
 
-import dao.impl.CustomerDaoImpl;
+import controller.MainController;
 import models.Customer;
-import org.apache.commons.lang3.Validate;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.codehaus.plexus.util.dag.DAG;
 
 import com.toedter.calendar.JDateChooser;
-
-
-
+import util.GeneratorIDAuto;
 
 
 public class CustomerManagementView extends JPanel implements MouseListener, KeyListener,ActionListener {
@@ -99,15 +69,16 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
     private JButton btnXuatExcel;
     private ButtonGroup groupGT;
     private SimpleDateFormat dfNgaySinh;
-    private CustomerDaoImpl daoKhachHang;
+    private MainController mainController;
     private DefaultTableModel modelKhachHang;
     private JTable tableKH;
     private JComboBox<Object> cbTimKiem;
-
+    private GeneratorIDAuto autoID;
     public CustomerManagementView() {
         dfNgaySinh = new SimpleDateFormat("dd/MM/yyyy");
-        daoKhachHang = new CustomerDaoImpl();
-        Customer kh = new Customer();
+        autoID = new GeneratorIDAuto();
+        mainController = new MainController();
+        Customer customer = new Customer();
         setLayout(new BorderLayout());
         this.setBackground(new Color(102, 255, 255));
 ///		Tiêu đề
@@ -117,7 +88,6 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
         JPanel pnInfo = new JPanel(new GridLayout(4, 1, 10, 10));
         JPanel pnChucNang = new JPanel(new GridLayout(1, 4, 10, 10));
         JPanel pnTimKiem = new JPanel(new GridLayout(1, 3, 10, 10));
-
 
         JLabel lblTieuDe = new JLabel("QUẢN LÝ KHÁCH HÀNG");
         lblTieuDe.setFont(new Font("Tahoma", Font.BOLD, 30));
@@ -257,13 +227,13 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
             @Override
             public void insertUpdate(DocumentEvent e) {
                 modelKhachHang.setRowCount(0);
-                handleTimKiemKH(txtTimKiem.getText().trim());
+                handleSearch(txtTimKiem.getText().trim());
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
                 modelKhachHang.setRowCount(0);
-                handleTimKiemKH(txtTimKiem.getText().trim());
+                handleSearch(txtTimKiem.getText().trim());
             }
 
             @Override
@@ -271,11 +241,25 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
 
             }
         });
+        txtTenKH.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                txtId.setText(autoID.autoID("C"));
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+            }
+        });
         loadData();
     }
-    private void handleTimKiemKH(String text) {
+    private void handleSearch(String text) {
         if (!text.equals("")) {
-            for (Customer customer : daoKhachHang.findCustomerByText(text)) {
+            for (Customer customer : mainController.findCustomerByText(text)) {
                 String ngaySinh = new SimpleDateFormat("dd/MM/yyyy").format(customer.getBirth());
                 modelKhachHang.addRow(new Object[] {customer.getIdCustomer(), customer.getName(),customer.getPhone(), customer.getEmail(),customer.getAddress(),ngaySinh,customer.getGender().equals("Nam")?"Nam":"Nữ"});
 
@@ -284,8 +268,8 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
             loadData();
         }
     }
-    private void ThemKH() {
-        String idKhachHang = autoID("C");
+    private void addCustomer() {
+        String id= txtId.getText();
         String tenKhachHang = txtTenKH.getText();
         String email= txtEmail.getText();
         String sdt=txtsdt.getText();
@@ -294,12 +278,13 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
         Date ngaySinh = new Date(date.getYear(), date.getMonth(), date.getDate());
         String GioiTinh=rbNam.isSelected()?"Nam":"Nữ";
         if(valiDate()) {
-            Customer customer=new Customer(tenKhachHang,sdt,email,diaChi,GioiTinh,ngaySinh);
-            daoKhachHang.addCustomer(customer);
-            modelKhachHang.addRow(new Object[] {idKhachHang, tenKhachHang, sdt, email, diaChi,dfNgaySinh.format(customer.getBirth()),customer.getGender()});
+            Customer customer=new Customer(id,tenKhachHang,sdt,email,diaChi,GioiTinh,ngaySinh);
+            mainController.addCustomer(customer);
+            modelKhachHang.addRow(new Object[] {id, tenKhachHang, sdt, email, diaChi,dfNgaySinh.format(customer.getBirth()),customer.getGender()});
             JOptionPane.showMessageDialog(this, "Thêm thành công");
         }
     }
+
     private boolean valiDate() {
         String ten = txtTenKH.getText().trim();
 
@@ -370,14 +355,14 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
     }
     private void loadData() {
         modelKhachHang.setRowCount(0);
-        for (Customer customer : daoKhachHang.getAllCustomers() ) {
+        for (Customer customer : mainController.getAllCustomers() ) {
             modelKhachHang.addRow(new Object[] {customer.getIdCustomer(), customer.getName(),customer.getPhone(), customer.getEmail(),customer.getAddress(),dfNgaySinh.format(customer.getBirth()),customer.getGender().equals("Nam")?"Nam":"Nữ"
             });
 
         }
     }
-    private void CapNhatKH() {
-        String id = txtId.getText();
+    private void updateCustomer() {
+        String id=modelKhachHang.getValueAt(tableKH.getSelectedRow(), 0).toString();
         String ten = txtTenKH.getText();
         String diaChi = txtDiaChi.getText();
         String soDienThoai = txtsdt.getText();
@@ -389,7 +374,7 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
         Customer customer = new Customer(id,ten,soDienThoai,email,diaChi,gioiTinh,ngaySinh);
         if(valiDate()) {
             try {
-                daoKhachHang.updateCustomer(customer);
+                mainController.updateCustomer(customer);
                 loadData();
                 JOptionPane.showMessageDialog(this, "Cập nhật thành công");
             } catch (Exception e) {
@@ -399,7 +384,7 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
         }
 
     }
-    private void xoaKH() {
+    private void deleteCustomer() {
         int row = tableKH.getSelectedRow();
         if (row == -1) {
             JOptionPane.showMessageDialog(this, "Phải chọn dòng cần xoá");
@@ -408,10 +393,10 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
                 int HopThoai = JOptionPane.showConfirmDialog(this, "Bạn có muốn xoá dòng này không?", "Cảnh báo",
                         JOptionPane.YES_NO_OPTION);
                 if (HopThoai == JOptionPane.YES_OPTION) {
+                    String manv = modelKhachHang.getValueAt(row, 0).toString();
+                    mainController.deleteCustomer(manv);
                     modelKhachHang.removeRow(row);
-                    String manv = txtId.getText();
-                    daoKhachHang.deleteCustomer(manv);
-                    lamMoi();
+                    reload();
                     JOptionPane.showMessageDialog(this, "Xoá khách hàng thành công");
                 }
             } catch (Exception e2) {
@@ -420,13 +405,7 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
             }
         }
     }
-    private String autoID(String prefix) {
-        LocalDateTime currentDateTime = LocalDateTime.now();
-        String formattedDateTime = currentDateTime.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
-        String id= prefix+formattedDateTime;
-        return id;
-    }
-    private void lamMoi() {
+    private void reload() {
         loadData();
         txtId.setText("");
         txtTenKH.setText("");
@@ -443,16 +422,16 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
     public void actionPerformed(ActionEvent e) {
         Object o = e.getSource();
         if (o.equals(btnThemKH)) {
-            ThemKH();
+            addCustomer();
         }
         if (o.equals(btnLamMoi)) {
-            lamMoi();
+            reload();
         }
         if (o.equals(btnXoaKH)) {
-            xoaKH();
+            deleteCustomer();
         }
         if (o.equals(btnCapNhatKH)) {
-            CapNhatKH();
+            updateCustomer();
         }
         if(o.equals(btnXemTatCa)) {
             txtTimKiem.setText("");
@@ -488,22 +467,16 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         java.util.Date valueNgaySinh = null;
         try {
-            valueNgaySinh =dateFormat.parse(ngaySinh);
+            valueNgaySinh = dateFormat.parse(ngaySinh);
         } catch (ParseException ex) {
             throw new RuntimeException(ex);
         }
 
         chooserNgaySinh.setDate(valueNgaySinh);
 //        System.out.println(modelKhachHang.getValueAt(row, 6).toString());
-        if(modelKhachHang.getValueAt(row, 6).toString().equals("Nam")){
-            rbNam.setSelected(true);
-            rbNu.setSelected(false);}
-        else{
-            rbNu.setSelected(true);
-            rbNam.setSelected(false);
-        }
+        rbNam.setSelected(modelKhachHang.getValueAt(row, 6).toString() == "Nam");
+        rbNu.setSelected(modelKhachHang.getValueAt(row, 6).toString() == "Nữ");
     }
-
     @Override
     public void mousePressed(MouseEvent e) {
 
