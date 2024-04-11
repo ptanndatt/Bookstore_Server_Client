@@ -389,9 +389,8 @@ public class MerchandiseView extends JPanel implements ActionListener, ItemListe
         } else if (o.equals(btnNhapNhieuSanPham)) {
             try {
                 importExcel();
-                loadData();
+//                loadData();
             } catch (SQLException e1) {
-
                 e1.printStackTrace();
             }
         }
@@ -415,12 +414,13 @@ public class MerchandiseView extends JPanel implements ActionListener, ItemListe
                 loadComboxBoxLoaiSanPham();
                 loadComboxBoxNhaCungCap();
                 loadData();
-                JOptionPane.showMessageDialog(null, "Thêm thành công");
+                DialogUtils.showSuccessMessage(this, "Nhập dữ liệu thành công");
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(null, e.getMessage());
             }
         }
     }
+
 
     private void xulyTrangSanPhamCon(Sheet sheet) {
         for (int rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
@@ -441,13 +441,12 @@ public class MerchandiseView extends JPanel implements ActionListener, ItemListe
                 int soLuong = (int) row.getCell(9).getNumericCellValue();
                 sp.setQuantity(soLuong);
                 sp.sellingPrice();
-//	            sp.setGiaKM(row.getCell(11).getNumericCellValue());
 
                 boolean checkIDLoaiSanPham = mainController.checkProductTypeExist(sp.getProductTypeId().getProductTypeId());
                 boolean checkIDNhaCungCap = mainController.checkSupplierId(sp.getSupplierId().getSupplierId());
 
                 if (!checkIDLoaiSanPham || !checkIDNhaCungCap) {
-//	                JOptionPane.showMessageDialog(this, "Không thể thêm sản phẩm: Một hoặc nhiều khóa phụ không tồn tại hoặc không hợp lệ.");
+                    loadData();
                     continue;
                 }
 
@@ -475,13 +474,10 @@ public class MerchandiseView extends JPanel implements ActionListener, ItemListe
                 lsp.setProductTypeId(row.getCell(0).getStringCellValue());
                 lsp.setProductTypeName(row.getCell(1).getStringCellValue());
                 try {
-                    if (!mainController.checkProductTypeExist(lsp.getProductTypeId())) {
-                        boolean result = mainController.addProductType(lsp);
-                        if (!result) {
-                            System.out.println("Không thể thêm loại sản phẩm: " + lsp.getProductTypeId());
-                        }
-                    } else {
+                    if (mainController.checkProductTypeExist(lsp.getProductTypeId())) {
                         mainController.updateProductType(lsp);
+                    } else {
+                        mainController.addProductType(lsp);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -504,6 +500,7 @@ public class MerchandiseView extends JPanel implements ActionListener, ItemListe
                 try {
                     if (!mainController.checkSupplierId(ncc.getSupplierId())) {
                         boolean result = mainController.addSupplier(ncc);
+                        loadDataTable();
                         if (!result) {
                             System.out.println("Không thể thêm nhà cung cấp: " + ncc.getSupplierId());
                         }
@@ -517,6 +514,27 @@ public class MerchandiseView extends JPanel implements ActionListener, ItemListe
         }
     }
 
+    public void loadDataTable() {
+        modelSP.setRowCount(0);
+        java.util.List<Merchandise> merchandiseList = mainController.getAllSanPhamLoadData();
+        for (Merchandise sp : merchandiseList) {
+            String idSanPham = sp.getProductId();
+            String tenSanPham = sp.getProductName();
+            String tenLoaiSanPham = sp.getProductTypeId().getProductTypeId();
+            String tenNhaCungCap = sp.getSupplierId().getSupplierId();
+            double kichThuoc = sp.getSize();
+            String mauSac = sp.getColor();
+            String trangThai = sp.getStatus().getDescription() + "";
+            double thue = sp.tax();
+            double giaNhap = sp.getImportPrice();
+            int soLuong = sp.getQuantity();
+            double giaBan = sp.sellingPrice();
+            modelSP.addRow(new Object[]{idSanPham, tenSanPham, tenLoaiSanPham, tenNhaCungCap, kichThuoc, mauSac,
+                    trangThai, currencyFormat.format(thue), currencyFormat.format(giaNhap), soLuong,
+                    currencyFormat.format(giaBan)});
+        }
+
+    }
 
 //	public void importExcel() throws SQLException {
 //		String defaultCurrentDirectoryPath = System.getProperty("user.dir") + "/src/main/resources/DataImports";
