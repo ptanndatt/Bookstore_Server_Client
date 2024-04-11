@@ -500,7 +500,6 @@ public class MerchandiseView extends JPanel implements ActionListener, ItemListe
                 try {
                     if (!mainController.checkSupplierId(ncc.getSupplierId())) {
                         boolean result = mainController.addSupplier(ncc);
-                        loadDataTable();
                         if (!result) {
                             System.out.println("Không thể thêm nhà cung cấp: " + ncc.getSupplierId());
                         }
@@ -512,28 +511,6 @@ public class MerchandiseView extends JPanel implements ActionListener, ItemListe
                 }
             }
         }
-    }
-
-    public void loadDataTable() {
-        modelSP.setRowCount(0);
-        java.util.List<Merchandise> merchandiseList = mainController.getAllSanPhamLoadData();
-        for (Merchandise sp : merchandiseList) {
-            String idSanPham = sp.getProductId();
-            String tenSanPham = sp.getProductName();
-            String tenLoaiSanPham = sp.getProductTypeId().getProductTypeId();
-            String tenNhaCungCap = sp.getSupplierId().getSupplierId();
-            double kichThuoc = sp.getSize();
-            String mauSac = sp.getColor();
-            String trangThai = sp.getStatus().getDescription() + "";
-            double thue = sp.tax();
-            double giaNhap = sp.getImportPrice();
-            int soLuong = sp.getQuantity();
-            double giaBan = sp.sellingPrice();
-            modelSP.addRow(new Object[]{idSanPham, tenSanPham, tenLoaiSanPham, tenNhaCungCap, kichThuoc, mauSac,
-                    trangThai, currencyFormat.format(thue), currencyFormat.format(giaNhap), soLuong,
-                    currencyFormat.format(giaBan)});
-        }
-
     }
 
 //	public void importExcel() throws SQLException {

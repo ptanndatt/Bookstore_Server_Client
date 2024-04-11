@@ -18,6 +18,5 @@ public interface MerchandiseDao {
     List<Merchandise> findSupplierByNameMerchandise(String name);
 
     List<Merchandise> findProductTypeMerchandise(String name);
-
-    List<Merchandise> getAllSanPhamLoadData();
+    
 }

@@ -37,7 +37,5 @@ public class MerchandiseDaoImplService {
         return merchandiseDao.findProductTypeMerchandise(name);
     }
 
-    public List<Merchandise> getAllSanPhamLoadData() {
-        return merchandiseDao.getAllSanPhamLoadData();
-    }
+   
 }

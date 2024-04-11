@@ -224,9 +224,4 @@ public class MainController {
     public List<Merchandise> findSupplierByNameMerchandise(String name) {
         return merchandiseDaoImplService.findSupplierByNameMerchandise(name);
     }
-
-    public List<Merchandise> getAllSanPhamLoadData() {
-        return merchandiseDaoImplService.getAllSanPhamLoadData();
-    }
-
 }

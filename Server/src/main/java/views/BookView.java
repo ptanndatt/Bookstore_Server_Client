@@ -1,6 +1,8 @@
 package views;
 
 import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.*;
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,9 +34,7 @@ import javax.swing.text.MaskFormatter;
 
 import controller.MainController;
 import models.*;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import com.toedter.calendar.JDateChooser;
 
@@ -542,58 +542,58 @@ public class BookView extends JPanel
     }
 
     private void xulyTrangSanPhamCon(Sheet sheet) throws SQLException {
-//        for (int rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
-//            Row row = sheet.getRow(rowIndex);
-//            if (row != null) {
-//                SachCon s = new SachCon();
-//                s.setIdSanPham(row.getCell(0).getStringCellValue());
-//                s.setTenSanPham(row.getCell(1).getStringCellValue());
-//                s.setTacGia(new TacGia(row.getCell(2).getStringCellValue()));
-//                s.setTheLoai(new TheLoai(row.getCell(3).getStringCellValue()));
-//                Date namXuatBanUtil = row.getCell(4).getDateCellValue();
-//                java.sql.Date namXuatBanSql = new java.sql.Date(namXuatBanUtil.getTime());
-//                s.setNamXuatBan(namXuatBanSql);
-//                s.setISBN(row.getCell(5).getStringCellValue());
-//                int soTrang = (int) row.getCell(6).getNumericCellValue();
-//                s.setSoTrang(soTrang);
-//                s.setIdLoaiSanPham(new LoaiSanPham(row.getCell(7).getStringCellValue()));
-//                s.setIdNhaCungCap(new NhaCungCap(row.getCell(8).getStringCellValue()));
-//                s.setKichThuoc(row.getCell(9).getNumericCellValue());
-//                s.setMauSac(row.getCell(10).getStringCellValue());
-//                int trangThaiValue = (int) row.getCell(11).getNumericCellValue();
-//                TrangThaiSPEnum trangThaiEnum = TrangThaiSPEnum.getById(trangThaiValue);
-//                s.setTrangThai(trangThaiEnum);
-//                s.thue();
-//                int soLuong = (int) row.getCell(13).getNumericCellValue();
-//                s.setSoLuong(soLuong);
-//                s.setGiaNhap(row.getCell(14).getNumericCellValue());
-//                s.giaBan();
-//                s.setGiaKM(row.getCell(16).getNumericCellValue());
-//                boolean checkIDLoaiSanPham = daoLoaiSanPham.checkIdLoaiSanPham(s.getIdLoaiSanPham().getIdLoaiSanPham());
-//                boolean checkIDNhaCungCap = daoNhaCungCap.checkIdNhaCungCap(s.getIdNhaCungCap().getIdNhaCungCap());
-//
-//                boolean checkIDTacGia = daoTacGia.checkIdTacGia(s.getTacGia().getIdTacGia());
-//
-//                boolean checkIDTheLoai = daoTheLoai.checkIdTheLoai(s.getTheLoai().getIdTheLoai());
-//
-//                if (!checkIDLoaiSanPham || !checkIDNhaCungCap || !checkIDTacGia || !checkIDTheLoai) {
-//                    JOptionPane.showMessageDialog(this,
-//                            "Không thể thêm sản phẩm: Một hoặc nhiều khóa phụ không tồn tại hoặc không hợp lệ.");
-//                    continue;
-//                }
-//                if (daoSach.checkIdSach(s.getIdSanPham())) {
-//                    daoSach.updateBook(s);
-//                    lamMoi();
-//                } else {
-//                    boolean result = daoSach.themSach(s);
-//                    loadData();
-//                    lamMoi();
-//                    if (!result) {
-//                        System.out.println("Không thể thêm sản phẩm: " + s.getIdSanPham());
-//                    }
-//                }
-//            }
-//        }
+        for (int rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
+            Row row = sheet.getRow(rowIndex);
+            if (row != null) {
+                Book s = new Book();
+                s.setProductId(row.getCell(0).getStringCellValue());
+                s.setProductName(row.getCell(1).getStringCellValue());
+                s.setAuthorId(new Author(row.getCell(2).getStringCellValue()));
+                s.setCategoryId(new Category(row.getCell(3).getStringCellValue()));
+                Date namXuatBanUtil = row.getCell(4).getDateCellValue();
+                LocalDate namXuatBan = namXuatBanUtil.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                s.setPublicationYear(namXuatBan);
+                s.setISBN(row.getCell(5).getStringCellValue());
+                int soTrang = (int) row.getCell(6).getNumericCellValue();
+                s.setNumberOfPages(soTrang);
+                s.setProductTypeId(new ProductType(row.getCell(7).getStringCellValue()));
+                s.setSupplierId(new Supplier(row.getCell(8).getStringCellValue()));
+                s.setSize(row.getCell(9).getNumericCellValue());
+                s.setColor(row.getCell(10).getStringCellValue());
+                int trangThaiValue = (int) row.getCell(11).getNumericCellValue();
+                ProductStatusEnum status = ProductStatusEnum.getById(trangThaiValue);
+                s.setStatus(status);
+                s.tax();
+                int soLuong = (int) row.getCell(13).getNumericCellValue();
+                s.setQuantity(soLuong);
+                s.setImportPrice(row.getCell(14).getNumericCellValue());
+                s.sellingPrice();
+//                s.s(row.getCell(16).getNumericCellValue());
+                boolean checkIDLoaiSanPham = mainController.checkProductTypeExist(s.getProductTypeId().getProductTypeId());
+                boolean checkIDNhaCungCap = mainController.checkSupplierId(s.getSupplierId().getSupplierId());
+
+                boolean checkIDTacGia = mainController.checkIdAuthor(s.getAuthorId().getAuthorId());
+
+                boolean checkIDTheLoai = mainController.checkIdCategory(s.getCategoryId().getIdCategory());
+
+                if (!checkIDLoaiSanPham || !checkIDNhaCungCap || !checkIDTacGia || !checkIDTheLoai) {
+                    JOptionPane.showMessageDialog(this,
+                            "Không thể thêm sản phẩm: Một hoặc nhiều khóa phụ không tồn tại hoặc không hợp lệ.");
+                    continue;
+                }
+                if (mainController.checkIdBook(s.getProductId())) {
+                    mainController.updateBook(s);
+                    refreshForm();
+                } else {
+                    boolean result = mainController.addBook(s);
+                    loadData();
+                    refreshForm();
+                    if (!result) {
+                        System.out.println("Không thể thêm sản phẩm: " + s.getProductId());
+                    }
+                }
+            }
+        }
     }
 
     private void xulyTrangCategory(Sheet sheet) {
@@ -605,7 +605,6 @@ public class BookView extends JPanel
                 tl.setCategoryName(row.getCell(1).getStringCellValue());
                 int soLuong = (int) row.getCell(2).getNumericCellValue();
                 tl.setBookQuantity(soLuong);
-                tl.setDescription(row.getCell(3).getStringCellValue());
                 try {
                     if (!mainController.checkIdCategory(tl.getIdCategory())) {
                         boolean result = mainController.addCategory(tl);
@@ -624,22 +623,33 @@ public class BookView extends JPanel
         for (int rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
             Row row = sheet.getRow(rowIndex);
             if (row != null) {
-                Author tg = new Author();
-                tg.setAuthorId(row.getCell(0).getStringCellValue());
-                tg.setAuthorName(row.getCell(1).getStringCellValue());
-                Date namXuatBanUtil = row.getCell(3).getDateCellValue();
+                Author author = new Author();
 
-                LocalDate namXuatBan = namXuatBanUtil.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                tg.setDate(namXuatBan);
+                author.setAuthorId(row.getCell(0).getStringCellValue());
+
+                author.setAuthorName(row.getCell(1).getStringCellValue());
+
+                Cell namXuatBanCell = row.getCell(2);
+                if (namXuatBanCell != null) {
+                    if (namXuatBanCell.getCellType() == CellType.NUMERIC && DateUtil.isCellDateFormatted(namXuatBanCell)) {
+                        Date namXuatBanUtil = namXuatBanCell.getDateCellValue();
+                        LocalDate namXuatBan = namXuatBanUtil.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                        author.setDate(namXuatBan);
+                    } else {
+
+                    }
+                } else {
+                }
+
 
                 int soLuong = (int) row.getCell(3).getNumericCellValue();
-                tg.setNumberOfWorks(soLuong);
+                author.setNumberOfWorks(soLuong);
+
                 try {
-                    if (!mainController.checkIdAuthor(tg.getAuthorId())) {
-                        boolean result = mainController.addAuthor(tg);
-                        if (!result) {
-                            System.out.println("Không thể thêm tác giả: " + tg.getAuthorId());
-                        }
+                    if (mainController.checkIdAuthor(author.getAuthorId())) {
+                        mainController.updateAuthor(author);
+                    } else {
+                        mainController.addAuthor(author);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -648,11 +658,12 @@ public class BookView extends JPanel
         }
     }
 
+
     private void xulyTrangProductType(Sheet sheet) {
         for (int rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
             Row row = sheet.getRow(rowIndex);
             if (row != null) {
-                ProductType lsp = new ProductType(row.getCell(2).getStringCellValue());
+                ProductType lsp = new ProductType();
                 lsp.setProductTypeId(row.getCell(0).getStringCellValue());
                 lsp.setProductTypeName(row.getCell(1).getStringCellValue());
 

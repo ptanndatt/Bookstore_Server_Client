@@ -42,4 +42,8 @@ public class Author {
         this.date = date;
     }
 
+    public Author(String authorId) {
+        this.authorId = authorId;
+    }
+
 }

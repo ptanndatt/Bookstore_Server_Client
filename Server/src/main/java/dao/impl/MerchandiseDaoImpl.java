@@ -168,36 +168,5 @@ public class MerchandiseDaoImpl implements MerchandiseDao {
         return null;
     }
 
-    @Override
-    public List<Merchandise> getAllSanPhamLoadData() {
-        List<Merchandise> list = null;
-        try {
-            String hql = "SELECT m.productId, m.productName, m.supplierId, m.productTypeId, m.size, m.color, m.status, m.importPrice, m.quantity FROM Merchandise m";
-
-            TypedQuery<Object[]> query = em.createQuery(hql, Object[].class);
-            List<Object[]> results = query.getResultList();
-
-            list = new ArrayList<>();
-            for (Object[] result : results) {
-                Merchandise merchandise = new Merchandise();
-                merchandise.setProductId((String) result[0]);
-                merchandise.setProductName((String) result[1]);
-                merchandise.setSupplierId((Supplier) result[2]);
-                merchandise.setProductTypeId((ProductType) result[3]);
-                merchandise.setSize((int) result[4]);
-                merchandise.setColor((String) result[5]);
-                merchandise.setStatus((ProductStatusEnum) result[6]);
-                merchandise.setImportPrice((Double) result[7]);
-                merchandise.setQuantity((Integer) result[8]);
-
-                list.add(merchandise);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-        return list;
-    }
-
 
 }
