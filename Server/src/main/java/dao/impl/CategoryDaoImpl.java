@@ -130,9 +130,6 @@ public class CategoryDaoImpl implements CategoryDao {
             if (!tr.isActive()) {
                 tr.begin();
             }
-
-            tr.begin();
-
             Category category = em.find(Category.class, idCategory);
             if (category == null) {
                 Log.error("Category not found");

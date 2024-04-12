@@ -14,10 +14,12 @@ public class MainController {
     private SupplierDaoImplService supplierDaoImplService = new SupplierDaoImplService();
     private BookDaoImplService bookDaoImplService = new BookDaoImplService();
     private MerchandiseDaoImplService merchandiseDaoImplService = new MerchandiseDaoImplService();
+
     private CustomerDaoImplService customerDaoImplService = new CustomerDaoImplService();
     private EmployeeDaoImplService employeeDaoImplService = new EmployeeDaoImplService();
     private AccountDaoImplService accountDaoImplService = new AccountDaoImplService();
     private RoleDaoImplService roleDaoImplService = new RoleDaoImplService();
+
     //Customer
     public List<Customer> getAllCustomers() {
         return customerDaoImplService.getAllCustomers();
@@ -34,9 +36,11 @@ public class MainController {
     public boolean deleteCustomer(String id) {
         return customerDaoImplService.deleteCustomer(id);
     }
+
     public List<Customer> findCustomerByText(String text) {
         return customerDaoImplService.findCustomerByText(text);
     }
+
     //Account
     public List<Account> getAllAccount() {
         return accountDaoImplService.getAllAccount();
@@ -53,6 +57,7 @@ public class MainController {
     public boolean deleteAccount(String id) {
         return accountDaoImplService.deleteAccount(id);
     }
+
     //Role
     public List<Role> getAllRole() {
         return roleDaoImplService.getAllRole();
@@ -65,9 +70,11 @@ public class MainController {
     public boolean deleteRole(String id) {
         return roleDaoImplService.deleteRole(id);
     }
-    public Role findRoleByText(String text){
+
+    public Role findRoleByText(String text) {
         return roleDaoImplService.findRoleByText(text);
     }
+
     //Employee
     public List<Employee> getAllEmployees() {
         return employeeDaoImplService.getAllEmployees();
@@ -84,9 +91,11 @@ public class MainController {
     public boolean deleteEmployee(String id) {
         return employeeDaoImplService.deleteEmployee(id);
     }
+
     public List<Employee> findEmployeeByText(String text) {
         return employeeDaoImplService.findEmployeeByText(text);
     }
+
     // author
     public List<Author> getAllAuthor() {
         return authorDaoImplService.getAllAuthor();
@@ -274,23 +283,28 @@ public class MainController {
     public List<Merchandise> getAllMerchandise() {
         return merchandiseDaoImplService.getAllMerchandise();
     }
+
     public boolean addMerchandise(Merchandise merchandise) {
         return merchandiseDaoImplService.addMerchandise(merchandise);
     }
+
     public boolean checkIdExist(String id) {
         return merchandiseDaoImplService.checkIdExist(id);
     }
+
     public boolean updateMerchandise(Merchandise merchandise) {
         return merchandiseDaoImplService.updateMerchandise(merchandise);
     }
+
     public boolean deleteMerchandise(String id) {
         return merchandiseDaoImplService.deleteMerchandise(id);
     }
+
     public List<Merchandise> findBookByProductTypeMerchandise(String name) {
         return merchandiseDaoImplService.findByProductTypeMerchandise(name);
     }
+
     public List<Merchandise> findSupplierByNameMerchandise(String name) {
         return merchandiseDaoImplService.findSupplierByNameMerchandise(name);
     }
-
 }

@@ -41,4 +41,11 @@ public class Author {
         this.authorName = authorName;
         this.date = date;
     }
+
+    public Author(String authorId) {
+        this.authorId = authorId;
+    }
+
 }
+
+

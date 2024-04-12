@@ -32,7 +32,9 @@ public class AuthorDaoImpl implements AuthorDao {
     public List<Author> getAllAuthor() {
         EntityTransaction tr = em.getTransaction();
         try {
-            tr.begin();
+            if (!tr.isActive()) {
+                tr.begin();
+            }
             List<Author> authors = em.createQuery("FROM Author", Author.class).getResultList();
             tr.commit();
             return authors;
@@ -47,7 +49,9 @@ public class AuthorDaoImpl implements AuthorDao {
     public boolean addAuthor(Author author) {
         EntityTransaction tr = em.getTransaction();
         try {
-            tr.begin();
+            if (!tr.isActive()) {
+                tr.begin();
+            }
             if (!em.contains(author)) {
                 author = em.merge(author);
             }
@@ -67,7 +71,9 @@ public class AuthorDaoImpl implements AuthorDao {
         EntityTransaction tr = null;
         try {
             tr = em.getTransaction();
-            tr.begin();
+            if (!tr.isActive()) {
+                tr.begin();
+            }
             em.merge(author);
             tr.commit();
             return true;
