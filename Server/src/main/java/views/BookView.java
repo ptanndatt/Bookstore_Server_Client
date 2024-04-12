@@ -113,25 +113,25 @@ public class BookView extends JPanel
         init();
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                Frame frame = new Frame();
-                frame.add(new BookView());
-                frame.setVisible(true);
-                frame.setSize(1500, 900);
-                frame.setLocationRelativeTo(null);
-                frame.addWindowListener(new WindowAdapter() {
-                    @Override
-                    public void windowClosing(WindowEvent e) {
-                        super.windowClosing(e);
-                        System.exit(0);
-                    }
-                });
-            }
-        });
-    }
+//    public static void main(String[] args) {
+//        SwingUtilities.invokeLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                Frame frame = new Frame();
+//                frame.add(new BookView());
+//                frame.setVisible(true);
+//                frame.setSize(1500, 900);
+//                frame.setLocationRelativeTo(null);
+//                frame.addWindowListener(new WindowAdapter() {
+//                    @Override
+//                    public void windowClosing(WindowEvent e) {
+//                        super.windowClosing(e);
+//                        System.exit(0);
+//                    }
+//                });
+//            }
+//        });
+//    }
 
     private void init() {
         timer = new Timer(1000, new ActionListener() {

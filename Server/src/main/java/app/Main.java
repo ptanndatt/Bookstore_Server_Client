@@ -67,7 +67,6 @@ public class Main {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-//                ManagerView view = new ManagerView();
                 LoginView view = new LoginView();
                 view.setVisible(true);
             }

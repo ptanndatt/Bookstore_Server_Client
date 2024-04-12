@@ -54,25 +54,25 @@ public class CategoryView extends JPanel implements ActionListener, KeyListener,
     private MainController mainController;
 
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                Frame frame = new Frame();
-                frame.add(new CategoryView());
-                frame.setVisible(true);
-                frame.setSize(1000, 600);
-                frame.setLocationRelativeTo(null);
-                frame.addWindowListener(new WindowAdapter() {
-                    @Override
-                    public void windowClosing(WindowEvent e) {
-                        super.windowClosing(e);
-                        System.exit(0);
-                    }
-                });
-            }
-        });
-    }
+//    public static void main(String[] args) {
+//        SwingUtilities.invokeLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                Frame frame = new Frame();
+//                frame.add(new CategoryView());
+//                frame.setVisible(true);
+//                frame.setSize(1000, 600);
+//                frame.setLocationRelativeTo(null);
+//                frame.addWindowListener(new WindowAdapter() {
+//                    @Override
+//                    public void windowClosing(WindowEvent e) {
+//                        super.windowClosing(e);
+//                        System.exit(0);
+//                    }
+//                });
+//            }
+//        });
+//    }
 
 
     public CategoryView() {
