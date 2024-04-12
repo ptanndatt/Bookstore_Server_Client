@@ -547,12 +547,12 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
 
     }
 
-    public static void main(String[] args) {
-        JFrame frame = new JFrame();
-        frame.add(new EmployeeManagementView());
-        frame.setSize(1000, 700);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
-    }
+//    public static void main(String[] args) {
+//        JFrame frame = new JFrame();
+//        frame.add(new EmployeeManagementView());
+//        frame.setSize(1000, 700);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.setLocationRelativeTo(null);
+//        frame.setVisible(true);
+//    }
 }

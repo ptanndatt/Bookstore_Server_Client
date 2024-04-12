@@ -33,7 +33,7 @@ public class LoginView extends JFrame implements ActionListener {
             return;
         }
         if (id.startsWith("admin") && password.equals("admin")) {
-//            DialogUtils.showSuccessMessage(this, "Đăng nhập thành công");
+            DialogUtils.showSuccessMessage(this, "Đăng nhập thành công");
             AdminView view = new AdminView();
             view.setVisible(true);
             this.dispose();

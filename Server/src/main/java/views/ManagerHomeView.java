@@ -86,14 +86,14 @@ public class ManagerHomeView extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-//                switchToPanel(new LoaiSanPhamView());
+                switchToPanel(new ProductTypeView());
             }
         });
         MenuItem subQLNhaCungCap = new MenuItem(iconSubMenu, "Nhà cung cấp", new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-//                switchToPanel(new LoaiNhaSanXuatView());
+                switchToPanel(new SupplierView());
 
             }
         });
@@ -101,7 +101,7 @@ public class ManagerHomeView extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-//                switchToPanel(new TacGiaView());
+                switchToPanel(new AuthorView());
             }
         });
 
@@ -109,7 +109,7 @@ public class ManagerHomeView extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-//                switchToPanel(new TheLoaiView());
+                switchToPanel(new CategoryView());
             }
         });
         MenuItem DangXuat = new MenuItem(iconDX, "Đăng xuất", new ActionListener() {
@@ -131,7 +131,7 @@ public class ManagerHomeView extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-//                switchToPanel(new QuanLySanPhamView());
+                switchToPanel(new MerchandiseView());
 
             }
         }, subQLLoaiSanPham, subQLNhaCungCap, subQLTacGia, subQLTheLoai);
