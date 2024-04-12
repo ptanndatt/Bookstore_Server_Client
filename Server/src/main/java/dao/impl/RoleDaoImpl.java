@@ -13,12 +13,14 @@ import java.util.List;
 
 public class RoleDaoImpl implements RoleDao {
     private EntityManager em;
+
     public RoleDaoImpl() {
         em = HibernateUtil.getInstance().getEntityManager();
     }
+
     @Override
     public boolean addRole(Role role) {
-        EntityTransaction entityTransaction=em.getTransaction();
+        EntityTransaction entityTransaction = em.getTransaction();
         try {
             entityTransaction.begin();
             em.persist(role);
@@ -36,7 +38,7 @@ public class RoleDaoImpl implements RoleDao {
         EntityTransaction tr = em.getTransaction();
         try {
             tr.begin();
-            Role role=em.find(Role.class, roleId);
+            Role role = em.find(Role.class, roleId);
             em.remove(role);
             tr.commit();
             return true;
@@ -46,6 +48,7 @@ public class RoleDaoImpl implements RoleDao {
             return false;
         }
     }
+
     @Override
     public List<Role> getAllRole() {
         List<Role> roles = null;
@@ -67,5 +70,21 @@ public class RoleDaoImpl implements RoleDao {
         return em.createQuery("SELECT r from Role r where r.roleName =:text", Role.class)
                 .setParameter("text", text) // %text% for similarity
                 .getSingleResult();
+    }
+
+    @Override
+    public boolean updateRole(String id) {
+        EntityTransaction tr = em.getTransaction();
+        try {
+            tr.begin();
+            Role role = em.find(Role.class, id);
+            em.merge(role);
+            tr.commit();
+            return true;
+        } catch (Exception e) {
+            tr.rollback();
+            e.printStackTrace();
+        }
+        return false;
     }
 }

@@ -75,6 +75,10 @@ public class MainController {
         return roleDaoImplService.findRoleByText(text);
     }
 
+    public boolean updateRole(String id) {
+        return roleDaoImplService.updateRole(id);
+    }
+
     //Employee
     public List<Employee> getAllEmployees() {
         return employeeDaoImplService.getAllEmployees();

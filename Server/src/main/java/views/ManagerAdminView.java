@@ -67,11 +67,15 @@ public class ManagerAdminView extends JPanel implements KeyListener, MouseListen
     private GeneratorIDAuto autoID;
     private MainController mainController;
     private JButton btnAddRole;
+    private JTable tbChucVu;
+    private DefaultTableModel modelChucVu;
 
     public ManagerAdminView() {
         dfNgaySinh = new SimpleDateFormat("dd/MM/yyyy");
         autoID = new GeneratorIDAuto();
         mainController = new MainController();
+        tbChucVu = new JTable();
+        modelChucVu = new DefaultTableModel();
         btnAddRole = new JButton("Thêm chức vụ");
         setLayout(new BorderLayout());
 
@@ -212,6 +216,7 @@ public class ManagerAdminView extends JPanel implements KeyListener, MouseListen
         txtID.getDocument().addDocumentListener(this);
         btnAddRole.addActionListener(this);
         loadData();
+        loadRole();
         loadComboBox();
     }
 
@@ -224,80 +229,142 @@ public class ManagerAdminView extends JPanel implements KeyListener, MouseListen
     }
 
     private void showAddPositionDialog() {
+        loadRole();
         JDialog dialog = new JDialog();
         dialog.setTitle("Thêm chức vụ");
-        dialog.setSize(350, 300);
+        dialog.setSize(400, 300);
         dialog.setLocationRelativeTo(null);
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         dialog.setLayout(new BorderLayout());
-        dialog.setLayout(new BorderLayout());
-        JPanel pnTop = new JPanel(new FlowLayout());
-        JPanel pnCenter = new JPanel(new GridBagLayout());
 
-        JLabel lblTop = new JLabel("Thêm chức vụ");
-        lblTop.setFont(new Font("Tahoma", Font.BOLD, 20));
+        JPanel pnCenter = new JPanel(new BorderLayout());
 
-        JLabel lblID = new JLabel("ID chức vụ:");
-        JTextField txtID = new JTextField();
-        txtID.setEditable(false);
-//        txtID.setText(autoID.autoID("R"));
         JLabel lblTenChucVu = new JLabel("Tên chức vụ:");
         JTextField txtTenChucVu = new JTextField();
-        JButton btnThem = new JButton("Thêm");
-        JButton btnHuy = new JButton("Hủy");
+        txtTenChucVu.setColumns(15);
+
+        JPanel pnInput = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(10, 10, 10, 10);
         gbc.gridx = 0;
         gbc.gridy = 0;
-        pnCenter.add(lblID, gbc);
+        gbc.insets = new Insets(10, 10, 10, 10);
+        pnInput.add(lblTenChucVu, gbc);
         gbc.gridx = 1;
-        pnCenter.add(txtID, gbc);
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        pnCenter.add(lblTenChucVu, gbc);
-        gbc.gridx = 1;
-        pnCenter.add(txtTenChucVu, gbc);
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        pnCenter.add(btnThem, gbc);
-        gbc.gridx = 1;
-        pnCenter.add(btnHuy, gbc);
-        dialog.add(pnCenter, BorderLayout.CENTER);
-        pnTop.add(lblTop);
-        dialog.add(pnTop, BorderLayout.NORTH);
-        dialog.setVisible(true);
-        cbChucVu.addItem("Quản lý");
-        btnThem.addActionListener(new ActionListener() {
+        gbc.gridwidth = 2;
+        pnInput.add(txtTenChucVu, gbc);
+
+        pnCenter.add(pnInput, BorderLayout.NORTH);
+
+        tbChucVu = new JTable();
+        modelChucVu = new DefaultTableModel();
+        modelChucVu.addColumn("ID");
+        modelChucVu.addColumn("Tên chức vụ");
+        tbChucVu.setModel(modelChucVu);
+        JScrollPane scrollTbChucVu = new JScrollPane(tbChucVu);
+        pnCenter.add(scrollTbChucVu, BorderLayout.CENTER);
+
+        JPanel pnBottom = new JPanel(new BorderLayout());
+
+        JPanel pnButtons = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        JButton btnAdd = new JButton("Thêm");
+        JButton btnEdit = new JButton("Sửa");
+        JButton btnDelete = new JButton("Xóa");
+        JButton btnCancel = new JButton("Hủy");
+
+        pnButtons.add(btnAdd);
+//        pnButtons.add(btnEdit);
+//        pnButtons.add(btnDelete);
+        pnButtons.add(btnCancel);
+
+        pnBottom.add(pnButtons, BorderLayout.SOUTH);
+
+        btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Object o = e.getSource();
-                if (o.equals(btnThem)) {
-//                    int id = Integer.parseInt(txtID.getText());
-                    String ten = txtTenChucVu.getText();
-                    Role role = new Role();
-//                    role.setIdRole(id);
-                    role.setRoleName(ten);
-                    boolean check = mainController.addRole(role);
-                    if (check) {
-                        DialogUtils.showSuccessMessage(dialog, "Thêm chức vụ thành công");
-                        updateChucVuComboBox();
-                        dialog.dispose();
-                    } else {
-                        DialogUtils.showErrorMessage(dialog, "Thêm chức vụ thất bại");
-                    }
-                    dialog.dispose();
+                String roleName = txtTenChucVu.getText().trim();
+                if (roleName.isEmpty()) {
+                    DialogUtils.showErrorMessage(dialog, "Tên chức vụ không được để trống");
+                    return;
                 }
+                Role role = new Role();
+                role.setRoleName(roleName);
+                mainController.addRole(role);
+                modelChucVu.addRow(new Object[]{role.getIdRole(), role.getRoleName()});
+                loadComboBox();
+                loadRole();
+                txtTenChucVu.setText("");
+                DialogUtils.showSuccessMessage(dialog, "Thêm chức vụ thành công");
+                dialog.dispose();
             }
         });
 
+        btnCancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dialog.dispose();
+            }
+        });
+        btnDelete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = tbChucVu.getSelectedRow();
+                if (row == -1) {
+                    DialogUtils.showErrorMessage(dialog, "Vui lòng chọn chức vụ cần xóa");
+                    return;
+                }
+                String idRole = modelChucVu.getValueAt(row, 0).toString();
+                mainController.deleteRole(idRole);
+                modelChucVu.removeRow(row);
+                loadComboBox();
+                loadRole();
+                DialogUtils.showSuccessMessage(dialog, "Xóa chức vụ thành công");
+            }
+        });
+        btnEdit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = tbChucVu.getSelectedRow();
+                if (row == -1) {
+                    DialogUtils.showErrorMessage(dialog, "Vui lòng chọn chức vụ cần sửa");
+                    return;
+                }
+                String idRole = modelChucVu.getValueAt(row, 0).toString();
+                String roleName = txtTenChucVu.getText().trim();
+                if (roleName.isEmpty()) {
+                    DialogUtils.showErrorMessage(dialog, "Tên chức vụ không được để trống");
+                    return;
+                }
+                Role role = new Role();
+                role.setRoleName(roleName);
+                mainController.updateRole(idRole);
+                modelChucVu.setValueAt(roleName, row, 1);
+                loadComboBox();
+                loadRole();
+                txtTenChucVu.setText("");
+                DialogUtils.showSuccessMessage(dialog, "Sửa chức vụ thành công");
+            }
+        });
+
+        dialog.add(pnCenter, BorderLayout.CENTER);
+        dialog.add(pnBottom, BorderLayout.SOUTH);
+        loadRole();
+        dialog.setVisible(true);
     }
+
 
     private void updateChucVuComboBox() {
         cbChucVu.removeAllItems();
         List<Role> roles = mainController.getAllRole();
         for (Role role : roles) {
             cbChucVu.addItem(role.getRoleName());
+        }
+    }
+
+    public void loadRole() {
+        modelChucVu.setRowCount(0);
+        List<Role> roles = mainController.getAllRole();
+        for (Role role : roles) {
+            modelChucVu.addRow(new Object[]{role.getIdRole(), role.getRoleName()});
         }
     }
 
@@ -325,15 +392,15 @@ public class ManagerAdminView extends JPanel implements KeyListener, MouseListen
 
     }
 
-    public static String hashWithSHA3_256(String input) throws NoSuchAlgorithmException {
-        MessageDigest md = MessageDigest.getInstance("SHA3-256");
-        byte[] hashBytes = md.digest(input.getBytes());
-        StringBuilder sb = new StringBuilder();
-        for (byte b : hashBytes) {
-            sb.append(String.format("%02x", b));
-        }
-        return sb.toString();
-    }
+//    public static String hashWithSHA3_256(String input) throws NoSuchAlgorithmException {
+//        MessageDigest md = MessageDigest.getInstance("SHA3-256");
+//        byte[] hashBytes = md.digest(input.getBytes());
+//        StringBuilder sb = new StringBuilder();
+//        for (byte b : hashBytes) {
+//            sb.append(String.format("%02x", b));
+//        }
+//        return sb.toString();
+//    }
 
     private void addEmployee() {
         String id = txtID.getText();

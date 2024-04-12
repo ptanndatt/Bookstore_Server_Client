@@ -302,7 +302,6 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         for (Role role : mainController.getAllRole()) {
             modelChucVu.addRow(new Object[]{role.getIdRole(), role.getRoleName()
             });
-
         }
     }
 
