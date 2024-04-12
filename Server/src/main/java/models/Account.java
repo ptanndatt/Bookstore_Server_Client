@@ -1,7 +1,6 @@
 package models;
 
 
-
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,32 +12,32 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @Entity
-@Table(name="Account")
+@Table(name = "Account")
 public class Account {
 
-	@Id
-	@OneToOne
-	@JoinColumn(name = "employeeId")
-	private Employee employee;
+    @Id
+    @OneToOne
+    @JoinColumn(name = "employeeId")
+    private Employee employee;
 
-	private String password;
-	private Date starDate;
+    private String password;
+    private Date starDate;
 
-	public Account(Employee employee, String password, Date starDate) {
-		this.employee = employee;
-		this.password = password;
-		this.starDate = starDate;
-	}
+    public Account(Employee employee, String password, Date starDate) {
+        this.employee = employee;
+        this.password = password;
+        this.starDate = starDate;
+    }
 
-	@Override
-	public String toString() {
-		return "Account [password=" + password + ", starDate=" + starDate + "]";
-	}
-	
-	
-	
-	
-	
-	
-	
+    public Account(String password, Date starDate) {
+        this.password = password;
+        this.starDate = starDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Account [password=" + password + ", starDate=" + starDate + "]";
+    }
+
+
 }
