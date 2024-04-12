@@ -23,6 +23,9 @@ public class RoleDaoImpl implements RoleDao {
         EntityTransaction entityTransaction = em.getTransaction();
         try {
             entityTransaction.begin();
+            if (!em.contains(role)) {
+                role = em.merge(role);
+            }
             em.persist(role);
             entityTransaction.commit();
             return true;
@@ -86,5 +89,23 @@ public class RoleDaoImpl implements RoleDao {
             e.printStackTrace();
         }
         return false;
+    }
+
+    @Override
+    public List<Role> getRolesByRoleCode(int roleCode) {
+        List<Role> roles = new ArrayList<>();
+        EntityTransaction tr = em.getTransaction();
+        try {
+            tr.begin();
+            String hql = "FROM Role r WHERE r.roleCode = :roleCode";
+            TypedQuery<Role> query = em.createQuery(hql, Role.class);
+            query.setParameter("roleCode", roleCode);
+            roles = query.getResultList();
+            tr.commit();
+        } catch (Exception e) {
+            tr.rollback();
+            e.printStackTrace();
+        }
+        return roles;
     }
 }

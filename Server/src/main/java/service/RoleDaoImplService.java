@@ -29,4 +29,8 @@ public class RoleDaoImplService {
     public boolean updateRole(String id) {
         return roleDao.updateRole(id);
     }
+
+    public List<Role> getRolesByRoleCode(int roleCode) {
+        return roleDao.getRolesByRoleCode(roleCode);
+    }
 }

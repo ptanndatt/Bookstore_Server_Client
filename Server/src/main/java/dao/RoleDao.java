@@ -15,4 +15,7 @@ public interface RoleDao {
     Role findRoleByText(String text);
 
     boolean updateRole(String id);
+
+    List<Role> getRolesByRoleCode(int roleCode);
+    
 }

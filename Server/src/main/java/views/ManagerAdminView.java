@@ -34,7 +34,7 @@ import util.GeneratorIDAuto;
 
 
 public class ManagerAdminView extends JPanel implements KeyListener, MouseListener, ActionListener, DocumentListener {
-
+    private static final int ROLE = 1;
     private JDateChooser chooserNgaySinh;
     private JTextField txtTenNV;
     private JTextField txtsdt;
@@ -221,8 +221,7 @@ public class ManagerAdminView extends JPanel implements KeyListener, MouseListen
     }
 
     public void loadComboBox() {
-//        cbChucVu.removeAllItems();
-        List<Role> roles = mainController.getAllRole();
+        List<Role> roles = mainController.getRolesByRoleCode(ROLE);
         for (Role role : roles) {
             cbChucVu.addItem(role.getRoleName());
         }
@@ -281,17 +280,17 @@ public class ManagerAdminView extends JPanel implements KeyListener, MouseListen
         btnAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String roleName = txtTenChucVu.getText().trim();
+                String roleName = txtTenChucVu.getText();
                 if (roleName.isEmpty()) {
                     DialogUtils.showErrorMessage(dialog, "Tên chức vụ không được để trống");
                     return;
                 }
-                Role role = new Role();
-                role.setRoleName(roleName);
+
+                Role role = new Role(roleName, ROLE);
                 mainController.addRole(role);
                 modelChucVu.addRow(new Object[]{role.getIdRole(), role.getRoleName()});
                 loadComboBox();
-                loadRole();
+//                loadRole();
                 txtTenChucVu.setText("");
                 DialogUtils.showSuccessMessage(dialog, "Thêm chức vụ thành công");
                 dialog.dispose();
@@ -352,16 +351,8 @@ public class ManagerAdminView extends JPanel implements KeyListener, MouseListen
     }
 
 
-    private void updateChucVuComboBox() {
-        cbChucVu.removeAllItems();
-        List<Role> roles = mainController.getAllRole();
-        for (Role role : roles) {
-            cbChucVu.addItem(role.getRoleName());
-        }
-    }
-
     public void loadRole() {
-        modelChucVu.setRowCount(0);
+//        modelChucVu.setRowCount(0);
         List<Role> roles = mainController.getAllRole();
         for (Role role : roles) {
             modelChucVu.addRow(new Object[]{role.getIdRole(), role.getRoleName()});
@@ -452,17 +443,21 @@ public class ManagerAdminView extends JPanel implements KeyListener, MouseListen
     }
 
     private void loadData() {
+//        modelNhanVien.setRowCount(0);
+//        String roleName = "";
+//        for (Employee employee : mainController.getAllEmployees()) {
+//            if (employee.getRole() != null) {
+//                roleName = employee.getRole().getRoleName();
+//            } else {
+//                roleName = "";
+//            }
+//            modelNhanVien.addRow(new Object[]{employee.getIdEmployee(), employee.getName(), employee.getPhone(), employee.getEmail(), employee.getAddress(), dfNgaySinh.format(employee.getBirth()), employee.getGender(), roleName, employee.getStatus()
+//            });
+//            refeshForm();
+//        }
         modelNhanVien.setRowCount(0);
-        String roleName = "";
-        for (Employee employee : mainController.getAllEmployees()) {
-            if (employee.getRole() != null) {
-                roleName = employee.getRole().getRoleName();
-            } else {
-                roleName = "";
-            }
-            modelNhanVien.addRow(new Object[]{employee.getIdEmployee(), employee.getName(), employee.getPhone(), employee.getEmail(), employee.getAddress(), dfNgaySinh.format(employee.getBirth()), employee.getGender(), roleName, employee.getStatus()
-            });
-            refeshForm();
+        for (Employee employee : mainController.findEmployeeByRoleCode(ROLE)) {
+            modelNhanVien.addRow(new Object[]{employee.getIdEmployee(), employee.getName(), employee.getPhone(), employee.getEmail(), employee.getAddress(), dfNgaySinh.format(employee.getBirth()), employee.getGender(), employee.getRole().getRoleName(), employee.getStatus()});
         }
     }
 

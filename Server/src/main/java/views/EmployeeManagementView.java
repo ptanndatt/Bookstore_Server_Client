@@ -29,7 +29,7 @@ import static javax.swing.JColorChooser.showDialog;
 
 public class EmployeeManagementView extends JPanel implements KeyListener, MouseListener, ActionListener {
 
-
+    private static final int ROLE = 0;
     private JDateChooser chooserNgaySinh;
     private JTextField txtTenNV;
     private JTextField txtsdt;
@@ -288,7 +288,7 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
 
     private void addRole() {
         String tenChucVu = txtTenChucVu.getText();
-        Role role = new Role(tenChucVu);
+        Role role = new Role(tenChucVu, ROLE);
         mainController.addRole(role);
         JOptionPane.showMessageDialog(this, "Thêm thành công");
         modelChucVu.addRow(new Object[]{role.getIdRole(), role.getRoleName()});
@@ -337,7 +337,7 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
 
     private void loadData() {
         modelNhanVien.setRowCount(0);
-        for (Employee employee : mainController.getAllEmployees()) {
+        for (Employee employee : mainController.findEmployeeByRoleCode(ROLE)) {
             modelNhanVien.addRow(new Object[]{employee.getIdEmployee(), employee.getName(), employee.getPhone(), employee.getEmail(), employee.getAddress(), dfNgaySinh.format(employee.getBirth()), employee.getGender(), employee.getRole().getRoleName(), employee.getStatus()
             });
 
@@ -449,7 +449,7 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
 
     private void loadComboxBoxRole() {
         cbChucVu.removeAllItems();
-        for (Role role : mainController.getAllRole()) {
+        for (Role role : mainController.getRolesByRoleCode(ROLE)) {
             cbChucVu.addItem(role.getRoleName());
         }
     }

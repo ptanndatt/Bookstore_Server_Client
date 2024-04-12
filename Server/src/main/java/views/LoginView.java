@@ -1,6 +1,9 @@
 package views;
 
 
+import controller.MainController;
+import models.Account;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import util.DialogUtils;
 
 import javax.swing.*;
@@ -8,7 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LoginView extends JFrame implements ActionListener {
-
+    private MainController mainController;
 
     public LoginView() {
         initComponents();
@@ -22,6 +25,7 @@ public class LoginView extends JFrame implements ActionListener {
     }
 
     private void login() {
+        mainController = new MainController();
         String id = jTextField1.getText().trim();
         String password = new String(jPasswordField1.getPassword()).trim();
         if (id.isEmpty() || password.isEmpty()) {
@@ -34,7 +38,21 @@ public class LoginView extends JFrame implements ActionListener {
             view.setVisible(true);
             this.dispose();
         } else {
-            DialogUtils.showErrorMessage(this, "Sai ID hoặc Mật khẩu");
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
+
+            Account account = mainController.getAccountById(id);
+            String pass = mainController.findPasswordByEmployeeId(id);
+            if (!encoder.matches(password, pass)) {
+                DialogUtils.showErrorMessage(this, "Sai ID hoặc Mật khẩu");
+            } else {
+                if (account.getEmployee().getRole().getRoleCode() == 1) {
+                    ManagerHomeView view = new ManagerHomeView();
+                    view.setVisible(true);
+                    this.dispose();
+                } else {
+                    DialogUtils.showSuccessMessage(this, "Day nha nhan vien");
+                }
+            }
         }
     }
 

@@ -12,12 +12,14 @@ import java.util.List;
 
 public class AccountDaoImpl implements AccountDao {
     private EntityManager em;
+
     public AccountDaoImpl() {
         em = HibernateUtil.getInstance().getEntityManager();
     }
+
     @Override
     public boolean addAccount(Account account) {
-        EntityTransaction entityTransaction=em.getTransaction();
+        EntityTransaction entityTransaction = em.getTransaction();
         try {
             entityTransaction.begin();
             em.persist(account);
@@ -35,7 +37,7 @@ public class AccountDaoImpl implements AccountDao {
         EntityTransaction tr = em.getTransaction();
         try {
             tr.begin();
-            Account account=em.find(Account.class, acountDelete);
+            Account account = em.find(Account.class, acountDelete);
             em.remove(account);
             tr.commit();
             return true;
@@ -48,7 +50,8 @@ public class AccountDaoImpl implements AccountDao {
 
     @Override
     public boolean updateAccount(Account account) {
-        EntityTransaction entityTransaction =  em.getTransaction();;
+        EntityTransaction entityTransaction = em.getTransaction();
+        ;
         try {
             entityTransaction.begin();
             em.merge(account);
@@ -77,4 +80,48 @@ public class AccountDaoImpl implements AccountDao {
         }
         return accounts;
     }
+
+    @Override
+    public Account getAccountById(String id) {
+        Account account = null;
+        EntityTransaction tr = em.getTransaction();
+        try {
+            tr.begin();
+            String hql = "SELECT a " +
+                    "FROM Account a " +
+                    "JOIN FETCH a.employee e " +
+                    "JOIN FETCH e.role r " +
+                    "WHERE a.employee.idEmployee = :id";
+            TypedQuery<Account> query = em.createQuery(hql, Account.class);
+            query.setParameter("id", id);
+            account = query.getSingleResult();
+            tr.commit();
+        } catch (Exception e) {
+            tr.rollback();
+            e.printStackTrace();
+        }
+        return account;
+    }
+
+    @Override
+    public String findPasswordByEmployeeId(String employeeId) {
+        String password = null;
+        EntityTransaction tr = em.getTransaction();
+        try {
+            tr.begin();
+            String hql = "SELECT a.password " +
+                    "FROM Account a " +
+                    "WHERE a.employee.idEmployee = :id";
+            TypedQuery<String> query = em.createQuery(hql, String.class);
+            query.setParameter("id", employeeId);
+            password = query.getSingleResult();
+            tr.commit();
+        } catch (Exception e) {
+            tr.rollback();
+            e.printStackTrace();
+        }
+        return password;
+    }
+
+
 }

@@ -43,8 +43,6 @@ public class ManagerHomeView extends JFrame {
 
 
     public ManagerHomeView() {
-
-
         setTitle("Quản trị");
         setSize(new Dimension(871, 473));
         setLocationRelativeTo(null);
