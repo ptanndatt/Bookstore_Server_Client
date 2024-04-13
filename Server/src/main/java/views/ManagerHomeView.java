@@ -282,7 +282,7 @@ public class ManagerHomeView extends JFrame {
         pnDate.add(lblDate);
         JPanel pnTenID = new JPanel(new BorderLayout());
         JPanel pnChen = new JPanel();
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         panelHeader.setBackground(new Color(225, 223, 223));
         panelHeader.setPreferredSize(new Dimension(561, 50));
         pnTenID.add(lbID, BorderLayout.NORTH);

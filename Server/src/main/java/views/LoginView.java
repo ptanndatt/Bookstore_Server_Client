@@ -18,8 +18,6 @@ public class LoginView extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
-
         jButton1.addActionListener(e -> login());
 
     }
@@ -29,14 +27,13 @@ public class LoginView extends JFrame implements ActionListener {
         String id = jTextField1.getText().trim();
         String password = new String(jPasswordField1.getPassword()).trim();
         if (id.isEmpty() || password.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Vui lòng nhập cả ID và Mật khẩu");
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập cả ID và Mật khẩu");
             return;
-        }
-        if (id.startsWith("admin") && password.equals("admin")) {
+        } else if (id.startsWith("admin") && password.equals("admin")) {
             DialogUtils.showSuccessMessage(this, "Đăng nhập thành công");
             AdminView view = new AdminView();
             view.setVisible(true);
-            this.dispose();
+            this.setVisible(false);
         } else {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 
@@ -48,7 +45,7 @@ public class LoginView extends JFrame implements ActionListener {
                 if (account.getEmployee().getRole().getRoleCode() == 1) {
                     ManagerHomeView view = new ManagerHomeView();
                     view.setVisible(true);
-                    this.dispose();
+                    dispose();
                 } else {
                     DialogUtils.showSuccessMessage(this, "Day nha nhan vien");
                 }
