@@ -41,13 +41,6 @@ public class ProductTypeView extends JPanel implements ActionListener, KeyListen
     private MainController mainController;
 
     public ProductTypeView() {
-        timer = new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                updateIdProductType();
-            }
-        });
-        timer.start();
         setLayout(new BorderLayout());
         mainController = new MainController();
         pnMain = new JPanel(new BorderLayout(8, 6));

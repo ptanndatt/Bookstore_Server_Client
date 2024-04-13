@@ -19,7 +19,7 @@ public class MainController {
     private EmployeeDaoImplService employeeDaoImplService = new EmployeeDaoImplService();
     private AccountDaoImplService accountDaoImplService = new AccountDaoImplService();
     private RoleDaoImplService roleDaoImplService = new RoleDaoImplService();
-
+    private PromotionDaoImplService promotionDaoImplService = new PromotionDaoImplService();
     //Customer
     public List<Customer> getAllCustomers() {
         return customerDaoImplService.getAllCustomers();
@@ -74,7 +74,25 @@ public class MainController {
     public Role findRoleByText(String text) {
         return roleDaoImplService.findRoleByText(text);
     }
+    //Promotion
+    public List<Promotion> getAllPromotion() {
+        return promotionDaoImplService.getAllPromotion();
+    }
 
+    public boolean addPromotion(Promotion promotion) {
+        return promotionDaoImplService.addPromotion(promotion);
+    }
+
+    public boolean deletePromotion(String id) {
+        return promotionDaoImplService.deletePromotion(id);
+    }
+
+    public Promotion findPromotionByText(String text) {
+        return promotionDaoImplService.findPromotionByText(text);
+    }
+    public boolean updatePromotion(Promotion promotion) {
+        return promotionDaoImplService.updatePromotion(promotion);
+    }
     //Employee
     public List<Employee> getAllEmployees() {
         return employeeDaoImplService.getAllEmployees();

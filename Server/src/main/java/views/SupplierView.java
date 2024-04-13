@@ -44,36 +44,11 @@ public class SupplierView extends JPanel implements ActionListener, MouseListene
     private JTextField txtSoDienThoai;
     private JButton btnXemTatCa;
     private MainController mainController;
-    private Timer timer;
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                Frame frame = new Frame();
-                frame.add(new SupplierView());
-                frame.setVisible(true);
-                frame.setSize(1000, 800);
-                frame.setLocationRelativeTo(null);
-                frame.addWindowListener(new WindowAdapter() {
-                    @Override
-                    public void windowClosing(WindowEvent e) {
-                        super.windowClosing(e);
-                        System.exit(0);
-                    }
-                });
-            }
-        });
-    }
+
+
 
     public SupplierView() {
-        timer = new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                updateIdSupplier();
-            }
-        });
-        timer.start();
         mainController = new MainController();
         setLayout(new BorderLayout());
         pnMain = new JPanel(new BorderLayout(8, 6));

@@ -18,6 +18,7 @@
         <class>models.Bill</class>
         <class>models.Promotion</class>
         <class>models.DetailsBill</class>
+        <class>models.ProductSale</class>
         <properties>
             <property name="jakarta.persistence.jdbc.url"
                       value="jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true"/>

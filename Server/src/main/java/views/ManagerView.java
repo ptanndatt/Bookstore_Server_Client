@@ -89,14 +89,14 @@ public class ManagerView extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-//                switchToPanel(new LoaiSanPhamView());
+                switchToPanel(new ProductTypeView());
             }
         });
         MenuItem subQLNhaCungCap = new MenuItem(iconSubMenu, "Nhà cung cấp", new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-//                switchToPanel(new LoaiNhaSanXuatView());
+                switchToPanel(new SupplierView());
 
             }
         });
@@ -104,7 +104,7 @@ public class ManagerView extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-//                switchToPanel(new TacGiaView());
+                switchToPanel(new AuthorView());
             }
         });
 
@@ -112,7 +112,7 @@ public class ManagerView extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-//                switchToPanel(new TheLoaiView());
+                switchToPanel(new CategoryView());
             }
         });
         MenuItem DangXuat = new MenuItem(iconDX, "Đăng xuất", new ActionListener() {
@@ -134,7 +134,7 @@ public class ManagerView extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-//                switchToPanel(new QuanLySanPhamView());
+                switchToPanel(new MerchandiseView());
 
             }
         }, subQLLoaiSanPham, subQLNhaCungCap, subQLTacGia, subQLTheLoai);
@@ -161,8 +161,7 @@ public class ManagerView extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
-//                switchToPanel(new KhuyenMaiView());
+                switchToPanel(new PromotionView());
             }
         });
         MenuItem QLHD = new MenuItem(iconHD, "Quản lý hóa đơn", new ActionListener() {

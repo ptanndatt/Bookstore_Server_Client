@@ -41,10 +41,8 @@ public abstract class Product {
     protected int quantity;
     protected double importPrice;
     protected double discountPrice;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="promotionId")
-    protected Promotion promotion;
-
+    @OneToOne(mappedBy = "product")
+    private ProductSale productSale;
     public abstract double tax();
 
     public abstract double sellingPrice();

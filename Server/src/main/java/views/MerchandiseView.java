@@ -64,27 +64,9 @@ public class MerchandiseView extends JPanel implements ActionListener, ItemListe
     private JButton btnXuatExCel;
     private NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
     private MainController mainController;
-    private Timer timer;
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                Frame frame = new Frame();
-                frame.add(new MerchandiseView());
-                frame.setVisible(true);
-                frame.setSize(1500, 900);
-                frame.setLocationRelativeTo(null);
-                frame.addWindowListener(new WindowAdapter() {
-                    @Override
-                    public void windowClosing(WindowEvent e) {
-                        super.windowClosing(e);
-                        System.exit(0);
-                    }
-                });
-            }
-        });
-    }
+
+
 
     public void updateIdMerchandise() {
         if (table.getSelectedRow() == -1) {
@@ -96,13 +78,6 @@ public class MerchandiseView extends JPanel implements ActionListener, ItemListe
     }
 
     public MerchandiseView() {
-        timer = new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                updateIdMerchandise();
-            }
-        });
-        timer.start();
         mainController = new MainController();
         currencyFormat.setCurrency(Currency.getInstance("VND"));
         setLayout(new BorderLayout(8, 6));

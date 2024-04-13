@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -36,6 +37,7 @@ public class Employee {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="roleId")
 	protected Role role;
+
 	public Employee(String idEmployee) {
 		this.idEmployee = idEmployee;
 	}

@@ -267,6 +267,7 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         txtDiaChi.addKeyListener(this);
         txtEmail.addKeyListener(this);
         txtsdt.addKeyListener(this);
+        //Khi nhập dữ liệu vào ô tên sẽ phát sinh id
         txtTenNV.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -281,9 +282,38 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
             public void changedUpdate(DocumentEvent e) {
             }
         });
+        txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                modelNhanVien.setRowCount(0);
+                handleSearchEmployee(txtTimKiem.getText().trim());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                modelNhanVien.setRowCount(0);
+                handleSearchEmployee(txtTimKiem.getText().trim());
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+
+            }
+        });
         loadComboxBoxRole();
         loadDataRoleTabble();
         loadData();
+    }
+    private void handleSearchEmployee(String text) {
+        if (!text.equals("")) {
+            for (Employee employee : mainController.findEmployeeByText(text)) {
+                String ngaySinh = new SimpleDateFormat("dd/MM/yyyy").format(employee.getBirth());
+                modelNhanVien.addRow(new Object[] { employee.getIdEmployee(), employee.getName(),employee.getPhone(), employee.getEmail(),employee.getAddress(),ngaySinh,employee.getGender(),employee.getRole(),employee.getStatus()
+                });
+            }
+        } else {
+            loadData();
+        }
     }
     private void addRole(){
         String tenChucVu = txtTenChucVu.getText();
@@ -463,6 +493,29 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         txtTenNV.requestFocus();
         loadData();
     }
+    private void deleteEmployee() {
+        int row = tableNhanVien.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Chọn nhân sự cần xoá");
+        } else {
+            try {
+                int HopThoai = JOptionPane.showConfirmDialog(this, "Bạn có muốn xoá dòng này không?", "Cảnh báo",
+                        JOptionPane.YES_NO_OPTION);
+                if (HopThoai == JOptionPane.YES_OPTION) {
+
+                    String id = modelNhanVien.getValueAt(row, 0).toString();
+                    mainController.deleteAccount(id);
+                    mainController.deleteEmployee(id);
+                    modelNhanVien.removeRow(row);
+                    JOptionPane.showMessageDialog(this, "Xoá nhân sự thành công");
+                    reload();
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Xoá nhân sự thất bại");
+            }
+        }
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
         Object o = e.getSource();
@@ -480,6 +533,12 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         }
         if(o.equals(btnLamMoi)) {
             reload();
+        }
+        if(o.equals(btnXoaNV)) {
+            deleteEmployee();
+        }
+        if(o.equals(btnXemTatCa)) {
+            txtTimKiem.setText("");
         }
     }
 

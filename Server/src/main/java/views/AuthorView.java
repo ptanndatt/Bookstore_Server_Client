@@ -27,7 +27,7 @@ import dao.AuthorDao;
 import dao.impl.AuthorDaoImpl;
 import models.Author;
 
-public class AuthorView extends JFrame implements ActionListener, MouseListener, KeyListener {
+public class AuthorView extends JPanel implements ActionListener, MouseListener, KeyListener {
     private JPanel pnMain;
     private JPanel pnHeading;
     private JPanel pnThongTinMain;
@@ -74,10 +74,6 @@ public class AuthorView extends JFrame implements ActionListener, MouseListener,
     private MainController mainController;
 
     public AuthorView() {
-        setTitle("Author");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1000, 700);
-        setLocationRelativeTo(null);
         setLayout(new BorderLayout(8, 6));
         mainController = new MainController();
         init();
@@ -95,13 +91,6 @@ public class AuthorView extends JFrame implements ActionListener, MouseListener,
 
 
     private void init() {
-        timer = new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                updateIdAuther();
-            }
-        });
-        timer.start();
         dfNgaySinh = new SimpleDateFormat("dd/MM/yyyy");
         pnMain = new JPanel(new BorderLayout());
 
