@@ -28,8 +28,7 @@ import javax.swing.JScrollPane;
 import javax.swing.WindowConstants;
 
 
-
-public class ManagerView extends JFrame {
+public class ManagerHomeView extends JFrame {
     private JScrollPane jScrollPane1;
     private JPanel menus;
     private JPanel panelBody;
@@ -43,9 +42,7 @@ public class ManagerView extends JFrame {
     private JLabel lblDate;
 
 
-    public ManagerView() {
-
-
+    public ManagerHomeView() {
         setTitle("Quản trị");
         setSize(new Dimension(871, 473));
         setLocationRelativeTo(null);
@@ -61,7 +58,7 @@ public class ManagerView extends JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                int result = JOptionPane.showConfirmDialog(ManagerView.this, "Bạn có chắc chắn muốn đóng cửa sổ?",
+                int result = JOptionPane.showConfirmDialog(ManagerHomeView.this, "Bạn có chắc chắn muốn đóng cửa sổ?",
                         "Xác nhận đóng cửa sổ", JOptionPane.YES_NO_OPTION);
                 if (result == JOptionPane.YES_OPTION) {
                     dispose();
@@ -89,14 +86,14 @@ public class ManagerView extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-//                switchToPanel(new LoaiSanPhamView());
+                switchToPanel(new ProductTypeView());
             }
         });
         MenuItem subQLNhaCungCap = new MenuItem(iconSubMenu, "Nhà cung cấp", new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-//                switchToPanel(new LoaiNhaSanXuatView());
+                switchToPanel(new SupplierView());
 
             }
         });
@@ -104,7 +101,7 @@ public class ManagerView extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-//                switchToPanel(new TacGiaView());
+                switchToPanel(new AuthorView());
             }
         });
 
@@ -112,7 +109,7 @@ public class ManagerView extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-//                switchToPanel(new TheLoaiView());
+                switchToPanel(new CategoryView());
             }
         });
         MenuItem DangXuat = new MenuItem(iconDX, "Đăng xuất", new ActionListener() {
@@ -134,7 +131,7 @@ public class ManagerView extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-//                switchToPanel(new QuanLySanPhamView());
+                switchToPanel(new MerchandiseView());
 
             }
         }, subQLLoaiSanPham, subQLNhaCungCap, subQLTacGia, subQLTheLoai);
@@ -208,8 +205,7 @@ public class ManagerView extends JFrame {
         });
 
 
-
-        MenuItem ThongKe = new MenuItem(iconTK, "Thống kê", null, subThongKeDoanhThu, subThongKeSanPham,subThongKeSach,
+        MenuItem ThongKe = new MenuItem(iconTK, "Thống kê", null, subThongKeDoanhThu, subThongKeSanPham, subThongKeSach,
                 subThongKeKhachHang);
 
         MenuItem subGiaoDien = new MenuItem(iconSubMenu, "Giao diện", new ActionListener() {
@@ -231,7 +227,7 @@ public class ManagerView extends JFrame {
             }
         });
         MenuItem subCaiDatHDSD = new MenuItem(iconSubMenu, "Hướng dẫn sử dụng", null);
-        MenuItem CaiDat = new MenuItem(iconSetting, "Cài đặt", null, subGiaoDien,subCaiDatDMK);
+        MenuItem CaiDat = new MenuItem(iconSetting, "Cài đặt", null, subGiaoDien, subCaiDatDMK);
 
         addMenu(QLSP, QLNV, QLKH, KM, QLHD, ThongKe, CaiDat, DangXuat);
         QLSP.setBackground(new Color(153, 255, 255));
@@ -289,8 +285,8 @@ public class ManagerView extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         panelHeader.setBackground(new Color(225, 223, 223));
         panelHeader.setPreferredSize(new Dimension(561, 50));
-        pnTenID.add(lbID,BorderLayout.NORTH);
-        pnTenID.add(lbName,BorderLayout.CENTER);
+        pnTenID.add(lbID, BorderLayout.NORTH);
+        pnTenID.add(lbName, BorderLayout.CENTER);
         ImageIcon iconid = new ImageIcon(getClass().getResource("/icons/id.png"));
         ImageIcon iconTen = new ImageIcon(getClass().getResource("/icons/Ten.png"));
         ImageIcon iconNgayThang = new ImageIcon(getClass().getResource("/icons/calendar.png"));

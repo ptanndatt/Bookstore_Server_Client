@@ -14,7 +14,7 @@ package app;/*
 import jakarta.persistence.EntityManager;
 import models.*;
 import util.HibernateUtil;
-import views.ManagerView;
+import views.LoginView;
 
 import java.awt.*;
 
@@ -31,13 +31,13 @@ public class Main {
 //            Merchandise merchandise = new Merchandise();
 //            Supplier supplier = new Supplier();
 //            Book book = new Book();
-//            Bill bill= new Bill();
-//            Customer customer=new Customer();
-//            Employee employee=new Employee();
-//            Account account=new Account();
-//            Role role=new Role();
-//            Promotion promotion=new Promotion();
-//            DetailsBill detailsBill=new DetailsBill();
+//            Bill bill = new Bill();
+//            Customer customer = new Customer();
+//            Employee employee = new Employee();
+//            Account account = new Account();
+//            Role role = new Role();
+//            Promotion promotion = new Promotion();
+//            DetailsBill detailsBill = new DetailsBill();
 //            em.persist(author);
 //            em.persist(category);
 //            em.persist(productType);
@@ -67,7 +67,7 @@ public class Main {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                ManagerView view = new ManagerView();
+                LoginView view = new LoginView();
                 view.setVisible(true);
             }
         });

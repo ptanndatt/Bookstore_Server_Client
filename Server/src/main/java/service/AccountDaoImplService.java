@@ -26,4 +26,11 @@ public class AccountDaoImplService {
         return accountDao.deleteAccount(id);
     }
 
+    public Account getAccountById(String id) {
+        return accountDao.getAccountById(id);
+    }
+
+    public String findPasswordByEmployeeId(String employeeId) {
+        return accountDao.findPasswordByEmployeeId(employeeId);
+    }
 }

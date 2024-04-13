@@ -58,6 +58,14 @@ public class MainController {
         return accountDaoImplService.deleteAccount(id);
     }
 
+    public Account getAccountById(String id) {
+        return accountDaoImplService.getAccountById(id);
+    }
+
+    public String findPasswordByEmployeeId(String employeeId) {
+        return accountDaoImplService.findPasswordByEmployeeId(employeeId);
+    }
+
     //Role
     public List<Role> getAllRole() {
         return roleDaoImplService.getAllRole();
@@ -73,6 +81,14 @@ public class MainController {
 
     public Role findRoleByText(String text) {
         return roleDaoImplService.findRoleByText(text);
+    }
+
+    public boolean updateRole(String id) {
+        return roleDaoImplService.updateRole(id);
+    }
+
+    public List<Role> getRolesByRoleCode(int roleCode) {
+        return roleDaoImplService.getRolesByRoleCode(roleCode);
     }
 
     //Employee
@@ -94,6 +110,14 @@ public class MainController {
 
     public List<Employee> findEmployeeByText(String text) {
         return employeeDaoImplService.findEmployeeByText(text);
+    }
+
+    public List<Employee> findEmployeeByRoleCode(int roleCode) {
+        return employeeDaoImplService.findEmployeeByRoleCode(roleCode);
+    }
+
+    public Employee findEmployeeById(String empId) {
+        return employeeDaoImplService.findEmployeeById(empId);
     }
 
     // author

@@ -4,11 +4,12 @@ import dao.impl.CustomerDaoImpl;
 import dao.impl.EmployeeDaoImpl;
 import models.Customer;
 import models.Employee;
+import models.Role;
 
 import java.util.List;
 
 public class EmployeeDaoImplService {
-    private EmployeeDaoImpl employeeDao= new EmployeeDaoImpl();
+    private EmployeeDaoImpl employeeDao = new EmployeeDaoImpl();
 
     public List<Employee> getAllEmployees() {
         return employeeDao.getAllEmployees();
@@ -25,7 +26,16 @@ public class EmployeeDaoImplService {
     public boolean deleteEmployee(String id) {
         return employeeDao.deleteEmployee(id);
     }
+
     public List<Employee> findEmployeeByText(String text) {
         return employeeDao.findEmployeeByText(text);
+    }
+
+    public List<Employee> findEmployeeByRoleCode(int roleCode) {
+        return employeeDao.findEmployeeByRoleCode(roleCode);
+    }
+
+    public Employee findEmployeeById(String empId) {
+        return employeeDao.findEmployeeById(empId);
     }
 }

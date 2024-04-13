@@ -66,25 +66,25 @@ public class MerchandiseView extends JPanel implements ActionListener, ItemListe
     private MainController mainController;
     private Timer timer;
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                Frame frame = new Frame();
-                frame.add(new MerchandiseView());
-                frame.setVisible(true);
-                frame.setSize(1500, 900);
-                frame.setLocationRelativeTo(null);
-                frame.addWindowListener(new WindowAdapter() {
-                    @Override
-                    public void windowClosing(WindowEvent e) {
-                        super.windowClosing(e);
-                        System.exit(0);
-                    }
-                });
-            }
-        });
-    }
+//    public static void main(String[] args) {
+//        SwingUtilities.invokeLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                Frame frame = new Frame();
+//                frame.add(new MerchandiseView());
+//                frame.setVisible(true);
+//                frame.setSize(1500, 900);
+//                frame.setLocationRelativeTo(null);
+//                frame.addWindowListener(new WindowAdapter() {
+//                    @Override
+//                    public void windowClosing(WindowEvent e) {
+//                        super.windowClosing(e);
+//                        System.exit(0);
+//                    }
+//                });
+//            }
+//        });
+//    }
 
     public void updateIdMerchandise() {
         if (table.getSelectedRow() == -1) {
