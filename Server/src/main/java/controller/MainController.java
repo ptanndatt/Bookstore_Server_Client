@@ -1,11 +1,9 @@
 
 package controller;
 
-import dao.impl.SaleManagementDaoImpl;
 import models.*;
 import service.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainController {
@@ -31,8 +29,8 @@ public class MainController {
     public boolean addDetailBillPending(DetailsBillPending detailsBillPending){
         return saleManagementDaoImplService.addDetailBillPending(detailsBillPending);
     }
-    public List<DetailsBillPending> getBillPendingByIdBill(String idBill){
-        return saleManagementDaoImplService.getBillPendingByIdBill(idBill);
+    public List<DetailsBillPending> getDetailBillPendingByIdBill(String idBill){
+        return saleManagementDaoImplService.getDetailBillPendingByIdBill(idBill);
     }
     public boolean deleteDetailsBillPendingById(String idBill){
         return saleManagementDaoImplService.deleteDetailsBillPendingById(idBill);
@@ -42,6 +40,15 @@ public class MainController {
     }
     public List<BillPending> getAllBillPending(){
         return saleManagementDaoImplService.getAllBillPending();
+    }
+    public List<DetailsBillPending> getAllDetailBillPending(){
+        return saleManagementDaoImplService.getAllDetailBillPending();
+    }
+    public boolean deleteAllBillPending(){
+        return saleManagementDaoImplService.deleteAllBillPending();
+    }
+    public boolean deleteAllDetailBillPending(){
+        return saleManagementDaoImplService.deleteAllDetailBillPending();
     }
     //ProductSale
     public List<ProductSale> getAllAProductSale() {

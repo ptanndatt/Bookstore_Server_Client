@@ -18,7 +18,6 @@ import jakarta.persistence.NamedQuery;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode
 @Entity
 @Table(name="Customer")
 public class Customer {

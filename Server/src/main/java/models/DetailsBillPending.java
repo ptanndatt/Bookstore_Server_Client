@@ -29,8 +29,7 @@ public class DetailsBillPending {
     @Override
     public String toString() {
         return "DetailsBillPending{" +
-                "billPending=" + billPending +
-                ", product=" + product +
+                "product=" + product +
                 ", billId='" + billId + '\'' +
                 ", quantity=" + quantity +
                 ", price=" + price +

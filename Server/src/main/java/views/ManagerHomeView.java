@@ -91,7 +91,7 @@ public class ManagerHomeView extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
 
-                switchToPanel(new SaleManagerView());
+                switchToPanel(new SaleManagerView(employee));
 
             }
         });

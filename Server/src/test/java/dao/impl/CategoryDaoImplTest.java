@@ -6,6 +6,7 @@ import dao.CategoryDao;
 import dao.ProductSaleDao;
 import models.BillPending;
 import models.Category;
+import models.DetailsBillPending;
 import models.ProductSale;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -27,8 +28,8 @@ class CategoryDaoImplTest {
     }
     @Test
     void getProductSales() {
-        List<BillPending> billPending = mainController.getAllBillPending();
-        System.out.println(billPending);
+        boolean result= mainController.deleteBillPendingById("HD20240415151651");
+        System.out.println(result);
     }
 
     @AfterAll

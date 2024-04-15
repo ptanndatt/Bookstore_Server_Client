@@ -15,7 +15,7 @@ public class SaleManagementDaoService {
     public boolean addDetailBillPending(DetailsBillPending detailsBillPending){
         return dao.addDetailsBillPending(detailsBillPending);
     }
-    public List<DetailsBillPending> getBillPendingByIdBill(String idBill){
+    public List<DetailsBillPending> getDetailBillPendingByIdBill(String idBill){
         return dao.findDetailsBillPendingById(idBill);
     }
     public boolean deleteDetailsBillPendingById(String idBill){
@@ -26,5 +26,14 @@ public class SaleManagementDaoService {
     }
     public List<BillPending> getAllBillPending(){
         return dao.getAllBillPending();
+    }
+    public List<DetailsBillPending> getAllDetailBillPending(){
+        return dao.getAllDetailsBillPending();
+    }
+    public boolean deleteAllBillPending(){
+        return dao.deleteAllBillPending();
+    }
+    public boolean deleteAllDetailBillPending(){
+        return dao.deleteAllDetailBillPending();
     }
 }

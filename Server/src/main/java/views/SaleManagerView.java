@@ -138,8 +138,9 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
     private JFrame frameThongBao;
     private MainController mainController;
     private GeneratorIDAuto autoID;
-
-    public SaleManagerView() {
+    private Employee employee;
+    public SaleManagerView(Employee e) {
+        this.employee = e;
         mainController=new MainController();
         autoID=new GeneratorIDAuto();
         // Xóa logo Eclipse ở phía trên hộp thoại
@@ -195,7 +196,6 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         txtTenNV = new JTextField(20);
         txtTenNV.setFont(new Font("SansSerif", Font.PLAIN, 14));
         txtTenNV.setEditable(false);
-        txtTenNV.setText("");
         txtTenKH = new JTextField(20);
         txtTenKH.setFont(new Font("SansSerif", Font.PLAIN, 14));
         txtTenKH.setEditable(false);
@@ -556,7 +556,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
 
             }
         });
-        txtTenKH.getDocument().addDocumentListener(new DocumentListener() {
+        txtTenNV.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
                 txtMaHD.setText(autoID.autoID("HD"));
@@ -782,6 +782,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
             dialogKhachHang.dispose();
             modelKH.setColumnCount(0);
             modelKH.setRowCount(0);
+            txtTenNV.setText(employee.getName());
         } else {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn khách hàng");
         }
@@ -1456,9 +1457,8 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         txtMaHD.setText(modelHangCho.getValueAt(rowSelectedDonHangCho, 0).toString());
         txtTenKH.setText(modelHangCho.getValueAt(rowSelectedDonHangCho, 1).toString());
         txtMaKH.setText(modelHangCho.getValueAt(rowSelectedDonHangCho, 2).toString());
+        List<DetailsBillPending> dsChiTietSanPham =mainController.getDetailBillPendingByIdBill(modelHangCho.getValueAt(rowSelectedDonHangCho, 0).toString());
         modelHangCho.removeRow(rowSelectedDonHangCho);
-        List<DetailsBillPending> dsChiTietSanPham =mainController.getBillPendingByIdBill(txtMaHD.getText().trim());
-
         if (dsChiTietSanPham.size() != 0) {
             for (DetailsBillPending cthdc : dsChiTietSanPham) {
                 Product product= mainController.getProductById(cthdc.getProduct().getProductId());
@@ -1471,6 +1471,34 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         }
         mainController.deleteDetailsBillPendingById(txtMaHD.getText());
         mainController.deleteBillPendingById(txtMaHD.getText());
+    }
+    private void reloadBillPending() {
+        int hoiNhac = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xoá toàn bộ hàng chờ không", "Cảnh báo",
+                JOptionPane.YES_NO_OPTION);
+        if (hoiNhac == JOptionPane.YES_OPTION) {
+            mainController.deleteAllDetailBillPending();
+            mainController.deleteAllBillPending();
+            modelHangCho.setRowCount(0);
+        }
+    }
+    private void handleXoaHangCho() {
+        if (modelHangCho.getRowCount() > 0) {
+            int rowSelectedDonHangCho = tblHangCho.getSelectedRow();
+            if (rowSelectedDonHangCho >= 0) {
+                int hoiNhac = JOptionPane.showConfirmDialog(this, "Bạn có muốn xoá hóa đơn chờ này không", "Cảnh báo",
+                        JOptionPane.YES_NO_OPTION);
+                if (hoiNhac == JOptionPane.YES_OPTION) {
+                    mainController.deleteDetailsBillPendingById(modelHangCho.getValueAt(rowSelectedDonHangCho, 0).toString());
+                    mainController.deleteBillPendingById(modelHangCho.getValueAt(rowSelectedDonHangCho, 0).toString());
+                    modelHangCho.removeRow(rowSelectedDonHangCho);
+                    showThongBao("Xoá hàng chờ thành công");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Bạn chưa chọn hoá đơn chờ để xoá");
+            }
+        } else {
+            showThongBao("Hàng chờ rỗng");
+        }
     }
     private void handlesubmitPay() {
         if (modelHangCho.getRowCount() > 0) {
@@ -1521,6 +1549,27 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         }
 
     }
+    private void handleReloadBill() {
+        if (modelGioHang.getRowCount() == 0) {
+            txtMaHD.setText("");
+            txtTenKH.setText("");
+            txtMaKH.setText("");
+            tblHangCho.clearSelection();
+        } else {
+            int hoiNhac = JOptionPane.showConfirmDialog(this, "Bạn có muốn lưu đơn hàng hiện tại không!", "Cảnh báo",
+                    JOptionPane.YES_NO_OPTION);
+            if (hoiNhac == JOptionPane.YES_OPTION) {
+                saveBillPending();
+            } else {
+                txtMaHD.setText("");
+                txtTenKH.setText("");
+                txtMaKH.setText("");
+                modelGioHang.setRowCount(0);
+                tblHangCho.clearSelection();
+            }
+        }
+
+    }
     @Override
     public void mouseClicked(MouseEvent e) {
         int rowSP = tblSanPham.getSelectedRow();
@@ -1545,12 +1594,59 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
             for (BillPending hdc : dsHoaDonCho) {
                 String ngayLap = new SimpleDateFormat("dd/MM/yyyy").format(hdc.getNgayLap());
                 modelHangCho.addRow(new Object[] {
-                        hdc.getBillID(), hdc.getCustomer().getName(),
+                        hdc.getBillId(), hdc.getCustomer().getName(),
                         hdc.getCustomer().getIdCustomer(), hdc.getCustomer().getPhone(),
                         ngayLap
                 });
             }
         }
+    }
+    private void handLePayment() throws DocumentException {
+        if (!txtMaKH.getText().equals("")) {
+            if (modelGioHang.getRowCount() >= 0) {
+
+                if (txtTienKhachDua.getText().equals("")) {
+                    JOptionPane.showMessageDialog(this, "Chưa nhập tiền khách đưa");
+                    txtTienKhachDua.requestFocus();
+                    txtTienKhachDua.setSelectionStart(0);
+                    txtTienKhachDua.setSelectionEnd(txtTienKhachDua.getText().length());
+                    return;
+                }
+
+                if (!txtTienKhachDua.getText().matches("\\d+")) {
+                    JOptionPane.showMessageDialog(this, "Tiền khách đưa nhập sai định dạng");
+                    txtTienKhachDua.requestFocus();
+                    txtTienKhachDua.setSelectionStart(0);
+                    txtTienKhachDua.setSelectionEnd(txtTienKhachDua.getText().length());
+                    return;
+                }
+
+                String tongTienHoaDon = txtTongTienHoaDon.getText();
+                double tongTienHoaDonDouble = Double.parseDouble(tongTienHoaDon.trim().replace("\u00A0", "").replaceAll("[.,₫]", ""));
+                double tienKhachDua = Double.parseDouble(txtTienKhachDua.getText());
+
+                if (tienKhachDua < tongTienHoaDonDouble){
+                    JOptionPane.showMessageDialog(this, "Tiền khách đưa bé hơn tổng tiền hoá đơn");
+                    txtTienKhachDua.requestFocus();
+                    txtTienKhachDua.setSelectionStart(0);
+                    txtTienKhachDua.setSelectionEnd(txtTienKhachDua.getText().length());
+                    return;
+                }
+                luuHoaDonVaCTHD();
+                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+                String filePath = System.getProperty("user.dir") + "/src/main/resources/DataExports/HoaDonPDF/HD_"+timeStamp+".pdf" ;
+                exportToPdf(filePath);
+                reloadCart();
+                handleReloadBill();
+                txtTienKhachDua.setText("");
+            } else {
+                JOptionPane.showMessageDialog(this, "Giỏ hàng rỗng");
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Chưa thể thanh toán được vì chưa chọn khách hàng");
+            showDialogKhachHang();
+        }
+
     }
     @Override
     public void mousePressed(MouseEvent e) {
@@ -1595,8 +1691,9 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         if (o.equals(btnLamMoiGioHang)) {
             reloadCart();
         }
-//        } else if (o.equals(btnLamMoiDonHang)) {
-//            handleLamMoiHoaDon();
+        if(o.equals(btnLamMoiDonHang)) {
+            handleReloadBill();
+        }
             if (o.equals(btnTimKiemSanPham)) {
                 showDialogSanPham();
             }
@@ -1624,18 +1721,21 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
             }
 //        } else if (o.equals(btnXemTatCaKhachHang)) {
 //            lamMoiKhachHang();
-            if (o.equals(btnThanhToan)) {
-                handlesubmitPay();
-            }
+//            if (o.equals(btnThanhToan)) {
+//                handlesubmitPay();
+//            }
             if (o.equals(btnLuuHoaDon)) {
                 saveBillPending();
             }
-//        } else if (o.equals(btnXoaHangCho)) {
-//            handleXoaHangCho();
-//        } else if (o.equals(btnLamMoiHangCho)) {
-//            lamMoiHangCho();
-//        } else if (o.equals(btnChonThanhToan)) {
-//            handleChonThanhToan();
+            if (o.equals(btnXoaHangCho)) {
+                handleXoaHangCho();
+            }
+            if (o.equals(btnLamMoiHangCho)) {
+                reloadBillPending();
+            }
+            if (o.equals(btnChonThanhToan)) {
+                handlesubmitPay();
+            }
 //        } else if (o.equals(btnTaoMaHoaDon)) {
 //            phatSinhMaHD();
 //        } else if (o.equals(btnXemTatCaSanPham)) {

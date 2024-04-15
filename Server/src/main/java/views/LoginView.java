@@ -20,9 +20,9 @@ public class LoginView extends JFrame implements ActionListener {
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-        jTextField1.setText("E20240413120611");
+        jTextField1.setText("E20240415161112");
         jPasswordField1.setText("1111");
-        jButton1.addActionListener(e -> login());
+
 
     }
 
@@ -38,7 +38,7 @@ public class LoginView extends JFrame implements ActionListener {
 //            DialogUtils.showSuccessMessage(this, "Đăng nhập thành công");
             AdminView view = new AdminView();
             view.setVisible(true);
-            this.dispose();
+            this.setVisible(false);
         } else {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
 
@@ -51,7 +51,7 @@ public class LoginView extends JFrame implements ActionListener {
                     Employee employee= mainController.findEmployeeById(account.getEmployee().getIdEmployee());
                     ManagerHomeView view = new ManagerHomeView(employee);
                     view.setVisible(true);
-                    this.dispose();
+                    this.setVisible(false);
                 } else {
                     DialogUtils.showSuccessMessage(this, "Day nha nhan vien");
                 }
@@ -247,7 +247,8 @@ public class LoginView extends JFrame implements ActionListener {
     private javax.swing.JTextField jTextField1;
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == jButton1 || e.getSource() == jTextField1 || e.getSource() == jPasswordField1) {
+        Object o = e.getSource();
+        if (o.equals(jButton1)) {
             login();
         }
     }

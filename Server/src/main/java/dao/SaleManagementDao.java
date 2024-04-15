@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface SaleManagementDao {
     boolean deleteAllBillPending();
+    boolean deleteAllDetailBillPending();
     boolean deleteBillPendingById(String id);
 //    boolean deleteDetailBillPending();
     boolean addBill(Bill bill);
@@ -20,5 +21,6 @@ public interface SaleManagementDao {
     List<DetailsBillPending> findDetailsBillPendingById(String id);
     boolean deleteDetailsBillPendingById(String id);
     List<BillPending> getAllBillPending();
+    List<DetailsBillPending> getAllDetailsBillPending();
 
 }

@@ -21,7 +21,22 @@ public class SaleManagementDaoImpl implements SaleManagementDao {
         EntityTransaction tr = em.getTransaction();
         try {
             tr.begin();
-            em.createQuery("delete from BillPending").executeUpdate();
+            em.createQuery("delete from BillPending ").executeUpdate();
+            tr.commit();
+            return true;
+        } catch (Exception e) {
+            tr.rollback();
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean deleteAllDetailBillPending() {
+        EntityTransaction tr = em.getTransaction();
+        try {
+            tr.begin();
+            em.createQuery("delete from DetailsBillPending ").executeUpdate();
             tr.commit();
             return true;
         } catch (Exception e) {
@@ -92,26 +107,12 @@ public class SaleManagementDaoImpl implements SaleManagementDao {
 
     @Override
     public List<DetailsBillPending> findDetailsBillPendingById(String id) {
-        return em.createQuery("SELECT d FROM DetailsBillPending d WHERE d.billId =:id", DetailsBillPending.class)
-                .setParameter("id", "%" + id + "%") // %text% for similarity
+        return em.createQuery("SELECT d FROM DetailsBillPending d WHERE d.billId=:id",DetailsBillPending.class)
+                .setParameter("id", id ) // %text% for similarity
                 .getResultList();
     }
 
-    @Override
-    public boolean deleteDetailsBillPendingById(String id) {
-        EntityTransaction tr = em.getTransaction();
-        try {
-            tr.begin();
-            em.createQuery("delete FROM DetailsBillPending d WHERE d.billId =:id", DetailsBillPending.class)
-                .setParameter("id", "%" + id + "%"); // %text% for similarity
-            tr.commit();
-            return true;
-        } catch (Exception e) {
-            tr.rollback();
-            e.printStackTrace();
-            return false;
-        }
-    }
+
 
     @Override
     public List<BillPending> getAllBillPending() {
@@ -126,12 +127,24 @@ public class SaleManagementDaoImpl implements SaleManagementDao {
     }
 
     @Override
+    public List<DetailsBillPending> getAllDetailsBillPending() {
+        try {
+            String hql = "FROM DetailsBillPending ";
+            TypedQuery<DetailsBillPending> query = em.createQuery(hql, DetailsBillPending.class);
+            return query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Collections.emptyList();
+    }
+
+    @Override
     public boolean deleteBillPendingById(String id) {
         EntityTransaction tr = em.getTransaction();
         try {
             tr.begin();
-            em.createQuery("delete FROM BillPending d WHERE d.billID =:id", DetailsBillPending.class)
-                    .setParameter("id", "%" + id + "%"); // %text% for similarity
+            em.createQuery("delete FROM BillPending d WHERE d.billId =:id")
+                    .setParameter("id",  id ).executeUpdate(); // %text% for similarity
             tr.commit();
             return true;
         } catch (Exception e) {
@@ -140,6 +153,19 @@ public class SaleManagementDaoImpl implements SaleManagementDao {
             return false;
         }
     }
-
+    @Override
+    public boolean deleteDetailsBillPendingById(String id) {
+        EntityTransaction tr = em.getTransaction();
+        try {
+            tr.begin();
+            em.createQuery("delete from DetailsBillPending d where d.billId=:id").setParameter("id",id).executeUpdate();
+            tr.commit();
+            return true;
+        } catch (Exception e) {
+            tr.rollback();
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 }

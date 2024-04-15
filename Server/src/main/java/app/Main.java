@@ -68,9 +68,9 @@ public class Main {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-//                LoginView view = new LoginView();
-                Employee employee = new Employee();
-                ManagerHomeView view = new ManagerHomeView(employee);
+                LoginView view = new LoginView();
+//                Employee employee = new Employee();
+//                ManagerHomeView view = new ManagerHomeView(employee);
                 view.setVisible(true);
             }
         });

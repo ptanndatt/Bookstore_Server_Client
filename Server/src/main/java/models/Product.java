@@ -18,6 +18,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import util.ProductStatusEnum;
 
+import java.util.Set;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -43,6 +45,8 @@ public abstract class Product {
     protected double importPrice;
     @OneToOne(mappedBy = "product")
     private ProductSale productSale;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private Set<DetailsBillPending> detailsBillPendings;
 
     public Product(String productId) {
         this.productId = productId;
