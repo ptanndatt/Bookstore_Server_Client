@@ -1,6 +1,7 @@
 package models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,6 +10,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "ProductSale")
 public class ProductSale {
     @Id
@@ -22,4 +24,18 @@ public class ProductSale {
     private String description;
     private double giaBan;
 
+    public ProductSale(Product product, Promotion promotion) {
+        this.product = product;
+        this.promotion = promotion;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductSale{" +
+                "product=" + product +
+                ", promotion=" + promotion +
+                ", description='" + description + '\'' +
+                ", giaBan=" + giaBan +
+                '}';
+    }
 }

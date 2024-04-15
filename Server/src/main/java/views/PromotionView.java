@@ -2,9 +2,7 @@ package views;
 
 import com.toedter.calendar.JDateChooser;
 import controller.MainController;
-import models.Book;
-import models.Product;
-import models.Promotion;
+import models.*;
 import util.GeneratorIDAuto;
 import util.SaleTypeEnum;
 
@@ -15,6 +13,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,7 +30,6 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
     private JTextField txtTimKiemKM;
     private JLabel lbTimKiemSPKM;
     private JTextField txtTimKiemSPKM;
-    private JLabel lbTimKiemSKM;
     private JTextField txtTimKiemSKM;
     private JLabel lbTimKiemSP;
     private JLabel lbTimKiemSach;
@@ -45,27 +43,23 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
     private JDateChooser chooserngayKetThuc;
     private JComboBox<SaleTypeEnum> cbLoai;
     private JButton btnThem;
-    private JButton btnCapNhat;
     private JButton btnXoaKM;
     private JButton btnLamMoi;
     private JTable tblSP;
     private DefaultTableModel modelSP2;
     private JTable tblSach;
     private DefaultTableModel modelSach;
-
     private DefaultTableModel modelKM;
     private JTable tableKM;
     private DefaultTableModel modelSP;
-    private JTable tableSP;
+
+
     private DefaultTableModel modelSPKM;
     private JTable tableSPKM;
     private SimpleDateFormat dfNgay;
     private JButton btnMoTbSP;
     private JButton btnMoTbSach;
-    private JButton btnDongSP;
-    private JButton btnDongSach;
     private JButton btnXoaSPKM;
-    private JButton btnXoaSKM;
     private JPanel pnSP;
     private JFrame FrameSP;
     private JDialog dlogSP;
@@ -78,7 +72,7 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
 
     public PromotionView() {
         setLayout(new GridBagLayout());
-        mainController=new MainController();
+        mainController = new MainController();
         vietnameseFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
         autoID = new GeneratorIDAuto();
         dfNgay = new SimpleDateFormat("dd/MM/yyyy");
@@ -129,8 +123,8 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
         ImageIcon iconDong = new ImageIcon(getClass().getResource("/icons/close.png"));
         ImageIcon iconXoa = new ImageIcon(getClass().getResource("/icons/xoa.png"));
 
-        btnCapNhat = new JButton("CẬP NHẬT");
-        btnCapNhat.setIcon(iconCapNhat);
+//        btnCapNhat = new JButton("CẬP NHẬT");
+//        btnCapNhat.setIcon(iconCapNhat);
         btnThem = new JButton("THÊM KHUYẾN MÃI");
         btnThem.setIcon(iconThem);
         btnLamMoi = new JButton("LÀM MỚI");
@@ -139,7 +133,6 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
         btnXoaKM.setIcon(iconXoa);
         lbTimKiemSPKM = new JLabel("Tìm kiếm sản phẩm khuyến mãi:");
         txtTimKiemSPKM = new JTextField();
-        lbTimKiemSKM = new JLabel("Tìm kiếm sách khuyến mãi");
         txtTimKiemSKM = new JTextField();
         lbTimKiemKM = new JLabel("Tìm kiếm khuyến mãi:");
         txtTimKiemKM = new JTextField();
@@ -149,12 +142,8 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
         btnMoTbSP.setIcon(iconMoTBSP);
         btnMoTbSach = new JButton("CHỌN SÁCH");
         btnMoTbSach.setIcon(iconMoTBSach);
-        btnDongSP = new JButton("ĐÓNG");
-        btnDongSP.setIcon(iconDong);
-        btnDongSach = new JButton("ĐÓNG");
-        btnDongSach.setIcon(iconDong);
         btnXoaSPKM = new JButton("XÓA");
-        btnXoaSKM = new JButton("XÓA");
+
         JPanel pnKM = new JPanel(new GridLayout(5, 1, 10, 10));
         JPanel pnHeaderLeft = new JPanel(new BorderLayout());
 
@@ -180,7 +169,7 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
         pnKM.setBorder(BorderFactory.createTitledBorder("Thông tin khuyến mãi"));
 
         pnChucNang.add(btnThem);
-        pnChucNang.add(btnCapNhat);
+//        pnChucNang.add(btnCapNhat);
         pnChucNang.add(btnXoaKM);
         pnChucNang.add(btnLamMoi);
 
@@ -198,7 +187,7 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
         pnTimKiemKM.add(lbTimKiemKM);
         pnTimKiemKM.add(txtTimKiemKM);
 
-    //Bảng khuyến mãi
+        //Bảng khuyến mãi
         modelKM = new DefaultTableModel();
         tableKM = new JTable();
         modelKM.addColumn("ID khuyến mãi");
@@ -222,7 +211,7 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
         modelSPKM.addColumn("Giá bán");
         modelSPKM.addColumn("Giá KM");
         tableSPKM.setModel(modelSPKM);
-        JScrollPane scrollPane2 = new JScrollPane(tableSP);
+        JScrollPane scrollPane2 = new JScrollPane(tableSPKM);
         JPanel pntbSP = new JPanel(new BorderLayout());
         pntbSP.add(pnTimKiemSP, BorderLayout.NORTH);
         pntbSP.add(scrollPane2, BorderLayout.CENTER);
@@ -258,8 +247,8 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
         tblSach.setModel(modelSach);
         JScrollPane scrollTblSach = new JScrollPane(tblSach);
         btnChonSach = new JButton("ÁP DỤNG");
-        JPanel TimKiemSach = new JPanel(new GridLayout(1,2,5,5));
-        JPanel FooterSach = new JPanel(new GridLayout(1,4,5,5));
+        JPanel TimKiemSach = new JPanel(new GridLayout(1, 2, 5, 5));
+        JPanel FooterSach = new JPanel(new GridLayout(1, 4, 5, 5));
         FooterSach.add(btnChonSach);
 
         TimKiemSach.add(lbTimKiemSach);
@@ -271,7 +260,6 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
         FrameSach=new JFrame();
         dlogSach= new JDialog( FrameSach, "SÁCH", null);
         dlogSach.add(pnSach);
-
 
         JPanel pnRigth = new JPanel();
         pnRigth.setLayout(new BorderLayout());
@@ -306,8 +294,9 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
 
         btnLamMoi.addActionListener(this);
         btnXoaKM.addActionListener(this);
-        btnCapNhat.addActionListener(this);
+//        btnCapNhat.addActionListener(this);
         btnChonSP.addActionListener(this);
+        btnChonSach.addActionListener(this);
         btnThem.addActionListener(this);
         tableKM.addMouseListener(this);
         txtTimKiemKM.addKeyListener(this);
@@ -317,14 +306,11 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
         txtTimKiemSach.addKeyListener(this);
         btnMoTbSP.addActionListener(this);
         btnMoTbSach.addActionListener(this);
-        btnDongSP.addActionListener(this);
-        btnDongSach.addActionListener(this);
-        btnXoaSKM.addActionListener(this);
         btnXoaSPKM.addActionListener(this);
         txtTen.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                txtID.setText(autoID.autoID("S"));
+                txtID.setText(autoID.autoID("KM"));
             }
 
             @Override
@@ -335,12 +321,13 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
             public void changedUpdate(DocumentEvent e) {
             }
         });
-//        loadSPKM();
+        loadProductSale();
         loadData();
-        LoadDataBook();
-        LoadDataProduct();
+//        LoadDataBook();
+
 //        loadSKM();
     }
+
     private void LoadDataProduct() {
         modelSP.setRowCount(0);
         for (Product product :mainController.getAllMerchandise()) {
@@ -349,13 +336,84 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
         }
     }
     private void LoadDataBook() {
-        modelSP.setRowCount(0);
+        modelSach.setRowCount(0);
         for (Book book :mainController.getAllBook()) {
 
-            modelSP.addRow(new Object[] {book.getProductId(),book.getProductName(),vietnameseFormat.format(book.sellingPrice())});
+            modelSach.addRow(new Object[] {book.getProductId(),book.getProductName(),vietnameseFormat.format(book.sellingPrice())});
         }
     }
-    private void addBooktoPromotion() throws SQLException {
+    private void loadProductSale() {
+    modelSPKM.setRowCount(0);
+    for (ProductSale productSale: mainController.getAllAProductSale()) {
+        modelSPKM.addRow(new Object[] {  productSale.getPromotion().getPromotionId(),productSale.getProduct().getProductId(),productSale.getProduct().getProductName(),vietnameseFormat.format(productSale.getProduct().sellingPrice()),vietnameseFormat.format(productSale.getGiaBan())
+        });
+        }
+    }
+    private void deleteProductSale() {
+        int row = tableSPKM.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Phải chọn dòng cần xoá");
+        } else {
+            try {
+                int hoinhac = JOptionPane.showConfirmDialog(this, "Bạn có muốn xoá dòng này không?", "Cảnh báo",
+                        JOptionPane.YES_NO_OPTION);
+                if (hoinhac == JOptionPane.YES_OPTION) {
+                    String idKM=tableSPKM.getValueAt(row, 0).toString();
+                    String idSP=tableSPKM.getValueAt(row, 1).toString();
+//                    Product product= mainController.getProductById(idSP);
+//                    Promotion promotion=new Promotion(idKM);
+//                    ProductSale productSale= new ProductSale(product,promotion);
+                    mainController.deleteProductSale(idSP);
+                    modelSP.removeRow(row);
+                    JOptionPane.showMessageDialog(this, "Xoá thành công");
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Xoá thất bại");
+            }
+        }
+    }
+    private void addProductToPromotion() {
+        // Lấy thông tin chương trình khuyến mãi đang được chọn
+        int chonKM = tableKM.getSelectedRow();
+        int chonSP = tblSP.getSelectedRow();
+
+        if(chonKM<0 || chonSP<0) {
+            JOptionPane.showMessageDialog(null,"Vui lòng chọn chương trình khuyến mãi và sản phẩm");
+        }
+        else{
+                String idKM=(String)tableKM.getValueAt(chonKM,0);
+                String loaiKMSelect=  tableKM.getValueAt(chonKM, 2).toString();
+                SaleTypeEnum loaiKM= SaleTypeEnum.getByDescription(loaiKMSelect);
+                // Lấy thông tin sản phẩm
+                String idSP = (String) tblSP.getValueAt(chonSP, 0);
+                String tenSP=(String) tblSP.getValueAt(chonSP, 1);
+                NumberFormat format = NumberFormat.getCurrencyInstance(new java.util.Locale("vi", "VN"));
+                String getGiaBan=(String)tblSP.getValueAt(chonSP, 2);
+                Number number = null;
+                try {
+                    number = format.parse(getGiaBan);
+                } catch (ParseException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                double giaBan=number.doubleValue();
+                // Tính giá bán mới sau khuyến mãi
+                double giaKM = giaBan- (giaBan * (loaiKM.getValue() / 100.0));
+                // Cập nhật giá bán mới trong bảng và cơ sở dữ liệu
+                if(checkProductSale(idSP)){
+                    Merchandise merchandise=new Merchandise(idSP);
+                    Promotion promotion=new Promotion(idKM);
+                    ProductSale productSale=new ProductSale(merchandise,promotion,loaiKM.getDescription(),giaKM);
+                    mainController.addProductSale(productSale);
+//                    daoKM.updateGiaKM(idSP, giaKM);
+                    modelSPKM.addRow(new Object[] {idKM,idSP,tenSP,vietnameseFormat.format(giaBan),vietnameseFormat.format(giaKM)});
+                    dlogSP.setVisible(false);
+                    JOptionPane.showMessageDialog(this,"Áp dụng khuyến mãi thành công");
+                }
+        }
+    }
+    private void addBookToPromotion() {
         // Lấy thông tin chương trình khuyến mãi đang được chọn
         int chonKM = tableKM.getSelectedRow();
         int chonSach = tblSach.getSelectedRow();
@@ -365,38 +423,52 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
         }
         else {
 
-                String idKM=(String)tableKM.getValueAt(chonKM,0);
-                SaleTypeEnum loaiKM= (SaleTypeEnum) tableKM.getValueAt(chonKM, 2);
-                // Lấy thông tin sản phẩm
-                String id = (String) tblSach.getValueAt(chonSach, 0);
-                NumberFormat format = NumberFormat.getCurrencyInstance(new java.util.Locale("vi", "VN"));
-                String getGiaBan=tblSach.getValueAt(chonSach, 2).toString();
-                Number number = null;
-                try {
-                    number = format.parse(getGiaBan);
-                } catch (ParseException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-                double giaBan=number.doubleValue();
+            String idKM=(String)tableKM.getValueAt(chonKM,0);
+            String loaiKMSelect=  tableKM.getValueAt(chonKM, 2).toString();
+            SaleTypeEnum loaiKM= SaleTypeEnum.getByDescription(loaiKMSelect);
+            // Lấy thông tin sản phẩm
+            String id = tblSach.getValueAt(chonSach, 0).toString();
+            NumberFormat format = NumberFormat.getCurrencyInstance(new java.util.Locale("vi", "VN"));
+            String getGiaBan=tblSach.getValueAt(chonSach, 2).toString();
+            Number number = null;
+            try {
+                number = format.parse(getGiaBan);
+            } catch (ParseException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            double giaBan=number.doubleValue();
 
-                String tenSP=(String) tblSach.getValueAt(chonSach, 1);
-                // Tính giá bán mới sau khuyến mãi
-                double giaKM = giaBan * (loaiKM.getValue() / 100.0);
-                // Cập nhật giá bán mới trong bảng và cơ sở dữ liệu
-                if(KiemTraSKM(idSP)) {
-                    daoKM.ThemSachKM(idSP, idKM, tenSP, giaBan, giaKM);
-                    daoKM.updateGiaKMSach(idSP, giaKM);
-                    modelSKM.addRow(new Object[] {idKM,idSP,tenSP,vietnameseFormat.format(giaBan),"-"+vietnameseFormat.format(giaKM)});
-                    dlogSach.setVisible(false);
-                    JOptionPane.showMessageDialog(this,"Áp dụng khuyến mãi thành công");
-                }
+            String tenSP=(String) tblSach.getValueAt(chonSach, 1);
+            // Tính giá bán mới sau khuyến mãi
+            double giaKM = giaBan- (giaBan * (loaiKM.getValue() / 100.0));
+            // Cập nhật giá bán mới trong bảng và cơ sở dữ liệu
+            if(checkProductSale(id)) {
+                Book book=new Book(id);
+                Promotion promotion=new Promotion(idKM);
+                ProductSale productSale=new ProductSale(book,promotion,loaiKM.getDescription(),giaKM);
+                mainController.addProductSale(productSale);
 
+                modelSPKM.addRow(new Object[] {idKM,id,tenSP,vietnameseFormat.format(giaBan),vietnameseFormat.format(giaKM)});                dlogSach.setVisible(false);
+                JOptionPane.showMessageDialog(this,"Áp dụng khuyến mãi thành công");
             }
 
-
         }
+
+
     }
+    private boolean checkProductSale(String idNew){
+        for (ProductSale productSale : mainController.getAllAProductSale() ) {
+            if(idNew.equals(productSale.getProduct().getProductId())) {
+                JOptionPane.showMessageDialog(this, "Sản phẩm đã được áp dụng khuyến mãi", "Thông báo",
+                        JOptionPane.WARNING_MESSAGE);
+                return false;
+            }
+        }
+        return true;
+    }
+
+
     private void updatePromotion() {
         String id=modelKM.getValueAt(tableKM.getSelectedRow(), 0).toString();
         String ten = txtTen.getText();
@@ -406,7 +478,7 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
         Date ngayKT = new Date(dateKetThuc.getYear(), dateKetThuc.getMonth(), dateKetThuc.getDate());
         SaleTypeEnum selectedValue = (SaleTypeEnum) cbLoai.getSelectedItem();
         String LoaiDescription=selectedValue.getDescription();
-        Promotion promotion = new Promotion(id,ten,ngayBD,ngayKT,LoaiDescription);
+        Promotion promotion = new Promotion(id,ten,LoaiDescription,ngayBD,ngayKT);
         if(valiDate()){
             try {
                 mainController.updatePromotion(promotion);
@@ -429,9 +501,9 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
         SaleTypeEnum selectedValue = (SaleTypeEnum) cbLoai.getSelectedItem();
         String LoaiDescription=selectedValue.getDescription();
         if(valiDate()){
-            Promotion promotion = new Promotion(id,tenKM,ngayBD,ngayKT,LoaiDescription);
+            Promotion promotion = new Promotion(id,tenKM,LoaiDescription,ngayBD,ngayKT);
             mainController.addPromotion(promotion);
-            modelKM.addRow(new Object[] {promotion.getPromotionId(),promotion.getPromotionName(),promotion.getPromotionDiscount(),dfNgay.format(promotion.getPromotionStartDate()),dfNgay.format(promotion.getPromotionEndDate())});
+            modelKM.addRow(new Object[] {promotion.getPromotionId(),promotion.getPromotionName(),LoaiDescription,dfNgay.format(promotion.getPromotionStartDate()),dfNgay.format(promotion.getPromotionEndDate())});
             reload();
         }
 
@@ -520,17 +592,28 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
         if (o.equals(btnXoaKM)) {
             deletePromotion();
         }
-        if (o.equals(btnCapNhat)) {
-            updatePromotion();
-        }
+//        if (o.equals(btnCapNhat)) {
+//            updatePromotion();
+//        }
         if (o.equals(btnLamMoi)) {
             reload();
         }
         if (o.equals(btnMoTbSP)) {
             showDialog(FrameSP,dlogSP);
+            LoadDataProduct();
         }
         if (o.equals(btnMoTbSach)) {
             showDialog(FrameSach,dlogSach);
+            LoadDataBook();
+        }
+        if (o.equals(btnChonSP)) {
+            addProductToPromotion();
+        }
+        if (o.equals(btnChonSach)) {
+            addBookToPromotion();
+        }
+        if (o.equals(btnXoaSPKM)) {
+            deleteProductSale();
         }
     }
 
@@ -554,9 +637,9 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
         int row = tableKM.getSelectedRow();
         txtID.setText(modelKM.getValueAt(row, 0).toString());
         txtTen.setText(modelKM.getValueAt(row, 1).toString());
-        SaleTypeEnum loaiSelectd=(SaleTypeEnum) modelKM.getValueAt(row,2);
-
-        cbLoai.setSelectedItem(loaiSelectd);
+        String loaiSelectd= modelKM.getValueAt(row,2).toString();
+        SaleTypeEnum loaiKm= SaleTypeEnum.getByDescription(loaiSelectd);
+        cbLoai.setSelectedItem(loaiKm);
         String ngayBatDau=modelKM.getValueAt(row, 3).toString();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         java.util.Date valueNgayBD=null;

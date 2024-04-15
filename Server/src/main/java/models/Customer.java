@@ -2,7 +2,9 @@ package models;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -33,17 +35,20 @@ public class Customer {
 	@Column(name = "gender",columnDefinition = "NVARCHAR(5)")
 	private String gender;
 	private Date birth;
-	public Customer(String name, String phone, String email, String address, String gender, Date birth) {
-		super();
-		this.name = name;
-		this.phone = phone;
-		this.email = email;
-		this.address = address;
-		this.gender = gender;
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+	private Set<Bill> bill;
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+	private Set<BillPending> billPendings;
+
+	public Customer(String idCustomer, String name, String phone, String email, String address, String gender, Date birth) {
 		this.birth = birth;
+		this.gender = gender;
+		this.address = address;
+		this.email = email;
+		this.phone = phone;
+		this.name = name;
+		this.idCustomer = idCustomer;
 	}
-
-
 
 	@Override
 	public String toString() {

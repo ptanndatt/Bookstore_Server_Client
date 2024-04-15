@@ -19,20 +19,28 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name="Role")
+@Table(name = "Role")
 public class Role {
-	@Id
+    @Id
     @Column(name = "roleId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idRole;
-	@Column(name = "roleName",unique=true,columnDefinition = "NVARCHAR(255)")
-	private String roleName;
+    private int idRole;
+    @Column(name = "roleName", columnDefinition = "NVARCHAR(255)")
+    private String roleName;
 
-	public Role(String roleName) {
-		this.roleName = roleName;
-	}
+    @Column(name = "roleCode")
+    private int roleCode;
 
-	public Role(int idRole) {
-		this.idRole = idRole;
-	}
+    public Role(String roleName) {
+        this.roleName = roleName;
+    }
+
+    public Role(String roleName, int roleCode) {
+        this.roleName = roleName;
+        this.roleCode = roleCode;
+    }
+
+    public Role(int idRole) {
+        this.idRole = idRole;
+    }
 }

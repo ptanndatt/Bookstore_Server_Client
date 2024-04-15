@@ -4,6 +4,7 @@ import controller.MainController;
 import models.Category;
 import models.ProductType;
 import util.DialogUtils;
+import util.GeneratorIDAuto;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -12,6 +13,8 @@ import java.util.Date;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -39,10 +42,11 @@ public class ProductTypeView extends JPanel implements ActionListener, KeyListen
     private JButton btnXemTatCa;
     private Timer timer;
     private MainController mainController;
-
+    private GeneratorIDAuto autoID;
     public ProductTypeView() {
         setLayout(new BorderLayout());
         mainController = new MainController();
+        autoID = new GeneratorIDAuto();
         pnMain = new JPanel(new BorderLayout(8, 6));
 
         pnHeader = new JPanel();
@@ -145,6 +149,20 @@ public class ProductTypeView extends JPanel implements ActionListener, KeyListen
         btnXemTatCa.addActionListener(this);
         tableSP.addMouseListener(this);
         txtTimKiem.addKeyListener(this);
+        txtTenLoaiSanPham.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                txtIdLoaiSanPham.setText(autoID.autoID("LSP"));
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+            }
+        });
         loadData();
 
     }

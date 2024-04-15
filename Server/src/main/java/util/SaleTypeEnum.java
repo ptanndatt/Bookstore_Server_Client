@@ -29,9 +29,9 @@ public enum SaleTypeEnum {
         return null;
     }
 
-    public static SaleTypeEnum getByName(String name) {
+    public static SaleTypeEnum getByDescription(String Description) {
         for (SaleTypeEnum e : values()) {
-            if (e.name().equals(name)) {
+            if (e.getDescription().equals(Description)) {
                 return e;
             }
         }

@@ -9,6 +9,7 @@ import java.util.List;
 
 public class RoleDaoImplService {
     RoleDaoImpl roleDao = new RoleDaoImpl();
+
     public List<Role> getAllRole() {
         return roleDao.getAllRole();
     }
@@ -20,7 +21,16 @@ public class RoleDaoImplService {
     public boolean deleteRole(String id) {
         return roleDao.deleteRole(id);
     }
+
     public Role findRoleByText(String text) {
         return roleDao.findRoleByText(text);
+    }
+
+    public boolean updateRole(String id) {
+        return roleDao.updateRole(id);
+    }
+
+    public List<Role> getRolesByRoleCode(int roleCode) {
+        return roleDao.getRolesByRoleCode(roleCode);
     }
 }

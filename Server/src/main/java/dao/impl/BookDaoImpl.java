@@ -4,6 +4,7 @@ import dao.BookDao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import models.Book;
+import models.Customer;
 import util.HibernateUtil;
 
 import java.util.List;
@@ -126,7 +127,9 @@ public class BookDaoImpl implements BookDao {
 
     @Override
     public List<Book> searchBook(String search) {
-        return null;
+        return em.createQuery("SELECT b FROM Book b WHERE b.id LIKE :text OR b.productName LIKE :text OR b.productId LIKE :text ", Book.class)
+                .setParameter("text", "%" + search + "%") // %text% for similarity
+                .getResultList();
     }
 
 

@@ -1,6 +1,8 @@
 package views;
 
+import controller.MainController;
 import controller.MenuItem;
+import models.Employee;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -28,8 +30,7 @@ import javax.swing.JScrollPane;
 import javax.swing.WindowConstants;
 
 
-
-public class ManagerView extends JFrame {
+public class ManagerHomeView extends JFrame {
     private JScrollPane jScrollPane1;
     private JPanel menus;
     private JPanel panelBody;
@@ -38,14 +39,14 @@ public class ManagerView extends JFrame {
     private JPanel paneCu;
     private JLabel lbID;
     private JLabel lbName;
-
-
+    private Employee employee;
+    private MainController mainController;
     private JLabel lblDate;
 
 
-    public ManagerView() {
-
-
+    public ManagerHomeView(Employee e) {
+        this.employee = e;
+        mainController = new MainController();
         setTitle("Quản trị");
         setSize(new Dimension(871, 473));
         setLocationRelativeTo(null);
@@ -61,7 +62,7 @@ public class ManagerView extends JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                int result = JOptionPane.showConfirmDialog(ManagerView.this, "Bạn có chắc chắn muốn đóng cửa sổ?",
+                int result = JOptionPane.showConfirmDialog(ManagerHomeView.this, "Bạn có chắc chắn muốn đóng cửa sổ?",
                         "Xác nhận đóng cửa sổ", JOptionPane.YES_NO_OPTION);
                 if (result == JOptionPane.YES_OPTION) {
                     dispose();
@@ -84,7 +85,16 @@ public class ManagerView extends JFrame {
         ImageIcon iconDX = new ImageIcon(getClass().getResource("/icons/DX.png"));
 
         ImageIcon iconBH = new ImageIcon(getClass().getResource("/icons/banhang.png"));
+        MenuItem QLBH = new MenuItem(iconBH, "Quản lý bán hàng", new ActionListener() {
 
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+
+                switchToPanel(new SaleManagerView());
+
+            }
+        });
         MenuItem subQLLoaiSanPham = new MenuItem(iconSubMenu, "Loại sản phẩm", new ActionListener() {
 
             @Override
@@ -207,8 +217,7 @@ public class ManagerView extends JFrame {
         });
 
 
-
-        MenuItem ThongKe = new MenuItem(iconTK, "Thống kê", null, subThongKeDoanhThu, subThongKeSanPham,subThongKeSach,
+        MenuItem ThongKe = new MenuItem(iconTK, "Thống kê", null, subThongKeDoanhThu, subThongKeSanPham, subThongKeSach,
                 subThongKeKhachHang);
 
         MenuItem subGiaoDien = new MenuItem(iconSubMenu, "Giao diện", new ActionListener() {
@@ -230,9 +239,10 @@ public class ManagerView extends JFrame {
             }
         });
         MenuItem subCaiDatHDSD = new MenuItem(iconSubMenu, "Hướng dẫn sử dụng", null);
-        MenuItem CaiDat = new MenuItem(iconSetting, "Cài đặt", null, subGiaoDien,subCaiDatDMK);
+        MenuItem CaiDat = new MenuItem(iconSetting, "Cài đặt", null, subGiaoDien, subCaiDatDMK);
 
-        addMenu(QLSP, QLNV, QLKH, KM, QLHD, ThongKe, CaiDat, DangXuat);
+        addMenu(QLSP,QLBH, QLNV, QLKH, KM, QLHD, ThongKe, CaiDat, DangXuat);
+        QLBH.setBackground(new Color(153, 255, 255));
         QLSP.setBackground(new Color(153, 255, 255));
         QLNV.setBackground(new Color(153, 255, 255));
         QLKH.setBackground(new Color(153, 255, 255));
@@ -271,10 +281,10 @@ public class ManagerView extends JFrame {
         jScrollPane1 = new JScrollPane();
         menus = new JPanel();
         panelBody = new JPanel();
-        lbID = new JLabel();
-//        lbID.setFont(new Font("Arial", Font.ITALIC, 15));
-        lbName = new JLabel();
-//        lbTen.setFont(new Font("Arial", Font.ITALIC, 15));
+        lbID = new JLabel(": " + employee.getIdEmployee());
+        lbID.setFont(new Font("Arial", Font.ITALIC, 15));
+        lbName = new JLabel(": " + employee.getName());
+        lbName.setFont(new Font("Arial", Font.ITALIC, 15));
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(": dd/MM/yyyy");
         String dateTiemString = now.format(formatter);
@@ -288,8 +298,8 @@ public class ManagerView extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         panelHeader.setBackground(new Color(225, 223, 223));
         panelHeader.setPreferredSize(new Dimension(561, 50));
-        pnTenID.add(lbID,BorderLayout.NORTH);
-        pnTenID.add(lbName,BorderLayout.CENTER);
+        pnTenID.add(lbID, BorderLayout.NORTH);
+        pnTenID.add(lbName, BorderLayout.CENTER);
         ImageIcon iconid = new ImageIcon(getClass().getResource("/icons/id.png"));
         ImageIcon iconTen = new ImageIcon(getClass().getResource("/icons/Ten.png"));
         ImageIcon iconNgayThang = new ImageIcon(getClass().getResource("/icons/calendar.png"));

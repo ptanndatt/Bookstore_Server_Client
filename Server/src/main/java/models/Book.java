@@ -40,6 +40,10 @@ public class Book extends Product {
     private double revenue;
     private double profit;
 
+    public Book(String productId) {
+        super(productId);
+    }
+
     @Override
     public double tax() {
         return super.importPrice * 0.05;

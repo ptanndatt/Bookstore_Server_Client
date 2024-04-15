@@ -26,6 +26,7 @@ import java.util.List;
 public class ProductType {
     @Id
     private String productTypeId;
+    @Column(name = "productTypeName",columnDefinition = "NVARCHAR(255)")
     private String productTypeName;
     @OneToMany(mappedBy = "productTypeId", cascade = CascadeType.ALL)
     private List<Product> products;

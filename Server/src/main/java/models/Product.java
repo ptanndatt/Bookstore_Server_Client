@@ -28,6 +28,7 @@ public abstract class Product {
     @Id
     @Column(name = "productId")
     protected String productId;
+    @Column(name = "productName",columnDefinition = "NVARCHAR(255)")
     protected String productName;
     @ManyToOne
     @JoinColumn(name = "productTypeId")
@@ -40,9 +41,13 @@ public abstract class Product {
     protected ProductStatusEnum status;
     protected int quantity;
     protected double importPrice;
-    protected double discountPrice;
     @OneToOne(mappedBy = "product")
     private ProductSale productSale;
+
+    public Product(String productId) {
+        this.productId = productId;
+    }
+
     public abstract double tax();
 
     public abstract double sellingPrice();

@@ -39,6 +39,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import com.toedter.calendar.JDateChooser;
 
 import util.DialogUtils;
+import util.GeneratorIDAuto;
 import util.ProductStatusEnum;
 
 public class BookView extends JPanel
@@ -107,16 +108,18 @@ public class BookView extends JPanel
     private ProductStatusEnum statusEnum;
     private MainController mainController;
     private DecimalFormat df;
-    private Timer timer;
-
+    private GeneratorIDAuto autoID;
     public BookView() {
+        autoID=new GeneratorIDAuto();
         init();
     }
 
 
-    private void init() {
 
+    private void init() {
         setLayout(new BorderLayout());
+
+
         df = new DecimalFormat("#,###.##");
         mainController = new MainController();
         currencyFormat.setCurrency(Currency.getInstance("VND"));
@@ -352,7 +355,20 @@ public class BookView extends JPanel
         loadComboBoxByTheLoai();
         loadComBoBoxByTacGia();
         refreshForm();
+        txtTenSanPham.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                txtIdSanPham.setText(autoID.autoID("SP"));
+            }
 
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+            }
+        });
 
         KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
 
@@ -1013,6 +1029,7 @@ public class BookView extends JPanel
         book.setStatus(trangThai);
         book.setQuantity(soLuong);
         book.setImportPrice(giaNhap);
+
         return book;
     }
 

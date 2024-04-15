@@ -7,12 +7,15 @@ import java.util.Date;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 import controller.MainController;
 
 import models.Category;
 import util.DialogUtils;
+import util.GeneratorIDAuto;
 
 
 public class CategoryView extends JPanel implements ActionListener, KeyListener, MouseListener {
@@ -51,20 +54,18 @@ public class CategoryView extends JPanel implements ActionListener, KeyListener,
     private JTable table;
     private DefaultTableModel model;
     private MainController mainController;
-
-
-
+    private GeneratorIDAuto autoID;
 
 
     public CategoryView() {
         setLayout(new BorderLayout(8, 6));
         mainController = new MainController();
+        autoID = new GeneratorIDAuto();
         init();
     }
 
     private void init() {
         pnContainer = new JPanel(new BorderLayout());
-
         pnMain = new JPanel(new BorderLayout());
         pnHeading = new JPanel();
         lblTitle = new JLabel("Quản Lý Thể Loại");
@@ -171,7 +172,20 @@ public class CategoryView extends JPanel implements ActionListener, KeyListener,
 //		btnXoa.addActionListener(this);
         btnCapNhat.addActionListener(this);
         table.addMouseListener(this);
+        txtTentheLoai.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                txtIdtheLoai.setText(autoID.autoID("TL"));
+            }
 
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+            }
+        });
     }
 
 

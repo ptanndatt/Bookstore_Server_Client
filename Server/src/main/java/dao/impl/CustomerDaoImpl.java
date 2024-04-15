@@ -87,4 +87,9 @@ public class CustomerDaoImpl implements CustomerDao {
                 .getResultList();
 
     }
+
+    @Override
+    public Customer getCustomerByID(String customerID) {
+        return em.find(Customer.class, customerID);
+    }
 }

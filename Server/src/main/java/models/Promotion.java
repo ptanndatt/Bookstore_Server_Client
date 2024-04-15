@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import util.SaleTypeEnum;
 
 import java.util.Date;
 import java.util.List;
@@ -22,7 +23,7 @@ public class Promotion {
     private String promotionId;
     @Column(name = "promotionName",nullable = false,columnDefinition = "NVARCHAR(255)")
     private String promotionName;
-    @Column(name = "promotionDiscount",columnDefinition = "NVARCHAR(10)")
+    @Column(name = "promotionDiscount",columnDefinition = "NVARCHAR(255)")
     private String promotionDiscount;
     private Date promotionStartDate;
     private Date promotionEndDate;
@@ -32,12 +33,13 @@ public class Promotion {
         this.promotionId = promotionId;
     }
 
-    public Promotion(String promotionId,String promotionName,Date promotionStartDate,Date promotionEndDate, String promotionDiscount ) {
-        this.promotionEndDate = promotionEndDate;
-        this.promotionStartDate = promotionStartDate;
-        this.promotionDiscount = promotionDiscount;
-        this.promotionName = promotionName;
+    public Promotion(String promotionId, String promotionName, String promotionDiscount, Date promotionStartDate, Date promotionEndDate) {
         this.promotionId = promotionId;
+        this.promotionName = promotionName;
+        this.promotionDiscount = promotionDiscount;
+        this.promotionStartDate = promotionStartDate;
+        this.promotionEndDate = promotionEndDate;
+
     }
 
     @Override

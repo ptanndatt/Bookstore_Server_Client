@@ -4,6 +4,7 @@ import controller.MainController;
 import models.ProductType;
 import models.Supplier;
 import util.DialogUtils;
+import util.GeneratorIDAuto;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -14,6 +15,8 @@ import java.util.EventListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -44,12 +47,13 @@ public class SupplierView extends JPanel implements ActionListener, MouseListene
     private JTextField txtSoDienThoai;
     private JButton btnXemTatCa;
     private MainController mainController;
-
+    private GeneratorIDAuto autoID;
 
 
 
     public SupplierView() {
         mainController = new MainController();
+        autoID = new GeneratorIDAuto();
         setLayout(new BorderLayout());
         pnMain = new JPanel(new BorderLayout(8, 6));
 
@@ -183,6 +187,20 @@ public class SupplierView extends JPanel implements ActionListener, MouseListene
         this.setFocusable(true);
         this.requestFocusInWindow();
         tableSP.requestFocus();
+        txtTenLoaiSanPham.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                txtIdLoaiSanPham.setText(autoID.autoID("NCC"));
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+            }
+        });
     }
 
 

@@ -28,6 +28,7 @@ import java.util.List;
 public class Supplier {
     @Id
     private String supplierId;
+    @Column(name = "supplierName",columnDefinition = "NVARCHAR(255)")
     private String supplierName;
     private String address;
     private String phoneNumber;

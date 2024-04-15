@@ -16,6 +16,8 @@ import java.util.Date;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -26,6 +28,7 @@ import controller.MainController;
 import dao.AuthorDao;
 import dao.impl.AuthorDaoImpl;
 import models.Author;
+import util.GeneratorIDAuto;
 
 public class AuthorView extends JPanel implements ActionListener, MouseListener, KeyListener {
     private JPanel pnMain;
@@ -72,21 +75,13 @@ public class AuthorView extends JPanel implements ActionListener, MouseListener,
     private boolean selectingRow = false;
     private Timer timer;
     private MainController mainController;
-
+    private GeneratorIDAuto autoID;
     public AuthorView() {
         setLayout(new BorderLayout(8, 6));
+        autoID= new GeneratorIDAuto();
         mainController = new MainController();
         init();
 
-    }
-
-    private void updateIdAuther() {
-        if (table.getSelectedRow() == -1) {
-            Date currentTime = new Date();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-            String formattedTime = "TG" + sdf.format(currentTime);
-            txtIdTacGia.setText(formattedTime);
-        }
     }
 
 
@@ -208,6 +203,20 @@ public class AuthorView extends JPanel implements ActionListener, MouseListener,
 //		btnXoa.addActionListener(this);
         table.addMouseListener(this);
         txtTuKhoa.addKeyListener(this);
+        txtTenTacGia.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                txtIdTacGia.setText(autoID.autoID("TG"));
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+            }
+        });
     }
 
     private void loadData() {
@@ -321,7 +330,6 @@ public class AuthorView extends JPanel implements ActionListener, MouseListener,
         chooserNgaySinh.setDate(new Date());
         txtTuKhoa.setText("");
         table.clearSelection();
-        updateIdAuther();
 
     }
 

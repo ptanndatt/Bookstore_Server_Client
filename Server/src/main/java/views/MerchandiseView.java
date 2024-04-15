@@ -16,6 +16,8 @@ import java.util.Locale;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -32,6 +34,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import util.DialogUtils;
+import util.GeneratorIDAuto;
 import util.ProductStatusEnum;
 
 
@@ -66,19 +69,12 @@ public class MerchandiseView extends JPanel implements ActionListener, ItemListe
     private MainController mainController;
 
 
-
-
-    public void updateIdMerchandise() {
-        if (table.getSelectedRow() == -1) {
-            Date currentTime = new Date();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
-            String formattedTime = "SP" + sdf.format(currentTime);
-            txtIdSanPham.setText(formattedTime);
-        }
-    }
+    private GeneratorIDAuto autoID;
 
     public MerchandiseView() {
+
         mainController = new MainController();
+        autoID=new GeneratorIDAuto();
         currencyFormat.setCurrency(Currency.getInstance("VND"));
         setLayout(new BorderLayout(8, 6));
         tabbedPane = new JTabbedPane();
@@ -253,6 +249,21 @@ public class MerchandiseView extends JPanel implements ActionListener, ItemListe
         txtTenSanPham.addKeyListener(this);
         tabbedPane.addKeyListener(this);
         table.getSelectionModel().addListSelectionListener(this);
+
+        txtTenSanPham.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                txtIdSanPham.setText(autoID.autoID("SP"));
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+            }
+        });
 
         this.setFocusable(true);
         this.requestFocusInWindow();
@@ -853,7 +864,6 @@ public class MerchandiseView extends JPanel implements ActionListener, ItemListe
     }
 
     private void refeshForm() {
-        updateIdMerchandise();
         txtTenSanPham.setText("");
         cbLoaiSanPham.setSelectedIndex(0);
         cbNhaCungCap.setSelectedIndex(0);

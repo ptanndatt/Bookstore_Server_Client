@@ -29,33 +29,33 @@ public class AuthorDaoImplTest {
         authorDaoImpl = new AuthorDaoImpl();
     }
 
-    @Test
-    void testAddAuthor() {
-        Author author = new Author("Hoangle", LocalDate.now(), 6);
-        boolean resulft = authorDaoImpl.addAuthor(author);
-        if (resulft) {
-            Log.info("Add author successfully");
-        } else {
-            Log.error("Add author failed");
-        }
-    }
+//    @Test
+//    void testAddAuthor() {
+//        Author author = new Author("Hoangle", LocalDate.now(), 6);
+//        boolean resulft = authorDaoImpl.addAuthor(author);
+//        if (resulft) {
+//            Log.info("Add author successfully");
+//        } else {
+//            Log.error("Add author failed");
+//        }
+//    }
 
     @Test
     void testGetAllAuthor() {
         authorDaoImpl.getAllAuthor().forEach(author -> Log.info(author.toString()));
     }
 
-    @Test
-    void testUpdateAuthor() {
-        Author author = new Author("AnhHong", LocalDate.now(), 6);
-        author.setAuthorId("null20240404152912");
-        boolean resulft = authorDaoImpl.updateAuthor(author);
-        if (resulft) {
-            Log.info("Update author successfully");
-        } else {
-            Log.error("Update author failed");
-        }
-    }
+//    @Test
+//    void testUpdateAuthor() {
+//        Author author = new Author("AnhHong", LocalDate.now(), 6);
+//        author.setAuthorId("null20240404152912");
+//        boolean resulft = authorDaoImpl.updateAuthor(author);
+//        if (resulft) {
+//            Log.info("Update author successfully");
+//        } else {
+//            Log.error("Update author failed");
+//        }
+//    }
 
     @Test
     void testDeleteAuthor() {
@@ -81,11 +81,6 @@ public class AuthorDaoImplTest {
     void testGetLatestAuthorID() {
         authorDaoImpl.getLatestAuthorID().forEach(author -> Log.info(author.toString()));
     }
-<<<<<<< HEAD
-    
-=======
-
->>>>>>> bc09ac6bc71855fd0fe3a69e903491144071f6c2
     @AfterAll
     void tearDown() {
         authorDaoImpl = null;

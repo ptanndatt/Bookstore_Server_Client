@@ -1,6 +1,7 @@
 
 package controller;
 
+import dao.impl.SaleManagementDaoImpl;
 import models.*;
 import service.*;
 
@@ -20,6 +21,51 @@ public class MainController {
     private AccountDaoImplService accountDaoImplService = new AccountDaoImplService();
     private RoleDaoImplService roleDaoImplService = new RoleDaoImplService();
     private PromotionDaoImplService promotionDaoImplService = new PromotionDaoImplService();
+    private ProductSaleDaoImplService productSaleDaoImplService = new ProductSaleDaoImplService();
+    private ProductDaoImplService productDaoImplService = new ProductDaoImplService();
+    private SaleManagementDaoService saleManagementDaoImplService = new SaleManagementDaoService();
+    //BillPending
+    public boolean addBillPending(BillPending billPending){
+        return saleManagementDaoImplService.addBillPending(billPending);
+    }
+    public boolean addDetailBillPending(DetailsBillPending detailsBillPending){
+        return saleManagementDaoImplService.addDetailBillPending(detailsBillPending);
+    }
+    public List<DetailsBillPending> getBillPendingByIdBill(String idBill){
+        return saleManagementDaoImplService.getBillPendingByIdBill(idBill);
+    }
+    public boolean deleteDetailsBillPendingById(String idBill){
+        return saleManagementDaoImplService.deleteDetailsBillPendingById(idBill);
+    }
+    public boolean deleteBillPendingById(String idBill){
+        return saleManagementDaoImplService.deleteBillPendingById(idBill);
+    }
+    public List<BillPending> getAllBillPending(){
+        return saleManagementDaoImplService.getAllBillPending();
+    }
+    //ProductSale
+    public List<ProductSale> getAllAProductSale() {
+        return productSaleDaoImplService.getAllAProductSale();
+    }
+
+    public boolean addProductSale(ProductSale productSale) {
+        return productSaleDaoImplService.addProductSale(productSale);
+    }
+    public boolean deleteProductSale(String id) {
+        return productSaleDaoImplService.deleteProductSale(id);
+    }
+    public ProductSale getProductSale(String productSaleId) {
+        return productSaleDaoImplService.getProductSale(productSaleId);
+    }
+    //product
+    public Product getProductById(String id) {
+        return productDaoImplService.getById(id);
+    }
+
+
+    public List<Product> getProductByText(String text) {
+        return productDaoImplService.getProductByText(text);
+    }
     //Customer
     public List<Customer> getAllCustomers() {
         return customerDaoImplService.getAllCustomers();
@@ -40,7 +86,27 @@ public class MainController {
     public List<Customer> findCustomerByText(String text) {
         return customerDaoImplService.findCustomerByText(text);
     }
+    public Customer findCustomerById(String id) {
+        return customerDaoImplService.findCustomerById(id);
+    }
+    //Promotion
+    public List<Promotion> getAllPromotion() {
+        return promotionDaoImplService.getAllPromotion();
+    }
 
+    public boolean addPromotion(Promotion promotion) {
+        return promotionDaoImplService.addPromotion(promotion);
+    }
+
+    public boolean deletePromotion(String id) {
+        return promotionDaoImplService.deletePromotion(id);
+    }
+    public Promotion findPromotionByText(String text) {
+        return promotionDaoImplService.findPromotionByText(text);
+    }
+    public boolean updatePromotion(Promotion promotion) {
+        return promotionDaoImplService.updatePromotion(promotion);
+    }
     //Account
     public List<Account> getAllAccount() {
         return accountDaoImplService.getAllAccount();
@@ -57,7 +123,13 @@ public class MainController {
     public boolean deleteAccount(String id) {
         return accountDaoImplService.deleteAccount(id);
     }
+    public Account getAccountById(String id) {
+        return accountDaoImplService.getAccountById(id);
+    }
 
+    public String findPasswordByEmployeeId(String employeeId) {
+        return accountDaoImplService.findPasswordByEmployeeId(employeeId);
+    }
     //Role
     public List<Role> getAllRole() {
         return roleDaoImplService.getAllRole();
@@ -74,24 +146,11 @@ public class MainController {
     public Role findRoleByText(String text) {
         return roleDaoImplService.findRoleByText(text);
     }
-    //Promotion
-    public List<Promotion> getAllPromotion() {
-        return promotionDaoImplService.getAllPromotion();
+    public List<Role> getRolesByRoleCode(int roleCode) {
+        return roleDaoImplService.getRolesByRoleCode(roleCode);
     }
-
-    public boolean addPromotion(Promotion promotion) {
-        return promotionDaoImplService.addPromotion(promotion);
-    }
-
-    public boolean deletePromotion(String id) {
-        return promotionDaoImplService.deletePromotion(id);
-    }
-
-    public Promotion findPromotionByText(String text) {
-        return promotionDaoImplService.findPromotionByText(text);
-    }
-    public boolean updatePromotion(Promotion promotion) {
-        return promotionDaoImplService.updatePromotion(promotion);
+    public boolean updateRole(String id) {
+        return roleDaoImplService.updateRole(id);
     }
     //Employee
     public List<Employee> getAllEmployees() {
@@ -113,7 +172,12 @@ public class MainController {
     public List<Employee> findEmployeeByText(String text) {
         return employeeDaoImplService.findEmployeeByText(text);
     }
-
+    public List<Employee> findEmployeeByRoleCode(int roleCode) {
+        return employeeDaoImplService.findEmployeeByRoleCode(roleCode);
+    }
+    public Employee findEmployeeById(String empId) {
+        return employeeDaoImplService.findEmployeeById(empId);
+    }
     // author
     public List<Author> getAllAuthor() {
         return authorDaoImplService.getAllAuthor();

@@ -19,6 +19,8 @@
         <class>models.Promotion</class>
         <class>models.DetailsBill</class>
         <class>models.ProductSale</class>
+        <class>models.BillPending</class>
+        <class>models.DetailsBillPending</class>
         <properties>
             <property name="jakarta.persistence.jdbc.url"
                       value="jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true"/>
