@@ -10424,925 +10424,228 @@ Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: The index 'UK_r5u6pr
 [INFO ] 13-04-2024 00:08:24 [AWT-EventQueue-0] Log - Retrieved all categories successfully
 [INFO ] 13-04-2024 00:08:25 [AWT-EventQueue-0] Log - Retrieved all categories successfully
 [INFO ] 13-04-2024 00:08:30 [AWT-EventQueue-0] Log - Retrieved all categories successfully
-[INFO ] 14-04-2024 18:23:20 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 14-04-2024 18:23:21 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 14-04-2024 18:23:21 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 14-04-2024 18:23:21 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 14-04-2024 18:23:21 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 14-04-2024 18:23:21 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 14-04-2024 18:23:21 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 14-04-2024 18:23:21 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 14-04-2024 18:23:21 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 14-04-2024 18:23:21 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 14-04-2024 18:23:22 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 14-04-2024 18:23:22 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 14-04-2024 18:23:22 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 14-04-2024 18:23:22 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 14-04-2024 18:23:22 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 14-04-2024 18:23:22 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 14-04-2024 18:23:22 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 14-04-2024 18:23:22 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 14-04-2024 18:23:23 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 14-04-2024 18:23:23 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@719bb60d] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 14-04-2024 18:26:55 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 14-04-2024 18:26:55 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 14-04-2024 18:26:55 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 14-04-2024 18:26:55 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 14-04-2024 18:26:56 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 14-04-2024 18:26:56 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 14-04-2024 18:26:56 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 14-04-2024 18:26:56 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 14-04-2024 18:26:56 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 14-04-2024 18:26:56 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 14-04-2024 18:26:57 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 14-04-2024 18:26:57 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 14-04-2024 18:26:57 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 14-04-2024 18:26:57 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 14-04-2024 18:26:57 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 14-04-2024 18:26:57 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 14-04-2024 18:26:57 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 14-04-2024 18:26:57 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 14-04-2024 18:26:58 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 14-04-2024 18:26:58 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@49639118] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 14-04-2024 18:27:30 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 14-04-2024 18:27:30 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 14-04-2024 18:27:30 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 14-04-2024 18:27:30 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 14-04-2024 18:27:30 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 14-04-2024 18:27:31 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 14-04-2024 18:27:31 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 14-04-2024 18:27:31 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 14-04-2024 18:27:31 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 14-04-2024 18:27:31 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 14-04-2024 18:27:32 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 14-04-2024 18:27:32 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 14-04-2024 18:27:32 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 14-04-2024 18:27:32 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 14-04-2024 18:27:32 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 14-04-2024 18:27:32 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 14-04-2024 18:27:32 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 14-04-2024 18:27:32 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 14-04-2024 18:27:32 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 14-04-2024 18:27:32 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@49639118] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 14-04-2024 18:28:13 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 14-04-2024 18:28:13 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 14-04-2024 18:28:13 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 14-04-2024 18:28:13 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 14-04-2024 18:28:13 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 14-04-2024 18:28:13 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 14-04-2024 18:28:13 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 14-04-2024 18:28:13 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 14-04-2024 18:28:13 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 14-04-2024 18:28:13 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 14-04-2024 18:28:14 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 14-04-2024 18:28:14 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 14-04-2024 18:28:14 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 14-04-2024 18:28:14 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 14-04-2024 18:28:14 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 14-04-2024 18:28:14 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 14-04-2024 18:28:14 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 14-04-2024 18:28:14 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 14-04-2024 18:28:15 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 14-04-2024 18:28:15 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@719bb60d] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 14-04-2024 18:47:41 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 14-04-2024 18:47:41 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 14-04-2024 18:47:41 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 14-04-2024 18:47:41 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 14-04-2024 18:47:41 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 14-04-2024 18:47:41 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 14-04-2024 18:47:41 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 14-04-2024 18:47:41 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 14-04-2024 18:47:41 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 14-04-2024 18:47:41 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 14-04-2024 18:47:42 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 14-04-2024 18:47:42 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 14-04-2024 18:47:42 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 14-04-2024 18:47:42 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 14-04-2024 18:47:42 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 14-04-2024 18:47:42 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 14-04-2024 18:47:42 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 14-04-2024 18:47:42 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 14-04-2024 18:47:43 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 14-04-2024 18:47:43 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@49639118] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 14-04-2024 19:30:54 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 14-04-2024 19:30:54 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 14-04-2024 19:30:54 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 14-04-2024 19:30:54 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 14-04-2024 19:30:55 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 14-04-2024 19:30:55 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 14-04-2024 19:30:55 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 14-04-2024 19:30:55 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 14-04-2024 19:30:55 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 14-04-2024 19:30:55 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 14-04-2024 19:30:56 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 14-04-2024 19:30:56 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 14-04-2024 19:30:56 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 14-04-2024 19:30:56 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 14-04-2024 19:30:56 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 14-04-2024 19:30:56 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 14-04-2024 19:30:56 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 14-04-2024 19:30:56 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 14-04-2024 19:30:57 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 14-04-2024 19:30:57 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6942ee48] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 14-04-2024 21:55:53 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 14-04-2024 21:55:53 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 14-04-2024 21:55:53 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 14-04-2024 21:55:53 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 14-04-2024 21:55:53 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 14-04-2024 21:55:53 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 14-04-2024 21:55:53 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 14-04-2024 21:55:53 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 14-04-2024 21:55:53 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 14-04-2024 21:55:53 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 14-04-2024 21:55:54 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 14-04-2024 21:55:54 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 14-04-2024 21:55:54 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 14-04-2024 21:55:54 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 14-04-2024 21:55:54 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 14-04-2024 21:55:54 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 14-04-2024 21:55:54 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 14-04-2024 21:55:54 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 14-04-2024 21:55:55 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 14-04-2024 21:55:55 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@49639118] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 01:08:11 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 01:08:11 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 01:08:11 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 01:08:11 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 01:08:11 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 01:08:12 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 01:08:12 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 01:08:12 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 01:08:12 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 01:08:12 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 01:08:13 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 01:08:13 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 01:08:13 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 01:08:13 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 01:08:13 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 01:08:13 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 01:08:13 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 01:08:13 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 01:08:13 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 01:08:14 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@7d90764a] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 14:36:37 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 14:36:37 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 14:36:37 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 14:36:37 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 14:36:37 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 14:36:37 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 14:36:37 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 14:36:37 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 14:36:37 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 14:36:37 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 14:36:39 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 14:36:39 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 14:36:39 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 14:36:39 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 14:36:39 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 14:36:39 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 14:36:39 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 14:36:39 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 14:36:40 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 14:36:40 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@7d90764a] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 14:38:44 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 14:38:44 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 14:38:44 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 14:38:44 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 14:38:44 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 14:38:44 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 14:38:44 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 14:38:44 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 14:38:44 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 14:38:44 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 14:38:46 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 14:38:46 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 14:38:46 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 14:38:46 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 14:38:46 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 14:38:46 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 14:38:46 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 14:38:46 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 14:38:47 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 14:38:47 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@7d90764a] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 14:39:50 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 14:39:50 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 14:39:50 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 14:39:50 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 14:39:51 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 14:39:51 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 14:39:51 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 14:39:51 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 14:39:51 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 14:39:51 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 14:39:52 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 14:39:52 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 14:39:52 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 14:39:52 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 14:39:52 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 14:39:52 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 14:39:52 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 14:39:52 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 14:39:53 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 14:39:53 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@7d90764a] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 14:40:54 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 14:40:54 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 14:40:54 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 14:40:54 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 14:40:54 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 14:40:54 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 14:40:54 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 14:40:54 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 14:40:54 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 14:40:54 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 14:40:56 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 14:40:56 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 14:40:56 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 14:40:56 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 14:40:56 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 14:40:56 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 14:40:56 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 14:40:56 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 14:40:57 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 14:40:57 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6942ee48] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 14:43:46 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 14:43:46 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 14:43:46 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 14:43:46 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 14:43:46 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 14:43:47 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 14:43:47 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 14:43:47 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 14:43:47 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 14:43:47 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 14:43:47 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 14:43:47 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 14:43:47 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 14:43:47 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 14:43:47 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 14:43:47 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 14:43:47 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 14:43:47 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 14:43:48 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 14:43:48 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6942ee48] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 14:47:47 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 14:47:47 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 14:47:47 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 14:47:47 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 14:47:47 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 14:47:47 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 14:47:47 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 14:47:47 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 14:47:47 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 14:47:47 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 14:47:48 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 14:47:48 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 14:47:48 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 14:47:48 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 14:47:48 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 14:47:48 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 14:47:48 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 14:47:48 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 14:47:49 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 14:47:49 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@49639118] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 14:49:34 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 14:49:34 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 14:49:34 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 14:49:34 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 14:49:34 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 14:49:34 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 14:49:34 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 14:49:34 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 14:49:34 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 14:49:34 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 14:49:35 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 14:49:35 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 14:49:35 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 14:49:35 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 14:49:35 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 14:49:35 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 14:49:35 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 14:49:35 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 14:49:36 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 14:49:36 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@49639118] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 14:50:00 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 14:50:00 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 14:50:00 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 14:50:00 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 14:50:00 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 14:50:00 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 14:50:00 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 14:50:00 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 14:50:00 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 14:50:00 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 14:50:01 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 14:50:01 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 14:50:01 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 14:50:01 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 14:50:01 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 14:50:01 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 14:50:01 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 14:50:01 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 14:50:02 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 14:50:02 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6942ee48] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 14:52:14 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 14:52:14 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 14:52:14 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 14:52:14 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 14:52:14 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 14:52:14 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 14:52:14 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 14:52:14 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 14:52:14 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 14:52:14 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 14:52:15 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 14:52:15 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 14:52:15 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 14:52:15 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 14:52:15 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 14:52:15 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 14:52:15 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 14:52:15 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 14:52:16 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 14:52:16 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@49639118] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 14:56:45 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 14:56:45 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 14:56:45 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 14:56:45 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 14:56:46 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 14:56:46 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 14:56:46 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 14:56:46 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 14:56:46 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 14:56:46 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 14:56:47 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 14:56:47 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 14:56:47 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 14:56:47 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 14:56:47 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 14:56:47 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 14:56:47 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 14:56:47 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 14:56:48 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 14:56:48 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6942ee48] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 14:57:15 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 14:57:15 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 14:57:15 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 14:57:15 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 14:57:15 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 14:57:15 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 14:57:15 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 14:57:15 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 14:57:15 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 14:57:15 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 14:57:16 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 14:57:16 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 14:57:16 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 14:57:16 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 14:57:16 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 14:57:16 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 14:57:16 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 14:57:16 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 14:57:17 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 14:57:17 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6942ee48] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 15:00:13 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 15:00:13 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 15:00:13 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 15:00:13 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 15:00:13 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 15:00:13 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 15:00:13 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 15:00:13 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 15:00:13 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 15:00:13 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 15:00:14 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 15:00:14 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 15:00:14 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 15:00:14 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 15:00:15 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:00:15 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:00:15 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 15:00:15 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 15:00:15 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 15:00:15 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6942ee48] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 15:05:47 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 15:05:47 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 15:05:47 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 15:05:47 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 15:05:47 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 15:05:47 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 15:05:47 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 15:05:47 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 15:05:47 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 15:05:47 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 15:05:48 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 15:05:48 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 15:05:48 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 15:05:48 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 15:05:48 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:05:48 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:05:48 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 15:05:48 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 15:05:49 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 15:05:49 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@49639118] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 15:07:28 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 15:07:28 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 15:07:28 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 15:07:28 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 15:07:28 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 15:07:28 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 15:07:28 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 15:07:28 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 15:07:28 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 15:07:28 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 15:07:29 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 15:07:29 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 15:07:29 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 15:07:29 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 15:07:29 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:07:29 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:07:29 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 15:07:29 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 15:07:30 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 15:07:30 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@49639118] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 15:08:16 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 15:08:16 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 15:08:16 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 15:08:16 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 15:08:16 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 15:08:16 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 15:08:16 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 15:08:16 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 15:08:16 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 15:08:16 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 15:08:17 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 15:08:17 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 15:08:17 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 15:08:17 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 15:08:17 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:08:17 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:08:17 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 15:08:17 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 15:08:18 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 15:08:18 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@49639118] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 15:09:01 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 15:09:01 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 15:09:01 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 15:09:01 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 15:09:02 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 15:09:02 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 15:09:02 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 15:09:02 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 15:09:02 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 15:09:02 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 15:09:03 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 15:09:03 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 15:09:03 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 15:09:03 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 15:09:03 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:09:03 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:09:03 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 15:09:03 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 15:09:03 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 15:09:04 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@49639118] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 15:10:39 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 15:10:39 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 15:10:40 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 15:10:40 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 15:10:40 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 15:10:40 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 15:10:40 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 15:10:40 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 15:10:40 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 15:10:40 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 15:10:41 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 15:10:41 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 15:10:41 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 15:10:41 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 15:10:41 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:10:41 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:10:41 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 15:10:41 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 15:10:42 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 15:10:42 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@49639118] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 15:14:06 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 15:14:06 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 15:14:06 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 15:14:06 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 15:14:06 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 15:14:06 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 15:14:06 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 15:14:06 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 15:14:06 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 15:14:06 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 15:14:07 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 15:14:07 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 15:14:07 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 15:14:07 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 15:14:07 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:14:07 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:14:07 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 15:14:07 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 15:14:08 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 15:14:08 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@666b91db] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 15:17:35 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 15:17:35 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 15:17:35 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 15:17:35 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 15:17:35 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 15:17:35 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 15:17:35 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 15:17:35 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 15:17:35 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 15:17:35 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 15:17:36 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 15:17:36 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 15:17:36 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 15:17:36 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 15:17:36 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:17:36 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:17:36 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 15:17:36 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 15:17:37 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 15:17:37 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@666b91db] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 15:18:34 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 15:18:35 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 15:18:35 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 15:18:35 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 15:18:35 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 15:18:35 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 15:18:35 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 15:18:35 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 15:18:35 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 15:18:35 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 15:18:36 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 15:18:36 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 15:18:36 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 15:18:36 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 15:18:36 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:18:36 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:18:36 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 15:18:36 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 15:18:37 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 15:18:37 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@666b91db] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 15:19:47 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 15:19:47 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 15:19:47 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 15:19:47 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 15:19:47 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 15:19:48 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 15:19:48 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 15:19:48 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 15:19:48 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 15:19:48 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 15:19:48 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 15:19:48 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 15:19:48 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 15:19:48 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 15:19:48 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:19:48 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:19:48 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 15:19:48 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 15:19:49 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 15:19:49 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@666b91db] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 15:23:06 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 15:23:06 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 15:23:06 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 15:23:06 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 15:23:06 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 15:23:07 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 15:23:07 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 15:23:07 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 15:23:07 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 15:23:07 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 15:23:08 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 15:23:08 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 15:23:08 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 15:23:08 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 15:23:08 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:23:08 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:23:08 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 15:23:08 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 15:23:08 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 15:23:08 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@666b91db] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 15:23:50 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 15:23:50 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 15:23:50 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 15:23:50 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 15:23:51 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 15:23:51 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 15:23:51 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 15:23:51 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 15:23:51 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 15:23:51 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 15:23:52 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 15:23:52 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 15:23:52 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 15:23:52 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 15:23:52 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:23:52 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:23:52 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 15:23:52 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 15:23:52 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 15:23:53 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@666b91db] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 15:24:44 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 15:24:44 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 15:24:44 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 15:24:44 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 15:24:44 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 15:24:44 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 15:24:44 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 15:24:44 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 15:24:44 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 15:24:44 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 15:24:45 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 15:24:45 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 15:24:45 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 15:24:45 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 15:24:45 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:24:45 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:24:45 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 15:24:45 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 15:24:46 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 15:24:46 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@666b91db] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 15:25:45 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 15:25:45 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 15:25:45 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 15:25:45 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 15:25:45 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 15:25:45 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 15:25:45 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 15:25:45 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 15:25:45 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 15:25:45 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 15:25:46 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 15:25:46 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 15:25:46 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 15:25:46 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 15:25:46 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:25:46 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:25:46 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 15:25:46 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 15:25:47 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 15:25:47 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@663cf5d7] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 15:29:18 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 15:29:19 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 15:29:19 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 15:29:19 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 15:29:19 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 15:29:19 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 15:29:19 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 15:29:19 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 15:29:19 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 15:29:19 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 15:29:20 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 15:29:20 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 15:29:20 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 15:29:20 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 15:29:20 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:29:20 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:29:20 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 15:29:20 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 15:29:21 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 15:29:21 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@666b91db] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 15:34:20 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 15:34:20 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 15:34:20 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 15:34:20 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 15:34:20 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 15:34:20 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 15:34:20 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 15:34:20 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 15:34:20 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 15:34:20 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 15:34:21 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 15:34:21 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 15:34:21 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 15:34:21 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 15:34:21 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:34:21 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:34:21 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 15:34:21 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 15:34:22 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 15:34:22 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@666b91db] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 15:36:20 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 15:36:20 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 15:36:20 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 15:36:20 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 15:36:20 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 15:36:20 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 15:36:20 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 15:36:20 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 15:36:20 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 15:36:20 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 15:36:21 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 15:36:21 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 15:36:21 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 15:36:21 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 15:36:21 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:36:21 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:36:21 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 15:36:21 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 15:36:22 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 15:36:22 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@666b91db] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 15:38:55 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 15:38:55 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 15:38:55 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 15:38:55 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 15:38:56 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 15:38:56 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 15:38:56 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 15:38:56 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 15:38:56 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 15:38:56 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 15:38:57 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 15:38:57 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 15:38:57 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 15:38:57 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 15:38:57 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:38:57 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:38:57 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 15:38:57 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 15:38:57 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 15:38:57 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@663cf5d7] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[WARN ] 15-04-2024 15:39:00 [Test worker] SqlExceptionHelper - SQL Error: 547, SQLState: 23000
-[ERROR] 15-04-2024 15:39:00 [Test worker] SqlExceptionHelper - The DELETE statement conflicted with the REFERENCE constraint "FK8objdv9makseoavn7ldlqyd0o". The conflict occurred in database "QLHieuSach", table "dbo.DetailsBillPending", column 'billPendingId'.
-[INFO ] 15-04-2024 15:39:39 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 15:39:39 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 15:39:39 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 15:39:39 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 15:39:39 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 15:39:39 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 15:39:39 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 15:39:39 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 15:39:39 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 15:39:39 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 15:39:40 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 15:39:40 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 15:39:40 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 15:39:40 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 15:39:40 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:39:40 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:39:40 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 15:39:40 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 15:39:41 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 15:39:41 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@666b91db] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 15:42:07 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 15:42:07 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 15:42:07 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 15:42:07 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 15:42:07 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 15:42:07 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 15:42:07 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 15:42:07 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 15:42:07 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 15:42:07 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 15:42:08 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 15:42:08 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 15:42:08 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 15:42:08 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 15:42:08 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:42:08 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:42:08 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 15:42:08 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 15:42:09 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 15:42:09 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@666b91db] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 15:44:09 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 15:44:09 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 15:44:09 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 15:44:09 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 15:44:09 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 15:44:09 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 15:44:09 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 15:44:09 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 15:44:09 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 15:44:09 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 15:44:10 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 15:44:10 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 15:44:10 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 15:44:10 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 15:44:10 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:44:10 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:44:10 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 15:44:10 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 15:44:11 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 15:44:11 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@666b91db] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 15:46:29 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 15:46:29 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 15:46:29 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 15:46:29 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 15:46:29 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 15:46:29 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 15:46:29 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 15:46:29 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 15:46:29 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 15:46:29 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 15:46:30 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 15:46:30 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 15:46:30 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 15:46:30 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 15:46:30 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:46:30 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:46:30 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 15:46:30 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 15:46:31 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 15:46:31 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@663cf5d7] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 15:48:08 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 15:48:08 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 15:48:08 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 15:48:08 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 15:48:08 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 15:48:08 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 15:48:08 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 15:48:08 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 15:48:08 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 15:48:08 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 15:48:09 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 15:48:09 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 15:48:09 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 15:48:09 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 15:48:09 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:48:09 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:48:09 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 15:48:09 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 15:48:10 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 15:48:10 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@666b91db] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 15-04-2024 15:50:11 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 15-04-2024 15:50:11 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 15-04-2024 15:50:11 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 15-04-2024 15:50:11 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 15-04-2024 15:50:11 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 15-04-2024 15:50:11 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 15-04-2024 15:50:11 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 15-04-2024 15:50:11 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 15-04-2024 15:50:11 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 15-04-2024 15:50:11 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 15-04-2024 15:50:12 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 15-04-2024 15:50:12 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 15-04-2024 15:50:12 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 15-04-2024 15:50:12 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 15-04-2024 15:50:12 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:50:12 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 15-04-2024 15:50:12 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 15-04-2024 15:50:12 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 15-04-2024 15:50:13 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 15-04-2024 15:50:13 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@666b91db] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 18-04-2024 18:10:55 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 18-04-2024 18:10:55 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 18-04-2024 18:10:55 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 18-04-2024 18:10:55 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 18-04-2024 18:10:55 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 18-04-2024 18:10:55 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 18-04-2024 18:10:55 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 18-04-2024 18:10:55 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 18-04-2024 18:10:55 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 18-04-2024 18:10:55 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 18-04-2024 18:10:56 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 18-04-2024 18:10:56 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 18-04-2024 18:10:56 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 18-04-2024 18:10:56 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 18-04-2024 18:10:56 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 18-04-2024 18:10:56 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 18-04-2024 18:10:56 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 18-04-2024 18:10:56 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 18-04-2024 18:10:57 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 18-04-2024 18:10:57 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@27055a2a] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 18-04-2024 18:13:58 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 18-04-2024 18:13:58 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 18-04-2024 18:13:58 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 18-04-2024 18:13:58 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 18-04-2024 18:13:59 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 18-04-2024 18:13:59 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 18-04-2024 18:13:59 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 18-04-2024 18:13:59 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 18-04-2024 18:13:59 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 18-04-2024 18:13:59 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 18-04-2024 18:14:00 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 18-04-2024 18:14:00 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 18-04-2024 18:14:00 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 18-04-2024 18:14:00 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 18-04-2024 18:14:00 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 18-04-2024 18:14:00 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 18-04-2024 18:14:00 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 18-04-2024 18:14:00 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 18-04-2024 18:14:01 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 18-04-2024 18:14:01 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@3ee68377] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-[INFO ] 18-04-2024 18:42:02 [Test worker] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
-[INFO ] 18-04-2024 18:42:02 [Test worker] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
-[WARN ] 18-04-2024 18:42:02 [Test worker] CachingRegionFactory - org.hibernate.testing.cache.CachingRegionFactory should be only used for testing.
-[INFO ] 18-04-2024 18:42:02 [Test worker] RegionFactoryInitiator - HHH000025: Second-level cache region factory [org.hibernate.testing.cache.CachingRegionFactory]
-[WARN ] 18-04-2024 18:42:02 [Test worker] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
-[INFO ] 18-04-2024 18:42:02 [Test worker] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
-[INFO ] 18-04-2024 18:42:02 [Test worker] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
-[INFO ] 18-04-2024 18:42:02 [Test worker] pooling - HHH10001001: Connection properties: {password=****, user=sa}
-[INFO ] 18-04-2024 18:42:02 [Test worker] pooling - HHH10001003: Autocommit mode: false
-[INFO ] 18-04-2024 18:42:02 [Test worker] pooling - HHH10001115: Connection pool size: 20 (min=1)
-[WARN ] 18-04-2024 18:42:03 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
-[WARN ] 18-04-2024 18:42:03 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
-[WARN ] 18-04-2024 18:42:03 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
-[WARN ] 18-04-2024 18:42:03 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
-[WARN ] 18-04-2024 18:42:03 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
-[WARN ] 18-04-2024 18:42:03 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
-[WARN ] 18-04-2024 18:42:03 [Test worker] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
-[WARN ] 18-04-2024 18:42:03 [Test worker] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
-[INFO ] 18-04-2024 18:42:04 [Test worker] JtaPlatformInitiator - HHH000490: Using JTA platform [org.hibernate.engine.transaction.jta.platform.internal.WildFlyStandAloneJtaPlatform]
-[INFO ] 18-04-2024 18:42:04 [Test worker] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@3f033664] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 13-04-2024 09:08:30 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Student MSSQL_Linux]
+[INFO ] 13-04-2024 09:08:30 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 13-04-2024 09:08:30 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 13-04-2024 09:08:30 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 13-04-2024 09:08:31 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 13-04-2024 09:08:31 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 13-04-2024 09:08:31 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 13-04-2024 09:08:31 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 13-04-2024 09:08:31 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 13-04-2024 09:08:31 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 13-04-2024 09:08:31 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 13-04-2024 09:08:31 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 13-04-2024 09:08:31 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[INFO ] 13-04-2024 09:08:32 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 13-04-2024 09:08:32 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@67d45114] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 13-04-2024 09:09:04 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Student MSSQL_Linux]
+[INFO ] 13-04-2024 09:09:05 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 13-04-2024 09:09:05 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 13-04-2024 09:09:05 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 13-04-2024 09:09:05 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 13-04-2024 09:09:05 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 13-04-2024 09:09:05 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 13-04-2024 09:09:05 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 13-04-2024 09:09:05 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 13-04-2024 09:09:05 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 13-04-2024 09:09:05 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 13-04-2024 09:09:05 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 13-04-2024 09:09:05 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[INFO ] 13-04-2024 09:09:06 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 13-04-2024 09:09:06 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@7d8766af] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 13-04-2024 09:10:29 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Student MSSQL_Linux]
+[INFO ] 13-04-2024 09:10:29 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 13-04-2024 09:10:29 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 13-04-2024 09:10:29 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 13-04-2024 09:10:30 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 13-04-2024 09:10:30 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 13-04-2024 09:10:30 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 13-04-2024 09:10:30 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 13-04-2024 09:10:30 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 13-04-2024 09:10:30 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 13-04-2024 09:10:30 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 13-04-2024 09:10:30 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 13-04-2024 09:10:30 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[INFO ] 13-04-2024 09:10:31 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 13-04-2024 09:10:31 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@60656d88] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 13-04-2024 09:11:07 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Student MSSQL_Linux]
+[INFO ] 13-04-2024 09:11:08 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 13-04-2024 09:11:08 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 13-04-2024 09:11:08 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 13-04-2024 09:11:08 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 13-04-2024 09:11:08 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 13-04-2024 09:11:08 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 13-04-2024 09:11:08 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 13-04-2024 09:11:08 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 13-04-2024 09:11:09 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 13-04-2024 09:11:09 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 13-04-2024 09:11:09 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 13-04-2024 09:11:09 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[INFO ] 13-04-2024 09:11:09 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 13-04-2024 09:11:09 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@7d8766af] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 13-04-2024 09:12:08 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Student MSSQL_Linux]
+[INFO ] 13-04-2024 09:12:08 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 13-04-2024 09:12:08 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 13-04-2024 09:12:08 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 13-04-2024 09:12:08 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 13-04-2024 09:12:08 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 13-04-2024 09:12:08 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 13-04-2024 09:12:08 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 13-04-2024 09:12:08 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 13-04-2024 09:12:09 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 13-04-2024 09:12:09 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 13-04-2024 09:12:09 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 13-04-2024 09:12:09 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[INFO ] 13-04-2024 09:12:09 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 13-04-2024 09:12:09 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@483cd716] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 13-04-2024 09:12:45 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Student MSSQL_Linux]
+[INFO ] 13-04-2024 09:12:45 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 13-04-2024 09:12:45 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 13-04-2024 09:12:45 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 13-04-2024 09:12:45 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 13-04-2024 09:12:45 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 13-04-2024 09:12:45 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 13-04-2024 09:12:45 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 13-04-2024 09:12:45 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 13-04-2024 09:12:46 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 13-04-2024 09:12:46 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 13-04-2024 09:12:46 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 13-04-2024 09:12:46 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[INFO ] 13-04-2024 09:12:46 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 13-04-2024 09:12:46 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@e583861] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 13-04-2024 09:14:41 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Student MSSQL_Linux]
+[INFO ] 13-04-2024 09:14:41 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 13-04-2024 09:14:41 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 13-04-2024 09:14:42 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 13-04-2024 09:14:42 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 13-04-2024 09:14:42 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 13-04-2024 09:14:42 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 13-04-2024 09:14:42 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 13-04-2024 09:14:42 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 13-04-2024 09:14:42 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 13-04-2024 09:14:42 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 13-04-2024 09:14:42 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 13-04-2024 09:14:42 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[INFO ] 13-04-2024 09:14:43 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 13-04-2024 09:14:43 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@7d6a2192] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 13-04-2024 09:15:00 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Student MSSQL_Linux]
+[INFO ] 13-04-2024 09:15:00 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 13-04-2024 09:15:00 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 13-04-2024 09:15:00 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 13-04-2024 09:15:00 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 13-04-2024 09:15:00 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 13-04-2024 09:15:00 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 13-04-2024 09:15:00 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 13-04-2024 09:15:00 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 13-04-2024 09:15:01 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 13-04-2024 09:15:01 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 13-04-2024 09:15:01 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 13-04-2024 09:15:01 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[INFO ] 13-04-2024 09:15:01 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 13-04-2024 09:15:01 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@7d8766af] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 13-04-2024 09:15:51 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Student MSSQL_Linux]
+[INFO ] 13-04-2024 09:15:51 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 13-04-2024 09:15:51 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 13-04-2024 09:15:51 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 13-04-2024 09:15:52 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 13-04-2024 09:15:52 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 13-04-2024 09:15:52 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 13-04-2024 09:15:52 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 13-04-2024 09:15:52 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 13-04-2024 09:15:52 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 13-04-2024 09:15:52 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 13-04-2024 09:15:52 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 13-04-2024 09:15:52 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[INFO ] 13-04-2024 09:15:53 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 13-04-2024 09:15:53 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@7d6a2192] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 13-04-2024 09:17:14 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Student MSSQL_Linux]
+[INFO ] 13-04-2024 09:17:14 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 13-04-2024 09:17:14 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 13-04-2024 09:17:14 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 13-04-2024 09:17:15 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 13-04-2024 09:17:15 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 13-04-2024 09:17:15 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 13-04-2024 09:17:15 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 13-04-2024 09:17:15 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 13-04-2024 09:17:15 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 13-04-2024 09:17:15 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 13-04-2024 09:17:15 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 13-04-2024 09:17:15 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[INFO ] 13-04-2024 09:17:16 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 13-04-2024 09:17:16 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@272456c1] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 13-04-2024 09:17:38 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Student MSSQL_Linux]
+[INFO ] 13-04-2024 09:17:38 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 13-04-2024 09:17:38 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 13-04-2024 09:17:38 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 13-04-2024 09:17:38 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 13-04-2024 09:17:38 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 13-04-2024 09:17:38 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 13-04-2024 09:17:38 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 13-04-2024 09:17:38 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 13-04-2024 09:17:39 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 13-04-2024 09:17:39 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 13-04-2024 09:17:39 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 13-04-2024 09:17:39 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[INFO ] 13-04-2024 09:17:40 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 13-04-2024 09:17:40 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@8d12c3d] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 13-04-2024 09:18:09 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Student MSSQL_Linux]
+[INFO ] 13-04-2024 09:18:09 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 13-04-2024 09:18:09 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 13-04-2024 09:18:09 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 13-04-2024 09:18:09 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 13-04-2024 09:18:09 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 13-04-2024 09:18:09 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 13-04-2024 09:18:09 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 13-04-2024 09:18:09 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 13-04-2024 09:18:10 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 13-04-2024 09:18:10 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 13-04-2024 09:18:10 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 13-04-2024 09:18:10 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[INFO ] 13-04-2024 09:18:10 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 13-04-2024 09:18:10 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@7b630c38] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 13-04-2024 09:18:20 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Student MSSQL_Linux]
+[INFO ] 13-04-2024 09:18:20 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 13-04-2024 09:18:20 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 13-04-2024 09:18:21 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 13-04-2024 09:18:21 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 13-04-2024 09:18:21 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 13-04-2024 09:18:21 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 13-04-2024 09:18:21 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 13-04-2024 09:18:21 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 13-04-2024 09:18:21 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 13-04-2024 09:18:21 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 13-04-2024 09:18:21 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 13-04-2024 09:18:21 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[INFO ] 13-04-2024 09:18:22 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 13-04-2024 09:18:22 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@7d8766af] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 13-04-2024 09:18:33 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Student MSSQL_Linux]
+[INFO ] 13-04-2024 09:18:34 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 13-04-2024 09:18:34 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 13-04-2024 09:18:34 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 13-04-2024 09:18:34 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 13-04-2024 09:18:34 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 13-04-2024 09:18:34 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 13-04-2024 09:18:34 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 13-04-2024 09:18:34 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 13-04-2024 09:18:34 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 13-04-2024 09:18:34 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 13-04-2024 09:18:34 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 13-04-2024 09:18:34 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[INFO ] 13-04-2024 09:18:35 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 13-04-2024 09:18:35 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@272456c1] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 13-04-2024 09:19:31 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Student MSSQL_Linux]
+[INFO ] 13-04-2024 09:19:31 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 13-04-2024 09:19:32 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 13-04-2024 09:19:32 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 13-04-2024 09:19:32 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 13-04-2024 09:19:32 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 13-04-2024 09:19:32 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 13-04-2024 09:19:32 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 13-04-2024 09:19:32 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 13-04-2024 09:19:33 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 13-04-2024 09:19:33 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 13-04-2024 09:19:33 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 13-04-2024 09:19:33 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[INFO ] 13-04-2024 09:19:33 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 13-04-2024 09:19:33 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@483cd716] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.

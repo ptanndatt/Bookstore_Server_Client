@@ -27,11 +27,11 @@ public class AdminView extends JFrame {
     private JPanel paneCu;
 
     public AdminView() {
+        initComponents();
         setTitle("Quản trị");
         setSize(new Dimension(871, 473));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         paneCu = new HomeView(); // Bắt đầu với HomeView
         panelBody.add(paneCu);
@@ -104,7 +104,7 @@ public class AdminView extends JFrame {
         menus = new JPanel();
         panelBody = new JPanel();
 
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 //		panelHeader.setBackground(new Color(225,223,223));
 //		panelHeader.setPreferredSize(new Dimension(561, 50));

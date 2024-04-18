@@ -14,13 +14,16 @@ import java.awt.event.ActionListener;
 
 public class LoginView extends JFrame implements ActionListener {
     private MainController mainController;
+
     public LoginView() {
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        jButton1.addActionListener(e -> login());
+
         setVisible(true);
-        jTextField1.setText("E20240418183024");
+        jTextField1.setText("E20240418220925");
         jPasswordField1.setText("1111");
 
 
@@ -31,11 +34,10 @@ public class LoginView extends JFrame implements ActionListener {
         String id = jTextField1.getText().trim();
         String password = new String(jPasswordField1.getPassword()).trim();
         if (id.isEmpty() || password.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Vui lòng nhập cả ID và Mật khẩu");
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập cả ID và Mật khẩu");
             return;
-        }
-        if (id.startsWith("admin") && password.equals("admin")) {
-//            DialogUtils.showSuccessMessage(this, "Đăng nhập thành công");
+        } else if (id.startsWith("admin") && password.equals("admin")) {
+            DialogUtils.showSuccessMessage(this, "Đăng nhập thành công");
             AdminView view = new AdminView();
             view.setVisible(true);
             this.setVisible(false);
@@ -48,12 +50,17 @@ public class LoginView extends JFrame implements ActionListener {
                 DialogUtils.showErrorMessage(this, "Sai ID hoặc Mật khẩu");
             } else {
                 if (account.getEmployee().getRole().getRoleCode() == 1) {
-                    Employee employee= mainController.findEmployeeById(account.getEmployee().getIdEmployee());
+                    Employee employee = mainController.findEmployeeById(account.getEmployee().getIdEmployee());
                     ManagerHomeView view = new ManagerHomeView(employee);
                     view.setVisible(true);
+                    dispose();
                     this.setVisible(false);
-                } else {
-                    DialogUtils.showSuccessMessage(this, "Day nha nhan vien");
+                } else if (account.getEmployee().getRole().getRoleCode() == 0) {
+                    Employee employee = mainController.findEmployeeById(account.getEmployee().getIdEmployee());
+                    SaleManagerView view = new SaleManagerView(employee);
+                    view.setVisible(true);
+                    dispose();
+                    this.setVisible(false);
                 }
             }
         }
@@ -245,6 +252,7 @@ public class LoginView extends JFrame implements ActionListener {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Object o = e.getSource();
