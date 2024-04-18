@@ -1,0 +1,50 @@
+[INFO ] 13-04-2024 23:44:56 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Student MSSQL_Linux]
+[INFO ] 13-04-2024 23:44:57 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 13-04-2024 23:44:57 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 13-04-2024 23:44:57 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 13-04-2024 23:44:57 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 13-04-2024 23:44:57 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 13-04-2024 23:44:57 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 13-04-2024 23:44:57 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 13-04-2024 23:44:57 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 13-04-2024 23:44:58 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 13-04-2024 23:44:58 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 13-04-2024 23:44:58 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 13-04-2024 23:44:58 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[INFO ] 13-04-2024 23:44:58 [AWT-EventQueue-0] EntityInstantiatorPojoStandard - HHH000182: No default (no-argument) constructor for class: models.Supplier (class must be instantiated by Interceptor)
+[INFO ] 13-04-2024 23:44:58 [AWT-EventQueue-0] EntityInstantiatorPojoStandard - HHH000182: No default (no-argument) constructor for class: models.Role (class must be instantiated by Interceptor)
+[INFO ] 13-04-2024 23:44:58 [AWT-EventQueue-0] EntityInstantiatorPojoStandard - HHH000182: No default (no-argument) constructor for class: models.ProductType (class must be instantiated by Interceptor)
+[INFO ] 13-04-2024 23:44:58 [AWT-EventQueue-0] EntityInstantiatorPojoStandard - HHH000182: No default (no-argument) constructor for class: models.Employee (class must be instantiated by Interceptor)
+[INFO ] 13-04-2024 23:44:58 [AWT-EventQueue-0] PojoInstantiatorImpl - HHH000182: No default (no-argument) constructor for class: models.Account (class must be instantiated by Interceptor)
+[INFO ] 13-04-2024 23:44:58 [AWT-EventQueue-0] EntityInstantiatorPojoStandard - HHH000182: No default (no-argument) constructor for class: models.Account (class must be instantiated by Interceptor)
+[INFO ] 13-04-2024 23:44:58 [AWT-EventQueue-0] EntityInstantiatorPojoStandard - HHH000182: No default (no-argument) constructor for class: models.Author (class must be instantiated by Interceptor)
+[INFO ] 13-04-2024 23:44:59 [AWT-EventQueue-0] EntityInstantiatorPojoStandard - HHH000182: No default (no-argument) constructor for class: models.Bill (class must be instantiated by Interceptor)
+[INFO ] 13-04-2024 23:44:59 [AWT-EventQueue-0] EntityInstantiatorPojoStandard - HHH000182: No default (no-argument) constructor for class: models.Promotion (class must be instantiated by Interceptor)
+[INFO ] 13-04-2024 23:44:59 [AWT-EventQueue-0] EntityInstantiatorPojoStandard - HHH000182: No default (no-argument) constructor for class: models.Customer (class must be instantiated by Interceptor)
+[INFO ] 13-04-2024 23:44:59 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 13-04-2024 23:44:59 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@21825f7c] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 13-04-2024 23:48:59 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Student MSSQL_Linux]
+[INFO ] 13-04-2024 23:48:59 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 13-04-2024 23:48:59 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 13-04-2024 23:48:59 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 13-04-2024 23:48:59 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 13-04-2024 23:48:59 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 13-04-2024 23:48:59 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 13-04-2024 23:48:59 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 13-04-2024 23:48:59 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 13-04-2024 23:49:00 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 13-04-2024 23:49:00 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 13-04-2024 23:49:00 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 13-04-2024 23:49:00 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[INFO ] 13-04-2024 23:49:00 [AWT-EventQueue-0] EntityInstantiatorPojoStandard - HHH000182: No default (no-argument) constructor for class: models.Supplier (class must be instantiated by Interceptor)
+[INFO ] 13-04-2024 23:49:00 [AWT-EventQueue-0] EntityInstantiatorPojoStandard - HHH000182: No default (no-argument) constructor for class: models.Role (class must be instantiated by Interceptor)
+[INFO ] 13-04-2024 23:49:00 [AWT-EventQueue-0] EntityInstantiatorPojoStandard - HHH000182: No default (no-argument) constructor for class: models.ProductType (class must be instantiated by Interceptor)
+[INFO ] 13-04-2024 23:49:00 [AWT-EventQueue-0] EntityInstantiatorPojoStandard - HHH000182: No default (no-argument) constructor for class: models.Employee (class must be instantiated by Interceptor)
+[INFO ] 13-04-2024 23:49:00 [AWT-EventQueue-0] PojoInstantiatorImpl - HHH000182: No default (no-argument) constructor for class: models.Account (class must be instantiated by Interceptor)
+[INFO ] 13-04-2024 23:49:00 [AWT-EventQueue-0] EntityInstantiatorPojoStandard - HHH000182: No default (no-argument) constructor for class: models.Account (class must be instantiated by Interceptor)
+[INFO ] 13-04-2024 23:49:00 [AWT-EventQueue-0] EntityInstantiatorPojoStandard - HHH000182: No default (no-argument) constructor for class: models.Author (class must be instantiated by Interceptor)
+[INFO ] 13-04-2024 23:49:00 [AWT-EventQueue-0] EntityInstantiatorPojoStandard - HHH000182: No default (no-argument) constructor for class: models.Bill (class must be instantiated by Interceptor)
+[INFO ] 13-04-2024 23:49:00 [AWT-EventQueue-0] EntityInstantiatorPojoStandard - HHH000182: No default (no-argument) constructor for class: models.Promotion (class must be instantiated by Interceptor)
+[INFO ] 13-04-2024 23:49:00 [AWT-EventQueue-0] EntityInstantiatorPojoStandard - HHH000182: No default (no-argument) constructor for class: models.Customer (class must be instantiated by Interceptor)
+[INFO ] 13-04-2024 23:49:01 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 13-04-2024 23:49:01 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@21825f7c] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
