@@ -108,7 +108,20 @@ public class ManagerAdminView extends JPanel implements KeyListener, MouseListen
         lbGioiTinh = new JLabel("Giới tính:");
         lbNgaySinh = new JLabel("Ngày sinh:");
         txtID = new JTextField();
-        txtID.setText(autoID.autoID("QL"));
+        txtTenNV.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                txtID.setText(autoID.autoID("E"));
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+            }
+        });
         txtID.setEditable(false);
         cbChucVu = new JComboBox<>();
         cbChucVu.addItem("Chon chuc vu");

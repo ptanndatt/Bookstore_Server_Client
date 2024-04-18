@@ -28,7 +28,6 @@ import java.util.List;
 import static javax.swing.JColorChooser.showDialog;
 
 public class EmployeeManagementView extends JPanel implements KeyListener, MouseListener, ActionListener {
-
     private static final int ROLE = 0;
     private JDateChooser chooserNgaySinh;
     private JTextField txtTenNV;
@@ -324,7 +323,7 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         Employee employee = new Employee(id, ten, sdt, diaChi, email, ngaySinh, GioiTinh, trangThai, chucVu);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
         String hasdPassword = passwordEncoder.encode(matkhau);
-        Account tk = new Account(employee, matkhau, ngayLap);
+        Account tk = new Account(employee, hasdPassword, ngayLap);
         System.out.println(hasdPassword);
 
         if (valiDate()) {

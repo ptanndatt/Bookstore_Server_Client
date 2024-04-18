@@ -29,6 +29,10 @@ public class Merchandise extends Product {
     private double revenue;
     private double profit;
 
+    public Merchandise(String productId) {
+        super(productId);
+    }
+
     @Override
     public double tax() {
         return 0;

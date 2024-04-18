@@ -39,6 +39,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import com.toedter.calendar.JDateChooser;
 
 import util.DialogUtils;
+import util.GeneratorIDAuto;
 import util.ProductStatusEnum;
 
 public class BookView extends JPanel
@@ -107,40 +108,15 @@ public class BookView extends JPanel
     private ProductStatusEnum statusEnum;
     private MainController mainController;
     private DecimalFormat df;
-    private Timer timer;
-
+    private GeneratorIDAuto autoID;
     public BookView() {
+        autoID=new GeneratorIDAuto();
         init();
     }
 
-//    public static void main(String[] args) {
-//        SwingUtilities.invokeLater(new Runnable() {
-//            @Override
-//            public void run() {
-//                Frame frame = new Frame();
-//                frame.add(new BookView());
-//                frame.setVisible(true);
-//                frame.setSize(1500, 900);
-//                frame.setLocationRelativeTo(null);
-//                frame.addWindowListener(new WindowAdapter() {
-//                    @Override
-//                    public void windowClosing(WindowEvent e) {
-//                        super.windowClosing(e);
-//                        System.exit(0);
-//                    }
-//                });
-//            }
-//        });
-//    }
+
 
     private void init() {
-        timer = new Timer(1000, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                updateIdBook();
-            }
-        });
-        timer.start();
         setLayout(new BorderLayout());
 
 
@@ -379,7 +355,20 @@ public class BookView extends JPanel
         loadComboBoxByTheLoai();
         loadComBoBoxByTacGia();
         refreshForm();
+        txtTenSanPham.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                txtIdSanPham.setText(autoID.autoID("SP"));
+            }
 
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+            }
+        });
 
         KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
 
@@ -1040,6 +1029,7 @@ public class BookView extends JPanel
         book.setStatus(trangThai);
         book.setQuantity(soLuong);
         book.setImportPrice(giaNhap);
+
         return book;
     }
 

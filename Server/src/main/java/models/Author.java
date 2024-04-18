@@ -29,6 +29,7 @@ import java.util.List;
 public class Author {
     @Id
     private String authorId;
+    @Column(name = "authorName",columnDefinition = "NVARCHAR(255)")
     private String authorName;
     private LocalDate date;
     private int numberOfWorks;

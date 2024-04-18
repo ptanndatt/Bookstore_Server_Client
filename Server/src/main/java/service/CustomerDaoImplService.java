@@ -28,4 +28,7 @@ public class CustomerDaoImplService{
     public List<Customer> findCustomerByText(String text) {
         return customerDao.findCustomerByText(text);
     }
+    public Customer findCustomerById(String id) {
+        return customerDao.getCustomerByID(id);
+    }
 }

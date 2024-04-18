@@ -282,6 +282,7 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
             mainController.addCustomer(customer);
             modelKhachHang.addRow(new Object[] {id, tenKhachHang, sdt, email, diaChi,dfNgaySinh.format(customer.getBirth()),customer.getGender()});
             JOptionPane.showMessageDialog(this, "Thêm thành công");
+            reload();
         }
     }
 
@@ -393,8 +394,8 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
                 int HopThoai = JOptionPane.showConfirmDialog(this, "Bạn có muốn xoá dòng này không?", "Cảnh báo",
                         JOptionPane.YES_NO_OPTION);
                 if (HopThoai == JOptionPane.YES_OPTION) {
-                    String manv = modelKhachHang.getValueAt(row, 0).toString();
-                    mainController.deleteCustomer(manv);
+                    String id = modelKhachHang.getValueAt(row, 0).toString();
+                    mainController.deleteCustomer(id);
                     modelKhachHang.removeRow(row);
                     reload();
                     JOptionPane.showMessageDialog(this, "Xoá khách hàng thành công");
@@ -471,7 +472,6 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
         } catch (ParseException ex) {
             throw new RuntimeException(ex);
         }
-
         chooserNgaySinh.setDate(valueNgaySinh);
 //        System.out.println(modelKhachHang.getValueAt(row, 6).toString());
         rbNam.setSelected(modelKhachHang.getValueAt(row, 6).toString() == "Nam");

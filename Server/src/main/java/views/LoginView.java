@@ -2,7 +2,9 @@ package views;
 
 
 import controller.MainController;
+import dao.impl.EmployeeDaoImpl;
 import models.Account;
+import models.Employee;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import util.DialogUtils;
 
@@ -19,6 +21,11 @@ public class LoginView extends JFrame implements ActionListener {
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jButton1.addActionListener(e -> login());
+
+        setVisible(true);
+        jTextField1.setText("E20240418220925");
+        jPasswordField1.setText("1111");
+
 
     }
 
@@ -43,11 +50,17 @@ public class LoginView extends JFrame implements ActionListener {
                 DialogUtils.showErrorMessage(this, "Sai ID hoặc Mật khẩu");
             } else {
                 if (account.getEmployee().getRole().getRoleCode() == 1) {
-                    ManagerHomeView view = new ManagerHomeView();
+                    Employee employee = mainController.findEmployeeById(account.getEmployee().getIdEmployee());
+                    ManagerHomeView view = new ManagerHomeView(employee);
                     view.setVisible(true);
                     dispose();
-                } else {
-                    DialogUtils.showSuccessMessage(this, "Day nha nhan vien");
+                    this.setVisible(false);
+                } else if (account.getEmployee().getRole().getRoleCode() == 0) {
+                    Employee employee = mainController.findEmployeeById(account.getEmployee().getIdEmployee());
+                    SaleManagerView view = new SaleManagerView(employee);
+                    view.setVisible(true);
+                    dispose();
+                    this.setVisible(false);
                 }
             }
         }
@@ -242,7 +255,8 @@ public class LoginView extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == jButton1 || e.getSource() == jTextField1 || e.getSource() == jPasswordField1) {
+        Object o = e.getSource();
+        if (o.equals(jButton1)) {
             login();
         }
     }
