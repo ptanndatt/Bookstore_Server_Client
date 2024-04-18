@@ -20,7 +20,7 @@ public class LoginView extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jButton1.addActionListener(e -> login());
+//        jButton1.addActionListener(e -> login());
 
         setVisible(true);
         jTextField1.setText("E20240418220925");

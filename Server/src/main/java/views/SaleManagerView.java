@@ -149,9 +149,9 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         setLayout(new GridBagLayout());
         pnLeft = new JPanel(new BorderLayout());
         pnRight = new JPanel(new BorderLayout());
-        JLabel lblTitleLeft = new JLabel("CHI TIẾT HOÁ ĐƠN");
+//        JLabel lblTitleLeft = new JLabel("CHI TIẾT HOÁ ĐƠN");
         JLabel lblTitleRight = new JLabel("HOÁ ĐƠN");
-        JPanel pnTitleLeft = new JPanel();
+//        JPanel pnTitleLeft = new JPanel();
         JPanel pnTitleRight = new JPanel();
         JPanel pnHeaderLeft = new JPanel(new BorderLayout());
         JPanel pnHeaderRight = new JPanel(new BorderLayout());
@@ -233,8 +233,8 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         txtTenKH2 = new JTextField(20);
         txtTenKH2.setFont(new Font("SansSerif", Font.PLAIN, 14));
         txtTenKH2.setEditable(false);
-        lblTitleLeft.setFont(new Font("Tahoma", Font.BOLD, 30));
-        lblTitleLeft.setForeground(new Color(26, 102, 227));
+//        lblTitleLeft.setFont(new Font("Tahoma", Font.BOLD, 30));
+//        lblTitleLeft.setForeground(new Color(26, 102, 227));
         lblTitleRight.setFont(new Font("Tahoma", Font.BOLD, 30));
         lblTitleRight.setForeground(new Color(26, 102, 227));
         lblMaSP.setFont(new Font("SansSerif", Font.BOLD, 14));
@@ -253,7 +253,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         lblThue.setFont(new Font("SansSerif", Font.BOLD, 14));
         spinnerSoLuong = new JSpinner(new SpinnerNumberModel(1, 1, 100, 1));
         spinnerSoLuong.setFont(new Font("SansSerif", Font.BOLD, 14));
-        btnTimKiemSanPham = new JButton("Tìm kiếm sản phẩm");
+        btnTimKiemSanPham = new JButton("Xem tất cả sản phẩm");
         btnDongSanPham = new JButton("Đóng");
         btnDongKhachHang = new JButton("Đóng");
         btnXacNhanCapNhat = new JButton("Cập nhật");
@@ -306,7 +306,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         ImageIcon iconLuuVaIn = new ImageIcon(getClass().getResource("/icons/printing.png"));
         ImageIcon iconLuu = new ImageIcon(getClass().getResource("/icons/bookmark.png"));
 
-        pnTitleLeft.add(lblTitleLeft);
+//        pnTitleLeft.add(lblTitleLeft);
         pnSanPham.add(lblMaSP);
         pnSanPham.add(txtMaSP);
         pnSanPham.add(lblSoLuong);
@@ -318,7 +318,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         pn5.add(btnTimKiemSanPham);
         pn6.add(pn5);
         pn7.add(pn6);
-        pnHeaderLeft.add(pnTitleLeft, BorderLayout.NORTH);
+//        pnHeaderLeft.add(pnTitleLeft, BorderLayout.NORTH);
         pnHeaderLeft.add(pn1, BorderLayout.CENTER);
         pnHeaderLeft.add(pn7, BorderLayout.SOUTH);
         tblGioHang = new JTable();
@@ -344,14 +344,17 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         btnLamMoiGioHang = new JButton("Làm mới giỏ hàng");
         btnLamMoiGioHang.setIcon(iconLamMoi);
         btnCapNhatSoLuong = new JButton("Cập nhật số lượng");
+        btnLuuHoaDon = new JButton("Lưu");
+        btnLuuHoaDon.setIcon(iconLuu);
         pnXoaLamMoi.add(btnXoaGioHang);
         pnXoaLamMoi.add(btnCapNhatSoLuong);
         pnXoaLamMoi.add(btnLamMoiGioHang);
+        pnXoaLamMoi.add(btnLuuHoaDon);
         pnGioHang.add(scrollTblGH, BorderLayout.CENTER);
         pnGioHang.add(pnXoaLamMoi, BorderLayout.SOUTH);
-        pnLeft.add(pnHeaderLeft, BorderLayout.NORTH);
-        pnLeft.add(pnGioHang, BorderLayout.CENTER);
-        pnLeft.setBorder(BorderFactory.createTitledBorder(""));
+        pnLeft.add(pnHeaderLeft, BorderLayout.CENTER);
+        pnLeft.add(pnTblHangCho, BorderLayout.SOUTH);
+        pnLeft.setBorder(BorderFactory.createTitledBorder("Chọn sản phẩm"));
 
 
         btnTimKhachHang = new JButton("Chọn khách hàng");
@@ -386,8 +389,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         JScrollPane scrollTblHangDoi = new JScrollPane(tblHangCho);
         scrollTblHangDoi.setBorder(BorderFactory.createTitledBorder("Đơn hàng chờ thanh toán"));
 
-        btnLuuHoaDon = new JButton("Lưu");
-        btnLuuHoaDon.setIcon(iconLuu);
+
         btnXoaHangCho = new JButton("Xoá");
         btnXoaHangCho.setIcon(iconXoa);
         btnChonThanhToan = new JButton("Chọn thanh toán");
@@ -395,7 +397,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         btnLamMoiHangCho = new JButton("Làm mới hàng chờ");
         btnLamMoiHangCho.setIcon(iconLamMoi);
         pnChucNangHangCho.add(btnChonThanhToan);
-        pnChucNangHangCho.add(btnLuuHoaDon);
+
         pnChucNangHangCho.add(btnXoaHangCho);
         pnChucNangHangCho.add(btnLamMoiHangCho);
         pnTblHangCho.add(scrollTblHangDoi, BorderLayout.CENTER);
@@ -429,7 +431,8 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         pnLamThanhToan.add(btnLamMoiDonHang);
         pnFooterRight.add(pnLamThanhToan, BorderLayout.SOUTH);
         pnRight.add(pnHeaderRight, BorderLayout.NORTH);
-        pnRight.add(pnTblHangCho, BorderLayout.CENTER);
+
+        pnRight.add(pnGioHang, BorderLayout.CENTER);
         pnRight.add(pnFooterRight, BorderLayout.SOUTH);
         pnRight.setBorder(BorderFactory.createTitledBorder(""));
 
@@ -437,7 +440,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.weightx = 0.7;
+        gbc.weightx = 0.5;
         gbc.weighty = 1.0;
         gbc.fill = GridBagConstraints.BOTH;
         add(pnLeft, gbc);
@@ -445,7 +448,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
 
         gbc.gridx = 1;
         gbc.gridy = 0;
-        gbc.weightx = 0.3;
+        gbc.weightx = 0.5;
         gbc.weighty = 1.0;
         gbc.fill = GridBagConstraints.BOTH;
         add(pnRight, gbc);
