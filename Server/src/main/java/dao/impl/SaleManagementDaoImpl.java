@@ -139,6 +139,11 @@ public class SaleManagementDaoImpl implements SaleManagementDao {
     }
 
     @Override
+    public Bill findBillById(String id) {
+        return em.find(Bill.class, id);
+    }
+
+    @Override
     public boolean deleteBillPendingById(String id) {
         EntityTransaction tr = em.getTransaction();
         try {

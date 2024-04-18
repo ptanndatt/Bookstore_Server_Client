@@ -5188,3 +5188,264 @@ Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: Column 'Supplier.sup
 [WARN ] 15-04-2024 16:36:01 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
 [INFO ] 15-04-2024 16:36:02 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 [INFO ] 15-04-2024 16:36:02 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@160c0700] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 15-04-2024 20:53:58 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
+[INFO ] 15-04-2024 20:53:58 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 15-04-2024 20:53:58 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 15-04-2024 20:53:58 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 15-04-2024 20:53:58 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 15-04-2024 20:53:58 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 15-04-2024 20:53:58 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 15-04-2024 20:53:58 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 15-04-2024 20:53:58 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 15-04-2024 20:53:59 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 15-04-2024 20:53:59 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 15-04-2024 20:53:59 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 15-04-2024 20:53:59 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[WARN ] 15-04-2024 20:53:59 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
+[WARN ] 15-04-2024 20:53:59 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
+[WARN ] 15-04-2024 20:53:59 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
+[WARN ] 15-04-2024 20:53:59 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
+[INFO ] 15-04-2024 20:54:00 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 15-04-2024 20:54:00 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@fa8d209] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 15-04-2024 21:23:03 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
+[INFO ] 15-04-2024 21:23:03 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 15-04-2024 21:23:03 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 15-04-2024 21:23:03 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 15-04-2024 21:23:03 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 15-04-2024 21:23:03 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 15-04-2024 21:23:03 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 15-04-2024 21:23:03 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 15-04-2024 21:23:03 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 15-04-2024 21:23:04 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 15-04-2024 21:23:04 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 15-04-2024 21:23:04 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 15-04-2024 21:23:04 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[WARN ] 15-04-2024 21:23:04 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
+[WARN ] 15-04-2024 21:23:04 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
+[WARN ] 15-04-2024 21:23:04 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
+[WARN ] 15-04-2024 21:23:04 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
+[INFO ] 15-04-2024 21:23:05 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 15-04-2024 21:23:05 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@7fde5ef7] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 15-04-2024 21:23:23 [AWT-EventQueue-0] Log - Retrieved all categories successfully
+[INFO ] 15-04-2024 21:24:10 [AWT-EventQueue-0] Log - Retrieved all categories successfully
+[INFO ] 15-04-2024 21:51:16 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
+[INFO ] 15-04-2024 21:51:16 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 15-04-2024 21:51:16 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 15-04-2024 21:51:16 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 15-04-2024 21:51:16 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 15-04-2024 21:51:16 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 15-04-2024 21:51:16 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 15-04-2024 21:51:16 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 15-04-2024 21:51:16 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 15-04-2024 21:51:17 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 15-04-2024 21:51:17 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 15-04-2024 21:51:17 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 15-04-2024 21:51:17 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[WARN ] 15-04-2024 21:51:17 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
+[WARN ] 15-04-2024 21:51:17 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
+[WARN ] 15-04-2024 21:51:17 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
+[WARN ] 15-04-2024 21:51:17 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
+[INFO ] 15-04-2024 21:51:18 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 15-04-2024 21:51:18 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@53b8e369] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[WARN ] 15-04-2024 21:51:43 [AWT-EventQueue-0] SqlExceptionHelper - SQL Error: 547, SQLState: 23000
+[ERROR] 15-04-2024 21:51:43 [AWT-EventQueue-0] SqlExceptionHelper - The INSERT statement conflicted with the FOREIGN KEY constraint "FK6vlea2p0dy7d93ua7wlhvpmwn". The conflict occurred in database "QLHieuSach", table "dbo.Bill", column 'billId'.
+[INFO ] 18-04-2024 17:57:43 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
+[INFO ] 18-04-2024 17:57:43 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 18-04-2024 17:57:43 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 18-04-2024 17:57:44 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 18-04-2024 17:57:44 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 18-04-2024 17:57:44 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 18-04-2024 17:57:44 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 18-04-2024 17:57:44 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 18-04-2024 17:57:44 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 18-04-2024 17:57:45 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 18-04-2024 17:57:45 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 18-04-2024 17:57:45 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 18-04-2024 17:57:45 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[WARN ] 18-04-2024 17:57:45 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
+[WARN ] 18-04-2024 17:57:45 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
+[WARN ] 18-04-2024 17:57:45 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
+[WARN ] 18-04-2024 17:57:45 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
+[INFO ] 18-04-2024 17:57:46 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 18-04-2024 17:57:46 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@7fde5ef7] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[WARN ] 18-04-2024 17:58:21 [AWT-EventQueue-0] SqlExceptionHelper - SQL Error: 547, SQLState: 23000
+[ERROR] 18-04-2024 17:58:21 [AWT-EventQueue-0] SqlExceptionHelper - The INSERT statement conflicted with the FOREIGN KEY constraint "FK6vlea2p0dy7d93ua7wlhvpmwn". The conflict occurred in database "QLHieuSach", table "dbo.Bill", column 'billId'.
+[WARN ] 18-04-2024 17:58:21 [AWT-EventQueue-0] SqlExceptionHelper - SQL Error: 547, SQLState: 23000
+[ERROR] 18-04-2024 17:58:21 [AWT-EventQueue-0] SqlExceptionHelper - The INSERT statement conflicted with the FOREIGN KEY constraint "FK6vlea2p0dy7d93ua7wlhvpmwn". The conflict occurred in database "QLHieuSach", table "dbo.Bill", column 'billId'.
+[INFO ] 18-04-2024 18:17:21 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
+[INFO ] 18-04-2024 18:17:21 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 18-04-2024 18:17:21 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 18-04-2024 18:17:21 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 18-04-2024 18:17:21 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 18-04-2024 18:17:21 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 18-04-2024 18:17:21 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 18-04-2024 18:17:21 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 18-04-2024 18:17:21 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 18-04-2024 18:17:22 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 18-04-2024 18:17:22 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 18-04-2024 18:17:22 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 18-04-2024 18:17:22 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[WARN ] 18-04-2024 18:17:22 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
+[WARN ] 18-04-2024 18:17:22 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
+[WARN ] 18-04-2024 18:17:22 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
+[WARN ] 18-04-2024 18:17:22 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
+[INFO ] 18-04-2024 18:17:23 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 18-04-2024 18:17:23 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@fa8d209] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[WARN ] 18-04-2024 18:17:44 [AWT-EventQueue-0] SqlExceptionHelper - SQL Error: 547, SQLState: 23000
+[ERROR] 18-04-2024 18:17:44 [AWT-EventQueue-0] SqlExceptionHelper - The INSERT statement conflicted with the FOREIGN KEY constraint "FK6vlea2p0dy7d93ua7wlhvpmwn". The conflict occurred in database "QLHieuSach", table "dbo.Bill", column 'billId'.
+[INFO ] 18-04-2024 18:26:26 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
+[INFO ] 18-04-2024 18:26:26 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 18-04-2024 18:26:26 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 18-04-2024 18:26:27 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 18-04-2024 18:26:27 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 18-04-2024 18:26:27 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 18-04-2024 18:26:27 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 18-04-2024 18:26:27 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 18-04-2024 18:26:27 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 18-04-2024 18:26:28 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 18-04-2024 18:26:28 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 18-04-2024 18:26:28 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 18-04-2024 18:26:28 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[WARN ] 18-04-2024 18:26:28 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
+[WARN ] 18-04-2024 18:26:28 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
+[WARN ] 18-04-2024 18:26:28 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
+[WARN ] 18-04-2024 18:26:28 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
+[INFO ] 18-04-2024 18:26:29 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 18-04-2024 18:26:29 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@53b8e369] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[WARN ] 18-04-2024 18:27:26 [AWT-EventQueue-0] SqlExceptionHelper - SQL Error: 547, SQLState: 23000
+[ERROR] 18-04-2024 18:27:26 [AWT-EventQueue-0] SqlExceptionHelper - The INSERT statement conflicted with the FOREIGN KEY constraint "FK6vlea2p0dy7d93ua7wlhvpmwn". The conflict occurred in database "QLHieuSach", table "dbo.Bill", column 'billId'.
+[INFO ] 18-04-2024 18:30:10 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
+[INFO ] 18-04-2024 18:30:10 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 18-04-2024 18:30:10 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 18-04-2024 18:30:11 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 18-04-2024 18:30:11 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 18-04-2024 18:30:11 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 18-04-2024 18:30:11 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 18-04-2024 18:30:11 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 18-04-2024 18:30:11 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 18-04-2024 18:30:12 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 18-04-2024 18:30:12 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 18-04-2024 18:30:12 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 18-04-2024 18:30:12 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[WARN ] 18-04-2024 18:30:12 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
+[WARN ] 18-04-2024 18:30:12 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
+[WARN ] 18-04-2024 18:30:12 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
+[WARN ] 18-04-2024 18:30:12 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
+[INFO ] 18-04-2024 18:30:12 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 18-04-2024 18:30:12 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@46dc0299] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[WARN ] 18-04-2024 18:31:16 [AWT-EventQueue-0] SqlExceptionHelper - SQL Error: 547, SQLState: 23000
+[ERROR] 18-04-2024 18:31:16 [AWT-EventQueue-0] SqlExceptionHelper - The INSERT statement conflicted with the FOREIGN KEY constraint "FK6vlea2p0dy7d93ua7wlhvpmwn". The conflict occurred in database "QLHieuSach", table "dbo.Bill", column 'billId'.
+[INFO ] 18-04-2024 18:33:04 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
+[INFO ] 18-04-2024 18:33:04 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 18-04-2024 18:33:04 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 18-04-2024 18:33:05 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 18-04-2024 18:33:05 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 18-04-2024 18:33:05 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 18-04-2024 18:33:05 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 18-04-2024 18:33:05 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 18-04-2024 18:33:05 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 18-04-2024 18:33:06 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 18-04-2024 18:33:06 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 18-04-2024 18:33:06 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 18-04-2024 18:33:06 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[WARN ] 18-04-2024 18:33:06 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
+[WARN ] 18-04-2024 18:33:06 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
+[WARN ] 18-04-2024 18:33:06 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
+[WARN ] 18-04-2024 18:33:06 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
+[INFO ] 18-04-2024 18:33:07 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 18-04-2024 18:33:07 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@55eeea96] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 18-04-2024 18:36:51 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
+[INFO ] 18-04-2024 18:36:51 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 18-04-2024 18:36:51 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 18-04-2024 18:36:51 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 18-04-2024 18:36:51 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 18-04-2024 18:36:51 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 18-04-2024 18:36:51 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 18-04-2024 18:36:51 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 18-04-2024 18:36:51 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 18-04-2024 18:36:52 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 18-04-2024 18:36:52 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 18-04-2024 18:36:52 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 18-04-2024 18:36:52 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[WARN ] 18-04-2024 18:36:52 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
+[WARN ] 18-04-2024 18:36:52 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
+[WARN ] 18-04-2024 18:36:52 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
+[WARN ] 18-04-2024 18:36:52 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
+[INFO ] 18-04-2024 18:36:53 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 18-04-2024 18:36:53 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6dc8093a] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 18-04-2024 18:43:53 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
+[INFO ] 18-04-2024 18:43:53 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 18-04-2024 18:43:53 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 18-04-2024 18:43:54 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 18-04-2024 18:43:54 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 18-04-2024 18:43:54 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 18-04-2024 18:43:54 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 18-04-2024 18:43:54 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 18-04-2024 18:43:54 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 18-04-2024 18:43:55 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 18-04-2024 18:43:55 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 18-04-2024 18:43:55 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 18-04-2024 18:43:55 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[WARN ] 18-04-2024 18:43:55 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
+[WARN ] 18-04-2024 18:43:55 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
+[WARN ] 18-04-2024 18:43:55 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
+[WARN ] 18-04-2024 18:43:55 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
+[INFO ] 18-04-2024 18:43:55 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 18-04-2024 18:43:55 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@3908c480] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 18-04-2024 18:58:45 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
+[INFO ] 18-04-2024 18:58:45 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 18-04-2024 18:58:45 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 18-04-2024 18:58:45 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 18-04-2024 18:58:45 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 18-04-2024 18:58:45 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 18-04-2024 18:58:45 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 18-04-2024 18:58:45 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 18-04-2024 18:58:45 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 18-04-2024 18:58:47 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 18-04-2024 18:58:47 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 18-04-2024 18:58:47 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 18-04-2024 18:58:47 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[WARN ] 18-04-2024 18:58:47 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
+[WARN ] 18-04-2024 18:58:47 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
+[WARN ] 18-04-2024 18:58:47 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
+[WARN ] 18-04-2024 18:58:47 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
+[INFO ] 18-04-2024 18:58:47 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 18-04-2024 18:58:47 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@24e85ac6] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 18-04-2024 19:01:06 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
+[INFO ] 18-04-2024 19:01:06 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 18-04-2024 19:01:06 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 18-04-2024 19:01:06 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 18-04-2024 19:01:06 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 18-04-2024 19:01:06 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 18-04-2024 19:01:06 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 18-04-2024 19:01:06 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 18-04-2024 19:01:06 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 18-04-2024 19:01:07 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 18-04-2024 19:01:07 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 18-04-2024 19:01:07 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 18-04-2024 19:01:07 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[WARN ] 18-04-2024 19:01:07 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
+[WARN ] 18-04-2024 19:01:07 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
+[WARN ] 18-04-2024 19:01:07 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
+[WARN ] 18-04-2024 19:01:07 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
+[INFO ] 18-04-2024 19:01:08 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 18-04-2024 19:01:08 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6dc8093a] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 18-04-2024 19:01:23 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
+[INFO ] 18-04-2024 19:01:23 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 18-04-2024 19:01:23 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 18-04-2024 19:01:23 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 18-04-2024 19:01:23 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 18-04-2024 19:01:23 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 18-04-2024 19:01:23 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 18-04-2024 19:01:23 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 18-04-2024 19:01:23 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 18-04-2024 19:01:24 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 18-04-2024 19:01:24 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 18-04-2024 19:01:24 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 18-04-2024 19:01:24 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[WARN ] 18-04-2024 19:01:24 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
+[WARN ] 18-04-2024 19:01:24 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
+[WARN ] 18-04-2024 19:01:24 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
+[WARN ] 18-04-2024 19:01:24 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
+[INFO ] 18-04-2024 19:01:25 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 18-04-2024 19:01:25 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@24e85ac6] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.

@@ -20,7 +20,7 @@ public class LoginView extends JFrame implements ActionListener {
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-        jTextField1.setText("E20240415161112");
+        jTextField1.setText("E20240418183024");
         jPasswordField1.setText("1111");
 
 

@@ -47,7 +47,8 @@ public abstract class Product {
     private ProductSale productSale;
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private Set<DetailsBillPending> detailsBillPendings;
-
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private Set<DetailsBill> detailsBills;
     public Product(String productId) {
         this.productId = productId;
     }

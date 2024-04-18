@@ -22,7 +22,7 @@ public class MainController {
     private ProductSaleDaoImplService productSaleDaoImplService = new ProductSaleDaoImplService();
     private ProductDaoImplService productDaoImplService = new ProductDaoImplService();
     private SaleManagementDaoService saleManagementDaoImplService = new SaleManagementDaoService();
-    //BillPending
+    //BillPending,Bill
     public boolean addBillPending(BillPending billPending){
         return saleManagementDaoImplService.addBillPending(billPending);
     }
@@ -50,6 +50,15 @@ public class MainController {
     public boolean deleteAllDetailBillPending(){
         return saleManagementDaoImplService.deleteAllDetailBillPending();
     }
+    public boolean addBill(Bill bill){
+        return saleManagementDaoImplService.addBill(bill);
+    }
+    public Bill getBillById(String idBill){
+        return saleManagementDaoImplService.getBillById(idBill);
+    }
+    public boolean addDetailsBill(DetailsBill detailsBill){
+        return saleManagementDaoImplService.addDetailsBill(detailsBill);
+    }
     //ProductSale
     public List<ProductSale> getAllAProductSale() {
         return productSaleDaoImplService.getAllAProductSale();
@@ -72,6 +81,9 @@ public class MainController {
 
     public List<Product> getProductByText(String text) {
         return productDaoImplService.getProductByText(text);
+    }
+    public boolean updateProductQuantity(String id,int quantity) {
+        return productDaoImplService.updateProduct(id,quantity);
     }
     //Customer
     public List<Customer> getAllCustomers() {

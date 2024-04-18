@@ -425,8 +425,6 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         btnThanhToan.setPreferredSize(new Dimension(200, 35));
         btnLamMoiDonHang = new JButton("Làm mới hoá đơn");
         btnLamMoiDonHang.setIcon(iconLamMoi);
-        btnTaoMaHoaDon = new JButton("Tạo mã hoá đơn");
-        pnLamThanhToan.add(btnTaoMaHoaDon);
         pnLamThanhToan.add(btnThanhToan);
         pnLamThanhToan.add(btnLamMoiDonHang);
         pnFooterRight.add(pnLamThanhToan, BorderLayout.SOUTH);
@@ -475,7 +473,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         btnXacNhanCapNhat.addActionListener(this);
         btnXemTatCaKhachHang.addActionListener(this);
         btnChonKH.addActionListener(this);
-        btnTaoMaHoaDon.addActionListener(this);
+//        btnTaoMaHoaDon.addActionListener(this);
         btnXemTatCaSanPham.addActionListener(this);
         txtTienKhachDua.getDocument().addDocumentListener(new DocumentListener() {
             @Override
@@ -971,7 +969,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
                 spinnerSoLuong.setValue(1);
                 txtMaSP.setText("");
             } else {
-                JOptionPane.showMessageDialog(this, "Số lượng sách trong kho không đủ");
+                JOptionPane.showMessageDialog(this, "Số lượng trong kho không đủ");
             }
 
         } else {
@@ -1445,6 +1443,8 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
                 DetailsBillPending cthdc = new DetailsBillPending(hdc,sp,maHD, soLuong, giaBanSauKMDouble, thanhTienDouble);
                 try {
                     mainController.addDetailBillPending(cthdc);
+                    int quantityNew=sp.getQuantity()-soLuong;
+                    mainController.updateProductQuantity(maSP,quantityNew);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this, "Thêm chi tiết hoá đơn chờ thất bại");
                 }
@@ -1500,7 +1500,8 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
             showThongBao("Hàng chờ rỗng");
         }
     }
-    private void handlesubmitPay() {
+
+    private void handleSubmitPayBillPending() {
         if (modelHangCho.getRowCount() > 0) {
             int rowSelectedDonHangCho = tblHangCho.getSelectedRow();
             if (modelGioHang.getRowCount() == 0) {
@@ -1601,6 +1602,53 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
             }
         }
     }
+    private void saveBill() {
+        String idHD = txtMaHD.getText();
+        Customer kh = mainController.findCustomerById(txtMaKH.getText());
+        Employee nv = mainController.findEmployeeById(employee.getIdEmployee());
+        String tienKhachDua = txtTienKhachDua.getText();
+        double tienKhachDuaDouble = Double.parseDouble(tienKhachDua.trim().replace("\u00A0", "").replaceAll("[.,₫]", ""));
+        String tongTienHoaDon = txtTongTienHoaDon.getText();
+        double tongTienHoaDonDouble = Double.parseDouble(tongTienHoaDon.trim().replace("\u00A0", "").replaceAll("[.,₫]", ""));
+        java.sql.Date ngayNhapSql = new java.sql.Date(ngayNhap.getTime());
+        double tongLoiNhuan = 0;
+        int gioHangRowCount = modelGioHang.getRowCount();
+
+        for (int i = 0; i < gioHangRowCount; i++) {
+            Product sanPham = mainController.getProductById(modelGioHang.getValueAt(i, 0).toString());
+            int soLuong = Integer.parseInt(modelGioHang.getValueAt(i, 4).toString());
+            double giaNhap = sanPham.getImportPrice();
+            double loiNhuan = (giaNhap * 0.55) * soLuong;
+            tongLoiNhuan += loiNhuan;
+        }
+
+        Bill hd = new Bill(idHD,ngayNhapSql, kh, nv, tienKhachDuaDouble, tongTienHoaDonDouble, tongLoiNhuan);
+        try {
+            mainController.addBill(hd);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Thêm hoá đơn thất bại");
+        }
+        int rowCountGioHang = modelGioHang.getRowCount();
+        for (int i = 0; i < rowCountGioHang; i++) {
+            int soLuong = Integer.parseInt(modelGioHang.getValueAt(i, 4).toString());
+            String maSP = modelGioHang.getValueAt(i, 0).toString();
+
+            String thanhTien = modelGioHang.getValueAt(i, 5).toString();
+            double thanhTienDouble = Double.parseDouble(thanhTien.trim().replace("\u00A0", "").replaceAll("[.,₫]", ""));
+            Product product= mainController.getProductById(maSP);
+            String giaBan = modelGioHang.getValueAt(i, 3).toString();
+            double giaBanDouble = Double.parseDouble(giaBan.trim().replace("\u00A0", "").replaceAll("[.,₫]", ""));
+
+            DetailsBill cthd = new DetailsBill(hd,product,soLuong,giaBanDouble,thanhTienDouble);
+            try {
+                mainController.addDetailsBill(cthd);
+                int quantityNew=product.getQuantity()-soLuong;
+                mainController.updateProductQuantity(maSP,quantityNew);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Thêm chi tiết hoá đơn thất bại");
+            }
+        }
+    }
     private void handLePayment() throws DocumentException {
         if (!txtMaKH.getText().equals("")) {
             if (modelGioHang.getRowCount() >= 0) {
@@ -1632,10 +1680,10 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
                     txtTienKhachDua.setSelectionEnd(txtTienKhachDua.getText().length());
                     return;
                 }
-                luuHoaDonVaCTHD();
+                saveBill();
                 String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
                 String filePath = System.getProperty("user.dir") + "/src/main/resources/DataExports/HoaDonPDF/HD_"+timeStamp+".pdf" ;
-                exportToPdf(filePath);
+//                exportToPdf(filePath);
                 reloadCart();
                 handleReloadBill();
                 txtTienKhachDua.setText("");
@@ -1696,6 +1744,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         }
             if (o.equals(btnTimKiemSanPham)) {
                 showDialogSanPham();
+                loadProduct();
             }
             if (o.equals(btnTimKhachHang))
             {
@@ -1716,14 +1765,12 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
                 chonMaSanPham();
             }
             if (o.equals(btnXacNhanCapNhat)) {
-            int rowSelected = tblGioHang.getSelectedRow();
-            submitUpdateQuantity(modelGioHang.getValueAt(rowSelected, 0).toString());
+                int rowSelected = tblGioHang.getSelectedRow();
+                submitUpdateQuantity(modelGioHang.getValueAt(rowSelected, 0).toString());
             }
-//        } else if (o.equals(btnXemTatCaKhachHang)) {
-//            lamMoiKhachHang();
-//            if (o.equals(btnThanhToan)) {
-//                handlesubmitPay();
-//            }
+            if (o.equals(btnXemTatCaKhachHang)) {
+                txtTimKiemKH.setText("");
+            }
             if (o.equals(btnLuuHoaDon)) {
                 saveBillPending();
             }
@@ -1734,13 +1781,18 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
                 reloadBillPending();
             }
             if (o.equals(btnChonThanhToan)) {
-                handlesubmitPay();
+                handleSubmitPayBillPending();
             }
-//        } else if (o.equals(btnTaoMaHoaDon)) {
-//            phatSinhMaHD();
-//        } else if (o.equals(btnXemTatCaSanPham)) {
-//            txtTimKiemSP.setText("");
-//        }
+            if (o.equals(btnThanhToan)) {
+                try {
+                    handLePayment();
+                } catch (DocumentException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+            if (o.equals(btnXemTatCaSanPham)) {
+                txtTimKiemSP.setText("");
+            }
 
     }
 }

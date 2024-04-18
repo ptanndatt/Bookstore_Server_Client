@@ -2,6 +2,7 @@ package dao.impl;
 
 import dao.ProductDao;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 import models.Employee;
 import models.Product;
 import util.HibernateUtil;
@@ -24,5 +25,23 @@ public class ProductDaoImpl implements ProductDao {
         return em.createQuery("SELECT p FROM Product p WHERE p.productId LIKE :text OR p.productName LIKE :text ", Product.class)
                 .setParameter("text", "%" + text + "%") // %text% for similarity
                 .getResultList();
+    }
+
+    @Override
+    public boolean updateProduct(String id, int quantity) {
+        EntityTransaction tr = em.getTransaction();
+        try {
+            tr.begin();
+            em.createQuery("UPDATE Product p SET p.quantity = :quantity WHERE p.id = :productId")
+                    .setParameter("productId",  id )
+                    .setParameter("quantity", quantity)
+                    .executeUpdate();
+            tr.commit();
+            return true;
+        } catch (Exception e) {
+            tr.rollback();
+            e.printStackTrace();
+            return false;
+        }
     }
 }

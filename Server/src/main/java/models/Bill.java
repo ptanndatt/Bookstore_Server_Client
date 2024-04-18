@@ -6,10 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 
 @Getter
@@ -38,12 +35,10 @@ public class Bill {
 	@EqualsAndHashCode.Exclude
 	private double profitTotal;
 	@OneToMany(mappedBy = "bill", cascade = CascadeType.ALL)
-	private List<DetailsBill> invoiceDetails;
+	private Set<DetailsBill> detailsBills;
 
-
-	public Bill(Date billDate, Customer customer, Employee employee, double amountReceived, double amounttotal,
-			double profitTotal) {
-		super();
+	public Bill(String billId, Date billDate, Customer customer, Employee employee, double amountReceived, double amounttotal, double profitTotal) {
+		this.billId = billId;
 		this.billDate = billDate;
 		this.customer = customer;
 		this.employee = employee;

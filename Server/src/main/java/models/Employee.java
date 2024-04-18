@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -36,8 +37,22 @@ public class Employee {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="roleId")
 	protected Role role;
+	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+	private Set<Bill> bill;
 	public Employee(String idEmployee) {
 		this.idEmployee = idEmployee;
+	}
+
+	public Employee(String idEmployee, String name, String phone, String address, String email, Date birth, String gender, String status, Role role) {
+		this.idEmployee = idEmployee;
+		this.name = name;
+		this.phone = phone;
+		this.address = address;
+		this.email = email;
+		this.birth = birth;
+		this.gender = gender;
+		this.status = status;
+		this.role = role;
 	}
 
 	@Override

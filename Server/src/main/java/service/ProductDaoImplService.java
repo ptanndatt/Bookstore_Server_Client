@@ -14,4 +14,7 @@ public class ProductDaoImplService {
     public List<Product> getProductByText(String text) {
         return productDao.getProductByText(text);
     }
+    public boolean updateProduct(String id,int quantity) {
+        return productDao.updateProduct(id,quantity);
+    }
 }

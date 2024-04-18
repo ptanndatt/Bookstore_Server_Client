@@ -12,7 +12,6 @@ public interface SaleManagementDao {
     boolean deleteAllBillPending();
     boolean deleteAllDetailBillPending();
     boolean deleteBillPendingById(String id);
-//    boolean deleteDetailBillPending();
     boolean addBill(Bill bill);
     boolean addDetailBill(DetailsBill detailsBill);
 
@@ -22,5 +21,6 @@ public interface SaleManagementDao {
     boolean deleteDetailsBillPendingById(String id);
     List<BillPending> getAllBillPending();
     List<DetailsBillPending> getAllDetailsBillPending();
+    Bill findBillById(String id);
 
 }

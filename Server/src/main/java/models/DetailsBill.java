@@ -25,5 +25,11 @@ public class DetailsBill {
     private double price;
     private double total;
 
-
+    public DetailsBill(Bill bill, Product product, int quantity, double price, double total) {
+        this.bill = bill;
+        this.product = product;
+        this.quantity = quantity;
+        this.price = price;
+        this.total = total;
+    }
 }

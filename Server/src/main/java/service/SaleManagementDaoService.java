@@ -2,7 +2,9 @@ package service;
 
 import dao.SaleManagementDao;
 import dao.impl.SaleManagementDaoImpl;
+import models.Bill;
 import models.BillPending;
+import models.DetailsBill;
 import models.DetailsBillPending;
 
 import java.util.List;
@@ -35,5 +37,14 @@ public class SaleManagementDaoService {
     }
     public boolean deleteAllDetailBillPending(){
         return dao.deleteAllDetailBillPending();
+    }
+    public boolean addBill(Bill bill){
+        return dao.addBill(bill);
+    }
+    public Bill getBillById(String idBill){
+        return dao.findBillById(idBill);
+    }
+    public boolean addDetailsBill(DetailsBill detailsBill){
+        return dao.addDetailBill(detailsBill);
     }
 }
