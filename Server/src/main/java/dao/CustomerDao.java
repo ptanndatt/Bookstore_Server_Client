@@ -10,4 +10,5 @@ public interface CustomerDao {
     boolean deleteCustomer(String customerID);
     List<Customer> getAllCustomers();
     List<Customer> findCustomerByText(String text);
+    Customer getCustomerByID(String customerID);
 }

@@ -1,6 +1,8 @@
 package views;
 
+import controller.MainController;
 import controller.MenuItem;
+import models.Employee;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -37,12 +39,14 @@ public class ManagerHomeView extends JFrame {
     private JPanel paneCu;
     private JLabel lbID;
     private JLabel lbName;
-
-
+    private Employee employee;
+    private MainController mainController;
     private JLabel lblDate;
 
 
-    public ManagerHomeView() {
+    public ManagerHomeView(Employee e) {
+        this.employee = e;
+        mainController = new MainController();
         setTitle("Quản trị");
         setSize(new Dimension(871, 473));
         setLocationRelativeTo(null);
@@ -81,7 +85,16 @@ public class ManagerHomeView extends JFrame {
         ImageIcon iconDX = new ImageIcon(getClass().getResource("/icons/DX.png"));
 
         ImageIcon iconBH = new ImageIcon(getClass().getResource("/icons/banhang.png"));
+        MenuItem QLBH = new MenuItem(iconBH, "Quản lý bán hàng", new ActionListener() {
 
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+
+                switchToPanel(new SaleManagerView(employee));
+
+            }
+        });
         MenuItem subQLLoaiSanPham = new MenuItem(iconSubMenu, "Loại sản phẩm", new ActionListener() {
 
             @Override
@@ -158,8 +171,7 @@ public class ManagerHomeView extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
-//                switchToPanel(new KhuyenMaiView());
+                switchToPanel(new PromotionView());
             }
         });
         MenuItem QLHD = new MenuItem(iconHD, "Quản lý hóa đơn", new ActionListener() {
@@ -229,7 +241,8 @@ public class ManagerHomeView extends JFrame {
         MenuItem subCaiDatHDSD = new MenuItem(iconSubMenu, "Hướng dẫn sử dụng", null);
         MenuItem CaiDat = new MenuItem(iconSetting, "Cài đặt", null, subGiaoDien, subCaiDatDMK);
 
-        addMenu(QLSP, QLNV, QLKH, KM, QLHD, ThongKe, CaiDat, DangXuat);
+        addMenu(QLSP,QLBH, QLNV, QLKH, KM, QLHD, ThongKe, CaiDat, DangXuat);
+        QLBH.setBackground(new Color(153, 255, 255));
         QLSP.setBackground(new Color(153, 255, 255));
         QLNV.setBackground(new Color(153, 255, 255));
         QLKH.setBackground(new Color(153, 255, 255));
@@ -268,10 +281,10 @@ public class ManagerHomeView extends JFrame {
         jScrollPane1 = new JScrollPane();
         menus = new JPanel();
         panelBody = new JPanel();
-        lbID = new JLabel();
-//        lbID.setFont(new Font("Arial", Font.ITALIC, 15));
-        lbName = new JLabel();
-//        lbTen.setFont(new Font("Arial", Font.ITALIC, 15));
+        lbID = new JLabel(": " + employee.getIdEmployee());
+        lbID.setFont(new Font("Arial", Font.ITALIC, 15));
+        lbName = new JLabel(": " + employee.getName());
+        lbName.setFont(new Font("Arial", Font.ITALIC, 15));
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(": dd/MM/yyyy");
         String dateTiemString = now.format(formatter);

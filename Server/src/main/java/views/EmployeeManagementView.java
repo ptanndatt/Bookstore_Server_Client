@@ -2,13 +2,11 @@ package views;
 
 import com.toedter.calendar.JDateChooser;
 import controller.MainController;
-import dao.impl.AccountDaoImpl;
-import dao.impl.EmployeeDaoImpl;
-import dao.impl.RoleDaoImpl;
 import models.Account;
 import models.Employee;
 import models.Role;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import util.DialogUtils;
 import util.GeneratorIDAuto;
 
 import javax.swing.*;
@@ -29,7 +27,8 @@ import static javax.swing.JColorChooser.showDialog;
 
 public class EmployeeManagementView extends JPanel implements KeyListener, MouseListener, ActionListener {
 
-    private static final int ROLE = 0;
+
+
     private JDateChooser chooserNgaySinh;
     private JTextField txtTenNV;
     private JTextField txtsdt;
@@ -48,7 +47,7 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
     private JLabel lbTimKiem;
     private JRadioButton rbNam;
     private JRadioButton rbNu;
-    private JComboBox<Object> cbTrangThai, cbChucVu;
+    private JComboBox<Object> cbTrangThai,cbChucVu;
     private JLabel lbChucVu;
     private JLabel lbTrangThai;
     private JTable tableNhanVien;
@@ -75,14 +74,15 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
     private GeneratorIDAuto autoID;
 
     private JTabbedPane tabbedPane;
-
     public EmployeeManagementView() {
         dfNgaySinh = new SimpleDateFormat("dd/MM/yyyy");
-        mainController = new MainController();
-        autoID = new GeneratorIDAuto();
+        mainController=new MainController();
+        autoID=new GeneratorIDAuto();
         Employee employee = new Employee();
-        Role role = new Role();
+        Role role=new Role();
         Account account = new Account();
+        tbChucVu = new JTable();
+        modelChucVu = new DefaultTableModel();
         setLayout(new BorderLayout());
         JPanel pnNouth = new JPanel(new BorderLayout());
         JPanel pnSounth = new JPanel(new BorderLayout());
@@ -114,9 +114,9 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         lbNgaySinh = new JLabel("Ngày sinh:");
         txtID = new JTextField();
         txtID.setEditable(false);
-        cbChucVu = new JComboBox<>();
+        cbChucVu=new JComboBox<>();
         cbTrangThai = new JComboBox<Object>(new Object[]{"Đang làm việc", "Đã nghỉ việc"});
-        btnMoBangThemChucVu = new JButton("THÊM CHỨC VỤ MỚI");
+        btnMoBangThemChucVu=new JButton("THÊM CHỨC VỤ MỚI");
 
         chooserNgaySinh = new JDateChooser();
         chooserNgaySinh.getCalendarButton().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -195,6 +195,11 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
                 return false; // Không cho phép chỉnh sửa các ô trong bảng
             }
         };
+//Tạo bangr thêm chức vụ
+        modelChucVu.addColumn("ID");
+        modelChucVu.addColumn("Tên chức vụ");
+        tbChucVu.setModel(modelChucVu);
+
         tableNhanVien = new JTable();
         modelNhanVien.addColumn("ID nhân sự");
         modelNhanVien.addColumn("Tên nhân sự");
@@ -209,38 +214,6 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         JScrollPane scrollPane = new JScrollPane(tableNhanVien);
         scrollPane.setBorder(BorderFactory.createTitledBorder("Danh sách nhân sự"));
         pnSounth.add(scrollPane, BorderLayout.CENTER);
-        //Cửa số thêm chức vụ
-        JPanel pnNhapChucVu = new JPanel(new GridLayout(2, 1, 10, 10));
-        JPanel pnButton = new JPanel(new GridLayout(1, 4, 5, 5));
-        lbIdChucVu = new JLabel("ID:");
-        lbTenChucVu = new JLabel("Tên chức vụ:");
-        txtIdChucVu = new JTextField();
-        txtIdChucVu.setEditable(false);
-        txtTenChucVu = new JTextField();
-        pnNhapChucVu.add(lbIdChucVu);
-        pnNhapChucVu.add(txtIdChucVu);
-        pnNhapChucVu.add(lbTenChucVu);
-        pnNhapChucVu.add(txtTenChucVu);
-        //Tạo bảng chức vụ trong cửa sổ
-        tbChucVu = new JTable();
-        modelChucVu = new DefaultTableModel();
-        modelChucVu.addColumn("ID");
-        modelChucVu.addColumn("Tên chức vụ");
-        tbChucVu.setModel(modelChucVu);
-        JScrollPane scrollTbChucVu = new JScrollPane(tbChucVu);
-        btnThemChucVu = new JButton("THÊM");
-        btnXoaChucVu = new JButton("XÓA");
-        pnButton.add(btnThemChucVu);
-        pnButton.add(btnXoaChucVu);
-        JPanel pnChucVu = new JPanel(new BorderLayout());
-        pnChucVu.add(pnNhapChucVu, BorderLayout.NORTH);
-        pnChucVu.add(scrollTbChucVu, BorderLayout.CENTER);
-        pnChucVu.add(pnButton, BorderLayout.SOUTH);
-
-
-        frameThemChucVu = new JFrame();
-        dlogThemChucVu = new JDialog(frameThemChucVu, "CHỨC VỤ", null);
-        dlogThemChucVu.add(pnChucVu);
 
         txtID.setToolTipText("ID + Date + XXXX");
         txtTenNV.setToolTipText("Chỉ nhận chữ");
@@ -259,7 +232,7 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         btnXemTatCa.addActionListener(this);
         btnXuatExecl.addActionListener(this);
         btnMoBangThemChucVu.addActionListener(this);
-        btnThemChucVu.addActionListener(this);
+
         tableNhanVien.addMouseListener(this);
         tableNhanVien.addKeyListener(this);
         txtTimKiem.addKeyListener(this);
@@ -285,65 +258,154 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         loadDataRoleTabble();
         loadData();
     }
+    private void showAddPositionDialog() {
+        loadDataRoleTabble();
+        JDialog dialog = new JDialog();
+        dialog.setTitle("Thêm chức vụ");
+        dialog.setSize(400, 300);
+        dialog.setLocationRelativeTo(null);
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        dialog.setLayout(new BorderLayout());
 
-    private void addRole() {
+        JPanel pnCenter = new JPanel(new BorderLayout());
+
+        JLabel lblTenChucVu = new JLabel("Tên chức vụ:");
+        JTextField txtTenChucVu = new JTextField();
+        txtTenChucVu.setColumns(15);
+
+        JPanel pnInput = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(10, 10, 10, 10);
+        pnInput.add(lblTenChucVu, gbc);
+        gbc.gridx = 1;
+        gbc.gridwidth = 2;
+        pnInput.add(txtTenChucVu, gbc);
+
+        pnCenter.add(pnInput, BorderLayout.NORTH);
+
+
+        JScrollPane scrollTbChucVu = new JScrollPane(tbChucVu);
+        pnCenter.add(scrollTbChucVu, BorderLayout.CENTER);
+
+        JPanel pnBottom = new JPanel(new BorderLayout());
+
+        JPanel pnButtons = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        JButton btnAdd = new JButton("Thêm");
+        JButton btnEdit = new JButton("Sửa");
+        JButton btnDelete = new JButton("Xóa");
+        JButton btnCancel = new JButton("Hủy");
+
+        pnButtons.add(btnAdd);
+//        pnButtons.add(btnEdit);
+//        pnButtons.add(btnDelete);
+        pnButtons.add(btnCancel);
+
+        pnBottom.add(pnButtons, BorderLayout.SOUTH);
+
+        btnAdd.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String roleName = txtTenChucVu.getText();
+                if (roleName.isEmpty()) {
+                    DialogUtils.showErrorMessage(dialog, "Tên chức vụ không được để trống");
+                    return;
+                }
+
+                Role role = new Role(roleName);
+                mainController.addRole(role);
+                modelChucVu.addRow(new Object[]{role.getIdRole(), role.getRoleName()});
+                loadComboxBoxRole();
+                loadDataRoleTabble();
+                txtTenChucVu.setText("");
+                DialogUtils.showSuccessMessage(dialog, "Thêm chức vụ thành công");
+                dialog.dispose();
+            }
+        });
+
+        btnCancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dialog.dispose();
+            }
+        });
+        btnDelete.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = tbChucVu.getSelectedRow();
+                if (row == -1) {
+                    DialogUtils.showErrorMessage(dialog, "Vui lòng chọn chức vụ cần xóa");
+                    return;
+                }
+                String idRole = modelChucVu.getValueAt(row, 0).toString();
+                mainController.deleteRole(idRole);
+                modelChucVu.removeRow(row);
+                loadComboxBoxRole();
+                loadDataRoleTabble();
+                DialogUtils.showSuccessMessage(dialog, "Xóa chức vụ thành công");
+            }
+        });
+        dialog.add(pnCenter, BorderLayout.CENTER);
+        dialog.add(pnBottom, BorderLayout.SOUTH);
+        loadDataRoleTabble();
+        dialog.setVisible(true);
+    }
+    private void addRole(){
         String tenChucVu = txtTenChucVu.getText();
-        Role role = new Role(tenChucVu, ROLE);
+        Role role=new Role(tenChucVu);
         mainController.addRole(role);
-        JOptionPane.showMessageDialog(this, "Thêm thành công");
-        modelChucVu.addRow(new Object[]{role.getIdRole(), role.getRoleName()});
+        JOptionPane.showMessageDialog(this,"Thêm thành công");
+        modelChucVu.addRow(new Object[] {role.getIdRole(),role.getRoleName()});
         loadComboxBoxRole();
         loadDataRoleTabble();
         txtTenChucVu.setText("");
     }
-
     private void loadDataRoleTabble() {
         modelChucVu.setRowCount(0);
-        for (Role role : mainController.getAllRole()) {
-            modelChucVu.addRow(new Object[]{role.getIdRole(), role.getRoleName()
+        for (Role role : mainController.getAllRole() ) {
+            modelChucVu.addRow(new Object[] { role.getIdRole(),role.getRoleName()
             });
+
         }
     }
-
     private void addEmployee() {
 
         String id = txtID.getText();
         String ten = txtTenNV.getText();
-        String email = txtEmail.getText();
-        String sdt = txtsdt.getText();
-        String diaChi = txtDiaChi.getText();
+        String email= txtEmail.getText();
+        String sdt=txtsdt.getText();
+        String diaChi=txtDiaChi.getText();
         java.util.Date date = chooserNgaySinh.getDate();
         Date ngaySinh = new Date(date.getYear(), date.getMonth(), date.getDate());
-        String GioiTinh = rbNam.isSelected() ? "Nam" : "Nữ";
-        String trangThai = cbTrangThai.getSelectedItem().toString();
+        String GioiTinh=rbNam.isSelected()?"Nam":"Nữ";
+        String trangThai=cbTrangThai.getSelectedItem().toString();
 
-        String chucVuSelected = cbChucVu.getSelectedItem().toString();
-        Role chucVu = mainController.findRoleByText(chucVuSelected);
+        String chucVuSelected=cbChucVu.getSelectedItem().toString();
+        Role chucVu= mainController.findRoleByText(chucVuSelected);
         Date ngayLap = new Date(System.currentTimeMillis());
-        String matkhau = "1111";
-        Employee employee = new Employee(id, ten, sdt, diaChi, email, ngaySinh, GioiTinh, trangThai, chucVu);
+        String matkhau="1111";
+        Employee employee = new Employee(id,ten,sdt,diaChi,email,ngaySinh,GioiTinh,trangThai,chucVu);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
         String hasdPassword = passwordEncoder.encode(matkhau);
-        Account tk = new Account(employee, matkhau, ngayLap);
+        Account tk=new Account(employee,matkhau,ngayLap);
         System.out.println(hasdPassword);
 
-        if (valiDate()) {
+        if(valiDate()) {
             mainController.addEmployee(employee);
             mainController.addAccount(tk);
-            modelNhanVien.addRow(new Object[]{employee.getIdEmployee(), ten, sdt, email, diaChi, dfNgaySinh.format(employee.getBirth()), employee.getGender(), chucVu.getRoleName(), trangThai});
+            modelNhanVien.addRow(new Object[] {employee.getIdEmployee(), ten, sdt,email, diaChi,dfNgaySinh.format(employee.getBirth()),employee.getGender(),chucVu.getRoleName(),trangThai });
             JOptionPane.showMessageDialog(this, "Thêm thành công");
         }
     }
-
     private void loadData() {
         modelNhanVien.setRowCount(0);
-        for (Employee employee : mainController.findEmployeeByRoleCode(ROLE)) {
-            modelNhanVien.addRow(new Object[]{employee.getIdEmployee(), employee.getName(), employee.getPhone(), employee.getEmail(), employee.getAddress(), dfNgaySinh.format(employee.getBirth()), employee.getGender(), employee.getRole().getRoleName(), employee.getStatus()
+        for (Employee employee : mainController.getAllEmployees()) {
+            modelNhanVien.addRow(new Object[] { employee.getIdEmployee(), employee.getName(),employee.getPhone(), employee.getEmail(),employee.getAddress(),dfNgaySinh.format(employee.getBirth()),employee.getGender(),employee.getRole().getRoleName(),employee.getStatus()
             });
 
         }
     }
-
     private void updateEmployee() {
         String id = modelNhanVien.getValueAt(tableNhanVien.getSelectedRow(), 0).toString();
         String ten = txtTenNV.getText();
@@ -352,12 +414,12 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         String email = txtEmail.getText();
         java.util.Date date = chooserNgaySinh.getDate();
         Date ngaySinh = new Date(date.getYear(), date.getMonth(), date.getDate());
-        String gioiTinh = rbNam.isSelected() ? "Nam" : "Nữ";
-        String trangThaiValue = cbTrangThai.getSelectedItem().toString();
-        String chucVuSelected = cbChucVu.getSelectedItem().toString();
+        String gioiTinh=rbNam.isSelected()?"Nam":"Nữ";
+        String trangThaiValue=cbTrangThai.getSelectedItem().toString();
+        String chucVuSelected =cbChucVu.getSelectedItem().toString();
         Role chucVu = mainController.findRoleByText(chucVuSelected);
-        Employee employee = new Employee(id, ten, soDienThoai, diaChi, email, ngaySinh, gioiTinh, trangThaiValue, chucVu);
-        if (valiDate()) {
+        Employee employee=new Employee(id,ten,soDienThoai,diaChi,email,ngaySinh,gioiTinh,trangThaiValue,chucVu);
+        if(valiDate()) {
             try {
                 mainController.updateEmployee(employee);
                 loadData();
@@ -369,26 +431,26 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         }
 
     }
-
     public boolean valiDate() {
 
         String ten = txtTenNV.getText().trim();
 
 
         Boolean gioiTinh;
-        if (rbNam.isSelected() || rbNu.isSelected()) {
-            gioiTinh = true;
-        } else {
-            gioiTinh = false;
+        if(rbNam.isSelected() || rbNu.isSelected()) {
+            gioiTinh=true;
+        }
+        else {
+            gioiTinh=false;
         }
         java.util.Date ngaySinh = chooserNgaySinh.getDate();
-        java.util.Date ngayHienTai = new java.util.Date();
+        java.util.Date ngayHienTai=new java.util.Date();
         String diaChi = txtDiaChi.getText().trim();
         String email = txtEmail.getText().trim();
         String soDienThoai = txtsdt.getText().trim();
 
 
-        if (ten.equals("") || diaChi.equals("") || email.equals("") || soDienThoai.equals("")) {
+        if(ten.equals("") || diaChi.equals("")|| email.equals("") || soDienThoai.equals("")) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập thông tin đầy đủ!", "Thông báo",
                     JOptionPane.WARNING_MESSAGE);
             txtTenNV.requestFocus();
@@ -417,21 +479,23 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
             txtEmail.selectAll();
             return false;
         }
-        if (!(ngaySinh != null && (ngayHienTai.getYear() - ngaySinh.getYear() > 18))) {
+        if (!(ngaySinh!=null  && (ngayHienTai.getYear()-ngaySinh.getYear()>18))) {
             JOptionPane.showMessageDialog(this, "Nhân viên chưa đủ 18 tuổi", "Thông báo",
                     JOptionPane.WARNING_MESSAGE);
             chooserNgaySinh.requestFocus();
 
             return false;
         }
-        if (!(soDienThoai.length() > 0 && soDienThoai.matches("^(0|\\+84)[0-9]{9}$"))) {
+        if(!(soDienThoai.length()>0 && soDienThoai.matches("^(0|\\+84)[0-9]{9}$")))
+        {
             JOptionPane.showMessageDialog(this, "Số điện thoại gồm 10 số và bắt đầu bằng 0 hoặc +84", "Thông báo",
                     JOptionPane.WARNING_MESSAGE);
             txtsdt.requestFocus();
             txtsdt.selectAll();
             return false;
         }
-        if (gioiTinh == false) {
+        if(gioiTinh==false)
+        {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn giới tính", "Thông báo",
                     JOptionPane.WARNING_MESSAGE);
 
@@ -439,21 +503,12 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         }
         return true;
     }
-
-    private void showDialog(JFrame FrameParent, JDialog dialog) {
-
-        dialog.pack();
-        dialog.setLocationRelativeTo(null);
-        dialog.setVisible(true);
-    }
-
     private void loadComboxBoxRole() {
         cbChucVu.removeAllItems();
-        for (Role role : mainController.getRolesByRoleCode(ROLE)) {
+        for (Role role : mainController.getAllRole()) {
             cbChucVu.addItem(role.getRoleName());
         }
     }
-
     private void reload() {
         txtID.setText("");
         txtTenNV.setText("");
@@ -468,23 +523,22 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         txtTenNV.requestFocus();
         loadData();
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         Object o = e.getSource();
-        if (o.equals(btnMoBangThemChucVu)) {
-            showDialog(frameThemChucVu, dlogThemChucVu);
+        if(o.equals(btnMoBangThemChucVu)) {
+            showAddPositionDialog();
         }
-        if (o.equals(btnThemChucVu)) {
+        if(o.equals(btnThemChucVu)) {
             addRole();
         }
-        if (o.equals(btnThemNV)) {
+        if(o.equals(btnThemNV)) {
             addEmployee();
         }
-        if (o.equals(btnCapNhatNV)) {
+        if(o.equals(btnCapNhatNV)) {
             updateEmployee();
         }
-        if (o.equals(btnLamMoi)) {
+        if(o.equals(btnLamMoi)) {
             reload();
         }
     }
@@ -512,19 +566,19 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         txtsdt.setText(modelNhanVien.getValueAt(row, 2).toString());
         txtEmail.setText(modelNhanVien.getValueAt(row, 3).toString());
         txtDiaChi.setText(modelNhanVien.getValueAt(row, 4).toString());
-        String ngaySinh = modelNhanVien.getValueAt(row, 5).toString();
+        String ngaySinh=modelNhanVien.getValueAt(row, 5).toString();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         java.util.Date valueNgaySinh = null;
         try {
-            valueNgaySinh = dateFormat.parse(ngaySinh);
+            valueNgaySinh =dateFormat.parse(ngaySinh);
         } catch (ParseException ex) {
             throw new RuntimeException(ex);
         }
         chooserNgaySinh.setDate(valueNgaySinh);
-        rbNam.setSelected(modelNhanVien.getValueAt(row, 6).toString() == "Nam");
-        rbNu.setSelected(modelNhanVien.getValueAt(row, 6).toString() == "Nữ");
-        cbChucVu.setSelectedItem(modelNhanVien.getValueAt(row, 7).toString());
-        cbTrangThai.setSelectedItem(modelNhanVien.getValueAt(row, 8).toString());
+        rbNam.setSelected(modelNhanVien.getValueAt(row, 6).toString()=="Nam");
+        rbNu.setSelected(modelNhanVien.getValueAt(row,6).toString()=="Nữ");
+        cbChucVu.setSelectedItem(modelNhanVien.getValueAt(row,7).toString());
+        cbTrangThai.setSelectedItem(modelNhanVien.getValueAt(row,8).toString());
     }
 
     @Override
@@ -546,13 +600,4 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
     public void mouseExited(MouseEvent e) {
 
     }
-
-//    public static void main(String[] args) {
-//        JFrame frame = new JFrame();
-//        frame.add(new EmployeeManagementView());
-//        frame.setSize(1000, 700);
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setLocationRelativeTo(null);
-//        frame.setVisible(true);
-//    }
 }

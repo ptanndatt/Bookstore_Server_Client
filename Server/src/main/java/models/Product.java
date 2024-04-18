@@ -18,6 +18,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import util.ProductStatusEnum;
 
+import java.util.Set;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,6 +30,7 @@ public abstract class Product {
     @Id
     @Column(name = "productId")
     protected String productId;
+    @Column(name = "productName",columnDefinition = "NVARCHAR(255)")
     protected String productName;
     @ManyToOne
     @JoinColumn(name = "productTypeId")
@@ -40,10 +43,15 @@ public abstract class Product {
     protected ProductStatusEnum status;
     protected int quantity;
     protected double importPrice;
-    protected double discountPrice;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="promotionId")
-    protected Promotion promotion;
+    @OneToOne(mappedBy = "product")
+    private ProductSale productSale;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private Set<DetailsBillPending> detailsBillPendings;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private Set<DetailsBill> detailsBills;
+    public Product(String productId) {
+        this.productId = productId;
+    }
 
     public abstract double tax();
 

@@ -15,6 +15,7 @@ import jakarta.persistence.EntityManager;
 import models.*;
 import util.HibernateUtil;
 import views.LoginView;
+import views.ManagerHomeView;
 
 import java.awt.*;
 
@@ -68,6 +69,8 @@ public class Main {
             @Override
             public void run() {
                 LoginView view = new LoginView();
+//                Employee employee = new Employee();
+//                ManagerHomeView view = new ManagerHomeView(employee);
                 view.setVisible(true);
             }
         });

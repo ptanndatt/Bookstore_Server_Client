@@ -26,6 +26,7 @@ import java.util.List;
 public class Category {
     @Id
     private String idCategory;
+    @Column(name = "categoryName",columnDefinition = "NVARCHAR(255)")
     private String categoryName;
     private int bookQuantity;
     private String description;
