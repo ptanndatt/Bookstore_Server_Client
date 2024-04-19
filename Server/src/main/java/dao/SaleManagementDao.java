@@ -5,6 +5,8 @@ import models.BillPending;
 import models.DetailsBill;
 import models.DetailsBillPending;
 
+import javax.xml.crypto.Data;
+import java.util.Date;
 import java.util.List;
 
 public interface SaleManagementDao {
@@ -34,5 +36,31 @@ public interface SaleManagementDao {
 
     List<Object[]> getAllBill();
 
-    List<Object[]> loadDataProduct();
+    List<Object[]> loadDataProduct(String id);
+
+    int sumTotalBill();
+
+    List<Object[]> findBillByCustomerSDT(String sdt);
+
+    List<Object[]> findProductBestSeller(Date from, Date to);
+
+    List<Object[]> findProductWorstSeller(Date from, Date to);
+
+    double sumTotalAmount(Date from, Date to);
+
+    int sumTotalBillDate(Date from, Date to);
+
+    double sumProfit(Date from, Date to);
+
+    double sumTotalBillValue(Date from, Date to);
+
+    List<Object[]> sumTotalBillValueByProduct(Date from, Date to);
+
+    List<Object[]> sumTotalBillValueDoanhThu(Date from, Date to);
+
+    List<Object[]> sumTotalBillValueByDate(Date from, Date to);
+
+    List<Object[]> sumTotalBillValueByDateLoiNhuan(Date from, Date to);
+    
+    List<Object[]> findEmployeeBestSeller(Date from, Date to);
 }

@@ -43,6 +43,9 @@ public class ManagerHomeView extends JFrame {
     private MainController mainController;
     private JLabel lblDate;
 
+//    public static void main(String[] args) {
+//        new ManagerHomeView(new Employee()).setVisible(true);
+//    }
 
     public ManagerHomeView(Employee e) {
         this.employee = e;
@@ -179,6 +182,7 @@ public class ManagerHomeView extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
+                switchToPanel(new BillsManagement());
 //                switchToPanel(new QuanLyHoaDonView());
             }
         });
@@ -187,7 +191,7 @@ public class ManagerHomeView extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                switchToPanel(new ManagerStatistics());
 //                switchToPanel(new ThongKeDoanhThuNhanVienView());
 
             }
@@ -241,7 +245,7 @@ public class ManagerHomeView extends JFrame {
         MenuItem subCaiDatHDSD = new MenuItem(iconSubMenu, "Hướng dẫn sử dụng", null);
         MenuItem CaiDat = new MenuItem(iconSetting, "Cài đặt", null, subGiaoDien, subCaiDatDMK);
 
-        addMenu(QLSP,QLBH, QLNV, QLKH, KM, QLHD, ThongKe, CaiDat, DangXuat);
+        addMenu(QLSP, QLBH, QLNV, QLKH, KM, QLHD, ThongKe, CaiDat, DangXuat);
         QLBH.setBackground(new Color(153, 255, 255));
         QLSP.setBackground(new Color(153, 255, 255));
         QLNV.setBackground(new Color(153, 255, 255));
