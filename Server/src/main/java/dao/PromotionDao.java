@@ -10,5 +10,5 @@ public interface PromotionDao {
     boolean updatePromotion(Promotion promotion);
     boolean deletePromotion(String id);
     List<Promotion> getAllPromotion();
-    Promotion findPromotionByText(String text);
+    List<Promotion> findPromotionByText(String text);
 }

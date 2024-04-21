@@ -4,7 +4,6 @@ import java.io.*;
 import java.net.Socket;
 
 
-
 public class ClientThread extends Thread {
     private Socket socket;
 
@@ -26,7 +25,7 @@ public class ClientThread extends Thread {
             do {
                 text = console.readLine();
                 writer.println(text);
-                
+
                 String serverText = reader.readLine();
                 System.out.println(serverText);
 

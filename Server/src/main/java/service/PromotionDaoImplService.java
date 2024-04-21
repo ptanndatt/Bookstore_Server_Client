@@ -19,7 +19,7 @@ public class PromotionDaoImplService {
     public boolean deletePromotion(String id) {
         return promotionDao.deletePromotion(id);
     }
-    public Promotion findPromotionByText(String text) {
+    public List<Promotion> findPromotionByText(String text) {
         return promotionDao.findPromotionByText(text);
     }
     public boolean updatePromotion(Promotion promotion) {

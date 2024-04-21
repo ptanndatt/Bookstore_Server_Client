@@ -22,7 +22,16 @@ public class ProductSaleDaoImplService {
     public boolean deleteProductSale(String productSale) {
         return productSaleDao.deleteProductSale(productSale);
     }
+    public boolean deleteProductSaleByPromotionId(String promotionId) {
+        return productSaleDao.deleteProductSaleByPromotionId(promotionId);
+    }
     public ProductSale getProductSale(String productSaleId) {
         return productSaleDao.getProductSaleById(productSaleId);
+    }
+    public List<ProductSale> getProductSaleByPromotionId(String productSaleId) {
+        return productSaleDao.getProductSaleByPromotionId(productSaleId);
+    }
+    public List<ProductSale> findProductSaleByText(String text) {
+        return productSaleDao.findProductSaleByText(text);
     }
 }

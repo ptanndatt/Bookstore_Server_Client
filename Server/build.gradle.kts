@@ -46,6 +46,10 @@ dependencies {
 // https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api
     implementation("javax.xml.bind:jaxb-api:2.3.1")
 
+    implementation( "org.netbeans.external:AbsoluteLayout:RELEASE210")
+    // https://mvnrepository.com/artifact/org.apache.poi/poi
+    implementation ("org.apache.poi:poi:5.2.5")
+
 }
 
 group = "vn.N10_PTUD_v1"

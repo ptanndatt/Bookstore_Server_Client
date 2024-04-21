@@ -3,7 +3,6 @@ package dao.impl;
 import dao.ProductSaleDao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
-import models.Product;
 import models.ProductSale;
 import util.HibernateUtil;
 
@@ -51,7 +50,22 @@ public class ProductSaleDaoImpl implements ProductSaleDao {
     public boolean deleteProductSale(String id) {
         EntityTransaction tr = em.getTransaction();
         try {
+            tr.begin();
             em.createQuery("DELETE FROM ProductSale ps WHERE ps.product.id= :id")
+                    .setParameter("id", id).executeUpdate();;
+            tr.commit();
+            return true;
+        } catch (Exception e) {
+            tr.rollback();
+            e.printStackTrace();
+            return false;
+        }
+    }
+    @Override
+    public boolean deleteProductSaleByPromotionId(String id) {
+        EntityTransaction tr = em.getTransaction();
+        try {
+            em.createQuery("DELETE FROM ProductSale ps WHERE ps.promotion.id= :id")
                     .setParameter("id", id)
                     .executeUpdate();
             tr.commit();
@@ -64,7 +78,6 @@ public class ProductSaleDaoImpl implements ProductSaleDao {
             return false;
         }
     }
-
     @Override
     public ProductSale getProductSaleById(String id) {
         EntityTransaction tr = em.getTransaction();
@@ -75,5 +88,18 @@ public class ProductSaleDaoImpl implements ProductSaleDao {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    @Override
+    public List<ProductSale> getProductSaleByPromotionId(String id) {
+        return em.createQuery("SELECT d FROM ProductSale d WHERE d.promotion.id=:id", ProductSale.class)
+                .setParameter("id", id ) // %text% for similarity
+                .getResultList();
+    }
+    @Override
+    public List<ProductSale> findProductSaleByText(String text) {
+        return em.createQuery("SELECT p from ProductSale p where p.promotion.id LIKE:text OR p.product.id LIKE :text OR p.product.productName LIKE :text", ProductSale.class)
+                .setParameter("text", "%" + text + "%") // %text% for similarity
+                .getResultList();
     }
 }

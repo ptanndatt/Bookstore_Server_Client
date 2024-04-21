@@ -16,6 +16,7 @@ import models.*;
 import util.HibernateUtil;
 import views.LoginView;
 import views.ManagerHomeView;
+import views.MenuDemo;
 
 import java.awt.*;
 
@@ -68,9 +69,10 @@ public class Main {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                LoginView view = new LoginView();
+//                LoginView view = new LoginView();
 //                Employee employee = new Employee();
 //                ManagerHomeView view = new ManagerHomeView(employee);
+                MenuDemo view = new MenuDemo();
                 view.setVisible(true);
             }
         });

@@ -23,4 +23,5 @@ public interface SaleManagementDao {
     List<DetailsBillPending> getAllDetailsBillPending();
     Bill findBillById(String id);
 
+    List<BillPending> findBillPendingByText(String text);
 }

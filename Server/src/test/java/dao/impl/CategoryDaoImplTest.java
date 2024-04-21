@@ -12,29 +12,25 @@ import org.junit.jupiter.api.TestInstance;
 import util.log.Log;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class CategoryDaoImplTest {
 
     private MainController mainController;
-
+    private ProductSaleDao productSaleDao;
     @BeforeAll
     void setUp() {
         mainController = new MainController();
-
+//        productSaleDao = new ProductSaleDaoImpl();
     }
     @Test
     void getProductSales() {
-//        Customer customer=mainController.findCustomerById("C20240414195510");
-//        Employee employee=mainController.findEmployeeById("E20240415161112");
-//        Bill bill = new Bill("B123", Date.valueOf("2023-05-06"),customer,employee,10000,20000,1000);
-//        Bill bill = mainController.getBillById("B123");
-        Product product = mainController.getProductById("SP20240415212327");
 
-        boolean result= mainController.updateProductQuantity("SP20240415212327",15);
-        System.out.println(product);
-        System.out.println(result);
+
+        List<BillPending> promotions = mainController.findBillPendingByText("03");
+        System.out.println(promotions);
     }
 
     @AfterAll

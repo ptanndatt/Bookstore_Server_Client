@@ -13,23 +13,15 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -39,6 +31,9 @@ import controller.MainController;
 import models.Customer;
 
 import com.toedter.calendar.JDateChooser;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import util.GeneratorIDAuto;
 
 
@@ -244,7 +239,11 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
         txtTenKH.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                txtId.setText(autoID.autoID("C"));
+                int row = tableKH.getSelectedRow();
+                if(row==-1)
+                    txtId.setText(autoID.autoID("KH"));
+                else
+                    txtId.setText(modelKhachHang.getValueAt(row, 0).toString());
             }
 
             @Override
@@ -266,6 +265,45 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
             }
         } else {
             loadData();
+        }
+    }
+    private void exportExecl(String filePath) {
+
+        try {
+            Workbook workbook = new XSSFWorkbook();
+            org.apache.poi.ss.usermodel.Sheet sheet = workbook.createSheet("Khách hàng");
+
+            Row header = sheet.createRow(0);
+            header.createCell(0).setCellValue("ID khách hàng");
+            header.createCell(1).setCellValue("Tên khách hàng");
+            header.createCell(2).setCellValue("Số điện thoại");
+            header.createCell(3).setCellValue("Email");
+            header.createCell(4).setCellValue("Địa chỉ");
+            header.createCell(5).setCellValue("Ngày sinh");
+            header.createCell(6).setCellValue("Giới tính");
+
+            int rowNum = 1;
+            for(Customer kh: mainController.getAllCustomers()) {
+                Row row = sheet.createRow(rowNum++);
+                row.createCell(0).setCellValue(kh.getIdCustomer());
+                row.createCell(1).setCellValue(kh.getName());
+                row.createCell(2).setCellValue(kh.getPhone());
+                row.createCell(3).setCellValue(kh.getEmail());
+                row.createCell(4).setCellValue(kh.getAddress());
+                row.createCell(5).setCellValue(new SimpleDateFormat("dd/MM/yyyy").format(kh.getBirth()));
+                row.createCell(6).setCellValue(kh.getGender());
+
+            }
+            // Hiển thị hộp thoại mở cửa sổ lưu tệp
+            try (FileOutputStream outputStream = new FileOutputStream(filePath)) {
+                workbook.write(outputStream);
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            JOptionPane.showMessageDialog(this, "Xuất dữ liệu thành công");
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
     private void addCustomer() {
@@ -436,6 +474,18 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
         }
         if(o.equals(btnXemTatCa)) {
             txtTimKiem.setText("");
+        }
+        if(o.equals(btnXuatExcel)){
+            JFileChooser fileChooser = new JFileChooser();
+            int returnValue = fileChooser.showOpenDialog(null);
+            if (returnValue == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = fileChooser.getSelectedFile();
+                String selectedFilePath = selectedFile.getAbsolutePath();
+                if (!selectedFilePath.toLowerCase().endsWith(".xlsx")) {
+                    selectedFilePath += ".xlsx";
+                }
+                exportExecl(selectedFilePath);
+            }
         }
     }
 

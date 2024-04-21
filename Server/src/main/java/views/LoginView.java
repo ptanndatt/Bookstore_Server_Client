@@ -23,7 +23,7 @@ public class LoginView extends JFrame implements ActionListener {
 //        jButton1.addActionListener(e -> login());
 
         setVisible(true);
-        jTextField1.setText("E20240418220925");
+        jTextField1.setText("E20240418183024");
         jPasswordField1.setText("1111");
 
 

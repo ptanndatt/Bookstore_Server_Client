@@ -149,7 +149,7 @@ public class ManagerHomeView extends JFrame {
             }
         }, subQLLoaiSanPham, subQLNhaCungCap, subQLTacGia, subQLTheLoai);
 
-        MenuItem QLNV = new MenuItem(iconNV, "Quản lý Nhân viên", new ActionListener() {
+        MenuItem QLNV = new MenuItem(iconNV, "Quản lý nhân sự", new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {

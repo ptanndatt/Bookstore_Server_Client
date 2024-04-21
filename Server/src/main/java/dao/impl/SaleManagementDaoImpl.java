@@ -7,7 +7,6 @@ import jakarta.persistence.TypedQuery;
 import models.*;
 import util.HibernateUtil;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -172,5 +171,10 @@ public class SaleManagementDaoImpl implements SaleManagementDao {
             return false;
         }
     }
-
+    @Override
+    public List<BillPending> findBillPendingByText(String text) {
+        return em.createQuery("SELECT p from BillPending p where p.customer.name LIKE:text OR p.customer.phone LIKE :text OR p.customer.id LIKE :text", BillPending.class)
+                .setParameter("text", "%" + text + "%") // %text% for similarity
+                .getResultList();
+    }
 }

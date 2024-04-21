@@ -12,12 +12,7 @@ import java.awt.GridLayout;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.Window.Type;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -74,7 +69,7 @@ import models.*;
 import util.GeneratorIDAuto;
 
 
-public class SaleManagerView extends JPanel implements ActionListener, MouseListener{
+public class SaleManagerView extends JPanel implements ActionListener, MouseListener,KeyListener{
     private JPanel pnLeft;
     private JPanel pnRight;
     private JTextField txtMaSP;
@@ -94,6 +89,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
     private JTextField txtThue;
     private JTextField txtCapNhatSoLuong;
     private JTextField txtTongTienHoaDon;
+    private JTextField txtTimKiemHDCho;
     private JTable tblSanPham;
     private JTable tblGioHang;
     private JTable tblkhachHang;
@@ -118,7 +114,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
     private JButton btnChonMaSanPham;
     private JButton btnCapNhatSoLuong;
     private JButton btnXacNhanCapNhat;
-    private JButton btnTaoMaHoaDon;
+    private JButton btnXemTatCaHDC;
     private DefaultTableModel modelSP;
     private DefaultTableModel modelKH;
     private DefaultTableModel modelGioHang;
@@ -373,6 +369,13 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         pnHeaderRight.add(pn2, BorderLayout.CENTER);
         pnHeaderRight.add(pnTimKiemKH, BorderLayout.SOUTH);
 
+        JPanel pnTimKiemHDC= new JPanel(new GridLayout(1,4,5,5));
+        txtTimKiemHDCho= new JTextField();
+        JLabel lbTimKiemHDC= new JLabel("Tìm kiếm hóa đơn chờ:");
+        btnXemTatCaHDC= new JButton("Xem tất cả hóa đơn chờ");
+        pnTimKiemHDC.add(lbTimKiemHDC);
+        pnTimKiemHDC.add(txtTimKiemHDCho);
+        pnTimKiemHDC.add(btnXemTatCaHDC);
         tblHangCho = new JTable();
         modelHangCho = new DefaultTableModel(){
             @Override
@@ -400,6 +403,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
 
         pnChucNangHangCho.add(btnXoaHangCho);
         pnChucNangHangCho.add(btnLamMoiHangCho);
+        pnTblHangCho.add(pnTimKiemHDC, BorderLayout.NORTH);
         pnTblHangCho.add(scrollTblHangDoi, BorderLayout.CENTER);
         pnTblHangCho.add(pnChucNangHangCho, BorderLayout.SOUTH);
 
@@ -476,8 +480,9 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         btnXacNhanCapNhat.addActionListener(this);
         btnXemTatCaKhachHang.addActionListener(this);
         btnChonKH.addActionListener(this);
-//        btnTaoMaHoaDon.addActionListener(this);
+        btnXemTatCaHDC.addActionListener(this);
         btnXemTatCaSanPham.addActionListener(this);
+
         txtTienKhachDua.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -595,10 +600,40 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
 
             }
         });
+        txtTimKiemHDCho.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                modelHangCho.setRowCount(0);
+                handleSearchBillPending(txtTimKiemHDCho.getText().trim());
+            }
 
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                modelHangCho.setRowCount(0);
+                handleSearchBillPending(txtTimKiemHDCho.getText().trim());
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+
+            }
+        });
     loadBillPending();
     }
-
+    private void handleSearchBillPending(String cond) {
+        if (!cond.equals("")) {
+            for (BillPending billPending:mainController.findBillPendingByText(cond)) {
+                String ngayLap = new SimpleDateFormat("dd/MM/yyyy").format(billPending.getNgayLap());
+                modelHangCho.addRow(new Object[] {
+                        billPending.getBillId(), billPending.getCustomer().getName(),
+                        billPending.getCustomer().getIdCustomer(), billPending.getCustomer().getPhone(),
+                        ngayLap
+                });
+            }
+        } else {
+            loadBillPending();
+        }
+    }
     private void tinhTienTraKhach() {
         if (!txtTienKhachDua.getText().equals("")) {
             Double tienKhachDua = Double.parseDouble(txtTienKhachDua.getText());
@@ -1723,28 +1758,31 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        Object o = e.getSource();
-        if (o.equals(btnThemGioHang)) {
-            handleAddCartById();
-        }
-         if (o.equals(btnThemGioHang2)) {
-            handleAddCartBySearch();
-         }
-         if (o.equals(cbLocSanPham)) {
-            handleSelectiveProduct();
+            Object o = e.getSource();
+            if (o.equals(btnThemGioHang)) {
+                handleAddCartById();
             }
-        if (o.equals(btnXoaGioHang)) {
-            deleteCart();
-        }
-        if (o.equals(btnCapNhatSoLuong)) {
-            showDialogUpdateQuantity();
-        }
-        if (o.equals(btnLamMoiGioHang)) {
-            reloadCart();
-        }
-        if(o.equals(btnLamMoiDonHang)) {
-            handleReloadBill();
-        }
+             if (o.equals(btnThemGioHang2)) {
+                handleAddCartBySearch();
+             }
+             if (o.equals(cbLocSanPham)) {
+                handleSelectiveProduct();
+                }
+            if (o.equals(btnXoaGioHang)) {
+                deleteCart();
+            }
+            if (o.equals(btnCapNhatSoLuong)) {
+                showDialogUpdateQuantity();
+            }
+            if (o.equals(btnLamMoiGioHang)) {
+                reloadCart();
+            }
+            if(o.equals(btnLamMoiDonHang)) {
+                handleReloadBill();
+            }
+            if(o.equals(btnXemTatCaHDC)) {
+                txtTimKiemHDCho.setText("");
+            }
             if (o.equals(btnTimKiemSanPham)) {
                 showDialogSanPham();
                 loadProduct();
@@ -1796,6 +1834,21 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
             if (o.equals(btnXemTatCaSanPham)) {
                 txtTimKiemSP.setText("");
             }
+
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
 
     }
 }

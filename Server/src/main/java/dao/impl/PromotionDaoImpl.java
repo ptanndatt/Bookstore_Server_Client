@@ -5,6 +5,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 import models.Customer;
+import models.Employee;
 import models.Promotion;
 import models.Role;
 import util.HibernateUtil;
@@ -80,9 +81,10 @@ public class PromotionDaoImpl implements PromotionDao {
     }
 
     @Override
-    public Promotion findPromotionByText(String text) {
-        return em.createQuery("SELECT p from Promotion p where p.promotionName =:text", Promotion.class)
+    public List<Promotion> findPromotionByText(String text) {
+        return em.createQuery("SELECT p from Promotion p where p.promotionName LIKE:text OR p.id LIKE :text", Promotion.class)
                 .setParameter("text", "%" + text + "%") // %text% for similarity
-                .getSingleResult();
+                .getResultList();
     }
+
 }

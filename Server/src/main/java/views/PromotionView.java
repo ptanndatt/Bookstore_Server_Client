@@ -18,6 +18,7 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class PromotionView extends JPanel implements ActionListener, MouseListener, KeyListener {
@@ -30,7 +31,6 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
     private JTextField txtTimKiemKM;
     private JLabel lbTimKiemSPKM;
     private JTextField txtTimKiemSPKM;
-    private JTextField txtTimKiemSKM;
     private JLabel lbTimKiemSP;
     private JLabel lbTimKiemSach;
     private JTextField txtTimKiemSP;
@@ -133,7 +133,6 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
         btnXoaKM.setIcon(iconXoa);
         lbTimKiemSPKM = new JLabel("Tìm kiếm sản phẩm khuyến mãi:");
         txtTimKiemSPKM = new JTextField();
-        txtTimKiemSKM = new JTextField();
         lbTimKiemKM = new JLabel("Tìm kiếm khuyến mãi:");
         txtTimKiemKM = new JTextField();
 
@@ -169,7 +168,6 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
         pnKM.setBorder(BorderFactory.createTitledBorder("Thông tin khuyến mãi"));
 
         pnChucNang.add(btnThem);
-//        pnChucNang.add(btnCapNhat);
         pnChucNang.add(btnXoaKM);
         pnChucNang.add(btnLamMoi);
 
@@ -294,14 +292,12 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
 
         btnLamMoi.addActionListener(this);
         btnXoaKM.addActionListener(this);
-//        btnCapNhat.addActionListener(this);
         btnChonSP.addActionListener(this);
         btnChonSach.addActionListener(this);
         btnThem.addActionListener(this);
         tableKM.addMouseListener(this);
         txtTimKiemKM.addKeyListener(this);
         txtTimKiemSPKM.addKeyListener(this);
-        txtTimKiemSKM.addKeyListener(this);
         txtTimKiemSP.addKeyListener(this);
         txtTimKiemSach.addKeyListener(this);
         btnMoTbSP.addActionListener(this);
@@ -310,7 +306,11 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
         txtTen.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                txtID.setText(autoID.autoID("KM"));
+                int row = tableKM.getSelectedRow();
+                if(row==-1)
+                    txtID.setText(autoID.autoID("KM"));
+                else
+                    txtID.setText(modelKM.getValueAt(row, 0).toString());
             }
 
             @Override
@@ -321,13 +321,81 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
             public void changedUpdate(DocumentEvent e) {
             }
         });
+        txtTimKiemKM.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                modelKM.setRowCount(0);
+                handleSearchPromotion(txtTimKiemKM.getText().trim());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                modelKM.setRowCount(0);
+                handleSearchPromotion(txtTimKiemKM.getText().trim());
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+
+            }
+        });
+        txtTimKiemSPKM.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                modelSPKM.setRowCount(0);
+                handleSearchProductSale(txtTimKiemSPKM.getText().trim());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                modelSPKM.setRowCount(0);
+                handleSearchProductSale(txtTimKiemSPKM.getText().trim());
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+
+            }
+        });
         loadProductSale();
         loadData();
-//        LoadDataBook();
-
-//        loadSKM();
+        deletePromotionEnd();
     }
-
+    private void handleSearchPromotion(String cond) {
+        if (!cond.equals("")) {
+            for (Promotion promotion : mainController.findPromotionByText(cond))
+            {
+                modelKM.addRow(new Object[] { promotion.getPromotionId(), promotion.getPromotionName(),promotion.getPromotionDiscount(),dfNgay.format(promotion.getPromotionStartDate()),dfNgay.format(promotion.getPromotionEndDate())
+                });
+            }
+        }
+        else
+        {
+            loadData();
+        }
+    }
+    private void handleSearchProductSale(String cond) {
+        if (!cond.equals("")) {
+            for (ProductSale productSale : mainController.findProductSaleByText(cond))
+            {
+                modelSPKM.addRow(new Object[] {  productSale.getPromotion().getPromotionId(),productSale.getProduct().getProductId(),productSale.getProduct().getProductName(),vietnameseFormat.format(productSale.getProduct().sellingPrice()),vietnameseFormat.format(productSale.getGiaBan())
+                });
+            }
+        }
+        else
+        {
+            loadData();
+        }
+    }
+    private void deletePromotionEnd()
+    {
+        for (Promotion promotion : mainController.getAllPromotion() ){
+            if(promotion.getPromotionEndDate().before(new Date())){
+                mainController.deleteProductSaleByPromotionId(promotion.getPromotionId());
+                mainController.deletePromotion(promotion.getPromotionId());
+            }
+        }
+    }
     private void LoadDataProduct() {
         modelSP.setRowCount(0);
         for (Product product :mainController.getAllMerchandise()) {
@@ -360,11 +428,8 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
                 if (hoinhac == JOptionPane.YES_OPTION) {
                     String idKM=tableSPKM.getValueAt(row, 0).toString();
                     String idSP=tableSPKM.getValueAt(row, 1).toString();
-//                    Product product= mainController.getProductById(idSP);
-//                    Promotion promotion=new Promotion(idKM);
-//                    ProductSale productSale= new ProductSale(product,promotion);
                     mainController.deleteProductSale(idSP);
-                    modelSP.removeRow(row);
+                    modelSPKM.removeRow(row);
                     JOptionPane.showMessageDialog(this, "Xoá thành công");
                 }
             } catch (Exception e2) {
@@ -511,19 +576,24 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
     }
     private void deletePromotion() {
         int row = tableKM.getSelectedRow();
+
         if (row == -1) {
             JOptionPane.showMessageDialog(this, "Phải chọn dòng cần xoá");
-        } else {
+        }
+        else {
             try {
-                int HopThoai = JOptionPane.showConfirmDialog(this, "Bạn có muốn xoá dòng này không?", "Cảnh báo",
-                        JOptionPane.YES_NO_OPTION);
-                if (HopThoai == JOptionPane.YES_OPTION) {
-                    String id = modelKM.getValueAt(row, 0).toString();
-                    mainController.deletePromotion(id);
-                    modelKM.removeRow(row);
-                    reload();
-                    JOptionPane.showMessageDialog(this, "Xoá chương trình khuyến mãi thành công");
-                }
+                String id = modelKM.getValueAt(row, 0).toString();
+                    int HopThoai = JOptionPane.showConfirmDialog(this, "Bạn có muốn xoá dòng này không?", "Cảnh báo",
+                            JOptionPane.YES_NO_OPTION);
+                    if (HopThoai == JOptionPane.YES_OPTION) {
+                        mainController.deleteProductSaleByPromotionId(id);
+                        modelSPKM.removeRow(row);
+                        mainController.deletePromotion(id);
+                        modelKM.removeRow(row);
+                        reload();
+                        JOptionPane.showMessageDialog(this, "Xoá chương trình khuyến mãi thành công");
+                    }
+
             } catch (Exception e2) {
                 e2.printStackTrace();
                 JOptionPane.showMessageDialog(this, "Xoá chương trình khuyến mãi thất bại");
@@ -532,6 +602,7 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
     }
     private void reload() {
         loadData();
+        txtTimKiemKM.setText("");
         txtID.setText("");
         txtTen.setText("");
         txtTen.requestFocus();
@@ -552,15 +623,22 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
             return false;
         }
 
-        if (!(ngayBD!=null  && (ngayBD.before(ngayKT)))) {
+        if (ngayBD==null  && (ngayBD.after(ngayKT))) {
             JOptionPane.showMessageDialog(this, "Ngày bắt đầu phải trước ngày ket thúc", "Thông báo",
                     JOptionPane.WARNING_MESSAGE);
             chooserngayBatDau.requestFocus();
 
             return false;
         }
-        if (!(ngayKT!=null  && (ngayKT.after(ngayBD)))) {
+        if (ngayKT==null  && (ngayKT.before(ngayBD))) {
             JOptionPane.showMessageDialog(this, "Ngày kết thúc phải sau ngày bắt đầu", "Thông báo",
+                    JOptionPane.WARNING_MESSAGE);
+            chooserngayKetThuc.requestFocus();
+
+            return false;
+        }
+        if (!(ngayKT!=null  && (ngayKT.after(new Date())))) {
+            JOptionPane.showMessageDialog(this, "Ngày kết thúc phải sau ngày hiện tại", "Thông báo",
                     JOptionPane.WARNING_MESSAGE);
             chooserngayKetThuc.requestFocus();
 

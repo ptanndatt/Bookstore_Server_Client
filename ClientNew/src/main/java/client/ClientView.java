@@ -6,15 +6,15 @@ import javax.swing.SwingUtilities;
 import views.LoginView;
 
 public class ClientView {
-		public static void main(String[] args) {
-			SwingUtilities.invokeLater(new Runnable() {
-				
-				@Override
-				public void run() {
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+
+            @Override
+            public void run() {
 //					MainController controller = new MainController();
-					LoginView view = new LoginView();
-					view.setVisible(true);
-				}
-			});
-		}
+                LoginView view = new LoginView();
+                view.setVisible(true);
+            }
+        });
+    }
 }

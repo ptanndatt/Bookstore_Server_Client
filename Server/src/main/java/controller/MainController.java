@@ -23,6 +23,9 @@ public class MainController {
     private ProductDaoImplService productDaoImplService = new ProductDaoImplService();
     private SaleManagementDaoService saleManagementDaoImplService = new SaleManagementDaoService();
     //BillPending,Bill
+    public List<BillPending> findBillPendingByText(String text){
+        return saleManagementDaoImplService.findBillPendingByText(text);
+    }
     public boolean addBillPending(BillPending billPending){
         return saleManagementDaoImplService.addBillPending(billPending);
     }
@@ -73,6 +76,15 @@ public class MainController {
     public ProductSale getProductSale(String productSaleId) {
         return productSaleDaoImplService.getProductSale(productSaleId);
     }
+    public boolean deleteProductSaleByPromotionId(String promotionId) {
+        return productSaleDaoImplService.deleteProductSaleByPromotionId(promotionId);
+    }
+    public List<ProductSale> getProductSaleByPromotionId(String productSaleId) {
+        return productSaleDaoImplService.getProductSaleByPromotionId(productSaleId);
+    }
+    public List<ProductSale> findProductSaleByText(String text) {
+        return productSaleDaoImplService.findProductSaleByText(text);
+    }
     //product
     public Product getProductById(String id) {
         return productDaoImplService.getById(id);
@@ -120,7 +132,7 @@ public class MainController {
     public boolean deletePromotion(String id) {
         return promotionDaoImplService.deletePromotion(id);
     }
-    public Promotion findPromotionByText(String text) {
+    public List<Promotion> findPromotionByText(String text) {
         return promotionDaoImplService.findPromotionByText(text);
     }
     public boolean updatePromotion(Promotion promotion) {

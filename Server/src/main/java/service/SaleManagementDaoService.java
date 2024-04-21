@@ -47,4 +47,7 @@ public class SaleManagementDaoService {
     public boolean addDetailsBill(DetailsBill detailsBill){
         return dao.addDetailBill(detailsBill);
     }
+    public List<BillPending> findBillPendingByText(String text){
+        return dao.findBillPendingByText(text);
+    }
 }
