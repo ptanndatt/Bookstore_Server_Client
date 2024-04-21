@@ -4,6 +4,8 @@ package controller;
 import models.*;
 import service.*;
 
+import javax.xml.crypto.Data;
+import java.util.Date;
 import java.util.List;
 
 public class MainController {
@@ -22,43 +24,116 @@ public class MainController {
     private ProductSaleDaoImplService productSaleDaoImplService = new ProductSaleDaoImplService();
     private ProductDaoImplService productDaoImplService = new ProductDaoImplService();
     private SaleManagementDaoService saleManagementDaoImplService = new SaleManagementDaoService();
+
     //BillPending,Bill
-    public boolean addBillPending(BillPending billPending){
+    public boolean addBillPending(BillPending billPending) {
         return saleManagementDaoImplService.addBillPending(billPending);
     }
-    public boolean addDetailBillPending(DetailsBillPending detailsBillPending){
+
+    public boolean addDetailBillPending(DetailsBillPending detailsBillPending) {
         return saleManagementDaoImplService.addDetailBillPending(detailsBillPending);
     }
-    public List<DetailsBillPending> getDetailBillPendingByIdBill(String idBill){
+
+    public List<DetailsBillPending> getDetailBillPendingByIdBill(String idBill) {
         return saleManagementDaoImplService.getDetailBillPendingByIdBill(idBill);
     }
-    public boolean deleteDetailsBillPendingById(String idBill){
+
+    public boolean deleteDetailsBillPendingById(String idBill) {
         return saleManagementDaoImplService.deleteDetailsBillPendingById(idBill);
     }
-    public boolean deleteBillPendingById(String idBill){
+
+    public boolean deleteBillPendingById(String idBill) {
         return saleManagementDaoImplService.deleteBillPendingById(idBill);
     }
-    public List<BillPending> getAllBillPending(){
+
+    public List<BillPending> getAllBillPending() {
         return saleManagementDaoImplService.getAllBillPending();
     }
-    public List<DetailsBillPending> getAllDetailBillPending(){
+
+    public List<DetailsBillPending> getAllDetailBillPending() {
         return saleManagementDaoImplService.getAllDetailBillPending();
     }
-    public boolean deleteAllBillPending(){
+
+    public boolean deleteAllBillPending() {
         return saleManagementDaoImplService.deleteAllBillPending();
     }
-    public boolean deleteAllDetailBillPending(){
+
+    public boolean deleteAllDetailBillPending() {
         return saleManagementDaoImplService.deleteAllDetailBillPending();
     }
-    public boolean addBill(Bill bill){
+
+    public boolean addBill(Bill bill) {
         return saleManagementDaoImplService.addBill(bill);
     }
-    public Bill getBillById(String idBill){
+
+    public Bill getBillById(String idBill) {
         return saleManagementDaoImplService.getBillById(idBill);
     }
-    public boolean addDetailsBill(DetailsBill detailsBill){
+
+    public boolean addDetailsBill(DetailsBill detailsBill) {
         return saleManagementDaoImplService.addDetailsBill(detailsBill);
     }
+
+    public List<Object[]> getAllBill() {
+        return saleManagementDaoImplService.getAllBill();
+    }
+
+    public List<Object[]> loadDataProduct(String id) {
+        return saleManagementDaoImplService.loadDataProduct(id);
+    }
+
+    public int sumTotalBill() {
+        return saleManagementDaoImplService.sumTotalBill();
+    }
+
+    public List<Object[]> findBillByCustomerSDT(String sdt) {
+        return saleManagementDaoImplService.findBillByCustomerSDT(sdt);
+    }
+
+    public List<Object[]> findProductBestSeller(Date from, Date to) {
+        return saleManagementDaoImplService.findProductBestSeller(from, to);
+    }
+
+    public double sumTotalAmount(Date from, Date to) {
+        return saleManagementDaoImplService.sumTotalAmount(from, to);
+    }
+
+    public int sumTotalBillDate(Date from, Date to) {
+        return saleManagementDaoImplService.sumTotalBillDate(from, to);
+    }
+
+    public double sumProfit(Date from, Date to) {
+        return saleManagementDaoImplService.sumProfit(from, to);
+    }
+
+    public double sumTotalBillValue(Date from, Date to) {
+        return saleManagementDaoImplService.sumTotalBillValue(from, to);
+    }
+
+    public List<Object[]> sumTotalBillValueByProduct(Date from, Date to) {
+        return saleManagementDaoImplService.sumTotalBillValueByProduct(from, to);
+    }
+
+    public List<Object[]> sumTotalBillValueDoanhThu(Date from, Date to) {
+        return saleManagementDaoImplService.sumTotalBillValueDoanhThu(from, to);
+    }
+
+    public List<Object[]> sumTotalBillValueByDate(Date from, Date to) {
+        return saleManagementDaoImplService.sumTotalBillValueByDate(from, to);
+    }
+
+    public List<Object[]> sumTotalBillValueByDateLoiNhuan(Date from, Date to) {
+        return saleManagementDaoImplService.sumTotalBillValueByDateLoiNhuan(from, to);
+    }
+
+    public List<Object[]> findProductWorstSeller(Date from, Date to) {
+        return saleManagementDaoImplService.findProductWorstSeller(from, to);
+    }
+
+    public List<Object[]> findEmployeeBestSeller(Date from, Date to) {
+        return saleManagementDaoImplService.findEmployeeBestSeller(from, to);
+    }
+
     //ProductSale
     public List<ProductSale> getAllAProductSale() {
         return productSaleDaoImplService.getAllAProductSale();
@@ -67,12 +142,15 @@ public class MainController {
     public boolean addProductSale(ProductSale productSale) {
         return productSaleDaoImplService.addProductSale(productSale);
     }
+
     public boolean deleteProductSale(String id) {
         return productSaleDaoImplService.deleteProductSale(id);
     }
+
     public ProductSale getProductSale(String productSaleId) {
         return productSaleDaoImplService.getProductSale(productSaleId);
     }
+
     //product
     public Product getProductById(String id) {
         return productDaoImplService.getById(id);
@@ -82,9 +160,11 @@ public class MainController {
     public List<Product> getProductByText(String text) {
         return productDaoImplService.getProductByText(text);
     }
-    public boolean updateProductQuantity(String id,int quantity) {
-        return productDaoImplService.updateProduct(id,quantity);
+
+    public boolean updateProductQuantity(String id, int quantity) {
+        return productDaoImplService.updateProduct(id, quantity);
     }
+
     //Customer
     public List<Customer> getAllCustomers() {
         return customerDaoImplService.getAllCustomers();
@@ -105,9 +185,11 @@ public class MainController {
     public List<Customer> findCustomerByText(String text) {
         return customerDaoImplService.findCustomerByText(text);
     }
+
     public Customer findCustomerById(String id) {
         return customerDaoImplService.findCustomerById(id);
     }
+
     //Promotion
     public List<Promotion> getAllPromotion() {
         return promotionDaoImplService.getAllPromotion();
@@ -120,12 +202,15 @@ public class MainController {
     public boolean deletePromotion(String id) {
         return promotionDaoImplService.deletePromotion(id);
     }
+
     public Promotion findPromotionByText(String text) {
         return promotionDaoImplService.findPromotionByText(text);
     }
+
     public boolean updatePromotion(Promotion promotion) {
         return promotionDaoImplService.updatePromotion(promotion);
     }
+
     //Account
     public List<Account> getAllAccount() {
         return accountDaoImplService.getAllAccount();
@@ -142,6 +227,7 @@ public class MainController {
     public boolean deleteAccount(String id) {
         return accountDaoImplService.deleteAccount(id);
     }
+
     public Account getAccountById(String id) {
         return accountDaoImplService.getAccountById(id);
     }
@@ -149,6 +235,7 @@ public class MainController {
     public String findPasswordByEmployeeId(String employeeId) {
         return accountDaoImplService.findPasswordByEmployeeId(employeeId);
     }
+
     //Role
     public List<Role> getAllRole() {
         return roleDaoImplService.getAllRole();
@@ -165,12 +252,15 @@ public class MainController {
     public Role findRoleByText(String text) {
         return roleDaoImplService.findRoleByText(text);
     }
+
     public List<Role> getRolesByRoleCode(int roleCode) {
         return roleDaoImplService.getRolesByRoleCode(roleCode);
     }
+
     public boolean updateRole(String id) {
         return roleDaoImplService.updateRole(id);
     }
+
     //Employee
     public List<Employee> getAllEmployees() {
         return employeeDaoImplService.getAllEmployees();
@@ -191,12 +281,15 @@ public class MainController {
     public List<Employee> findEmployeeByText(String text) {
         return employeeDaoImplService.findEmployeeByText(text);
     }
+
     public List<Employee> findEmployeeByRoleCode(int roleCode) {
         return employeeDaoImplService.findEmployeeByRoleCode(roleCode);
     }
+
     public Employee findEmployeeById(String empId) {
         return employeeDaoImplService.findEmployeeById(empId);
     }
+
     // author
     public List<Author> getAllAuthor() {
         return authorDaoImplService.getAllAuthor();

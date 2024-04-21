@@ -2,24 +2,41 @@ package views;
 
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
+import controller.MainController;
+import models.Bill;
+import models.Customer;
+import models.Employee;
+import models.ProductSale;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import util.DialogUtils;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-public class BillsManagement extends JFrame implements ListSelectionListener, ItemListener, PropertyChangeListener, ActionListener {
+public class BillsManagement extends JPanel implements ListSelectionListener, ItemListener, PropertyChangeListener, ActionListener, KeyListener {
     private JPanel pnController;
     private JPanel pnMain;
     private JPanel pnLeft;
@@ -47,7 +64,7 @@ public class BillsManagement extends JFrame implements ListSelectionListener, It
     private JTextArea txtAreaBillDetail;
 
     private JTable table;
-    private DefaultTableModel tableModel;
+    private DefaultTableModel tableModel, tableModel1;
 
     private JLabel lblTxtMaHoaDon;
     private JLabel lblTxtThoiGian;
@@ -59,17 +76,18 @@ public class BillsManagement extends JFrame implements ListSelectionListener, It
     private JLabel lblTxtTongTien;
 
     private JButton btnExportBillExcel;
+    private MainController controller;
 
     public BillsManagement() {
         setLayout(null);
-        setTitle("Bills Management");
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+//        setTitle("Bills Management");
+//        setExtendedState(JFrame.MAXIMIZED_BOTH);
+//        setDefaultCloseOperation(EXIT_ON_CLOSE);
         init();
     }
 
     public void init() {
-
+        controller = new MainController();
         pnLeft = new JPanel();
         pnLeft.setLayout(null);
         chkFullTime = new JCheckBox();
@@ -143,8 +161,10 @@ public class BillsManagement extends JFrame implements ListSelectionListener, It
         btnRefresh.setBounds(700, 70, 130, 30);
         lblSumBill = new JLabel("Tổng số hóa đơn:");
         lblSumBill.setBounds(800, 865, 150, 30);
-        lblSumBillValue = new JLabel("100");
+        lblSumBillValue = new JLabel();
         lblSumBillValue.setBounds(950, 865, 50, 30);
+        lblSumBillValue.setText(String.valueOf(calculateTotalBill()));
+
         pnMain.add(lblManagerBill);
         pnMain.add(btnRefresh);
         pnMain.add(btnExportExcel);
@@ -158,34 +178,7 @@ public class BillsManagement extends JFrame implements ListSelectionListener, It
         tableModel.addColumn("Khách hàng");
         tableModel.addColumn("Giảm giá (VNĐ)");
         tableModel.addColumn("Khách đã đưa (VNĐ)");
-        tableModel.addColumn("Tiền trả lại (VNĐ)");
         tableModel.addColumn("Tổng tiền hàng (VNĐ)");
-
-
-        Object[] rowData = new Object[]{
-                "HD001",
-                "2024-04-18 10:30",
-                "Nguyễn Văn A",
-                "Nguyễn Thị B",
-                50000,
-                200000,
-                150000,
-                450000,
-
-        };
-        Object[] rowData2 = new Object[]{
-                "HD003",
-                "2024-04-20 12:30",
-                "Nguyễn Văn C",
-                "Nguyễn Thị D",
-                70000,
-                220000,
-                170000,
-                490000
-        };
-
-        tableModel.addRow(rowData);
-        tableModel.addRow(rowData2);
 
         table.setModel(tableModel);
         JScrollPane sp = new JScrollPane(table);
@@ -215,7 +208,6 @@ public class BillsManagement extends JFrame implements ListSelectionListener, It
         JLabel lblKhachHang = new JLabel("Khách hàng:");
         JLabel lblGiamGia = new JLabel("Giảm giá (VNĐ):");
         JLabel lblKhachDaDua = new JLabel("Khách đã đưa (VNĐ):");
-        JLabel lblKhachDaTra = new JLabel("Tiền trả lại (VNĐ):");
         JLabel lblTongTien = new JLabel("Tổng tiền hàng (VNĐ):");
 
         lblTxtMaHoaDon = new JLabel();
@@ -224,11 +216,10 @@ public class BillsManagement extends JFrame implements ListSelectionListener, It
         lblTxtKhachHang = new JLabel();
         lblTxtGiamGia = new JLabel();
         lblTxtKhachDaDua = new JLabel();
-        lblTxtKhachDaTra = new JLabel();
         lblTxtTongTien = new JLabel();
 
         JTable table1 = new JTable();
-        DefaultTableModel tableModel1 = new DefaultTableModel();
+        tableModel1 = new DefaultTableModel();
 
         tableModel1.addColumn("Mã sản phẩm");
         tableModel1.addColumn("Tên sản phẩm");
@@ -241,7 +232,6 @@ public class BillsManagement extends JFrame implements ListSelectionListener, It
 
         btnExportBillExcel = new JButton("In hóa đơn");
         btnExportBillExcel.setBounds(397, 820, 150, 30);
-
         int y = 30;
         int verticalGap = 10;
 //        txtAreaBillDetail.setBounds(10, y, 369, 160); // Đ?ặt vị trí và kích thước cho JTextArea
@@ -264,9 +254,7 @@ public class BillsManagement extends JFrame implements ListSelectionListener, It
         lblKhachDaDua.setBounds(10, y, 369, 20);
         lblTxtKhachDaDua.setBounds(190, y, 369, 20);
         y += 20 + verticalGap;
-        lblKhachDaTra.setBounds(10, y, 369, 20);
-        lblTxtKhachDaTra.setBounds(190, y, 369, 20);
-        y += 20 + verticalGap;
+
         lblTongTien.setBounds(10, y, 369, 20);
         lblTxtTongTien.setBounds(190, y, 369, 20);
 
@@ -277,7 +265,6 @@ public class BillsManagement extends JFrame implements ListSelectionListener, It
         pnRight.add(lblKhachHang);
         pnRight.add(lblGiamGia);
         pnRight.add(lblKhachDaDua);
-        pnRight.add(lblKhachDaTra);
 
         pnRight.add(lblTxtMaHoaDon);
         pnRight.add(lblTxtThoiGian);
@@ -285,7 +272,6 @@ public class BillsManagement extends JFrame implements ListSelectionListener, It
         pnRight.add(lblTxtKhachHang);
         pnRight.add(lblTxtGiamGia);
         pnRight.add(lblTxtKhachDaDua);
-        pnRight.add(lblTxtKhachDaTra);
         pnRight.add(lblTxtTongTien);
 
         pnRight.add(btnExportBillExcel);
@@ -298,56 +284,75 @@ public class BillsManagement extends JFrame implements ListSelectionListener, It
         add(pnMain);
         add(pnRight);
 
+        loadData();
 
         table.getSelectionModel().addListSelectionListener(this);
         chkFullTime.addItemListener(this);
         chkAnotherChoice.addItemListener(this);
         dateChooser.addPropertyChangeListener(this);
         btnRefresh.addActionListener(this);
+        btnExportExcel.addActionListener(this);
+        btnExportBillExcel.addActionListener(this);
+        txtGetSearchBill.addKeyListener(this);
+        getTxtGetSearchProduct.addKeyListener(this);
+    }
+
+    public int calculateTotalBill() {
+
+        return controller.sumTotalBill();
     }
 
     public void calculateTotalPayment() {
         int totalPayment = 0;
-        // tong tien khach dua
         int totalPaymentCustomer = 0;
-        // tong tien khach tra
-        int totalPaymentCustomerReturn = 0;
+
         for (int i = 0; i < tableModel.getRowCount(); i++) {
-            int totalForRow = Integer.parseInt(tableModel.getValueAt(i, 7).toString());
-            int paymentCustomer = Integer.parseInt(tableModel.getValueAt(i, 5).toString());
-            int paymentCustomerReturn = Integer.parseInt(tableModel.getValueAt(i, 6).toString());
+            double totalForRow = Double.parseDouble(tableModel.getValueAt(i, 6).toString());
+            double paymentCustomer = Double.parseDouble(tableModel.getValueAt(i, 5).toString());
+
             totalPayment += totalForRow;
             totalPaymentCustomer += paymentCustomer;
-            totalPaymentCustomerReturn += paymentCustomerReturn;
         }
         Object[] totalRow = new Object[]{
                 "",
-                "", "", "", "", "<html><b>" + totalPaymentCustomer + "</b></html>", "<html><b>" + totalPaymentCustomerReturn + "</b></html>", "<html><b>" + totalPayment + "</b></html>"
+                "",
+                "",
+                "",
+                "",
+                "<html><b>" + totalPaymentCustomer + "</b></html>",
+                "<html><b>" + totalPayment + "</b></html>"
         };
         tableModel.insertRow(0, totalRow);
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            BillsManagement view = new BillsManagement();
-            view.setVisible(true);
-        });
-    }
+//    public static void main(String[] args) {
+//        SwingUtilities.invokeLater(() -> {
+//            BillsManagement view = new BillsManagement();
+//            view.setVisible(true);
+//        });
+//    }
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
         if (!e.getValueIsAdjusting()) {
             int selectedRow = table.getSelectedRow();
             if (selectedRow != -1) {
-                // Lấy dữ liệu từ bảng
-                String maHoaDon = table.getValueAt(selectedRow, 0).toString();
-                String thoiGian = table.getValueAt(selectedRow, 1).toString();
-                String nhanVien = table.getValueAt(selectedRow, 2).toString();
-                String khachHang = table.getValueAt(selectedRow, 3).toString();
-                String giamGia = table.getValueAt(selectedRow, 4).toString();
-                String khachDaDua = table.getValueAt(selectedRow, 5).toString();
-                String khachDaTra = table.getValueAt(selectedRow, 6).toString();
-                String tongTien = table.getValueAt(selectedRow, 7).toString();
+                Object maHoaDonObj = table.getValueAt(selectedRow, 0);
+                Object thoiGianObj = table.getValueAt(selectedRow, 1);
+                Object nhanVienObj = table.getValueAt(selectedRow, 2);
+                Object khachHangObj = table.getValueAt(selectedRow, 3);
+                Object giamGiaObj = table.getValueAt(selectedRow, 4);
+                Object khachDaDuaObj = table.getValueAt(selectedRow, 5);
+                Object tongTienObj = table.getValueAt(selectedRow, 6);
+
+
+                String maHoaDon = maHoaDonObj != null ? maHoaDonObj.toString() : "";
+                String thoiGian = thoiGianObj != null ? thoiGianObj.toString() : "";
+                String nhanVien = nhanVienObj != null ? nhanVienObj.toString() : "";
+                String khachHang = khachHangObj != null ? khachHangObj.toString() : "";
+                String giamGia = giamGiaObj != null ? giamGiaObj.toString() : "";
+                String khachDaDua = khachDaDuaObj != null ? khachDaDuaObj.toString() : "";
+                String tongTien = tongTienObj != null ? tongTienObj.toString() : "";
 
                 lblTxtMaHoaDon.setText(maHoaDon);
                 lblTxtThoiGian.setText(thoiGian);
@@ -355,10 +360,41 @@ public class BillsManagement extends JFrame implements ListSelectionListener, It
                 lblTxtKhachHang.setText(khachHang);
                 lblTxtGiamGia.setText(giamGia);
                 lblTxtKhachDaDua.setText(khachDaDua);
-                lblTxtKhachDaTra.setText(khachDaTra);
                 lblTxtTongTien.setText(tongTien);
+
+                tableModel1.setRowCount(0);
+                controller.loadDataProduct(maHoaDon).forEach(product -> {
+                    Object[] rowData = new Object[]{
+                            product[0],
+                            product[1],
+                            product[2],
+                            product[3],
+                            product[4]
+                    };
+                    tableModel1.addRow(rowData);
+                });
+
             }
         }
+    }
+
+
+    public void loadData() {
+        // Load data from database
+        tableModel.setRowCount(0);
+        controller.getAllBill().forEach(bill -> {
+            Object[] rowData = new Object[]{
+                    bill[0],
+                    bill[1],
+                    bill[2],
+                    bill[3],
+                    bill[4],
+                    bill[5],
+                    bill[6]
+            };
+            tableModel.addRow(rowData);
+        });
+        calculateTotalPayment();
     }
 
 
@@ -396,10 +432,12 @@ public class BillsManagement extends JFrame implements ListSelectionListener, It
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == btnExportExcel) {
-            // Export excel
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+            String filePath = System.getProperty("user.dir") + "/src/main/resources/DataExports/Bill/B_" + timeStamp
+                    + ".xlsx";
+            exportExcel(filePath);
         } else if (e.getSource() == btnRefresh) {
             refreshForm();
-            // Refresh
         } else if (e.getSource() == btnExportBillExcel) {
             // Export bill excel
         } else if (e.getSource() == cboSearchBillDate) {
@@ -407,7 +445,54 @@ public class BillsManagement extends JFrame implements ListSelectionListener, It
         }
     }
 
+    private void exportExcel(String filePath) {
+        FileOutputStream fileOutputStream = null;
+        Workbook workbook = null;
+        try {
+            workbook = new XSSFWorkbook();
+            Sheet sheet = workbook.createSheet("Bills");
+            Row headerRow = sheet.createRow(0);
+            for (int i = 0; i < tableModel.getColumnCount(); i++) {
+                Cell cell = headerRow.createCell(i);
+                cell.setCellValue(tableModel.getColumnName(i));
+            }
+
+            for (int i = 0; i < tableModel.getRowCount(); i++) {
+                Row row = sheet.createRow(i + 1);
+                for (int j = 0; j < tableModel.getColumnCount(); j++) {
+                    Cell cell = row.createCell(j);
+                    Object value = tableModel.getValueAt(i, j);
+                    if (value != null) {
+                        cell.setCellValue(value.toString());
+                    } else {
+                        cell.setCellValue("");
+                    }
+                }
+            }
+
+            fileOutputStream = new FileOutputStream(new File(filePath));
+            workbook.write(fileOutputStream);
+            DialogUtils.showSuccessMessage(this, "Export excel successfully");
+        } catch (IOException e) {
+            e.printStackTrace();
+            DialogUtils.showErrorMessage(this, "Export excel failed");
+        } finally {
+            try {
+                if (fileOutputStream != null) {
+                    fileOutputStream.close();
+                }
+                if (workbook != null) {
+                    workbook.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
     private void refreshForm() {
+        loadData();
         cboSearchBillDate.setSelectedIndex(0);
         chkFullTime.setSelected(false);
         chkAnotherChoice.setSelected(true);
@@ -415,6 +500,70 @@ public class BillsManagement extends JFrame implements ListSelectionListener, It
         txtGetSearchBill.setText("");
         getTxtGetSearchProduct.setText("");
         txtGetSearchBill.requestFocus();
+        lblTxtMaHoaDon.setText("");
+        lblTxtThoiGian.setText("");
+        lblTxtNhanVien.setText("");
+        lblTxtKhachHang.setText("");
+        lblTxtGiamGia.setText("");
+        lblTxtKhachDaDua.setText("");
+        lblTxtTongTien.setText("");
+        tableModel1.setRowCount(0);
+        table.clearSelection();
+
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    private void searchByBill() {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
+        table.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter("(?i)" + txtGetSearchBill.getText().trim(), 0, 2, 3));
+    }
+
+    private void searchByProduct() {
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(model);
+        table.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter("(?i)" + getTxtGetSearchProduct.getText().trim(), 3));
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        SwingUtilities.invokeLater(() -> {
+            Object o = e.getSource();
+            if (o.equals(txtGetSearchBill)) {
+                searchByBill();
+            } else if (o.equals(getTxtGetSearchProduct)) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    tableModel.setRowCount(0);
+                    controller.findBillByCustomerSDT(getTxtGetSearchProduct.getText().trim()).forEach(
+                            bill -> {
+                                Object[] rowData = new Object[]{
+                                        bill[0],
+                                        bill[1],
+                                        bill[2],
+                                        bill[3],
+                                        bill[4],
+                                        bill[5],
+                                        bill[6]
+                                };
+                                tableModel.addRow(rowData);
+                            }
+                    );
+                } else {
+                    searchByProduct();
+                }
+            }
+        });
+    }
+
+
+    @Override
+    public void keyReleased(KeyEvent e) {
 
     }
 }
