@@ -23,7 +23,7 @@ public class LoginView extends JFrame implements ActionListener {
 //        jButton1.addActionListener(e -> login());
 
         setVisible(true);
-        jTextField1.setText("E20240418183024");
+        jTextField1.setText("NS20240421231132");
         jPasswordField1.setText("1111");
 
 
@@ -57,7 +57,7 @@ public class LoginView extends JFrame implements ActionListener {
                     this.setVisible(false);
                 } else if (account.getEmployee().getRole().getRoleCode() == 0) {
                     Employee employee = mainController.findEmployeeById(account.getEmployee().getIdEmployee());
-                    SaleManagerView view = new SaleManagerView(employee);
+                    EmployeeHomeView view= new EmployeeHomeView(employee);
                     view.setVisible(true);
                     dispose();
                     this.setVisible(false);

@@ -16,9 +16,6 @@ public class ProductSaleDaoImplService {
     public boolean addProductSale(ProductSale productSale) {
         return productSaleDao.addProductSale(productSale);
     }
-
-
-
     public boolean deleteProductSale(String productSale) {
         return productSaleDao.deleteProductSale(productSale);
     }

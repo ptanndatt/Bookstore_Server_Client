@@ -21,6 +21,7 @@ public class ProductSale {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="promotionId")
     private Promotion promotion;
+    @Column(name = "description",columnDefinition = "NVARCHAR(255)")
     private String description;
     private double giaBan;
 

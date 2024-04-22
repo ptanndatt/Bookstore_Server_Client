@@ -41,7 +41,7 @@ import java.time.format.DateTimeParseException;
 import java.util.*;
 import java.util.List;
 
-public class BillsManagement extends JPanel implements MouseListener,ItemListener, PropertyChangeListener, ActionListener, KeyListener {
+public class BillForEmployeeView extends JPanel implements MouseListener,ItemListener, PropertyChangeListener, ActionListener, KeyListener {
     private JPanel pnMain;
     private JPanel pnLeft;
     private JPanel pnRight;
@@ -80,10 +80,10 @@ public class BillsManagement extends JPanel implements MouseListener,ItemListene
     private NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
     private JButton btnExportBillExcel;
     private MainController controller;
-
-    public BillsManagement() {
+    private Employee employee;
+    public BillForEmployeeView(Employee e) {
         setLayout(null);
-
+        this.employee = e;
         init();
 
     }
@@ -447,14 +447,9 @@ public class BillsManagement extends JPanel implements MouseListener,ItemListene
     public void loadData() {
         // Load data from database
         tableModel.setRowCount(0);
-        controller.getAllBill().forEach(bill -> {
+        controller.findBillByEmployee(employee.getIdEmployee()).forEach(bill -> {
             Object[] rowData = new Object[]{
-                    bill[0],
-                    bill[1],
-                    bill[2],
-                    bill[3],
-                    currencyFormat.format(bill[4]),
-                    currencyFormat.format(bill[5])
+                    bill.getBillId(),bill.getBillDate(),bill.getEmployee().getName(),bill.getCustomer().getName(),currencyFormat.format(bill.getAmountReceived()),currencyFormat.format(bill.getAmounttotal())
             };
             tableModel.addRow(rowData);
         });

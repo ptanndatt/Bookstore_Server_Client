@@ -19,11 +19,10 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
+
 @NoArgsConstructor
 @Entity
 @Table(name = "Merchandise")
-@EqualsAndHashCode(callSuper = false)
 public class Merchandise extends Product {
     private int quantitySold;
     private double revenue;
@@ -42,4 +41,5 @@ public class Merchandise extends Product {
     public double sellingPrice() {
         return super.importPrice + (super.importPrice * 0.55) + tax();
     }
+
 }

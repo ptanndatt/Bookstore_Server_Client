@@ -11,7 +11,6 @@ public class PromotionDaoImplService {
     public List<Promotion> getAllPromotion() {
         return promotionDao.getAllPromotion();
     }
-
     public boolean addPromotion(Promotion promotion) {
         return promotionDao.addPromotion(promotion);
     }
@@ -25,4 +24,5 @@ public class PromotionDaoImplService {
     public boolean updatePromotion(Promotion promotion) {
         return promotionDao.updatePromotion(promotion);
     }
+
 }

@@ -444,7 +444,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.weightx = 0.5;
+        gbc.weightx = 0.3;
         gbc.weighty = 1.0;
         gbc.fill = GridBagConstraints.BOTH;
         add(pnLeft, gbc);
@@ -452,7 +452,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
 
         gbc.gridx = 1;
         gbc.gridy = 0;
-        gbc.weightx = 0.5;
+        gbc.weightx = 0.7;
         gbc.weighty = 1.0;
         gbc.fill = GridBagConstraints.BOTH;
         add(pnRight, gbc);
@@ -687,28 +687,19 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         modelSP.setRowCount(0);
         List<Merchandise> merchandise = mainController.getAllMerchandise();
         for (Merchandise sanPham : merchandise) {
-
             String idSanPham = sanPham.getProductId();
             String tenSanPham = sanPham.getProductName();
-            String tenLoaiSanPham = sanPham.getProductTypeId().getProductTypeId();
-            String tenNhaCungCap = sanPham.getSupplierId().getSupplierId();
+            String tenLoaiSanPham = sanPham.getProductTypeId().getProductTypeName();
+            String tenNhaCungCap = sanPham.getSupplierId().getSupplierName();
             double kichThuoc = sanPham.getSize();
             String mauSac = sanPham.getColor();
             String trangThai = sanPham.getStatus().getDescription()+"";
-            double thue = sanPham.tax();
             int soLuong = sanPham.getQuantity();
             double giaBan = sanPham.sellingPrice();
             modelSP.addRow(new Object[] { idSanPham, tenSanPham, tenLoaiSanPham, tenNhaCungCap, kichThuoc, mauSac,
                     trangThai,soLuong, currencyFormat.format(giaBan)});
         }
     }
-//    private ProductSale checkProductSale(String id)
-//    {
-//        ProductSale productSale = mainController.getProductSale(id);
-//        if(productSale != null)
-//            return productSale;
-//        return null;
-//    }
     private void loadBook() {
         modelSP.setRowCount(0);
         List<Book> ds = mainController.getAllBook();
@@ -725,7 +716,6 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
             double kichThuoc = s.getSize();
             String mauSac = s.getColor();
             String trangThai = s.getStatus().getDescription();
-            double thue = s.tax();
             int soLuong = s.getQuantity();
             double giaBan = s.sellingPrice();
 //
@@ -944,9 +934,10 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
                 }
                 else if(productSale==null) {
                     giaKM=giaBan;
+
                 }
-                String thanhTien = currencyFormat.format(giaKM * Integer.parseInt(soLuong));
-                modelGioHang.addRow(new String[] {
+                String thanhTien = currencyFormat.format(giaKM *Integer.parseInt(soLuong) );
+                modelGioHang.addRow(new Object[] {
                         idSP, tenSP, currencyFormat.format(giaBan),currencyFormat.format(giaKM), soLuong, thanhTien
                 });
                 showThongBao("Đã thêm vào giỏ hàng");
@@ -957,18 +948,25 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
                 JOptionPane.showMessageDialog(dialogSanPham, "Số lượng sản phẩm trong kho không đủ");
             }
         } else {
-            int soLuongTrongKho = Integer.parseInt(modelSP.getValueAt(row, 13).toString());
+            int soLuongTrongKho = Integer.parseInt(modelSP.getValueAt(row, 12).toString());
             if (Integer.parseInt(soLuong) <= soLuongTrongKho) {
+                ProductSale productSale=mainController.getProductSale( modelSP.getValueAt(row, 0).toString());
                 String idSP = modelSP.getValueAt(row, 0).toString();
                 String tenSP = modelSP.getValueAt(row, 1).toString();
-                String giaBan = modelSP.getValueAt(row, 14).toString();
-                String giaKM = modelSP.getValueAt(row, 15).toString();
-                String giaKMDouble = giaKM.trim().replace("\u00A0", "").replaceAll("[.,₫]", "");
-                String giaBanDouble = giaBan.trim().replace("\u00A0", "").replaceAll("[.,₫]", "");
-                double giaCuoi = Double.parseDouble(giaBanDouble) - Double.parseDouble(giaKMDouble);
-                String thanhTien = currencyFormat.format(giaCuoi * Integer.parseInt(soLuong));
-                modelGioHang.addRow(new String[] {
-                        idSP, tenSP, giaBan, "-"+giaKM, currencyFormat.format(giaCuoi), soLuong, thanhTien
+                String giaBanValue = modelSP.getValueAt(row, 13).toString();
+                String giaBanDouble = giaBanValue.trim().replace("\u00A0", "").replaceAll("[.,₫]", "");
+                Double giaBan = Double.parseDouble(giaBanDouble);
+                double giaKM = 0;
+                if(productSale!=null){
+                    giaKM = productSale.getGiaBan();
+                }
+                else if(productSale==null) {
+                    giaKM=giaBan;
+
+                }
+                String thanhTien = currencyFormat.format(giaKM *Integer.parseInt(soLuong) );
+                modelGioHang.addRow(new Object[] {
+                        idSP, tenSP, currencyFormat.format(giaBan),currencyFormat.format(giaKM), soLuong, thanhTien
                 });
                 showThongBao("Đã thêm vào giỏ hàng");
                 spinnerSoLuong2.setValue(1);
@@ -991,15 +989,17 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
                 String tenSP = product.getProductName();
                 Double giaBan = product.sellingPrice();
                 double giaKM = 0;
+                ;
                 if(productSale!=null){
                     giaKM = productSale.getGiaBan();
                 }
                 else if(productSale==null) {
                     giaKM=giaBan;
+
                 }
                 String thanhTien = currencyFormat.format(giaKM * soLuong);
                 modelGioHang.addRow(new Object[] {
-                        idSP, tenSP, currencyFormat.format(giaBan), currencyFormat.format(giaKM), soLuong, thanhTien
+                        idSP, tenSP, currencyFormat.format(giaBan),currencyFormat.format(giaKM), soLuong, thanhTien
                 });
                 spinnerSoLuong.setValue(1);
                 txtMaSP.setText("");
@@ -1180,7 +1180,6 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         scrollTblSP.setBorder(BorderFactory.createTitledBorder("Sản phẩm"));
         pnMain.add(scrollTblSP, BorderLayout.CENTER);
         handleSelectiveProduct();
-        loadProduct();
 
         pnMa.add(lblMaSP);
         pnMa.add(Box.createHorizontalStrut(20));
@@ -1457,7 +1456,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         String maKhachHang = txtMaKH.getText();
         Customer kh = mainController.findCustomerById(maKhachHang);
         java.sql.Date ngayNhapSql = new java.sql.Date(ngayNhap.getTime());
-        String currentDate = new SimpleDateFormat("yyMMddHHmmss").format(new java.util.Date());
+        String currentDate = new SimpleDateFormat("yyMMddHHmmss").format(new Date());
         BillPending hdc = new BillPending("HDC" + currentDate, maHD, kh, ngayNhapSql);
         try {
             mainController.addBillPending(hdc);
@@ -1648,7 +1647,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         double tienKhachDuaDouble = Double.parseDouble(tienKhachDua.trim().replace("\u00A0", "").replaceAll("[.,₫]", ""));
         String tongTienHoaDon = txtTongTienHoaDon.getText();
         double tongTienHoaDonDouble = Double.parseDouble(tongTienHoaDon.trim().replace("\u00A0", "").replaceAll("[.,₫]", ""));
-        java.sql.Date ngayNhapSql = new java.sql.Date(ngayNhap.getTime());
+        LocalDate ngayTaoHD= LocalDate.now();
         double tongLoiNhuan = 0;
         int gioHangRowCount = modelGioHang.getRowCount();
 
@@ -1660,7 +1659,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
             tongLoiNhuan += loiNhuan;
         }
 
-        Bill hd = new Bill(idHD,ngayNhapSql, kh, nv, tienKhachDuaDouble, tongTienHoaDonDouble, tongLoiNhuan);
+        Bill hd = new Bill(idHD,ngayTaoHD, kh, nv, tienKhachDuaDouble, tongTienHoaDonDouble, tongLoiNhuan);
         try {
             mainController.addBill(hd);
         } catch (Exception e) {
@@ -1720,8 +1719,8 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
                 }
                 saveBill();
                 String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-                String filePath = System.getProperty("user.dir") + "/src/main/resources/DataExports/HoaDonPDF/HD_"+timeStamp+".pdf" ;
-//                exportToPdf(filePath);
+                String filePath = System.getProperty("user.dir") + "/Server/src/main/resources/DataExports/HoaDonPDF/HD_"+timeStamp+".pdf" ;
+                exportToPdf(filePath);
                 reloadCart();
                 handleReloadBill();
                 txtTienKhachDua.setText("");
@@ -1733,6 +1732,133 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
             showDialogKhachHang();
         }
 
+    }
+    private void exportToPdf(String filePath) throws DocumentException {
+        OutputStream file = null;
+        try {
+            file = new FileOutputStream(filePath);
+            // Create a new Document object
+            Document document = new Document();
+
+            // You need PdfWriter to generate PDF document
+            PdfWriter.getInstance(document, file);
+            // You need PdfWriter to generate PDF document
+
+            // Opening document for writing PDF
+            document.open();
+            String idKH= txtMaKH.getText();
+            Customer customer= mainController.findCustomerById(idKH);
+            String idHD=txtMaHD.getText();
+            Bill bill= mainController.getBillById(idHD);
+            LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            String dateTimeString = now.format(formatter);
+            // Writing content
+            String filePath2 = System.getProperty("user.dir") + "/Server/src/main/resources/database/vuArial.ttf";
+            BaseFont bf = BaseFont.createFont(filePath2, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            Paragraph tieuDe=new Paragraph("HÓA ĐƠN",new com.itextpdf.text.Font(bf,30,1,BaseColor.BLUE));
+            Paragraph tenKH=new Paragraph("Tên khách hàng : "+customer.getName(),new com.itextpdf.text.Font(bf,15));
+            Paragraph idKH2=new Paragraph("ID khách hàng   : "+customer.getIdCustomer(),new com.itextpdf.text.Font(bf,15));
+            Paragraph idHD2=new Paragraph("ID hóa đơn      : "+txtMaHD.getText().toString(),new com.itextpdf.text.Font(bf,15,Font.BOLD));
+            String ngay = new SimpleDateFormat("dd").format(new Date());
+            String thang = new SimpleDateFormat("MM").format(new Date());
+            String nam = new SimpleDateFormat("yyyy").format(new Date());
+            Paragraph DateTime=new Paragraph("Ngày "+ngay+" tháng "+thang+" năm "+nam,new com.itextpdf.text.Font(bf,15,Font.ITALIC));
+            tieuDe.setAlignment(Element.ALIGN_CENTER);
+            DateTime.setAlignment(Element.ALIGN_RIGHT);
+            document.add(tieuDe);
+            document.add(DateTime);
+            document.add(idHD2);
+            document.add(tenKH);
+            document.add(idKH2);
+            document.add(new Paragraph("SDT khách hàng: "+customer.getPhone(),new com.itextpdf.text.Font(bf,15)));
+            document.add(new Paragraph("Tên nhân viên    : "+employee.getName().toString(),new com.itextpdf.text.Font(bf,15)));
+            document.add(new Paragraph("ID nhân viên      : "+employee.getIdEmployee(),new com.itextpdf.text.Font(bf,15)));
+            document.add(new Paragraph("Ngày lập            : "+dateTimeString,new com.itextpdf.text.Font(bf,15)));
+            document.add(new Paragraph(" "));
+            // Add meta data information to PDF file
+
+            PdfPTable table = new PdfPTable(6);
+            //Khởi tạo ô header
+            PdfPCell header1 = new PdfPCell(new Paragraph("ID sản phẩm",new com.itextpdf.text.Font(bf,12)));
+            PdfPCell header2 = new PdfPCell(new Paragraph("Tên sản phẩm",new com.itextpdf.text.Font(bf,12)));
+            PdfPCell header3 = new PdfPCell(new Paragraph("Số lượng",new com.itextpdf.text.Font(bf,12)));
+            PdfPCell header4 = new PdfPCell(new Paragraph("Thành tiền",new com.itextpdf.text.Font(bf,12)));
+            PdfPCell header5 = new PdfPCell(new Paragraph("Giá niêm yết",new com.itextpdf.text.Font(bf,12)));
+            PdfPCell header6 = new PdfPCell(new Paragraph("Giá khuyến mãi",new com.itextpdf.text.Font(bf,12)));
+
+            header1.setMinimumHeight(70f); // Kích thước tối thiểu là 50
+            header2.setMinimumHeight(70f);
+            header3.setMinimumHeight(70f);
+            header4.setMinimumHeight(70f);
+            header5.setMinimumHeight(70f);
+            header6.setMinimumHeight(70f);
+            //Thêm 4 ô header vào table
+            table.addCell(header1);
+            table.addCell(header2);
+            table.addCell(header5);
+            table.addCell(header6);
+            table.addCell(header3);
+            table.addCell(header4);
+
+
+            for (DetailsBill cthd : mainController.findDetailsBillByBillId(idHD)) {
+                String idSP = cthd.getProduct().getProductId();
+                ProductSale productSale=mainController.getProductSale(idSP);
+                Product product = mainController.getProductById(idSP);
+                String giaBanSauKM ;
+                if(productSale!=null){
+                    giaBanSauKM = currencyFormat.format(productSale.getGiaBan())+"(-"+ productSale.getDescription().replaceAll("[^0-9%]", "")+")";
+                }
+                else{
+                    giaBanSauKM = currencyFormat.format(product.sellingPrice());
+                }
+
+                String tenSP = product.getProductName();
+                String soLuong = String.valueOf(cthd.getQuantity());
+                String thanhTien = currencyFormat.format(cthd.getTotal());
+                String giaBan = currencyFormat.format(product.sellingPrice());
+
+                table.addCell(new PdfPCell(new Paragraph(idSP)));
+                table.addCell(new PdfPCell(new Paragraph(tenSP,new com.itextpdf.text.Font(bf,12))));
+                table.addCell(new PdfPCell(new Paragraph(giaBan)));
+                table.addCell(new PdfPCell(new Paragraph(giaBanSauKM)));
+                table.addCell(new PdfPCell(new Paragraph(soLuong)));
+                table.addCell(new PdfPCell(new Paragraph(thanhTien)));
+            }
+
+            document.add(table);
+            String StrtienKhachDua=currencyFormat.format(bill.getAmountReceived());
+
+            Paragraph tongTien=new Paragraph("TỔNG TIỀN : "+txtTongTienHoaDon.getText(),new com.itextpdf.text.Font(bf, 25, 1, BaseColor.RED));
+            Paragraph tienKhachDua=new Paragraph("Tiền khách đưa  : "+StrtienKhachDua,new com.itextpdf.text.Font(bf, 20));
+            Paragraph tienTraKhach=new Paragraph("Tiền trả khách    : "+txtTienTraKhach.getText(),new com.itextpdf.text.Font(bf, 20));
+            Paragraph tienGioHang=new Paragraph("Tổng thành tiền  : "+txtTongTienGioHang.getText(),new com.itextpdf.text.Font(bf, 20,Font.BOLD));
+            Paragraph thue=new Paragraph("Thuế VAT (10%): "+txtThue.getText(),new com.itextpdf.text.Font(bf, 20));
+            document.add(tienGioHang);
+            document.add(thue);
+            document.add(tongTien);
+            document.add(tienKhachDua);
+            document.add(tienTraKhach);
+            // close the document
+            document.close();
+            Desktop.getDesktop().open(new java.io.File(filePath));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        } finally {
+
+            // closing FileOutputStream
+            try {
+                if (file != null) {
+                    file.close();
+                }
+            } catch (IOException io) {/*Failed to close*/
+
+            }
+
+        }
     }
     @Override
     public void mousePressed(MouseEvent e) {
@@ -1785,7 +1911,6 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
             }
             if (o.equals(btnTimKiemSanPham)) {
                 showDialogSanPham();
-                loadProduct();
             }
             if (o.equals(btnTimKhachHang))
             {
@@ -1798,6 +1923,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
             }
              if (o.equals(btnDongSanPham)) {
                  dialogSanPham.dispose();
+                 cbLocSanPham.setSelectedItem(0);
              }
             else if (o.equals(btnChonKH)) {
                  handleChooseCustomer();

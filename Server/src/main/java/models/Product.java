@@ -39,6 +39,7 @@ public abstract class Product {
     @JoinColumn(name = "supplierId")
     protected Supplier supplierId;
     protected double size;
+    @Column(name = "color",columnDefinition = "NVARCHAR(255)")
     protected String color;
     protected ProductStatusEnum status;
     protected int quantity;

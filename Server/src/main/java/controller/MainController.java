@@ -4,6 +4,8 @@ package controller;
 import models.*;
 import service.*;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public class MainController {
@@ -61,6 +63,74 @@ public class MainController {
     }
     public boolean addDetailsBill(DetailsBill detailsBill){
         return saleManagementDaoImplService.addDetailsBill(detailsBill);
+    }
+    public List<Object[]> getAllBill() {
+        return saleManagementDaoImplService.getAllBill();
+    }
+
+    public List<Object[]> loadDataProduct(String id) {
+        return saleManagementDaoImplService.loadDataProduct(id);
+    }
+
+    public int sumTotalBill() {
+        return saleManagementDaoImplService.sumTotalBill();
+    }
+
+    public List<Object[]> findBillByCustomerSDT(String sdt) {
+        return saleManagementDaoImplService.findBillByCustomerSDT(sdt);
+    }
+
+    public List<Object[]> findProductBestSeller(Date from, Date to) {
+        return saleManagementDaoImplService.findProductBestSeller(from, to);
+    }
+
+    public double sumTotalAmount(Date from, Date to) {
+        return saleManagementDaoImplService.sumTotalAmount(from, to);
+    }
+
+    public int sumTotalBillDate(Date from, Date to) {
+        return saleManagementDaoImplService.sumTotalBillDate(from, to);
+    }
+
+    public double sumProfit(Date from, Date to) {
+        return saleManagementDaoImplService.sumProfit(from, to);
+    }
+
+    public double sumTotalBillValue(Date from, Date to) {
+        return saleManagementDaoImplService.sumTotalBillValue(from, to);
+    }
+
+    public List<Object[]> sumTotalBillValueByProduct(Date from, Date to) {
+        return saleManagementDaoImplService.sumTotalBillValueByProduct(from, to);
+    }
+
+    public List<Object[]> sumTotalBillValueDoanhThu(Date from, Date to) {
+        return saleManagementDaoImplService.sumTotalBillValueDoanhThu(from, to);
+    }
+
+    public List<Object[]> sumTotalBillValueByDate(Date from, Date to) {
+        return saleManagementDaoImplService.sumTotalBillValueByDate(from, to);
+    }
+
+    public List<Object[]> sumTotalBillValueByDateLoiNhuan(Date from, Date to) {
+        return saleManagementDaoImplService.sumTotalBillValueByDateLoiNhuan(from, to);
+    }
+
+    public List<Object[]> findProductWorstSeller(Date from, Date to) {
+        return saleManagementDaoImplService.findProductWorstSeller(from, to);
+    }
+
+    public List<Object[]> findEmployeeBestSeller(Date from, Date to) {
+        return saleManagementDaoImplService.findEmployeeBestSeller(from, to);
+    }
+    public List<DetailsBill> findDetailsBillByBillId(String id){
+        return saleManagementDaoImplService.findDetailsBillByBillId(id);
+    }
+    public List<Bill> findBillByEmployee(String id){
+        return saleManagementDaoImplService.findBillByEmployee(id);
+    }
+    public List<Bill> findBillByDate(LocalDate from, LocalDate to){
+        return saleManagementDaoImplService.findBillByDate(from,to);
     }
     //ProductSale
     public List<ProductSale> getAllAProductSale() {

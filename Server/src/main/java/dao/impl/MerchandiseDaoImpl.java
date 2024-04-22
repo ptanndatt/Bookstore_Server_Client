@@ -4,10 +4,7 @@ import dao.MerchandiseDao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
-import models.Book;
-import models.Merchandise;
-import models.ProductType;
-import models.Supplier;
+import models.*;
 import util.HibernateUtil;
 import util.ProductStatusEnum;
 
@@ -81,7 +78,7 @@ public class MerchandiseDaoImpl implements MerchandiseDao {
         return false;
     }
 
-    //    @Override
+//        @Override
 //    public List<Merchandise> getAllMerchandise() {
 //        try {
 //            String hql = "SELECT m, p.productTypeName, s.supplierName  " +
@@ -106,33 +103,46 @@ public class MerchandiseDaoImpl implements MerchandiseDao {
 //        }
 //        return null;
 //    }
-    @Override
+//    @Override
+//    public List<Merchandise> getAllMerchandise() {
+//        try {
+//            String hql = "SELECT m, p.productTypeName AS productTypeName, s.supplierName AS supplierName " +
+//                    "FROM Merchandise m " +
+//                    "JOIN FETCH m.productTypeId p " +
+//                    "JOIN FETCH m.supplierId s";
+//
+//            TypedQuery<Object[]> query = em.createQuery(hql, Object[].class);
+//            List<Object[]> resultList = query.getResultList();
+//            List<Merchandise> merchandiseList = new ArrayList<>();
+//
+//            for (Object[] result : resultList) {
+//                Merchandise merchandise = (Merchandise) result[0];
+//                String productTypeName = (String) result[1];
+//                String supplierName = (String) result[2];
+//                merchandise.getProductTypeId().setProductTypeName(productTypeName);
+//                merchandise.getSupplierId().setSupplierName(supplierName);
+//                merchandiseList.add(merchandise);
+//            }
+//            return merchandiseList;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
     public List<Merchandise> getAllMerchandise() {
+        EntityTransaction tr = null;
         try {
-            String hql = "SELECT m, p.productTypeName AS productTypeName, s.supplierName AS supplierName " +
-                    "FROM Merchandise m " +
-                    "JOIN FETCH m.productTypeId p " +
-                    "JOIN FETCH m.supplierId s";
-
-            TypedQuery<Object[]> query = em.createQuery(hql, Object[].class);
-            List<Object[]> resultList = query.getResultList();
-            List<Merchandise> merchandiseList = new ArrayList<>();
-
-            for (Object[] result : resultList) {
-                Merchandise merchandise = (Merchandise) result[0];
-                String productTypeName = (String) result[1];
-                String supplierName = (String) result[2];
-                merchandise.getProductTypeId().setProductTypeName(productTypeName);
-                merchandise.getSupplierId().setSupplierName(supplierName);
-                merchandiseList.add(merchandise);
-            }
+            tr = em.getTransaction();
+            tr.begin();
+            List<Merchandise> merchandiseList = em.createQuery("FROM Merchandise", Merchandise.class).getResultList();
+            tr.commit();
             return merchandiseList;
         } catch (Exception e) {
+            tr.rollback();
             e.printStackTrace();
+            return null;
         }
-        return null;
     }
-
 
     @Override
     public List<Merchandise> findSupplierByNameMerchandise(String name) {

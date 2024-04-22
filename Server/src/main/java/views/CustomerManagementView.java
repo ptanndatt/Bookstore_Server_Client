@@ -260,7 +260,7 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
         if (!text.equals("")) {
             for (Customer customer : mainController.findCustomerByText(text)) {
                 String ngaySinh = new SimpleDateFormat("dd/MM/yyyy").format(customer.getBirth());
-                modelKhachHang.addRow(new Object[] {customer.getIdCustomer(), customer.getName(),customer.getPhone(), customer.getEmail(),customer.getAddress(),ngaySinh,customer.getGender().equals("Nam")?"Nam":"Nữ"});
+                modelKhachHang.addRow(new Object[] {customer.getIdCustomer(), customer.getName(),customer.getPhone(), customer.getEmail(),customer.getAddress(),ngaySinh,customer.getGender()});
 
             }
         } else {
@@ -395,7 +395,7 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
     private void loadData() {
         modelKhachHang.setRowCount(0);
         for (Customer customer : mainController.getAllCustomers() ) {
-            modelKhachHang.addRow(new Object[] {customer.getIdCustomer(), customer.getName(),customer.getPhone(), customer.getEmail(),customer.getAddress(),dfNgaySinh.format(customer.getBirth()),customer.getGender().equals("Nam")?"Nam":"Nữ"
+            modelKhachHang.addRow(new Object[] {customer.getIdCustomer(), customer.getName(),customer.getPhone(), customer.getEmail(),customer.getAddress(),dfNgaySinh.format(customer.getBirth()),customer.getGender()
             });
 
         }

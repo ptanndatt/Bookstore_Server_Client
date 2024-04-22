@@ -12,6 +12,8 @@ import util.log.Log;
 
 import java.util.List;
 
+import static java.awt.SystemColor.text;
+
 public class CustomerDaoImpl implements CustomerDao {
     private EntityManager em;
     public CustomerDaoImpl() {
@@ -91,5 +93,12 @@ public class CustomerDaoImpl implements CustomerDao {
     @Override
     public Customer getCustomerByID(String customerID) {
         return em.find(Customer.class, customerID);
+    }
+
+    @Override
+    public Customer getCustomerByName(String name) {
+        return em.createQuery("SELECT c FROM Customer c WHERE c.name =:text",Customer.class)
+                .setParameter("text",   name ) // %text% for similarity
+                .getSingleResult();
     }
 }

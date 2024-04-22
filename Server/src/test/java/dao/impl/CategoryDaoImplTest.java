@@ -11,8 +11,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import util.log.Log;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -28,9 +29,10 @@ class CategoryDaoImplTest {
     @Test
     void getProductSales() {
 
-
-        List<BillPending> promotions = mainController.findBillPendingByText("03");
-        System.out.println(promotions);
+        LocalDate datefrom= LocalDate.now();
+        LocalDate dateto=LocalDate.of(2024,5,1);
+        List<Bill> merchandises = mainController.findBillByDate(datefrom,dateto);
+        System.out.println(merchandises);
     }
 
     @AfterAll

@@ -29,7 +29,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 
-public class ManagerHomeView extends JFrame {
+public class EmployeeHomeView extends JFrame {
     private JScrollPane jScrollPane1;
     private JPanel menus;
     private JPanel panelBody;
@@ -46,10 +46,10 @@ public class ManagerHomeView extends JFrame {
 //        new ManagerHomeView(new Employee()).setVisible(true);
 //    }
 
-    public ManagerHomeView(Employee e) {
+    public EmployeeHomeView(Employee e) {
         this.employee = e;
         mainController = new MainController();
-        setTitle("Quản trị");
+        setTitle("NHÀ SÁCH");
         setSize(new Dimension(871, 473));
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -64,10 +64,13 @@ public class ManagerHomeView extends JFrame {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                int result = JOptionPane.showConfirmDialog(ManagerHomeView.this, "Bạn có chắc chắn muốn đóng cửa sổ?",
+                int result = JOptionPane.showConfirmDialog(EmployeeHomeView.this, "Bạn có chắc chắn muốn đóng cửa sổ?",
                         "Xác nhận đóng cửa sổ", JOptionPane.YES_NO_OPTION);
                 if (result == JOptionPane.YES_OPTION) {
                     dispose();
+                }
+                else if (result == JOptionPane.NO_OPTION) {
+                   System.exit(0);
                 }
             }
         });
@@ -97,36 +100,7 @@ public class ManagerHomeView extends JFrame {
 
             }
         });
-        MenuItem subQLLoaiSanPham = new MenuItem(iconSubMenu, "Loại sản phẩm", new ActionListener() {
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                switchToPanel(new ProductTypeView());
-            }
-        });
-        MenuItem subQLNhaCungCap = new MenuItem(iconSubMenu, "Nhà cung cấp", new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                switchToPanel(new SupplierView());
-
-            }
-        });
-        MenuItem subQLTacGia = new MenuItem(iconSubMenu, "Tác giả", new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                switchToPanel(new AuthorView());
-            }
-        });
-
-        MenuItem subQLTheLoai = new MenuItem(iconSubMenu, "Thể loại", new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                switchToPanel(new CategoryView());
-            }
-        });
         MenuItem DangXuat = new MenuItem(iconDX, "Đăng xuất", new ActionListener() {
 
             @Override
@@ -142,23 +116,6 @@ public class ManagerHomeView extends JFrame {
 
             }
         });
-        MenuItem QLSP = new MenuItem(iconSP, "Sản phẩm", new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                switchToPanel(new MerchandiseView());
-
-            }
-        }, subQLLoaiSanPham, subQLNhaCungCap, subQLTacGia, subQLTheLoai);
-
-        MenuItem QLNV = new MenuItem(iconNV, "Quản lý nhân sự", new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                switchToPanel(new EmployeeManagementView());
-
-            }
-        });
         MenuItem QLKH = new MenuItem(iconKH, "Quản lý khách hàng", new ActionListener() {
 
             @Override
@@ -169,59 +126,23 @@ public class ManagerHomeView extends JFrame {
             }
         });
 
-        MenuItem KM = new MenuItem(iconKM, "Chương trình khuyến mãi", new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                switchToPanel(new PromotionView());
-            }
-        });
         MenuItem QLHD = new MenuItem(iconHD, "Quản lý hóa đơn", new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
-                switchToPanel(new BillsManagement());
-//                switchToPanel(new QuanLyHoaDonView());
+                switchToPanel(new BillForEmployeeView(employee));
             }
         });
 
-        MenuItem subThongKeDoanhThu = new MenuItem(iconSubMenu, "Thống kê doanh thu", new ActionListener() {
+        MenuItem ThongKe = new MenuItem(iconTK, "Thống kê", new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
                 switchToPanel(new ManagerHomeStatistics());
-//                switchToPanel(new ThongKeDoanhThuNhanVienView());
-
             }
         });
-        MenuItem subThongKeSanPham = new MenuItem(iconSubMenu, "Thống kê sản phẩm", new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-//                switchToPanel(new ThongKeSanPhamQuanLyView());
-            }
-        });
-
-        MenuItem subThongKeSach = new MenuItem(iconSubMenu, "Thống kê sách", new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-//                switchToPanel(new ThongKeSachQuanLyView());
-            }
-        });
-
-        MenuItem subThongKeKhachHang = new MenuItem(iconSubMenu, "Thống kê khách hàng", new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-//                switchToPanel(new TKKHView());
-            }
-        });
-
-
-        MenuItem ThongKe = new MenuItem(iconTK, "Thống kê", null, subThongKeDoanhThu, subThongKeSanPham, subThongKeSach,
-                subThongKeKhachHang);
 
         MenuItem subGiaoDien = new MenuItem(iconSubMenu, "Giao diện", new ActionListener() {
 
@@ -244,12 +165,9 @@ public class ManagerHomeView extends JFrame {
         MenuItem subCaiDatHDSD = new MenuItem(iconSubMenu, "Hướng dẫn sử dụng", null);
         MenuItem CaiDat = new MenuItem(iconSetting, "Cài đặt", null, subGiaoDien, subCaiDatDMK);
 
-        addMenu(QLSP, QLBH, QLNV, QLKH, KM, QLHD, ThongKe, CaiDat, DangXuat);
+        addMenu(QLBH,QLKH, QLHD, ThongKe, CaiDat, DangXuat);
         QLBH.setBackground(new Color(153, 255, 255));
-        QLSP.setBackground(new Color(153, 255, 255));
-        QLNV.setBackground(new Color(153, 255, 255));
         QLKH.setBackground(new Color(153, 255, 255));
-        KM.setBackground(new Color(153, 255, 255));
         QLHD.setBackground(new Color(153, 255, 255));
         ThongKe.setBackground(new Color(153, 255, 255));
         CaiDat.setBackground(new Color(153, 255, 255));

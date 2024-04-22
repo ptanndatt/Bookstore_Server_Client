@@ -6,6 +6,7 @@ import dao.impl.AccountDaoImpl;
 import dao.impl.EmployeeDaoImpl;
 import dao.impl.RoleDaoImpl;
 import models.Account;
+import models.Customer;
 import models.Employee;
 import models.Role;
 import org.apache.poi.ss.usermodel.Row;
@@ -292,11 +293,39 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
             public void changedUpdate(DocumentEvent e) {
             }
         });
+        txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                modelNhanVien.setRowCount(0);
+                handleSearch(txtTimKiem.getText().trim());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                modelNhanVien.setRowCount(0);
+                handleSearch(txtTimKiem.getText().trim());
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+
+            }
+        });
         loadComboxBoxRole();
         loadDataRoleTabble();
         loadData();
     }
+    private void handleSearch(String text) {
+        if (!text.equals("")) {
+            for (Employee employee : mainController.findEmployeeByText(text)) {
+                String ngaySinh = new SimpleDateFormat("dd/MM/yyyy").format(employee.getBirth());
+                modelNhanVien.addRow(new Object[] {employee.getIdEmployee(), employee.getName(),employee.getPhone(), employee.getEmail(),employee.getAddress(),ngaySinh,employee.getGender()});
 
+            }
+        } else {
+            loadData();
+        }
+    }
     private void addRole() {
         String tenChucVu = txtTenChucVu.getText();
         Role role = new Role(tenChucVu, ROLE);
