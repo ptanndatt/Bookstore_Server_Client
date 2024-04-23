@@ -16,6 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Table(name = "ProductType")
@@ -23,10 +24,11 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductType {
+public class ProductType implements Serializable {
+    private static final long serialVersionUID = -6502313296453212087L;
     @Id
     private String productTypeId;
-    @Column(name = "productTypeName",columnDefinition = "NVARCHAR(255)")
+    @Column(name = "productTypeName", columnDefinition = "NVARCHAR(255)")
     private String productTypeName;
     @OneToMany(mappedBy = "productTypeId", cascade = CascadeType.ALL)
     private List<Product> products;

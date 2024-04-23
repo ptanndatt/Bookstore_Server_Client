@@ -9,18 +9,21 @@ import models.Employee;
 import models.Role;
 import util.HibernateUtil;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.Collections;
 import java.util.List;
 
-public class EmployeeDaoImpl implements EmployeeDao {
+public class EmployeeDaoImpl extends UnicastRemoteObject implements EmployeeDao {
+    private static final long serialVersionUID = -7025849940149050174L;
     private EntityManager em;
 
-    public EmployeeDaoImpl() {
+    public EmployeeDaoImpl() throws RemoteException {
         em = HibernateUtil.getInstance().getEntityManager();
     }
 
     @Override
-    public List<Employee> getAllEmployees() {
+    public List<Employee> getAllEmployees() throws RemoteException {
         try {
             String hql = "FROM Employee";
             TypedQuery<Employee> query = em.createQuery(hql, Employee.class);
@@ -33,7 +36,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public boolean addEmployee(Employee employee) {
+    public boolean addEmployee(Employee employee) throws RemoteException {
         EntityTransaction entityTransaction = em.getTransaction();
         try {
             entityTransaction.begin();
@@ -48,7 +51,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public boolean updateEmployee(Employee employee) {
+    public boolean updateEmployee(Employee employee) throws RemoteException {
         EntityTransaction entityTransaction = em.getTransaction();
         ;
         try {
@@ -64,7 +67,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public boolean deleteEmployee(String empId) {
+    public boolean deleteEmployee(String empId) throws RemoteException {
         EntityTransaction tr = em.getTransaction();
         try {
             tr.begin();
@@ -80,14 +83,14 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public List<Employee> findEmployeeByText(String text) {
+    public List<Employee> findEmployeeByText(String text) throws RemoteException {
         return em.createQuery("SELECT e FROM Employee e WHERE e.name LIKE :text OR e.phone LIKE :text OR e.email LIKE :text OR e.address LIKE :text OR e.idEmployee LIKE :text", Employee.class)
                 .setParameter("text", "%" + text + "%") // %text% for similarity
                 .getResultList();
     }
 
     @Override
-    public List<Employee> findEmployeeByRoleCode(int roleCode) {
+    public List<Employee> findEmployeeByRoleCode(int roleCode) throws RemoteException {
         try {
             String hql = "SELECT e " +
                     "FROM Employee e " +
@@ -103,7 +106,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public Employee findEmployeeById(String empId) {
+    public Employee findEmployeeById(String empId) throws RemoteException {
         try {
             return em.find(Employee.class, empId);
         } catch (Exception e) {

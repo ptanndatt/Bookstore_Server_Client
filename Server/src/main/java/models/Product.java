@@ -18,6 +18,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 import util.ProductStatusEnum;
 
+import java.io.Serializable;
 import java.util.Set;
 
 @Data
@@ -26,11 +27,12 @@ import java.util.Set;
 @Entity
 @Table(name = "Product")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Product {
+public abstract class Product implements Serializable {
+    private static final long serialVersionUID = 1886753072832474878L;
     @Id
     @Column(name = "productId")
     protected String productId;
-    @Column(name = "productName",columnDefinition = "NVARCHAR(255)")
+    @Column(name = "productName", columnDefinition = "NVARCHAR(255)")
     protected String productName;
     @ManyToOne
     @JoinColumn(name = "productTypeId")
@@ -39,7 +41,7 @@ public abstract class Product {
     @JoinColumn(name = "supplierId")
     protected Supplier supplierId;
     protected double size;
-    @Column(name = "color",columnDefinition = "NVARCHAR(255)")
+    @Column(name = "color", columnDefinition = "NVARCHAR(255)")
     protected String color;
     protected ProductStatusEnum status;
     protected int quantity;
@@ -50,6 +52,7 @@ public abstract class Product {
     private Set<DetailsBillPending> detailsBillPendings;
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private Set<DetailsBill> detailsBills;
+
     public Product(String productId) {
         this.productId = productId;
     }

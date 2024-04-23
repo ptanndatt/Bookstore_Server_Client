@@ -18,6 +18,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Table(name = "Supplier")
@@ -25,10 +26,10 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Supplier {
+public class Supplier implements Serializable {
     @Id
     private String supplierId;
-    @Column(name = "supplierName",columnDefinition = "NVARCHAR(255)")
+    @Column(name = "supplierName", columnDefinition = "NVARCHAR(255)")
     private String supplierName;
     private String address;
     private String phoneNumber;

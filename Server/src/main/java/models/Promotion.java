@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import util.SaleTypeEnum;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -17,18 +18,20 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "Promotion")
-public class Promotion {
+public class Promotion implements Serializable {
+    private static final long serialVersionUID = 7283124247038893245L;
     @Id
     @Column(name = "promotionId", nullable = false)
     private String promotionId;
-    @Column(name = "promotionName",nullable = false,columnDefinition = "NVARCHAR(255)")
+    @Column(name = "promotionName", nullable = false, columnDefinition = "NVARCHAR(255)")
     private String promotionName;
-    @Column(name = "promotionDiscount",columnDefinition = "NVARCHAR(255)")
+    @Column(name = "promotionDiscount", columnDefinition = "NVARCHAR(255)")
     private String promotionDiscount;
     private Date promotionStartDate;
     private Date promotionEndDate;
     @OneToMany(mappedBy = "promotion", cascade = CascadeType.ALL)
     private List<ProductSale> productSales;
+
     public Promotion(String promotionId) {
         this.promotionId = promotionId;
     }

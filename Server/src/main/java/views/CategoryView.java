@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 
 import controller.MainController;
 
+import lombok.SneakyThrows;
 import models.Category;
 import util.DialogUtils;
 import util.GeneratorIDAuto;
@@ -57,6 +58,7 @@ public class CategoryView extends JPanel implements ActionListener, KeyListener,
     private GeneratorIDAuto autoID;
 
 
+    @SneakyThrows
     public CategoryView() {
         setLayout(new BorderLayout(8, 6));
         mainController = new MainController();
@@ -213,6 +215,7 @@ public class CategoryView extends JPanel implements ActionListener, KeyListener,
         }
     }
 
+    @SneakyThrows
     private void loadData() {
         model.setRowCount(0);
         java.util.List<Category> categories = mainController.getAllCategory();
@@ -295,6 +298,7 @@ public class CategoryView extends JPanel implements ActionListener, KeyListener,
         return category;
     }
 
+    @SneakyThrows
     private void addCategory() {
         String idTheLoai = txtIdtheLoai.getText();
         String tenTheLoai = txtTentheLoai.getText();

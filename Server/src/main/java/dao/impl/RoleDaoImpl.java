@@ -8,18 +8,21 @@ import models.Customer;
 import models.Role;
 import util.HibernateUtil;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RoleDaoImpl implements RoleDao {
+public class RoleDaoImpl extends UnicastRemoteObject implements RoleDao {
+    private static final long serialVersionUID = -5636520417145561561L;
     private EntityManager em;
 
-    public RoleDaoImpl() {
+    public RoleDaoImpl() throws RemoteException {
         em = HibernateUtil.getInstance().getEntityManager();
     }
 
     @Override
-    public boolean addRole(Role role) {
+    public boolean addRole(Role role) throws RemoteException {
         EntityTransaction entityTransaction = em.getTransaction();
         try {
             entityTransaction.begin();
@@ -37,7 +40,7 @@ public class RoleDaoImpl implements RoleDao {
     }
 
     @Override
-    public boolean deleteRole(String roleId) {
+    public boolean deleteRole(String roleId) throws RemoteException {
         EntityTransaction tr = em.getTransaction();
         try {
             tr.begin();
@@ -53,7 +56,7 @@ public class RoleDaoImpl implements RoleDao {
     }
 
     @Override
-    public List<Role> getAllRole() {
+    public List<Role> getAllRole() throws RemoteException {
         List<Role> roles = null;
         EntityTransaction tr = em.getTransaction();
         try {
@@ -69,14 +72,14 @@ public class RoleDaoImpl implements RoleDao {
         return roles;
     }
 
-    public Role findRoleByText(String text) {
+    public Role findRoleByText(String text) throws RemoteException {
         return em.createQuery("SELECT r from Role r where r.roleName =:text", Role.class)
                 .setParameter("text", text) // %text% for similarity
                 .getSingleResult();
     }
 
     @Override
-    public boolean updateRole(String id) {
+    public boolean updateRole(String id) throws RemoteException {
         EntityTransaction tr = em.getTransaction();
         try {
             tr.begin();
@@ -92,7 +95,7 @@ public class RoleDaoImpl implements RoleDao {
     }
 
     @Override
-    public List<Role> getRolesByRoleCode(int roleCode) {
+    public List<Role> getRolesByRoleCode(int roleCode) throws RemoteException {
         List<Role> roles = new ArrayList<>();
         EntityTransaction tr = em.getTransaction();
         try {

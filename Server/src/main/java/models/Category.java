@@ -15,6 +15,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Table(name = "Category")
@@ -23,10 +24,11 @@ import java.util.List;
 @Setter
 //@AllArgsConstructor
 //@NoArgsConstructor
-public class Category {
+public class Category implements Serializable {
+    private static final long serialVersionUID = 8443636018907976118L;
     @Id
     private String idCategory;
-    @Column(name = "categoryName",columnDefinition = "NVARCHAR(255)")
+    @Column(name = "categoryName", columnDefinition = "NVARCHAR(255)")
     private String categoryName;
     private int bookQuantity;
     private String description;

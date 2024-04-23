@@ -3,40 +3,45 @@ package service;
 import dao.impl.AuthorDaoImpl;
 import models.Author;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 public class AuthorDaoImplService {
     private AuthorDaoImpl authorDaoImpl = new AuthorDaoImpl();
 
-    public List<Author> getAllAuthor() {
+    public AuthorDaoImplService() throws RemoteException {
+    }
+
+
+    public List<Author> getAllAuthor() throws RemoteException {
         return authorDaoImpl.getAllAuthor();
     }
 
-    public boolean addAuthor(Author author) {
+    public boolean addAuthor(Author author) throws RemoteException {
         return authorDaoImpl.addAuthor(author);
     }
 
-    public boolean updateAuthor(Author author) {
+    public boolean updateAuthor(Author author) throws RemoteException {
         return authorDaoImpl.updateAuthor(author);
     }
 
-    public boolean deleteAuthor(String idAuthor) {
+    public boolean deleteAuthor(String idAuthor) throws RemoteException {
         return authorDaoImpl.deleteAuthor(idAuthor);
     }
 
-    public boolean checkIdAuthor(String idAuthor) {
+    public boolean checkIdAuthor(String idAuthor) throws RemoteException {
         return authorDaoImpl.checkIdAuthor(idAuthor);
     }
 
-    public List<Author> getLatestAuthorID() {
+    public List<Author> getLatestAuthorID() throws RemoteException {
         return authorDaoImpl.getLatestAuthorID();
     }
 
-    public boolean decreaseNumberOfBooks(String idAuthor) {
+    public boolean decreaseNumberOfBooks(String idAuthor) throws RemoteException {
         return authorDaoImpl.decreaseNumberOfBooks(idAuthor);
     }
 
-    public boolean increaseNumberOfBooks(String idAuthor) {
+    public boolean increaseNumberOfBooks(String idAuthor) throws RemoteException {
         return authorDaoImpl.increaseNumberOfBooks(idAuthor);
     }
 }

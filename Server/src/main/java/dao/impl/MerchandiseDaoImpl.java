@@ -8,18 +8,21 @@ import models.*;
 import util.HibernateUtil;
 import util.ProductStatusEnum;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MerchandiseDaoImpl implements MerchandiseDao {
+public class MerchandiseDaoImpl extends UnicastRemoteObject implements MerchandiseDao {
+    private static final long serialVersionUID = -8628992639494711232L;
     private EntityManager em;
 
-    public MerchandiseDaoImpl() {
+    public MerchandiseDaoImpl() throws RemoteException {
         em = HibernateUtil.getInstance().getEntityManager();
     }
 
     @Override
-    public boolean addMerchandise(Merchandise merchandise) {
+    public boolean addMerchandise(Merchandise merchandise) throws RemoteException {
         EntityTransaction tr = null;
         try {
             tr = em.getTransaction();
@@ -35,7 +38,7 @@ public class MerchandiseDaoImpl implements MerchandiseDao {
     }
 
     @Override
-    public boolean updateMerchandise(Merchandise merchandise) {
+    public boolean updateMerchandise(Merchandise merchandise) throws RemoteException {
         EntityTransaction tr = null;
         try {
             tr = em.getTransaction();
@@ -50,7 +53,7 @@ public class MerchandiseDaoImpl implements MerchandiseDao {
     }
 
     @Override
-    public boolean deleteMerchandise(String id) {
+    public boolean deleteMerchandise(String id) throws RemoteException {
         EntityTransaction tr = null;
         try {
             tr = em.getTransaction();
@@ -68,7 +71,7 @@ public class MerchandiseDaoImpl implements MerchandiseDao {
     }
 
     @Override
-    public boolean checkIdExist(String id) {
+    public boolean checkIdExist(String id) throws RemoteException {
         try {
             Merchandise merchandise = em.find(Merchandise.class, id);
             if (merchandise != null) return true;
@@ -78,7 +81,7 @@ public class MerchandiseDaoImpl implements MerchandiseDao {
         return false;
     }
 
-//        @Override
+    //        @Override
 //    public List<Merchandise> getAllMerchandise() {
 //        try {
 //            String hql = "SELECT m, p.productTypeName, s.supplierName  " +
@@ -129,7 +132,7 @@ public class MerchandiseDaoImpl implements MerchandiseDao {
 //        }
 //        return null;
 //    }
-    public List<Merchandise> getAllMerchandise() {
+    public List<Merchandise> getAllMerchandise() throws RemoteException {
         EntityTransaction tr = null;
         try {
             tr = em.getTransaction();
@@ -145,7 +148,7 @@ public class MerchandiseDaoImpl implements MerchandiseDao {
     }
 
     @Override
-    public List<Merchandise> findSupplierByNameMerchandise(String name) {
+    public List<Merchandise> findSupplierByNameMerchandise(String name) throws RemoteException {
         try {
             if (!em.isOpen()) {
                 throw new IllegalStateException("EntityManager is closed");
@@ -162,7 +165,7 @@ public class MerchandiseDaoImpl implements MerchandiseDao {
     }
 
     @Override
-    public List<Merchandise> findProductTypeMerchandise(String name) {
+    public List<Merchandise> findProductTypeMerchandise(String name) throws RemoteException {
         try {
             if (!em.isOpen()) {
                 throw new IllegalStateException("EntityManager is closed");

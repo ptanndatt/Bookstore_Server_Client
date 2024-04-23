@@ -5,6 +5,7 @@ import controller.MainController;
 import dao.impl.AccountDaoImpl;
 import dao.impl.EmployeeDaoImpl;
 import dao.impl.RoleDaoImpl;
+import lombok.SneakyThrows;
 import models.Account;
 import models.Customer;
 import models.Employee;
@@ -84,6 +85,7 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
 
     private JTabbedPane tabbedPane;
 
+    @SneakyThrows
     public EmployeeManagementView() {
         dfNgaySinh = new SimpleDateFormat("dd/MM/yyyy");
         mainController = new MainController();
@@ -279,7 +281,7 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
             @Override
             public void insertUpdate(DocumentEvent e) {
                 int row = tableNhanVien.getSelectedRow();
-                if(row==-1)
+                if (row == -1)
                     txtID.setText(autoID.autoID("NS"));
                 else
                     txtID.setText(modelNhanVien.getValueAt(row, 0).toString());
@@ -315,17 +317,21 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         loadDataRoleTabble();
         loadData();
     }
+
+    @SneakyThrows
     private void handleSearch(String text) {
         if (!text.equals("")) {
             for (Employee employee : mainController.findEmployeeByText(text)) {
                 String ngaySinh = new SimpleDateFormat("dd/MM/yyyy").format(employee.getBirth());
-                modelNhanVien.addRow(new Object[] {employee.getIdEmployee(), employee.getName(),employee.getPhone(), employee.getEmail(),employee.getAddress(),ngaySinh,employee.getGender()});
+                modelNhanVien.addRow(new Object[]{employee.getIdEmployee(), employee.getName(), employee.getPhone(), employee.getEmail(), employee.getAddress(), ngaySinh, employee.getGender()});
 
             }
         } else {
             loadData();
         }
     }
+
+    @SneakyThrows
     private void addRole() {
         String tenChucVu = txtTenChucVu.getText();
         Role role = new Role(tenChucVu, ROLE);
@@ -337,6 +343,7 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         txtTenChucVu.setText("");
     }
 
+    @SneakyThrows
     private void loadDataRoleTabble() {
         modelChucVu.setRowCount(0);
         for (Role role : mainController.getAllRole()) {
@@ -345,6 +352,7 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         }
     }
 
+    @SneakyThrows
     private void addEmployee() {
 
         String id = txtID.getText();
@@ -375,6 +383,7 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         }
     }
 
+    @SneakyThrows
     private void loadData() {
         modelNhanVien.setRowCount(0);
         for (Employee employee : mainController.findEmployeeByRoleCode(ROLE)) {
@@ -384,6 +393,7 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         }
     }
 
+    @SneakyThrows
     private void updateEmployee() {
         String id = modelNhanVien.getValueAt(tableNhanVien.getSelectedRow(), 0).toString();
         String ten = txtTenNV.getText();
@@ -479,6 +489,8 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         }
         return true;
     }
+
+    @SneakyThrows
     private void loadComboxBoxRole() {
         cbChucVu.removeAllItems();
         for (Role role : mainController.getRolesByRoleCode(ROLE)) {
@@ -500,6 +512,7 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         txtTenNV.requestFocus();
         loadData();
     }
+
     private void showAddRoleDialog() {
         loadDataRoleTabble();
         JDialog dialog = new JDialog();
@@ -549,6 +562,7 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         pnBottom.add(pnButtons, BorderLayout.SOUTH);
 
         btnAdd.addActionListener(new ActionListener() {
+            @SneakyThrows
             @Override
             public void actionPerformed(ActionEvent e) {
                 String roleName = txtTenChucVu.getText();
@@ -576,6 +590,7 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
             }
         });
         btnDelete.addActionListener(new ActionListener() {
+            @SneakyThrows
             @Override
             public void actionPerformed(ActionEvent e) {
                 int row = tbChucVu.getSelectedRow();
@@ -598,6 +613,7 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         loadDataRoleTabble();
         dialog.setVisible(true);
     }
+
     private void exportExecl(String filePath) {
 
         try {
@@ -615,7 +631,7 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
             header.createCell(7).setCellValue("Chức vụ");
             header.createCell(8).setCellValue("Trạng thái");
             int rowNum = 1;
-            for(Employee kh: mainController.getAllEmployees()) {
+            for (Employee kh : mainController.getAllEmployees()) {
                 Row row = sheet.createRow(rowNum++);
                 row.createCell(0).setCellValue(kh.getIdEmployee());
                 row.createCell(1).setCellValue(kh.getName());
@@ -639,6 +655,7 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
             e.printStackTrace();
         }
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Object o = e.getSource();
@@ -657,7 +674,7 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         if (o.equals(btnLamMoi)) {
             reload();
         }
-        if(o.equals(btnXuatExecl)){
+        if (o.equals(btnXuatExecl)) {
             JFileChooser fileChooser = new JFileChooser();
             int returnValue = fileChooser.showOpenDialog(null);
             if (returnValue == JFileChooser.APPROVE_OPTION) {

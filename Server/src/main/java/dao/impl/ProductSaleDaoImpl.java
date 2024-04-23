@@ -6,16 +6,20 @@ import jakarta.persistence.EntityTransaction;
 import models.ProductSale;
 import util.HibernateUtil;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-public class ProductSaleDaoImpl implements ProductSaleDao {
+public class ProductSaleDaoImpl extends UnicastRemoteObject implements ProductSaleDao {
+    private static final long serialVersionUID = -7661189018618086279L;
     private EntityManager em;
 
-    public ProductSaleDaoImpl() {
+    public ProductSaleDaoImpl() throws RemoteException {
         em = HibernateUtil.getInstance().getEntityManager();
     }
+
     @Override
-    public List<ProductSale> getProductSale() {
+    public List<ProductSale> getProductSale() throws RemoteException {
         EntityTransaction tr = em.getTransaction();
         try {
             if (!tr.isActive()) {
@@ -32,7 +36,7 @@ public class ProductSaleDaoImpl implements ProductSaleDao {
     }
 
     @Override
-    public boolean addProductSale(ProductSale productSale) {
+    public boolean addProductSale(ProductSale productSale) throws RemoteException {
         EntityTransaction entityTransaction = em.getTransaction();
         try {
             entityTransaction.begin();
@@ -47,12 +51,13 @@ public class ProductSaleDaoImpl implements ProductSaleDao {
     }
 
     @Override
-    public boolean deleteProductSale(String id) {
+    public boolean deleteProductSale(String id) throws RemoteException {
         EntityTransaction tr = em.getTransaction();
         try {
             tr.begin();
             em.createQuery("DELETE FROM ProductSale ps WHERE ps.product.id= :id")
-                    .setParameter("id", id).executeUpdate();;
+                    .setParameter("id", id).executeUpdate();
+            ;
             tr.commit();
             return true;
         } catch (Exception e) {
@@ -61,8 +66,9 @@ public class ProductSaleDaoImpl implements ProductSaleDao {
             return false;
         }
     }
+
     @Override
-    public boolean deleteProductSaleByPromotionId(String id) {
+    public boolean deleteProductSaleByPromotionId(String id) throws RemoteException {
         EntityTransaction tr = em.getTransaction();
         try {
             em.createQuery("DELETE FROM ProductSale ps WHERE ps.promotion.id= :id")
@@ -78,26 +84,28 @@ public class ProductSaleDaoImpl implements ProductSaleDao {
             return false;
         }
     }
+
     @Override
-    public ProductSale getProductSaleById(String id) {
+    public ProductSale getProductSaleById(String id) throws RemoteException {
         EntityTransaction tr = em.getTransaction();
         try {
             return em.createQuery("SELECT ps FROM ProductSale ps WHERE ps.product.id =:id ", ProductSale.class)
-                .setParameter("id",   id ) // %text% for similarity
-                .getSingleResult();
+                    .setParameter("id", id) // %text% for similarity
+                    .getSingleResult();
         } catch (Exception e) {
             return null;
         }
     }
 
     @Override
-    public List<ProductSale> getProductSaleByPromotionId(String id) {
+    public List<ProductSale> getProductSaleByPromotionId(String id) throws RemoteException {
         return em.createQuery("SELECT d FROM ProductSale d WHERE d.promotion.id=:id", ProductSale.class)
-                .setParameter("id", id ) // %text% for similarity
+                .setParameter("id", id) // %text% for similarity
                 .getResultList();
     }
+
     @Override
-    public List<ProductSale> findProductSaleByText(String text) {
+    public List<ProductSale> findProductSaleByText(String text) throws RemoteException {
         return em.createQuery("SELECT p from ProductSale p where p.promotion.id LIKE:text OR p.product.id LIKE :text OR p.product.productName LIKE :text", ProductSale.class)
                 .setParameter("text", "%" + text + "%") // %text% for similarity
                 .getResultList();

@@ -1,5 +1,6 @@
 package models;
 
+import java.io.Serializable;
 import java.util.HashSet;
 
 import org.hibernate.mapping.Set;
@@ -20,7 +21,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Table(name = "Role")
-public class Role {
+public class Role implements Serializable {
+    private static final long serialVersionUID = 6878299406684161524L;
     @Id
     @Column(name = "roleId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -3,6 +3,7 @@ package models;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -12,14 +13,15 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="BillPending")
-public class BillPending {
+@Table(name = "BillPending")
+public class BillPending implements Serializable {
+    private static final long serialVersionUID = -4156963763725866835L;
     @Id
-    @Column(name = "billPendingId", nullable = false,unique = true)
+    @Column(name = "billPendingId", nullable = false, unique = true)
     private String billPendingId;
     private String billId;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="customerId")
+    @JoinColumn(name = "customerId")
     private Customer customer;
     @Column(name = "ngayLap")
     private Date ngayLap;

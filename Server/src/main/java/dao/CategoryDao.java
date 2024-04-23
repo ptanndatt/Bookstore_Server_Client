@@ -13,24 +13,26 @@ package dao;/*
 
 import models.Category;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.List;
 
-public interface CategoryDao {
-    List<Category> getAllCategory();
+public interface CategoryDao extends Remote {
+    List<Category> getAllCategory() throws RemoteException;
 
-    boolean addCategory(Category category);
+    boolean addCategory(Category category) throws RemoteException;
 
-    boolean updateCategory(Category category);
+    boolean updateCategory(Category category) throws RemoteException;
 
-    boolean deleteCategory(String idCategory);
+    boolean deleteCategory(String idCategory) throws RemoteException;
 
-    boolean checkIdCategory(String idCategory);
+    boolean checkIdCategory(String idCategory) throws RemoteException;
 
-    List<String> getLatestCategoryID();
+    List<String> getLatestCategoryID() throws RemoteException;
 
-    boolean decreaseNumberOfCategory(String idCategory);
+    boolean decreaseNumberOfCategory(String idCategory) throws RemoteException;
 
-    boolean increaseNumberOfCategory(String idCategory);
-    
+    boolean increaseNumberOfCategory(String idCategory) throws RemoteException;
+
 
 }

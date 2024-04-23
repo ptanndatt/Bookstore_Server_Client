@@ -8,18 +8,21 @@ import jakarta.persistence.TypedQuery;
 import models.*;
 import util.HibernateUtil;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDate;
 import java.util.*;
 
-public class SaleManagementDaoImpl implements SaleManagementDao {
+public class SaleManagementDaoImpl extends UnicastRemoteObject implements SaleManagementDao {
+    private static final long serialVersionUID = -4561025631834286278L;
     private EntityManager em;
 
-    public SaleManagementDaoImpl() {
+    public SaleManagementDaoImpl() throws RemoteException {
         em = HibernateUtil.getInstance().getEntityManager();
     }
 
     @Override
-    public boolean deleteAllBillPending() {
+    public boolean deleteAllBillPending() throws RemoteException {
         EntityTransaction tr = em.getTransaction();
         try {
             tr.begin();
@@ -34,7 +37,7 @@ public class SaleManagementDaoImpl implements SaleManagementDao {
     }
 
     @Override
-    public boolean deleteAllDetailBillPending() {
+    public boolean deleteAllDetailBillPending() throws RemoteException {
         EntityTransaction tr = em.getTransaction();
         try {
             tr.begin();
@@ -49,7 +52,7 @@ public class SaleManagementDaoImpl implements SaleManagementDao {
     }
 
     @Override
-    public boolean addBill(Bill bill) {
+    public boolean addBill(Bill bill) throws RemoteException {
         EntityTransaction entityTransaction = em.getTransaction();
         try {
             entityTransaction.begin();
@@ -64,7 +67,7 @@ public class SaleManagementDaoImpl implements SaleManagementDao {
     }
 
     @Override
-    public boolean addDetailBill(DetailsBill detailsBill) {
+    public boolean addDetailBill(DetailsBill detailsBill) throws RemoteException {
         EntityTransaction entityTransaction = em.getTransaction();
         try {
             entityTransaction.begin();
@@ -79,7 +82,7 @@ public class SaleManagementDaoImpl implements SaleManagementDao {
     }
 
     @Override
-    public boolean addBillPending(BillPending billPending) {
+    public boolean addBillPending(BillPending billPending) throws RemoteException {
         EntityTransaction entityTransaction = em.getTransaction();
         try {
             entityTransaction.begin();
@@ -94,7 +97,7 @@ public class SaleManagementDaoImpl implements SaleManagementDao {
     }
 
     @Override
-    public boolean addDetailsBillPending(DetailsBillPending detailsBillPending) {
+    public boolean addDetailsBillPending(DetailsBillPending detailsBillPending) throws RemoteException {
         EntityTransaction entityTransaction = em.getTransaction();
         try {
             entityTransaction.begin();
@@ -109,20 +112,21 @@ public class SaleManagementDaoImpl implements SaleManagementDao {
     }
 
     @Override
-    public List<DetailsBillPending> findDetailsBillPendingById(String id) {
+    public List<DetailsBillPending> findDetailsBillPendingById(String id) throws RemoteException {
         return em.createQuery("SELECT d FROM DetailsBillPending d WHERE d.billId=:id", DetailsBillPending.class)
                 .setParameter("id", id) // %text% for similarity
                 .getResultList();
     }
+
     @Override
-    public List<DetailsBill> findDetailsBillById(String id) {
+    public List<DetailsBill> findDetailsBillById(String id) throws RemoteException {
         return em.createQuery("SELECT d FROM DetailsBill d WHERE d.bill.id=:id", DetailsBill.class)
                 .setParameter("id", id) // %text% for similarity
                 .getResultList();
     }
 
     @Override
-    public List<BillPending> getAllBillPending() {
+    public List<BillPending> getAllBillPending() throws RemoteException {
         try {
             String hql = "FROM BillPending ";
             TypedQuery<BillPending> query = em.createQuery(hql, BillPending.class);
@@ -134,7 +138,7 @@ public class SaleManagementDaoImpl implements SaleManagementDao {
     }
 
     @Override
-    public List<DetailsBillPending> getAllDetailsBillPending() {
+    public List<DetailsBillPending> getAllDetailsBillPending() throws RemoteException {
         try {
             String hql = "FROM DetailsBillPending ";
             TypedQuery<DetailsBillPending> query = em.createQuery(hql, DetailsBillPending.class);
@@ -146,7 +150,7 @@ public class SaleManagementDaoImpl implements SaleManagementDao {
     }
 
     @Override
-    public Bill findBillById(String id) {
+    public Bill findBillById(String id) throws RemoteException {
         return em.find(Bill.class, id);
     }
 
@@ -160,7 +164,7 @@ on b.employeeId = e.employeeId
 on b.customerId = c.customerId
     * */
     @Override
-    public List<Object[]> getAllBill() {
+    public List<Object[]> getAllBill() throws RemoteException {
         String jpql = "SELECT b.billId, b.billDate, e.name, c.name,b.amountReceived,b.amounttotal " +
                 "FROM Bill b " +
                 "JOIN b.employee e " +
@@ -182,7 +186,7 @@ join Product p on db.productId = p.productId
 group by p.productId, p.productName, db.quantity, db.price
     * */
     @Override
-    public List<Object[]> loadDataProduct(String id) {
+    public List<Object[]> loadDataProduct(String id) throws RemoteException {
         String hql = "SELECT p.productId, p.productName, db.quantity, db.price, SUM(db.price*db.quantity) as ThanhTien " +
                 "FROM Bill b " +
                 "JOIN b.detailsBills db " +
@@ -195,7 +199,7 @@ group by p.productId, p.productName, db.quantity, db.price
     }
 
     @Override
-    public int sumTotalBill() {
+    public int sumTotalBill() throws RemoteException {
         try {
             String hql = "SELECT COUNT(*) FROM Bill b";
             TypedQuery<Long> query = em.createQuery(hql, Long.class);
@@ -208,7 +212,7 @@ group by p.productId, p.productName, db.quantity, db.price
     }
 
     @Override
-    public List<Object[]> findBillByCustomerSDT(String sdt) {
+    public List<Object[]> findBillByCustomerSDT(String sdt) throws RemoteException {
         try {
             String hql = "SELECT b.billId, b.billDate, e.name, c.name, " +
                     "MAX(ps.description) AS productDescription, b.amountReceived, b.amounttotal " +
@@ -223,7 +227,7 @@ group by p.productId, p.productName, db.quantity, db.price
                     "b.amountReceived, b.amounttotal";
             TypedQuery<Object[]> query = em.createQuery(hql, Object[].class);
             query.setParameter("sdt", "%" + sdt + "%");
-            return query.getResultList().stream().toList();
+            return query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -231,7 +235,7 @@ group by p.productId, p.productName, db.quantity, db.price
     }
 
     @Override
-    public List<Object[]> findProductBestSeller(Date from, Date to) {
+    public List<Object[]> findProductBestSeller(Date from, Date to) throws RemoteException {
         try {
             String hql = "SELECT p.productId, p.productName, db.price, db.quantity as quantity, COUNT(*) * 100.0 / (SELECT COUNT(*) FROM Bill) AS percentSold " +
                     "FROM Bill b " +
@@ -251,7 +255,7 @@ group by p.productId, p.productName, db.quantity, db.price
     }
 
     @Override
-    public List<Object[]> findProductWorstSeller(Date from, Date to) {
+    public List<Object[]> findProductWorstSeller(Date from, Date to) throws RemoteException {
         try {
             String hql = "SELECT p.productId, p.productName, db.price, db.quantity as quantity, COUNT(*) * 100.0 / (SELECT COUNT(*) FROM Bill) AS percentSold " +
                     "FROM Bill b " +
@@ -272,7 +276,7 @@ group by p.productId, p.productName, db.quantity, db.price
 
 
     @Override
-    public double sumTotalAmount(Date from, Date to) {
+    public double sumTotalAmount(Date from, Date to) throws RemoteException {
         try {
             String hql = "SELECT SUM(b.amounttotal) FROM Bill b WHERE b.billDate BETWEEN :from AND :to";
             TypedQuery<Number> query = em.createQuery(hql, Number.class);
@@ -287,7 +291,7 @@ group by p.productId, p.productName, db.quantity, db.price
     }
 
     @Override
-    public int sumTotalBillDate(Date from, Date to) {
+    public int sumTotalBillDate(Date from, Date to) throws RemoteException {
         try {
             String hql = "SELECT COUNT(*) FROM Bill b WHERE b.billDate BETWEEN :from AND :to";
             TypedQuery<Number> query = em.createQuery(hql, Number.class);
@@ -302,7 +306,7 @@ group by p.productId, p.productName, db.quantity, db.price
     }
 
     @Override
-    public double sumProfit(Date from, Date to) {
+    public double sumProfit(Date from, Date to) throws RemoteException {
         try {
             String hql = "SELECT SUM(b.profitTotal) FROM Bill b WHERE b.billDate BETWEEN :from AND :to";
             TypedQuery<Number> query = em.createQuery(hql, Number.class);
@@ -317,7 +321,7 @@ group by p.productId, p.productName, db.quantity, db.price
     }
 
     @Override
-    public double sumTotalBillValue(Date from, Date to) {
+    public double sumTotalBillValue(Date from, Date to) throws RemoteException {
         try {
             String hql = "SELECT SUM(db.quantity*db.price) FROM Bill b JOIN b.detailsBills db JOIN db.product p WHERE b.billDate BETWEEN :from AND :to";
             TypedQuery<Number> query = em.createQuery(hql, Number.class);
@@ -332,7 +336,7 @@ group by p.productId, p.productName, db.quantity, db.price
     }
 
     @Override
-    public List<Object[]> sumTotalBillValueByProduct(Date from, Date to) {
+    public List<Object[]> sumTotalBillValueByProduct(Date from, Date to) throws RemoteException {
         try {
             String hql = "SELECT p.productName, SUM(db.quantity*db.price) as totalValue " +
                     "FROM Bill b " +
@@ -348,11 +352,11 @@ group by p.productId, p.productName, db.quantity, db.price
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return List.of();
+        return Collections.emptyList();
     }
 
     @Override
-    public List<Object[]> sumTotalBillValueDoanhThu(Date from, Date to) {
+    public List<Object[]> sumTotalBillValueDoanhThu(Date from, Date to) throws RemoteException {
         try {
             String hql = "SELECT sum(db.quantity*db.price) FROM Bill b JOIN b.detailsBills db JOIN db.product p WHERE b.billDate BETWEEN :from AND :to";
             TypedQuery<Object[]> query = em.createQuery(hql, Object[].class);
@@ -367,7 +371,7 @@ group by p.productId, p.productName, db.quantity, db.price
 
 
     @Override
-    public List<Object[]> sumTotalBillValueByDate(Date from, Date to) {
+    public List<Object[]> sumTotalBillValueByDate(Date from, Date to) throws RemoteException {
         try {
             String hql = "SELECT b.billDate, sum(b.amounttotal) as DoanhThu " +
                     "from Bill b where b.billDate BETWEEN :from AND :to " +
@@ -383,7 +387,7 @@ group by p.productId, p.productName, db.quantity, db.price
     }
 
     @Override
-    public List<Object[]> sumTotalBillValueByDateLoiNhuan(Date from, Date to) {
+    public List<Object[]> sumTotalBillValueByDateLoiNhuan(Date from, Date to) throws RemoteException {
         try {
             String hql = "SELECT b.billDate, sum(b.profitTotal) as LoiNhuan " +
                     "from Bill b where b.billDate BETWEEN :from AND :to " +
@@ -399,7 +403,7 @@ group by p.productId, p.productName, db.quantity, db.price
     }
 
     @Override
-    public List<Object[]> findEmployeeBestSeller(Date from, Date to) {
+    public List<Object[]> findEmployeeBestSeller(Date from, Date to) throws RemoteException {
         try {
 
             String hql = "SELECT e.name, COUNT(*) as totalBill " +
@@ -420,7 +424,7 @@ group by p.productId, p.productName, db.quantity, db.price
 
 
     @Override
-    public boolean deleteBillPendingById(String id) {
+    public boolean deleteBillPendingById(String id) throws RemoteException {
         EntityTransaction tr = em.getTransaction();
         try {
             tr.begin();
@@ -436,7 +440,7 @@ group by p.productId, p.productName, db.quantity, db.price
     }
 
     @Override
-    public boolean deleteDetailsBillPendingById(String id) {
+    public boolean deleteDetailsBillPendingById(String id) throws RemoteException {
         EntityTransaction tr = em.getTransaction();
         try {
             tr.begin();
@@ -449,23 +453,26 @@ group by p.productId, p.productName, db.quantity, db.price
             return false;
         }
     }
+
     @Override
-    public List<BillPending> findBillPendingByText(String text) {
+    public List<BillPending> findBillPendingByText(String text) throws RemoteException {
         return em.createQuery("SELECT p from BillPending p where p.customer.name LIKE:text OR p.customer.phone LIKE :text OR p.customer.id LIKE :text", BillPending.class)
                 .setParameter("text", "%" + text + "%") // %text% for similarity
                 .getResultList();
     }
+
     @Override
-    public List<Bill> findBillByEmployee(String employeeID) {
+    public List<Bill> findBillByEmployee(String employeeID) throws RemoteException {
         return em.createQuery("SELECT p from Bill p where p.employee.idEmployee =:employeeID", Bill.class)
-                .setParameter("employeeID",  employeeID ) // %text% for similarity
+                .setParameter("employeeID", employeeID) // %text% for similarity
                 .getResultList();
     }
+
     @Override
-    public List<Bill> findBillByDate(LocalDate dateFrom, LocalDate dateTo) {
+    public List<Bill> findBillByDate(LocalDate dateFrom, LocalDate dateTo) throws RemoteException {
         return em.createQuery("SELECT p from Bill p where p.billDate between :dateFrom and  :dateTo", Bill.class)
-                .setParameter("dateFrom",  dateFrom )
-                .setParameter("dateTo",dateTo)// %text% for similarity
+                .setParameter("dateFrom", dateFrom)
+                .setParameter("dateTo", dateTo)// %text% for similarity
                 .getResultList();
     }
 }

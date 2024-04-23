@@ -21805,3 +21805,281 @@ java.lang.IllegalStateException: Cannot get a connection as the driver manager i
 [WARN ] 23-04-2024 02:18:50 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
 [INFO ] 23-04-2024 02:18:51 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 [INFO ] 23-04-2024 02:18:51 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@187354ab] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 23-04-2024 02:21:48 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
+[INFO ] 23-04-2024 02:21:48 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 23-04-2024 02:21:48 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 23-04-2024 02:21:49 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 23-04-2024 02:21:49 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 23-04-2024 02:21:49 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 23-04-2024 02:21:49 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 23-04-2024 02:21:49 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 23-04-2024 02:21:49 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 23-04-2024 02:21:50 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 23-04-2024 02:21:50 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 23-04-2024 02:21:50 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 23-04-2024 02:21:50 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[WARN ] 23-04-2024 02:21:50 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
+[WARN ] 23-04-2024 02:21:50 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
+[WARN ] 23-04-2024 02:21:50 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
+[WARN ] 23-04-2024 02:21:50 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
+[INFO ] 23-04-2024 02:21:50 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 23-04-2024 02:21:51 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@228e59b] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 23-04-2024 02:23:30 [AWT-EventQueue-0] Log - Retrieved all categories successfully
+[INFO ] 23-04-2024 02:23:31 [AWT-EventQueue-0] Log - Retrieved all categories successfully
+[INFO ] 23-04-2024 02:23:32 [AWT-EventQueue-0] Log - Retrieved all categories successfully
+[INFO ] 23-04-2024 02:23:33 [AWT-EventQueue-0] Log - Retrieved all categories successfully
+[INFO ] 23-04-2024 02:23:40 [AWT-EventQueue-0] Log - Retrieved all categories successfully
+[INFO ] 23-04-2024 02:23:41 [AWT-EventQueue-0] Log - Retrieved all categories successfully
+[INFO ] 23-04-2024 15:12:17 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
+[INFO ] 23-04-2024 15:12:17 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 23-04-2024 15:12:17 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 23-04-2024 15:12:17 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 23-04-2024 15:12:17 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 23-04-2024 15:12:17 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 23-04-2024 15:12:17 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 23-04-2024 15:12:17 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 23-04-2024 15:12:17 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 23-04-2024 15:12:19 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 23-04-2024 15:12:19 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 23-04-2024 15:12:19 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 23-04-2024 15:12:19 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[WARN ] 23-04-2024 15:12:19 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
+[WARN ] 23-04-2024 15:12:19 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
+[WARN ] 23-04-2024 15:12:19 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
+[WARN ] 23-04-2024 15:12:19 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
+[INFO ] 23-04-2024 15:12:20 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 23-04-2024 15:12:20 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@187354ab] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 23-04-2024 15:13:00 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
+[INFO ] 23-04-2024 15:13:00 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 23-04-2024 15:13:00 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 23-04-2024 15:13:00 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 23-04-2024 15:13:00 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 23-04-2024 15:13:00 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 23-04-2024 15:13:00 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 23-04-2024 15:13:00 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 23-04-2024 15:13:00 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 23-04-2024 15:13:02 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 23-04-2024 15:13:02 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 23-04-2024 15:13:02 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 23-04-2024 15:13:02 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[WARN ] 23-04-2024 15:13:02 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
+[WARN ] 23-04-2024 15:13:02 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
+[WARN ] 23-04-2024 15:13:02 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
+[WARN ] 23-04-2024 15:13:02 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
+[INFO ] 23-04-2024 15:13:03 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 23-04-2024 15:13:03 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@548ee805] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 23-04-2024 15:13:12 [AWT-EventQueue-0] Log - Retrieved all categories successfully
+[ERROR] 23-04-2024 15:14:18 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 23-04-2024 15:14:18 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 23-04-2024 15:14:18 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 23-04-2024 15:14:18 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 23-04-2024 15:14:18 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 23-04-2024 15:14:18 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 23-04-2024 15:14:18 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 23-04-2024 15:14:18 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 23-04-2024 15:14:18 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 23-04-2024 15:14:18 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 23-04-2024 15:14:18 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 23-04-2024 15:14:18 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 23-04-2024 15:14:18 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 23-04-2024 15:14:18 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 23-04-2024 15:14:18 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 23-04-2024 15:14:19 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 23-04-2024 15:14:19 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 23-04-2024 15:14:19 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 23-04-2024 15:14:19 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 23-04-2024 15:14:19 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 23-04-2024 15:14:19 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 23-04-2024 15:14:19 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 23-04-2024 15:14:19 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 23-04-2024 15:14:19 [AWT-EventQueue-0] Log - Category not found
+[INFO ] 23-04-2024 15:14:20 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:20 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:20 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:20 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:20 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:20 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:20 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:20 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:20 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:20 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:20 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:20 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:20 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:20 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:20 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:20 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:21 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:21 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:21 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:21 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:21 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:21 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:21 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:21 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:21 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:21 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:21 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:21 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:21 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:21 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:21 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:21 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:21 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:21 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:21 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:21 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:21 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:22 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:22 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:22 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:22 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:22 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:22 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:22 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:22 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:22 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:22 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:22 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:22 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:22 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:22 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:22 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:22 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:22 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:23 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:23 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:23 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:23 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:23 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:23 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:23 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:23 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:23 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:23 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:23 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:23 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:23 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:23 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:23 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:24 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:24 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:24 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:24 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:24 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:24 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:24 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:24 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:24 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:24 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:24 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:24 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:24 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:24 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:24 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:24 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:24 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:24 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:24 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:24 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:24 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:25 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:25 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:25 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:25 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:25 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:25 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:25 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:25 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:25 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:25 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:25 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:25 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:25 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:25 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:25 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:25 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:25 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:26 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:26 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:26 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:26 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:26 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:26 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:26 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:26 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:26 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:26 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:26 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:26 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:26 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:26 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:26 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:26 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:27 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:27 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:27 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:27 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:27 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:27 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:27 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:27 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:27 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:27 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:27 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:27 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:27 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:27 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:28 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:28 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:28 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:28 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:28 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:28 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:28 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:28 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:28 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:28 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:28 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:28 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:29 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:29 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:29 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:29 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:29 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:29 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:29 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:29 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:29 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:29 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:29 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:29 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:29 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:30 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:30 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:30 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:30 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:30 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:30 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:56 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:56 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:56 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:56 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:56 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:56 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:56 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:56 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:56 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:57 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:57 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:57 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:57 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:57 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:57 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:57 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:57 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:57 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:57 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:57 [AWT-EventQueue-0] Log - Category found
+[INFO ] 23-04-2024 15:14:57 [AWT-EventQueue-0] Log - Retrieved all categories successfully
+[INFO ] 23-04-2024 15:15:50 [AWT-EventQueue-0] Log - Retrieved all categories successfully

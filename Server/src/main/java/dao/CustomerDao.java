@@ -2,14 +2,22 @@ package dao;
 
 import models.Customer;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.List;
 
-public interface CustomerDao {
-    boolean addCustomer(Customer customer);
-    boolean updateCustomer(Customer customer);
-    boolean deleteCustomer(String customerID);
-    List<Customer> getAllCustomers();
-    List<Customer> findCustomerByText(String text);
-    Customer getCustomerByID(String customerID);
-    Customer getCustomerByName(String customerID);
+public interface CustomerDao extends Remote {
+    boolean addCustomer(Customer customer) throws RemoteException;
+
+    boolean updateCustomer(Customer customer) throws RemoteException;
+
+    boolean deleteCustomer(String customerID) throws RemoteException;
+
+    List<Customer> getAllCustomers() throws RemoteException;
+
+    List<Customer> findCustomerByText(String text) throws RemoteException;
+
+    Customer getCustomerByID(String customerID) throws RemoteException;
+
+    Customer getCustomerByName(String customerID) throws RemoteException;
 }

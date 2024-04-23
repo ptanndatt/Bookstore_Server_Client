@@ -1,6 +1,7 @@
 package views;
 
 import controller.MainController;
+import lombok.SneakyThrows;
 import models.Category;
 import models.ProductType;
 import util.DialogUtils;
@@ -43,6 +44,8 @@ public class ProductTypeView extends JPanel implements ActionListener, KeyListen
     private Timer timer;
     private MainController mainController;
     private GeneratorIDAuto autoID;
+
+    @SneakyThrows
     public ProductTypeView() {
         setLayout(new BorderLayout());
         mainController = new MainController();
@@ -184,6 +187,7 @@ public class ProductTypeView extends JPanel implements ActionListener, KeyListen
         }
     }
 
+    @SneakyThrows
     private void loadData() {
         modelSP.setRowCount(0);
         java.util.List<ProductType> productTypes = mainController.getAllProductType();
@@ -207,6 +211,7 @@ public class ProductTypeView extends JPanel implements ActionListener, KeyListen
         }
     }
 
+    @SneakyThrows
     private void deleteProductType() {
         int row = tableSP.getSelectedRow();
         if (row == -1) {
@@ -227,6 +232,7 @@ public class ProductTypeView extends JPanel implements ActionListener, KeyListen
         }
     }
 
+    @SneakyThrows
     private void updateProductType() {
         int row = tableSP.getSelectedRow();
         if (row >= 0) {
@@ -286,6 +292,7 @@ public class ProductTypeView extends JPanel implements ActionListener, KeyListen
                 "Tên Loại Sản Phẩm không hợp lệ. Phải bắt đầu bằng chữ cái, không chấp nhận ký tự đặc biệt.");
     }
 
+    @SneakyThrows
     private void addProductType() {
         String idProductType = txtIdLoaiSanPham.getText();
         String productName = txtTenLoaiSanPham.getText();

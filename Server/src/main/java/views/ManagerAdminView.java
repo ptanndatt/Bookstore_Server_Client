@@ -24,6 +24,7 @@ import javax.swing.table.TableRowSorter;
 
 import com.toedter.calendar.JDateChooser;
 import controller.MainController;
+import lombok.SneakyThrows;
 import models.Account;
 import models.Employee;
 import models.ProductType;
@@ -70,6 +71,7 @@ public class ManagerAdminView extends JPanel implements KeyListener, MouseListen
     private JTable tbChucVu;
     private DefaultTableModel modelChucVu;
 
+    @SneakyThrows
     public ManagerAdminView() {
         dfNgaySinh = new SimpleDateFormat("dd/MM/yyyy");
         autoID = new GeneratorIDAuto();
@@ -233,6 +235,7 @@ public class ManagerAdminView extends JPanel implements KeyListener, MouseListen
         loadComboBox();
     }
 
+    @SneakyThrows
     public void loadComboBox() {
         List<Role> roles = mainController.getRolesByRoleCode(ROLE);
         for (Role role : roles) {
@@ -291,6 +294,7 @@ public class ManagerAdminView extends JPanel implements KeyListener, MouseListen
         pnBottom.add(pnButtons, BorderLayout.SOUTH);
 
         btnAdd.addActionListener(new ActionListener() {
+            @SneakyThrows
             @Override
             public void actionPerformed(ActionEvent e) {
                 String roleName = txtTenChucVu.getText();
@@ -317,6 +321,7 @@ public class ManagerAdminView extends JPanel implements KeyListener, MouseListen
             }
         });
         btnDelete.addActionListener(new ActionListener() {
+            @SneakyThrows
             @Override
             public void actionPerformed(ActionEvent e) {
                 int row = tbChucVu.getSelectedRow();
@@ -333,6 +338,7 @@ public class ManagerAdminView extends JPanel implements KeyListener, MouseListen
             }
         });
         btnEdit.addActionListener(new ActionListener() {
+            @SneakyThrows
             @Override
             public void actionPerformed(ActionEvent e) {
                 int row = tbChucVu.getSelectedRow();
@@ -364,6 +370,7 @@ public class ManagerAdminView extends JPanel implements KeyListener, MouseListen
     }
 
 
+    @SneakyThrows
     public void loadRole() {
 //        modelChucVu.setRowCount(0);
         List<Role> roles = mainController.getAllRole();
@@ -406,6 +413,7 @@ public class ManagerAdminView extends JPanel implements KeyListener, MouseListen
 //        return sb.toString();
 //    }
 
+    @SneakyThrows
     private void addEmployee() {
         String id = txtID.getText();
         String ten = txtTenNV.getText();
@@ -455,6 +463,7 @@ public class ManagerAdminView extends JPanel implements KeyListener, MouseListen
         }
     }
 
+    @SneakyThrows
     private void loadData() {
 //        modelNhanVien.setRowCount(0);
 //        String roleName = "";

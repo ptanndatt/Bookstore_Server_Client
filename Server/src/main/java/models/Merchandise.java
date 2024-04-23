@@ -24,6 +24,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "Merchandise")
 public class Merchandise extends Product {
+    private static final long serialVersionUID = -9138842404795829420L;
     private int quantitySold;
     private double revenue;
     private double profit;

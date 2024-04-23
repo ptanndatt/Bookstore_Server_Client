@@ -2,6 +2,7 @@ package views;
 
 import controller.MainController;
 import controller.MenuItem;
+import lombok.SneakyThrows;
 import models.Employee;
 
 import java.awt.BorderLayout;
@@ -46,6 +47,7 @@ public class ManagerHomeView extends JFrame {
 //        new ManagerHomeView(new Employee()).setVisible(true);
 //    }
 
+    @SneakyThrows
     public ManagerHomeView(Employee e) {
         this.employee = e;
         mainController = new MainController();

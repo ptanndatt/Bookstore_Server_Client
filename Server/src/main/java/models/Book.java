@@ -17,6 +17,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Table(name = "Book")
@@ -26,7 +27,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Builder
-public class Book extends Product {
+public class Book extends Product implements Serializable {
+    private static final long serialVersionUID = -3872235661275604880L;
     @ManyToOne
     @JoinColumn(name = "authorId")
     private Author authorId;

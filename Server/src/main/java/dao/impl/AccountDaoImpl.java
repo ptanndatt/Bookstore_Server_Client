@@ -8,17 +8,20 @@ import models.Account;
 import models.Customer;
 import util.HibernateUtil;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-public class AccountDaoImpl implements AccountDao {
+public class AccountDaoImpl extends UnicastRemoteObject implements AccountDao {
+    private static final long serialVersionUID = -6583095858843327021L;
     private EntityManager em;
 
-    public AccountDaoImpl() {
+    public AccountDaoImpl() throws RemoteException {
         em = HibernateUtil.getInstance().getEntityManager();
     }
 
     @Override
-    public boolean addAccount(Account account) {
+    public boolean addAccount(Account account) throws RemoteException {
         EntityTransaction entityTransaction = em.getTransaction();
         try {
             entityTransaction.begin();
@@ -33,7 +36,7 @@ public class AccountDaoImpl implements AccountDao {
     }
 
     @Override
-    public boolean deleteAccount(String acountDelete) {
+    public boolean deleteAccount(String acountDelete) throws RemoteException {
         EntityTransaction tr = em.getTransaction();
         try {
             tr.begin();
@@ -49,7 +52,7 @@ public class AccountDaoImpl implements AccountDao {
     }
 
     @Override
-    public boolean updateAccount(Account account) {
+    public boolean updateAccount(Account account) throws RemoteException {
         EntityTransaction entityTransaction = em.getTransaction();
         ;
         try {
@@ -65,7 +68,7 @@ public class AccountDaoImpl implements AccountDao {
     }
 
     @Override
-    public List<Account> getAccounts() {
+    public List<Account> getAccounts() throws RemoteException {
         List<Account> accounts = null;
         EntityTransaction tr = em.getTransaction();
         try {
@@ -82,7 +85,7 @@ public class AccountDaoImpl implements AccountDao {
     }
 
     @Override
-    public Account getAccountById(String id) {
+    public Account getAccountById(String id) throws RemoteException {
         Account account = null;
         EntityTransaction tr = em.getTransaction();
         try {
@@ -104,7 +107,7 @@ public class AccountDaoImpl implements AccountDao {
     }
 
     @Override
-    public String findPasswordByEmployeeId(String employeeId) {
+    public String findPasswordByEmployeeId(String employeeId) throws RemoteException {
         String password = null;
         EntityTransaction tr = em.getTransaction();
         try {

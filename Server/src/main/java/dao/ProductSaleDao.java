@@ -2,15 +2,22 @@ package dao;
 
 import models.ProductSale;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.List;
 
-public interface ProductSaleDao {
-    List<ProductSale> getProductSale();
-    boolean addProductSale(ProductSale productSale);
-    boolean deleteProductSale(String id);
-    boolean deleteProductSaleByPromotionId(String id);
-    ProductSale getProductSaleById(String id);
-    List<ProductSale> getProductSaleByPromotionId(String id);
+public interface ProductSaleDao extends Remote {
+    List<ProductSale> getProductSale() throws RemoteException;
 
-    List<ProductSale> findProductSaleByText(String text);
+    boolean addProductSale(ProductSale productSale) throws RemoteException;
+
+    boolean deleteProductSale(String id) throws RemoteException;
+
+    boolean deleteProductSaleByPromotionId(String id) throws RemoteException;
+
+    ProductSale getProductSaleById(String id) throws RemoteException;
+
+    List<ProductSale> getProductSaleByPromotionId(String id) throws RemoteException;
+
+    List<ProductSale> findProductSaleByText(String text) throws RemoteException;
 }

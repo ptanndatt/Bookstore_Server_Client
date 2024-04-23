@@ -18,18 +18,21 @@ import jakarta.persistence.TypedQuery;
 import models.ProductType;
 import util.HibernateUtil;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.Collections;
 import java.util.List;
 
-public class ProductTypeDaoImpl implements ProductTypeDao {
+public class ProductTypeDaoImpl extends UnicastRemoteObject implements ProductTypeDao {
+    private static final long serialVersionUID = -8536969646252070294L;
     private EntityManager em;
 
-    public ProductTypeDaoImpl() {
+    public ProductTypeDaoImpl() throws RemoteException {
         em = HibernateUtil.getInstance().getEntityManager();
     }
 
     @Override
-    public List<ProductType> getAllProductType() {
+    public List<ProductType> getAllProductType() throws RemoteException {
         try {
             if (!em.isOpen()) {
                 throw new IllegalStateException("EntityManager is closed");
@@ -49,7 +52,7 @@ public class ProductTypeDaoImpl implements ProductTypeDao {
 
 
     @Override
-    public ProductType getProductTypeById(String id) {
+    public ProductType getProductTypeById(String id) throws RemoteException {
         try {
             if (!em.isOpen()) {
                 throw new IllegalStateException("EntityManager is closed");
@@ -62,7 +65,7 @@ public class ProductTypeDaoImpl implements ProductTypeDao {
     }
 
     @Override
-    public boolean addProductType(ProductType productType) {
+    public boolean addProductType(ProductType productType) throws RemoteException {
         EntityTransaction tr = null;
         try {
             tr = em.getTransaction();
@@ -83,7 +86,7 @@ public class ProductTypeDaoImpl implements ProductTypeDao {
     }
 
     @Override
-    public boolean updateProductType(ProductType productType) {
+    public boolean updateProductType(ProductType productType) throws RemoteException {
         EntityTransaction tr = null;
         try {
             tr = em.getTransaction();
@@ -104,7 +107,7 @@ public class ProductTypeDaoImpl implements ProductTypeDao {
 
 
     @Override
-    public boolean deleteProductType(String id) {
+    public boolean deleteProductType(String id) throws RemoteException {
         EntityTransaction tr = null;
         try {
             tr = em.getTransaction();
@@ -124,7 +127,7 @@ public class ProductTypeDaoImpl implements ProductTypeDao {
     }
 
     @Override
-    public List<String> getLastestProductType() {
+    public List<String> getLastestProductType() throws RemoteException {
         List<ProductType> productTypes = null;
         try {
             if (!em.isOpen()) {
@@ -140,7 +143,7 @@ public class ProductTypeDaoImpl implements ProductTypeDao {
     }
 
     @Override
-    public boolean checkProductTypeExist(String id) {
+    public boolean checkProductTypeExist(String id) throws RemoteException {
         ProductType productType = em.find(ProductType.class, id);
         if (productType != null) {
             return true;

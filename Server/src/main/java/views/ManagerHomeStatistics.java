@@ -2,6 +2,7 @@ package views;
 
 import com.toedter.calendar.JDateChooser;
 import controller.MainController;
+import lombok.SneakyThrows;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -54,6 +55,7 @@ public class ManagerHomeStatistics extends JPanel implements ItemListener, Actio
         initComponents();
     }
 
+    @SneakyThrows
     private void initComponents() {
         this.barDataset = new DefaultCategoryDataset();
         mainController = new MainController();
@@ -260,6 +262,7 @@ public class ManagerHomeStatistics extends JPanel implements ItemListener, Actio
         cbFilter.addItemListener(this);
     }
 
+    @SneakyThrows
     public void loadDataProductWorstSeller(Date from, Date to) {
         List<Object[]> list = mainController.findProductWorstSeller(from, to);
         model1.setRowCount(0);
@@ -268,6 +271,7 @@ public class ManagerHomeStatistics extends JPanel implements ItemListener, Actio
         }
     }
 
+    @SneakyThrows
     public void loadDataProductSales(Date from, Date to) {
         List<Object[]> list = mainController.findProductBestSeller(from, to);
         model.setRowCount(0);
@@ -276,6 +280,7 @@ public class ManagerHomeStatistics extends JPanel implements ItemListener, Actio
         }
     }
 
+    @SneakyThrows
     private PieDataset createDataset(Date startDate, Date endDate) {
         DefaultPieDataset dataset = new DefaultPieDataset();
         mainController.sumTotalBillValueByProduct(startDate, endDate).forEach(objects -> {
@@ -292,6 +297,7 @@ public class ManagerHomeStatistics extends JPanel implements ItemListener, Actio
         return chart;
     }
 
+    @SneakyThrows
     private DefaultCategoryDataset createBarChartDataset(Date startDate, Date endDate) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
@@ -345,6 +351,7 @@ public class ManagerHomeStatistics extends JPanel implements ItemListener, Actio
         return chart;
     }
 
+    @SneakyThrows
     private DefaultCategoryDataset createBarChartDataset1(Date startDate, Date endDate) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
@@ -359,6 +366,7 @@ public class ManagerHomeStatistics extends JPanel implements ItemListener, Actio
         return dataset;
     }
 
+    @SneakyThrows
     @Override
     public void itemStateChanged(ItemEvent e) {
         if (e.getSource() == cbFilter && e.getStateChange() == ItemEvent.SELECTED) {
@@ -429,6 +437,7 @@ public class ManagerHomeStatistics extends JPanel implements ItemListener, Actio
         }
     }
 
+    @SneakyThrows
     public void updateUI(Date startDate, Date endDate) {
         lblDonHangValue.setText(String.valueOf(mainController.sumTotalBillDate(startDate, endDate)));
         lblDoanhThuValue.setText(String.valueOf(mainController.sumTotalAmount(startDate, endDate)));
@@ -478,6 +487,7 @@ public class ManagerHomeStatistics extends JPanel implements ItemListener, Actio
         }
     }
 
+    @SneakyThrows
     @Override
     public void actionPerformed(ActionEvent e) {
         Object o = e.getSource();

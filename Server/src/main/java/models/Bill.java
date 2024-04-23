@@ -1,6 +1,7 @@
 package models;
 
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
@@ -17,11 +18,12 @@ import lombok.*;
 @Entity
 @Table(name = "Bill")
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Bill {
+public class Bill implements Serializable {
+    private static final long serialVersionUID = -3867076602662839096L;
     @Id
     @Column(name = "billId", nullable = false)
     private String billId;
-    @Column(name= "billDate")
+    @Column(name = "billDate")
     @Temporal(TemporalType.DATE)
     private LocalDate billDate;
     @ManyToOne(cascade = CascadeType.ALL)

@@ -19,17 +19,19 @@ import models.Author;
 import org.hibernate.Transaction;
 import util.HibernateUtil;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-public class AuthorDaoImpl implements AuthorDao {
+public class AuthorDaoImpl extends UnicastRemoteObject implements AuthorDao {
     private EntityManager em;
 
-    public AuthorDaoImpl() {
+    public AuthorDaoImpl() throws RemoteException {
         em = HibernateUtil.getInstance().getEntityManager();
     }
 
     @Override
-    public List<Author> getAllAuthor() {
+    public List<Author> getAllAuthor() throws RemoteException {
         EntityTransaction tr = em.getTransaction();
         try {
             if (!tr.isActive()) {
@@ -46,7 +48,7 @@ public class AuthorDaoImpl implements AuthorDao {
     }
 
     @Override
-    public boolean addAuthor(Author author) {
+    public boolean addAuthor(Author author) throws RemoteException {
         EntityTransaction tr = em.getTransaction();
         try {
             if (!tr.isActive()) {
@@ -67,7 +69,7 @@ public class AuthorDaoImpl implements AuthorDao {
     }
 
     @Override
-    public boolean updateAuthor(Author author) {
+    public boolean updateAuthor(Author author) throws RemoteException {
         EntityTransaction tr = null;
         try {
             tr = em.getTransaction();
@@ -85,7 +87,7 @@ public class AuthorDaoImpl implements AuthorDao {
     }
 
     @Override
-    public boolean deleteAuthor(String idAuthor) {
+    public boolean deleteAuthor(String idAuthor) throws RemoteException {
         EntityTransaction tr = em.getTransaction();
         try {
             tr.begin();
@@ -101,7 +103,7 @@ public class AuthorDaoImpl implements AuthorDao {
     }
 
     @Override
-    public boolean checkIdAuthor(String idAuthor) {
+    public boolean checkIdAuthor(String idAuthor) throws RemoteException {
         EntityTransaction tr = em.getTransaction();
         try {
             tr.begin();
@@ -118,7 +120,7 @@ public class AuthorDaoImpl implements AuthorDao {
     }
 
     @Override
-    public List<Author> getLatestAuthorID() {
+    public List<Author> getLatestAuthorID() throws RemoteException {
         EntityTransaction tr = em.getTransaction();
         try {
             tr.begin();
@@ -134,7 +136,7 @@ public class AuthorDaoImpl implements AuthorDao {
     }
 
     @Override
-    public boolean decreaseNumberOfBooks(String idAuthor) {
+    public boolean decreaseNumberOfBooks(String idAuthor) throws RemoteException {
         EntityTransaction tr = em.getTransaction();
         try {
             if (!tr.isActive()) {
@@ -158,7 +160,7 @@ public class AuthorDaoImpl implements AuthorDao {
     }
 
     @Override
-    public boolean increaseNumberOfBooks(String idAuthor) {
+    public boolean increaseNumberOfBooks(String idAuthor) throws RemoteException {
         EntityTransaction tr = em.getTransaction();
         try {
             if (!tr.isActive()) {

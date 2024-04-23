@@ -1,6 +1,7 @@
 package views;
 
 import controller.MainController;
+import lombok.SneakyThrows;
 import models.ProductType;
 import models.Supplier;
 import util.DialogUtils;
@@ -50,7 +51,7 @@ public class SupplierView extends JPanel implements ActionListener, MouseListene
     private GeneratorIDAuto autoID;
 
 
-
+    @SneakyThrows
     public SupplierView() {
         mainController = new MainController();
         autoID = new GeneratorIDAuto();
@@ -222,6 +223,7 @@ public class SupplierView extends JPanel implements ActionListener, MouseListene
 
     }
 
+    @SneakyThrows
     private void loadData() {
         modelSP.setRowCount(0);
         java.util.List<Supplier> suppliers = mainController.getAllSuppliers();
@@ -245,6 +247,7 @@ public class SupplierView extends JPanel implements ActionListener, MouseListene
         }
     }
 
+    @SneakyThrows
     private void deleteSupplier() {
         int row = tableSP.getSelectedRow();
         if (row == -1) {
@@ -267,6 +270,7 @@ public class SupplierView extends JPanel implements ActionListener, MouseListene
     }
 
 
+    @SneakyThrows
     private void updateSupplier() {
         int row = tableSP.getSelectedRow();
         if (row >= 0) {
@@ -304,6 +308,7 @@ public class SupplierView extends JPanel implements ActionListener, MouseListene
 
     }
 
+    @SneakyThrows
     private void addSupplier() {
         String supplierId = txtIdLoaiSanPham.getText().trim();
         String supplierName = txtTenLoaiSanPham.getText().trim();

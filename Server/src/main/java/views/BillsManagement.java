@@ -8,6 +8,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import com.toedter.calendar.JCalendar;
 import com.toedter.calendar.JDateChooser;
 import controller.MainController;
+import lombok.SneakyThrows;
 import models.*;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -31,6 +32,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.rmi.RemoteException;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -41,7 +43,7 @@ import java.time.format.DateTimeParseException;
 import java.util.*;
 import java.util.List;
 
-public class BillsManagement extends JPanel implements MouseListener,ItemListener, PropertyChangeListener, ActionListener, KeyListener {
+public class BillsManagement extends JPanel implements MouseListener, ItemListener, PropertyChangeListener, ActionListener, KeyListener {
     private JPanel pnMain;
     private JPanel pnLeft;
     private JPanel pnRight;
@@ -61,11 +63,8 @@ public class BillsManagement extends JPanel implements MouseListener,ItemListene
     private JCheckBox checkBoxSearchByDate;
 
 
-    private JComboBox<Object> cboSearchBillDate;
-    private JDateChooser dateChooser;
-
     private JTextArea txtAreaBillDetail;
-    private SimpleDateFormat dfNgaySQL;
+
     private JTable table;
     private DefaultTableModel tableModel, tableModel1;
     private JButton btnSearchByDate;
@@ -88,15 +87,15 @@ public class BillsManagement extends JPanel implements MouseListener,ItemListene
 
     }
 
+    @SneakyThrows
     public void init() {
-        dfNgaySQL = new SimpleDateFormat("yyyy-MM-dd");
         controller = new MainController();
         currencyFormat.setCurrency(Currency.getInstance("VND"));
         pnLeft = new JPanel();
         pnLeft.setLayout(null);
         checkBoxSearchByDate = new JCheckBox();
-        JLabel lbFrom= new JLabel("Từ:");
-        JLabel lbTo=new JLabel("Đến:");
+        JLabel lbFrom = new JLabel("Từ:");
+        JLabel lbTo = new JLabel("Đến:");
         btnSearchByDate = new JButton("Lọc");
         table = new JTable();
         tableModel = new DefaultTableModel();
@@ -127,15 +126,15 @@ public class BillsManagement extends JPanel implements MouseListener,ItemListene
         pnLeft_Bottom.setBounds(10, 220, 230, 200);
         pnLeft_Bottom.setBorder(BorderFactory.createTitledBorder("Tim kiem theo ngay"));
 
-        checkBoxSearchByDate= new JCheckBox();
+        checkBoxSearchByDate = new JCheckBox();
         checkBoxSearchByDate.setBounds(10, 20, 20, 30);
-        lbSearchByDate= new JLabel("Lọc theo thời gian");
+        lbSearchByDate = new JLabel("Lọc theo thời gian");
         lbSearchByDate.setBounds(50, 20, 150, 30);
-        lbFrom.setBounds(10,70,50,30);
-        lbTo.setBounds(10,120,50,30);
+        lbFrom.setBounds(10, 70, 50, 30);
+        lbTo.setBounds(10, 120, 50, 30);
         btnSearchByDate.setBounds(10, 160, 100, 30);
-        dateChooserStart= new JDateChooser();
-        dateChooserEnd= new JDateChooser();
+        dateChooserStart = new JDateChooser();
+        dateChooserEnd = new JDateChooser();
         dateChooserStart.setBounds(50, 70, 170, 30);
         dateChooserStart.getCalendarButton().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         dateChooserStart.setDateFormatString("dd/MM/yyyy");
@@ -210,7 +209,6 @@ public class BillsManagement extends JPanel implements MouseListener,ItemListene
 //        calculateTotalPayment();
 
 
-
         pnLeft_Bottom.add(checkBoxSearchByDate);
         pnLeft_Bottom.add(dateChooserStart);
         pnLeft_Bottom.add(lbSearchByDate);
@@ -218,7 +216,6 @@ public class BillsManagement extends JPanel implements MouseListener,ItemListene
         pnLeft_Bottom.add(btnSearchByDate);
         pnLeft_Bottom.add(lbFrom);
         pnLeft_Bottom.add(lbTo);
-
 
 
         pnRight = new JPanel();
@@ -242,7 +239,7 @@ public class BillsManagement extends JPanel implements MouseListener,ItemListene
         lblTxtGiamGia = new JLabel();
         lblTxtKhachDaDua = new JLabel();
         lblTxtTongTien = new JLabel();
-        lbTxtTienTraKhach= new JLabel();
+        lbTxtTienTraKhach = new JLabel();
         lblTxtTongTien.setFont(new Font("SansSerif", Font.BOLD, 15));
 
         JTable table1 = new JTable();
@@ -320,6 +317,7 @@ public class BillsManagement extends JPanel implements MouseListener,ItemListene
         btnSearchByDate.addActionListener(this);
     }
 
+    @SneakyThrows
     public int calculateTotalBill() {
 
         return controller.sumTotalBill();
@@ -338,22 +336,22 @@ public class BillsManagement extends JPanel implements MouseListener,ItemListene
 
             // Opening document for writing PDF
             document.open();
-            String idHD=lblTxtMaHoaDon.getText();
-            Bill bill= controller.getBillById(idHD);
+            String idHD = lblTxtMaHoaDon.getText();
+            Bill bill = controller.getBillById(idHD);
             LocalDateTime now = LocalDateTime.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             String dateTimeString = now.format(formatter);
             // Writing content
             String filePath2 = System.getProperty("user.dir") + "/Server/src/main/resources/database/vuArial.ttf";
             BaseFont bf = BaseFont.createFont(filePath2, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-            Paragraph tieuDe=new Paragraph("HÓA ĐƠN",new com.itextpdf.text.Font(bf,30,1, BaseColor.BLUE));
-            Paragraph tenKH=new Paragraph("Tên khách hàng : "+bill.getCustomer().getName(),new com.itextpdf.text.Font(bf,15));
-            Paragraph idKH2=new Paragraph("ID khách hàng   : "+bill.getCustomer().getIdCustomer(),new com.itextpdf.text.Font(bf,15));
-            Paragraph idHD2=new Paragraph("ID hóa đơn      : "+lblTxtMaHoaDon.getText().toString(),new com.itextpdf.text.Font(bf,15,Font.BOLD));
+            Paragraph tieuDe = new Paragraph("HÓA ĐƠN", new com.itextpdf.text.Font(bf, 30, 1, BaseColor.BLUE));
+            Paragraph tenKH = new Paragraph("Tên khách hàng : " + bill.getCustomer().getName(), new com.itextpdf.text.Font(bf, 15));
+            Paragraph idKH2 = new Paragraph("ID khách hàng   : " + bill.getCustomer().getIdCustomer(), new com.itextpdf.text.Font(bf, 15));
+            Paragraph idHD2 = new Paragraph("ID hóa đơn      : " + lblTxtMaHoaDon.getText().toString(), new com.itextpdf.text.Font(bf, 15, Font.BOLD));
             String ngay = new SimpleDateFormat("dd").format(new Date());
             String thang = new SimpleDateFormat("MM").format(new Date());
             String nam = new SimpleDateFormat("yyyy").format(new Date());
-            Paragraph DateTime=new Paragraph("Ngày "+ngay+" tháng "+thang+" năm "+nam,new com.itextpdf.text.Font(bf,15,Font.ITALIC));
+            Paragraph DateTime = new Paragraph("Ngày " + ngay + " tháng " + thang + " năm " + nam, new com.itextpdf.text.Font(bf, 15, Font.ITALIC));
             tieuDe.setAlignment(Element.ALIGN_CENTER);
             DateTime.setAlignment(Element.ALIGN_RIGHT);
             document.add(tieuDe);
@@ -361,20 +359,20 @@ public class BillsManagement extends JPanel implements MouseListener,ItemListene
             document.add(idHD2);
             document.add(tenKH);
             document.add(idKH2);
-            document.add(new Paragraph("SDT khách hàng: "+bill.getCustomer().getPhone(),new com.itextpdf.text.Font(bf,15)));
-            document.add(new Paragraph("Tên nhân viên    : "+lblTxtNhanVien.getText(),new com.itextpdf.text.Font(bf,15)));
-            document.add(new Paragraph("Ngày lập            : "+dateTimeString,new com.itextpdf.text.Font(bf,15)));
+            document.add(new Paragraph("SDT khách hàng: " + bill.getCustomer().getPhone(), new com.itextpdf.text.Font(bf, 15)));
+            document.add(new Paragraph("Tên nhân viên    : " + lblTxtNhanVien.getText(), new com.itextpdf.text.Font(bf, 15)));
+            document.add(new Paragraph("Ngày lập            : " + dateTimeString, new com.itextpdf.text.Font(bf, 15)));
             document.add(new Paragraph(" "));
             // Add meta data information to PDF file
 
             PdfPTable table = new PdfPTable(6);
             //Khởi tạo ô header
-            PdfPCell header1 = new PdfPCell(new Paragraph("ID sản phẩm",new com.itextpdf.text.Font(bf,12)));
-            PdfPCell header2 = new PdfPCell(new Paragraph("Tên sản phẩm",new com.itextpdf.text.Font(bf,12)));
-            PdfPCell header3 = new PdfPCell(new Paragraph("Số lượng",new com.itextpdf.text.Font(bf,12)));
-            PdfPCell header4 = new PdfPCell(new Paragraph("Thành tiền",new com.itextpdf.text.Font(bf,12)));
-            PdfPCell header5 = new PdfPCell(new Paragraph("Giá niêm yết",new com.itextpdf.text.Font(bf,12)));
-            PdfPCell header6 = new PdfPCell(new Paragraph("Giá khuyến mãi",new com.itextpdf.text.Font(bf,12)));
+            PdfPCell header1 = new PdfPCell(new Paragraph("ID sản phẩm", new com.itextpdf.text.Font(bf, 12)));
+            PdfPCell header2 = new PdfPCell(new Paragraph("Tên sản phẩm", new com.itextpdf.text.Font(bf, 12)));
+            PdfPCell header3 = new PdfPCell(new Paragraph("Số lượng", new com.itextpdf.text.Font(bf, 12)));
+            PdfPCell header4 = new PdfPCell(new Paragraph("Thành tiền", new com.itextpdf.text.Font(bf, 12)));
+            PdfPCell header5 = new PdfPCell(new Paragraph("Giá niêm yết", new com.itextpdf.text.Font(bf, 12)));
+            PdfPCell header6 = new PdfPCell(new Paragraph("Giá khuyến mãi", new com.itextpdf.text.Font(bf, 12)));
 
             header1.setMinimumHeight(70f); // Kích thước tối thiểu là 50
             header2.setMinimumHeight(70f);
@@ -393,13 +391,12 @@ public class BillsManagement extends JPanel implements MouseListener,ItemListene
 
             for (DetailsBill cthd : controller.findDetailsBillByBillId(idHD)) {
                 String idSP = cthd.getProduct().getProductId();
-                ProductSale productSale=controller.getProductSale(idSP);
+                ProductSale productSale = controller.getProductSale(idSP);
                 Product product = controller.getProductById(idSP);
-                String giaBanSauKM ;
-                if(productSale!=null){
-                    giaBanSauKM = currencyFormat.format(productSale.getGiaBan())+"(-"+ productSale.getDescription().replaceAll("[^0-9%]", "")+")";
-                }
-                else{
+                String giaBanSauKM;
+                if (productSale != null) {
+                    giaBanSauKM = currencyFormat.format(productSale.getGiaBan()) + "(-" + productSale.getDescription().replaceAll("[^0-9%]", "") + ")";
+                } else {
                     giaBanSauKM = currencyFormat.format(product.sellingPrice());
                 }
 
@@ -409,7 +406,7 @@ public class BillsManagement extends JPanel implements MouseListener,ItemListene
                 String giaBan = currencyFormat.format(product.sellingPrice());
 
                 table.addCell(new PdfPCell(new Paragraph(idSP)));
-                table.addCell(new PdfPCell(new Paragraph(tenSP,new com.itextpdf.text.Font(bf,12))));
+                table.addCell(new PdfPCell(new Paragraph(tenSP, new com.itextpdf.text.Font(bf, 12))));
                 table.addCell(new PdfPCell(new Paragraph(giaBan)));
                 table.addCell(new PdfPCell(new Paragraph(giaBanSauKM)));
                 table.addCell(new PdfPCell(new Paragraph(soLuong)));
@@ -418,9 +415,9 @@ public class BillsManagement extends JPanel implements MouseListener,ItemListene
 
             document.add(table);
 
-            Paragraph tongTien=new Paragraph("TỔNG TIỀN : "+lblTxtTongTien.getText(),new com.itextpdf.text.Font(bf, 25, 1, BaseColor.RED));
-            Paragraph tienKhachDua=new Paragraph("Tiền khách đưa  : "+lblTxtKhachDaDua.getText(),new com.itextpdf.text.Font(bf, 20));
-            Paragraph tienTraKhach=new Paragraph("Tiền trả khách    : ",new com.itextpdf.text.Font(bf, 20));
+            Paragraph tongTien = new Paragraph("TỔNG TIỀN : " + lblTxtTongTien.getText(), new com.itextpdf.text.Font(bf, 25, 1, BaseColor.RED));
+            Paragraph tienKhachDua = new Paragraph("Tiền khách đưa  : " + lblTxtKhachDaDua.getText(), new com.itextpdf.text.Font(bf, 20));
+            Paragraph tienTraKhach = new Paragraph("Tiền trả khách    : ", new com.itextpdf.text.Font(bf, 20));
             document.add(tongTien);
             document.add(tienKhachDua);
             document.add(tienTraKhach);
@@ -444,6 +441,8 @@ public class BillsManagement extends JPanel implements MouseListener,ItemListene
 
         }
     }
+
+    @SneakyThrows
     public void loadData() {
         // Load data from database
         tableModel.setRowCount(0);
@@ -459,17 +458,18 @@ public class BillsManagement extends JPanel implements MouseListener,ItemListene
             tableModel.addRow(rowData);
         });
     }
+
+    @SneakyThrows
     public void loadDataByDate(LocalDate dateFrom, LocalDate dateTo) {
         // Load data from database
         tableModel.setRowCount(0);
-        controller.findBillByDate(dateFrom,dateTo).forEach(bill -> {
+        controller.findBillByDate(dateFrom, dateTo).forEach(bill -> {
             Object[] rowData = new Object[]{
-                    bill.getBillId(),bill.getBillDate(),bill.getEmployee().getName(),bill.getCustomer().getName(),currencyFormat.format(bill.getAmountReceived()),currencyFormat.format(bill.getAmounttotal())
+                    bill.getBillId(), bill.getBillDate(), bill.getEmployee().getName(), bill.getCustomer().getName(), currencyFormat.format(bill.getAmountReceived()), currencyFormat.format(bill.getAmounttotal())
             };
             tableModel.addRow(rowData);
         });
     }
-
 
 
     @Override
@@ -508,15 +508,14 @@ public class BillsManagement extends JPanel implements MouseListener,ItemListene
         } else if (e.getSource() == btnSearchByDate) {
             Date dateFrom = dateChooserStart.getDate();
             Date dateTo = dateChooserEnd.getDate();
-            if(dateFrom.after(dateTo)) {
-                JOptionPane.showMessageDialog(this,"Ngày kết thúc không được trước ngày bắt đầu");
+            if (dateFrom.after(dateTo)) {
+                JOptionPane.showMessageDialog(this, "Ngày kết thúc không được trước ngày bắt đầu");
                 dateChooserStart.setDate(new Date());
                 dateChooserEnd.setDate(new Date());
-            }
-            else{
+            } else {
                 LocalDate localDateFrom = dateFrom.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 LocalDate localDateTo = dateTo.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                loadDataByDate(localDateFrom,localDateTo);
+                loadDataByDate(localDateFrom, localDateTo);
             }
 
         }
@@ -613,20 +612,24 @@ public class BillsManagement extends JPanel implements MouseListener,ItemListene
             } else if (o.equals(getTxtGetSearchProduct)) {
                 if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     tableModel.setRowCount(0);
-                    controller.findBillByCustomerSDT(getTxtGetSearchProduct.getText().trim()).forEach(
-                            bill -> {
-                                Object[] rowData = new Object[]{
-                                        bill[0],
-                                        bill[1],
-                                        bill[2],
-                                        bill[3],
-                                        bill[4],
-                                        bill[5],
-                                        bill[6]
-                                };
-                                tableModel.addRow(rowData);
-                            }
-                    );
+                    try {
+                        controller.findBillByCustomerSDT(getTxtGetSearchProduct.getText().trim()).forEach(
+                                bill -> {
+                                    Object[] rowData = new Object[]{
+                                            bill[0],
+                                            bill[1],
+                                            bill[2],
+                                            bill[3],
+                                            bill[4],
+                                            bill[5],
+                                            bill[6]
+                                    };
+                                    tableModel.addRow(rowData);
+                                }
+                        );
+                    } catch (RemoteException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 } else {
                     searchByProduct();
                 }
@@ -640,9 +643,10 @@ public class BillsManagement extends JPanel implements MouseListener,ItemListene
 
     }
 
+    @SneakyThrows
     @Override
     public void mouseClicked(MouseEvent e) {
-        int row= table.getSelectedRow();
+        int row = table.getSelectedRow();
         lblTxtMaHoaDon.setText(tableModel.getValueAt(row, 0).toString());
         lblTxtThoiGian.setText(tableModel.getValueAt(row, 1).toString());
         lblTxtNhanVien.setText(tableModel.getValueAt(row, 2).toString());
@@ -651,12 +655,12 @@ public class BillsManagement extends JPanel implements MouseListener,ItemListene
         lblTxtTongTien.setText(tableModel.getValueAt(row, 5).toString());
         double tienKhachDua = Double.parseDouble(tableModel.getValueAt(row, 4).toString().trim().replace("\u00A0", "").replaceAll("[.,₫]", ""));
         double tienHoaDon = Double.parseDouble(tableModel.getValueAt(row, 5).toString().trim().replace("\u00A0", "").replaceAll("[.,₫]", ""));
-        double tienTraKhach= tienKhachDua-tienHoaDon;
+        double tienTraKhach = tienKhachDua - tienHoaDon;
         lbTxtTienTraKhach.setText(currencyFormat.format(tienTraKhach));
         tableModel1.setRowCount(0);
-        for(DetailsBill detailsBill : controller.findDetailsBillByBillId(lblTxtMaHoaDon.getText())) {
-            tableModel1.addRow( new Object[]{
-                    detailsBill.getBill().getBillId(),detailsBill.getProduct().getProductName(),detailsBill.getQuantity(),currencyFormat.format(detailsBill.getPrice()),currencyFormat.format(detailsBill.getTotal())
+        for (DetailsBill detailsBill : controller.findDetailsBillByBillId(lblTxtMaHoaDon.getText())) {
+            tableModel1.addRow(new Object[]{
+                    detailsBill.getBill().getBillId(), detailsBill.getProduct().getProductName(), detailsBill.getQuantity(), currencyFormat.format(detailsBill.getPrice()), currencyFormat.format(detailsBill.getTotal())
             });
         }
 

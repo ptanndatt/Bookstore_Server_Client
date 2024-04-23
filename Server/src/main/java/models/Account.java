@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Getter
@@ -13,8 +14,9 @@ import java.util.Date;
 @NoArgsConstructor
 @Entity
 @Table(name = "Account")
-public class Account {
+public class Account implements Serializable {
 
+    private static final long serialVersionUID = -4326764061025244984L;
     @Id
     @OneToOne
     @JoinColumn(name = "employeeId")

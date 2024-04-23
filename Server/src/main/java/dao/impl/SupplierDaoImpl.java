@@ -18,17 +18,20 @@ import jakarta.persistence.TypedQuery;
 import models.Supplier;
 import util.HibernateUtil;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-public class SupplierDaoImpl implements SupplierDao {
+public class SupplierDaoImpl extends UnicastRemoteObject implements SupplierDao {
+    private static final long serialVersionUID = -8493360421210749854L;
     private EntityManager em;
 
-    public SupplierDaoImpl() {
+    public SupplierDaoImpl() throws RemoteException {
         em = HibernateUtil.getInstance().getEntityManager();
     }
 
     @Override
-    public List<Supplier> getAllSuppliers() {
+    public List<Supplier> getAllSuppliers() throws RemoteException {
         try {
             String hql = "FROM Supplier";
             TypedQuery<Supplier> query = em.createQuery(hql, Supplier.class);
@@ -40,7 +43,7 @@ public class SupplierDaoImpl implements SupplierDao {
     }
 
     @Override
-    public boolean addSupplier(Supplier supplier) {
+    public boolean addSupplier(Supplier supplier) throws RemoteException {
         EntityTransaction tr = null;
         try {
             tr = em.getTransaction();
@@ -61,7 +64,7 @@ public class SupplierDaoImpl implements SupplierDao {
     }
 
     @Override
-    public boolean updateSupplier(Supplier supplier) {
+    public boolean updateSupplier(Supplier supplier) throws RemoteException {
         EntityTransaction tr = null;
         try {
             tr = em.getTransaction();
@@ -77,7 +80,7 @@ public class SupplierDaoImpl implements SupplierDao {
     }
 
     @Override
-    public boolean deleteSupplier(String id) {
+    public boolean deleteSupplier(String id) throws RemoteException {
         EntityTransaction tr = null;
         try {
             tr = em.getTransaction();
@@ -94,7 +97,7 @@ public class SupplierDaoImpl implements SupplierDao {
     }
 
     @Override
-    public boolean checkSupplierId(String id) {
+    public boolean checkSupplierId(String id) throws RemoteException {
         try {
             Supplier supplier = em.find(Supplier.class, id);
             return supplier != null;
@@ -105,7 +108,7 @@ public class SupplierDaoImpl implements SupplierDao {
     }
 
     @Override
-    public List<Supplier> getLatestSupplierId() {
+    public List<Supplier> getLatestSupplierId() throws RemoteException {
         try {
             String hql = "SELECT s FROM Supplier s ORDER BY s.supplierId DESC";
             TypedQuery<Supplier> query = em.createQuery(hql, Supplier.class);

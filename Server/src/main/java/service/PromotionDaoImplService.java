@@ -4,25 +4,32 @@ package service;
 import dao.impl.PromotionDaoImpl;
 import models.Promotion;
 
+import java.rmi.RemoteException;
 import java.util.List;
 
 public class PromotionDaoImplService {
     PromotionDaoImpl promotionDao = new PromotionDaoImpl();
-    public List<Promotion> getAllPromotion() {
+
+    public PromotionDaoImplService() throws RemoteException {
+    }
+
+    public List<Promotion> getAllPromotion() throws RemoteException {
         return promotionDao.getAllPromotion();
     }
-    public boolean addPromotion(Promotion promotion) {
+
+    public boolean addPromotion(Promotion promotion) throws RemoteException {
         return promotionDao.addPromotion(promotion);
     }
 
-    public boolean deletePromotion(String id) {
+    public boolean deletePromotion(String id) throws RemoteException {
         return promotionDao.deletePromotion(id);
     }
-    public List<Promotion> findPromotionByText(String text) {
-        return promotionDao.findPromotionByText(text);
-    }
-    public boolean updatePromotion(Promotion promotion) {
+
+    public boolean updatePromotion(Promotion promotion) throws RemoteException {
         return promotionDao.updatePromotion(promotion);
     }
 
+    public List<Promotion> findPromotionByText(String text) throws RemoteException {
+        return promotionDao.findPromotionByText(text);
+    }
 }

@@ -18,6 +18,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -26,10 +27,11 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Author {
+public class Author implements Serializable {
+    private static final long serialVersionUID = -1504106167793275087L;
     @Id
     private String authorId;
-    @Column(name = "authorName",columnDefinition = "NVARCHAR(255)")
+    @Column(name = "authorName", columnDefinition = "NVARCHAR(255)")
     private String authorName;
     private LocalDate date;
     private int numberOfWorks;

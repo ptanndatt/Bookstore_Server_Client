@@ -6,19 +6,22 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.ui.Model;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @Entity
 @NoArgsConstructor
 @Table(name = "DetailsBill")
-public class DetailsBill {
+public class DetailsBill implements Serializable {
+    private static final long serialVersionUID = 751186654795557261L;
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="billId")
+    @JoinColumn(name = "billId")
     private Bill bill;
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="productId")
+    @JoinColumn(name = "productId")
     private Product product;
 
     private int quantity;

@@ -5,64 +5,73 @@ import models.BillPending;
 import models.DetailsBill;
 import models.DetailsBillPending;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public interface SaleManagementDao {
-    boolean deleteAllBillPending();
-    boolean deleteAllDetailBillPending();
-    boolean deleteBillPendingById(String id);
-    boolean addBill(Bill bill);
-    boolean addDetailBill(DetailsBill detailsBill);
+public interface SaleManagementDao extends Remote {
+    boolean deleteAllBillPending() throws RemoteException;
 
-    boolean addBillPending(BillPending billPending);
-    boolean addDetailsBillPending(DetailsBillPending detailsBillPending);
-    List<DetailsBillPending> findDetailsBillPendingById(String id);
-    boolean deleteDetailsBillPendingById(String id);
+    boolean deleteAllDetailBillPending() throws RemoteException;
 
-    List<DetailsBill> findDetailsBillById(String id);
+    boolean deleteBillPendingById(String id) throws RemoteException;
 
-    List<BillPending> getAllBillPending();
-    List<DetailsBillPending> getAllDetailsBillPending();
-    Bill findBillById(String id);
-    List<Object[]> getAllBill();
+    boolean addBill(Bill bill) throws RemoteException;
 
-    List<Object[]> loadDataProduct(String id);
+    boolean addDetailBill(DetailsBill detailsBill) throws RemoteException;
 
-    int sumTotalBill();
+    boolean addBillPending(BillPending billPending) throws RemoteException;
 
-    List<Object[]> findBillByCustomerSDT(String sdt);
+    boolean addDetailsBillPending(DetailsBillPending detailsBillPending) throws RemoteException;
 
-    List<Object[]> findProductBestSeller(Date from, Date to);
+    List<DetailsBillPending> findDetailsBillPendingById(String id) throws RemoteException;
 
-    List<Object[]> findProductWorstSeller(Date from, Date to);
+    boolean deleteDetailsBillPendingById(String id) throws RemoteException;
 
-    double sumTotalAmount(Date from, Date to);
+    List<DetailsBill> findDetailsBillById(String id) throws RemoteException;
 
-    int sumTotalBillDate(Date from, Date to);
+    List<BillPending> getAllBillPending() throws RemoteException;
 
-    double sumProfit(Date from, Date to);
+    List<DetailsBillPending> getAllDetailsBillPending() throws RemoteException;
 
-    double sumTotalBillValue(Date from, Date to);
+    Bill findBillById(String id) throws RemoteException;
 
-    List<Object[]> sumTotalBillValueByProduct(Date from, Date to);
+    List<Object[]> getAllBill() throws RemoteException;
 
-    List<Object[]> sumTotalBillValueDoanhThu(Date from, Date to);
+    List<Object[]> loadDataProduct(String id) throws RemoteException;
 
-    List<Object[]> sumTotalBillValueByDate(Date from, Date to);
+    int sumTotalBill() throws RemoteException;
 
-    List<Object[]> sumTotalBillValueByDateLoiNhuan(Date from, Date to);
+    List<Object[]> findBillByCustomerSDT(String sdt) throws RemoteException;
 
-    List<Object[]> findEmployeeBestSeller(Date from, Date to);
+    List<Object[]> findProductBestSeller(Date from, Date to) throws RemoteException;
 
-    List<BillPending> findBillPendingByText(String text);
+    List<Object[]> findProductWorstSeller(Date from, Date to) throws RemoteException;
 
-    List<Bill> findBillByEmployee(String employeeID);
+    double sumTotalAmount(Date from, Date to) throws RemoteException;
 
-//    List<Bill> findBillByDate(String dateFrom, String dateTo);
+    int sumTotalBillDate(Date from, Date to) throws RemoteException;
 
+    double sumProfit(Date from, Date to) throws RemoteException;
 
-    List<Bill> findBillByDate(LocalDate dateFrom, LocalDate dateTo);
+    double sumTotalBillValue(Date from, Date to) throws RemoteException;
+
+    List<Object[]> sumTotalBillValueByProduct(Date from, Date to) throws RemoteException;
+
+    List<Object[]> sumTotalBillValueDoanhThu(Date from, Date to) throws RemoteException;
+
+    List<Object[]> sumTotalBillValueByDate(Date from, Date to) throws RemoteException;
+
+    List<Object[]> sumTotalBillValueByDateLoiNhuan(Date from, Date to) throws RemoteException;
+
+    List<Object[]> findEmployeeBestSeller(Date from, Date to) throws RemoteException;
+
+    List<BillPending> findBillPendingByText(String text) throws RemoteException;
+
+    List<Bill> findBillByEmployee(String employeeID) throws RemoteException;
+
+    List<Bill> findBillByDate(LocalDate dateFrom, LocalDate dateTo) throws RemoteException;
 }

@@ -20,18 +20,21 @@ import models.Category;
 import util.HibernateUtil;
 import util.log.Log;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 
-public class CategoryDaoImpl implements CategoryDao {
+public class CategoryDaoImpl extends UnicastRemoteObject implements CategoryDao {
+    private static final long serialVersionUID = -884030185328911315L;
     private EntityManager em;
 
-    public CategoryDaoImpl() {
+    public CategoryDaoImpl() throws RemoteException {
         em = HibernateUtil.getInstance().getEntityManager();
     }
 
     @Override
-    public List<Category> getAllCategory() {
+    public List<Category> getAllCategory() throws RemoteException {
         List<Category> categories = null;
         EntityTransaction tr = em.getTransaction();
         try {
@@ -50,7 +53,7 @@ public class CategoryDaoImpl implements CategoryDao {
     }
 
     @Override
-    public boolean addCategory(Category category) {
+    public boolean addCategory(Category category) throws RemoteException {
         EntityTransaction tr = em.getTransaction();
         try {
             if (!tr.isActive()) {
@@ -73,7 +76,7 @@ public class CategoryDaoImpl implements CategoryDao {
     }
 
     @Override
-    public boolean updateCategory(Category category) {
+    public boolean updateCategory(Category category) throws RemoteException {
         EntityTransaction tr = null;
         try {
             tr = em.getTransaction();
@@ -99,7 +102,7 @@ public class CategoryDaoImpl implements CategoryDao {
     }
 
     @Override
-    public boolean deleteCategory(String idCategory) {
+    public boolean deleteCategory(String idCategory) throws RemoteException {
         EntityTransaction tr = null;
         try {
             tr = em.getTransaction();
@@ -123,7 +126,7 @@ public class CategoryDaoImpl implements CategoryDao {
     }
 
     @Override
-    public boolean checkIdCategory(String idCategory) {
+    public boolean checkIdCategory(String idCategory) throws RemoteException {
         EntityTransaction tr = em.getTransaction();
         try {
 
@@ -147,7 +150,7 @@ public class CategoryDaoImpl implements CategoryDao {
     }
 
     @Override
-    public List<String> getLatestCategoryID() {
+    public List<String> getLatestCategoryID() throws RemoteException {
         String categoryID = null;
         EntityTransaction tr = em.getTransaction();
         try {
@@ -169,7 +172,7 @@ public class CategoryDaoImpl implements CategoryDao {
 
 
     @Override
-    public boolean decreaseNumberOfCategory(String idCategory) {
+    public boolean decreaseNumberOfCategory(String idCategory) throws RemoteException {
         EntityTransaction tr = em.getTransaction();
         try {
             if (!tr.isActive()) {
@@ -192,7 +195,7 @@ public class CategoryDaoImpl implements CategoryDao {
     }
 
     @Override
-    public boolean increaseNumberOfCategory(String idCategory) {
+    public boolean increaseNumberOfCategory(String idCategory) throws RemoteException {
         EntityTransaction tr = em.getTransaction();
         try {
             if (!tr.isActive()) {

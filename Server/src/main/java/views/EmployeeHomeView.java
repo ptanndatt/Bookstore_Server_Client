@@ -2,6 +2,7 @@ package views;
 
 import controller.MainController;
 import controller.MenuItem;
+import lombok.SneakyThrows;
 import models.Employee;
 
 import java.awt.BorderLayout;
@@ -46,6 +47,7 @@ public class EmployeeHomeView extends JFrame {
 //        new ManagerHomeView(new Employee()).setVisible(true);
 //    }
 
+    @SneakyThrows
     public EmployeeHomeView(Employee e) {
         this.employee = e;
         mainController = new MainController();
@@ -68,9 +70,8 @@ public class EmployeeHomeView extends JFrame {
                         "Xác nhận đóng cửa sổ", JOptionPane.YES_NO_OPTION);
                 if (result == JOptionPane.YES_OPTION) {
                     dispose();
-                }
-                else if (result == JOptionPane.NO_OPTION) {
-                   System.exit(0);
+                } else if (result == JOptionPane.NO_OPTION) {
+                    System.exit(0);
                 }
             }
         });
@@ -165,7 +166,7 @@ public class EmployeeHomeView extends JFrame {
         MenuItem subCaiDatHDSD = new MenuItem(iconSubMenu, "Hướng dẫn sử dụng", null);
         MenuItem CaiDat = new MenuItem(iconSetting, "Cài đặt", null, subGiaoDien, subCaiDatDMK);
 
-        addMenu(QLBH,QLKH, QLHD, ThongKe, CaiDat, DangXuat);
+        addMenu(QLBH, QLKH, QLHD, ThongKe, CaiDat, DangXuat);
         QLBH.setBackground(new Color(153, 255, 255));
         QLKH.setBackground(new Color(153, 255, 255));
         QLHD.setBackground(new Color(153, 255, 255));

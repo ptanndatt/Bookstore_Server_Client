@@ -27,6 +27,7 @@ import com.toedter.calendar.JDateChooser;
 import controller.MainController;
 import dao.AuthorDao;
 import dao.impl.AuthorDaoImpl;
+import lombok.SneakyThrows;
 import models.Author;
 import util.GeneratorIDAuto;
 
@@ -76,9 +77,11 @@ public class AuthorView extends JPanel implements ActionListener, MouseListener,
     private Timer timer;
     private MainController mainController;
     private GeneratorIDAuto autoID;
+
+    @SneakyThrows
     public AuthorView() {
         setLayout(new BorderLayout(8, 6));
-        autoID= new GeneratorIDAuto();
+        autoID = new GeneratorIDAuto();
         mainController = new MainController();
         init();
 
@@ -219,6 +222,7 @@ public class AuthorView extends JPanel implements ActionListener, MouseListener,
         });
     }
 
+    @SneakyThrows
     private void loadData() {
         model.setRowCount(0);
         java.util.List<Author> authors = mainController.getAllAuthor();
@@ -252,6 +256,7 @@ public class AuthorView extends JPanel implements ActionListener, MouseListener,
 
     }
 
+    @SneakyThrows
     private void addAuthor() {
         String authorId = txtIdTacGia.getText();
         String authorName = txtTenTacGia.getText();
@@ -301,6 +306,7 @@ public class AuthorView extends JPanel implements ActionListener, MouseListener,
     }
 
 
+    @SneakyThrows
     private void updateAuhtor() {
         int selectedRow = table.getSelectedRow();
         if (selectedRow < 0) {

@@ -25,6 +25,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
 import controller.MainController;
+import lombok.SneakyThrows;
 import models.Merchandise;
 import models.ProductType;
 import models.Supplier;
@@ -71,10 +72,11 @@ public class MerchandiseView extends JPanel implements ActionListener, ItemListe
 
     private GeneratorIDAuto autoID;
 
+    @SneakyThrows
     public MerchandiseView() {
 
         mainController = new MainController();
-        autoID=new GeneratorIDAuto();
+        autoID = new GeneratorIDAuto();
         currencyFormat.setCurrency(Currency.getInstance("VND"));
         setLayout(new BorderLayout(8, 6));
         tabbedPane = new JTabbedPane();
@@ -290,6 +292,7 @@ public class MerchandiseView extends JPanel implements ActionListener, ItemListe
         });
     }
 
+    @SneakyThrows
     private void loadDataIntoTable() {
         modelSP.setRowCount(0);
         java.util.List<Merchandise> merchandiseList = mainController.getAllMerchandise();
@@ -311,6 +314,7 @@ public class MerchandiseView extends JPanel implements ActionListener, ItemListe
         }
     }
 
+    @SneakyThrows
     private void loadData() {
         txtTenSanPham.requestFocus();
         modelSP.setRowCount(0);
@@ -333,6 +337,7 @@ public class MerchandiseView extends JPanel implements ActionListener, ItemListe
         }
     }
 
+    @SneakyThrows
     private void loadComboxBoxLoaiSanPham() {
         java.util.List<ProductType> productTypes = mainController.getAllProductType();
         cbLoaiSanPham.removeAllItems();
@@ -343,6 +348,7 @@ public class MerchandiseView extends JPanel implements ActionListener, ItemListe
         }
     }
 
+    @SneakyThrows
     private void loadComboxBoxNhaCungCap() {
         java.util.List<Supplier> suppliers = mainController.getAllSuppliers();
         cbNhaCungCap.removeAllItems();
@@ -408,6 +414,7 @@ public class MerchandiseView extends JPanel implements ActionListener, ItemListe
     }
 
 
+    @SneakyThrows
     private void xulyTrangSanPhamCon(Sheet sheet) {
         for (int rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
             Row row = sheet.getRow(rowIndex);
@@ -675,6 +682,7 @@ public class MerchandiseView extends JPanel implements ActionListener, ItemListe
         }
     }
 
+    @SneakyThrows
     private void addMerchandise() {
         if (validataFieldsAndShowErrors()) {
             String idSanPham = txtIdSanPham.getText();
@@ -888,6 +896,7 @@ public class MerchandiseView extends JPanel implements ActionListener, ItemListe
         txtTenSanPham.requestFocus();
     }
 
+    @SneakyThrows
     private void updateMerchandise() {
         int row = table.getSelectedRow();
         if (row >= 0) {

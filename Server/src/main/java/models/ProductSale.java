@@ -6,22 +6,25 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "ProductSale")
-public class ProductSale {
+public class ProductSale implements Serializable {
+    private static final long serialVersionUID = -8099945809285369885L;
     @Id
     @OneToOne
     @JoinColumn(name = "productId")
     private Product product;
     @Id
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="promotionId")
+    @JoinColumn(name = "promotionId")
     private Promotion promotion;
-    @Column(name = "description",columnDefinition = "NVARCHAR(255)")
+    @Column(name = "description", columnDefinition = "NVARCHAR(255)")
     private String description;
     private double giaBan;
 

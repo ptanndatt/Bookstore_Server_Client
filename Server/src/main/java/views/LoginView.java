@@ -3,6 +3,7 @@ package views;
 
 import controller.MainController;
 import dao.impl.EmployeeDaoImpl;
+import lombok.SneakyThrows;
 import models.Account;
 import models.Employee;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -29,6 +30,7 @@ public class LoginView extends JFrame implements ActionListener {
 
     }
 
+    @SneakyThrows
     private void login() {
         mainController = new MainController();
         String id = jTextField1.getText().trim();
@@ -57,7 +59,7 @@ public class LoginView extends JFrame implements ActionListener {
                     this.setVisible(false);
                 } else if (account.getEmployee().getRole().getRoleCode() == 0) {
                     Employee employee = mainController.findEmployeeById(account.getEmployee().getIdEmployee());
-                    EmployeeHomeView view= new EmployeeHomeView(employee);
+                    EmployeeHomeView view = new EmployeeHomeView(employee);
                     view.setVisible(true);
                     dispose();
                     this.setVisible(false);

@@ -33,6 +33,7 @@ import javax.swing.table.TableRowSorter;
 import javax.swing.text.MaskFormatter;
 
 import controller.MainController;
+import lombok.SneakyThrows;
 import models.*;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -109,13 +110,14 @@ public class BookView extends JPanel
     private MainController mainController;
     private DecimalFormat df;
     private GeneratorIDAuto autoID;
+
     public BookView() {
-        autoID=new GeneratorIDAuto();
+        autoID = new GeneratorIDAuto();
         init();
     }
 
 
-
+    @SneakyThrows
     private void init() {
         setLayout(new BorderLayout());
 
@@ -421,6 +423,7 @@ public class BookView extends JPanel
         }
     }
 
+    @SneakyThrows
     private void loadComboBoxByTheLoai() {
         java.util.List<Category> categories = mainController.getAllCategory();
         cbLoaiTheLoai.removeAllItems();
@@ -431,6 +434,7 @@ public class BookView extends JPanel
         }
     }
 
+    @SneakyThrows
     private void loadData() {
         model.setRowCount(0);
         java.util.List<Book> dsSach = mainController.getAllBook();
@@ -462,6 +466,7 @@ public class BookView extends JPanel
         }
     }
 
+    @SneakyThrows
     private void loadComBoBoxByTacGia() {
         java.util.List<Author> authors = mainController.getAllAuthor();
         cbLoaiTacGia.removeAllItems();
@@ -472,6 +477,7 @@ public class BookView extends JPanel
         }
     }
 
+    @SneakyThrows
     private void loadComboBoxByLoaiSanPham() {
         java.util.List<ProductType> productTypes = mainController.getAllProductType();
         cbLoaiSanPham.removeAllItems();
@@ -482,6 +488,7 @@ public class BookView extends JPanel
         }
     }
 
+    @SneakyThrows
     private void loadComboxBoxByNhaCungCap() {
         java.util.List<Supplier> suppliers = mainController.getAllSuppliers();
         cbNhaCungCap.removeAllItems();
@@ -529,6 +536,7 @@ public class BookView extends JPanel
         }
     }
 
+    @SneakyThrows
     private void xulyTrangSanPhamCon(Sheet sheet) throws SQLException {
         for (int rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
             Row row = sheet.getRow(rowIndex);
@@ -916,6 +924,7 @@ public class BookView extends JPanel
     }
 
 
+    @SneakyThrows
     private void deleteBook() {
         int row = table.getSelectedRow();
         if (row == -1) {
@@ -937,6 +946,7 @@ public class BookView extends JPanel
     }
 
 
+    @SneakyThrows
     private void updateBook() {
         int row = table.getSelectedRow();
         if (row == -1) {
@@ -964,6 +974,7 @@ public class BookView extends JPanel
     }
 
 
+    @SneakyThrows
     private Book getBookInfo() throws NumberFormatException {
         String idSanPham = txtIdSanPham.getText().trim();
         String tenSanPham = txtTenSanPham.getText().trim();
@@ -1174,6 +1185,7 @@ public class BookView extends JPanel
     }
 
 
+    @SneakyThrows
     private void addBook() {
         String idSanPham = txtIdSanPham.getText();
         if (mainController.checkIdBook(idSanPham)) {

@@ -2,21 +2,23 @@ package dao;
 
 import models.Account;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
 import java.util.List;
 
-public interface AccountDao {
-    boolean addAccount(Account account);
+public interface AccountDao extends Remote {
+    boolean addAccount(Account account) throws RemoteException;
 
-    boolean deleteAccount(String accountDelete);
+    boolean deleteAccount(String accountDelete) throws RemoteException;
 
-    boolean updateAccount(Account account);
+    boolean updateAccount(Account account) throws RemoteException;
 
-    List<Account> getAccounts();
+    List<Account> getAccounts() throws RemoteException;
 
-    Account getAccountById(String id);
+    Account getAccountById(String id) throws RemoteException;
 
     /*
      * find password by employeeId
      * */
-    String findPasswordByEmployeeId(String employeeId);
+    String findPasswordByEmployeeId(String employeeId) throws RemoteException;
 }
