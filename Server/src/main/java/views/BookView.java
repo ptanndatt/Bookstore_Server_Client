@@ -360,7 +360,11 @@ public class BookView extends JPanel
         txtTenSanPham.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                txtIdSanPham.setText(autoID.autoID("SP"));
+                int row = table.getSelectedRow();
+                if (row == -1)
+                    txtIdSanPham.setText(autoID.autoID("SP"));
+                else
+                    txtIdSanPham.setText(model.getValueAt(row, 0).toString());
             }
 
             @Override

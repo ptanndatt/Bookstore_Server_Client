@@ -237,7 +237,7 @@ public class ManagerHomeView extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-//                QuanLy ql = daoQL.getQuanLy(headerQL.getId());
+//
 //                SetPassWordQuanLyView frame = new SetPassWordQuanLyView(ql);
 //                switchToPanel(new HomeView());
 //                frame.setVisible(true);

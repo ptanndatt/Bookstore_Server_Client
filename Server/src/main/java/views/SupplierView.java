@@ -191,7 +191,11 @@ public class SupplierView extends JPanel implements ActionListener, MouseListene
         txtTenLoaiSanPham.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                txtIdLoaiSanPham.setText(autoID.autoID("NCC"));
+                int row = tableSP.getSelectedRow();
+                if (row == -1)
+                    txtIdLoaiSanPham.setText(autoID.autoID("NCC"));
+                else
+                    txtIdLoaiSanPham.setText(modelSP.getValueAt(row, 0).toString());
             }
 
             @Override

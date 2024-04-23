@@ -4,6 +4,7 @@ package dao.impl;
 import controller.MainController;
 import dao.CategoryDao;
 import dao.ProductSaleDao;
+import lombok.SneakyThrows;
 import models.*;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -21,17 +22,18 @@ class CategoryDaoImplTest {
 
     private MainController mainController;
     private ProductSaleDao productSaleDao;
+    @SneakyThrows
     @BeforeAll
     void setUp() {
         mainController = new MainController();
 //        productSaleDao = new ProductSaleDaoImpl();
     }
+    @SneakyThrows
     @Test
     void getProductSales() {
 
-        LocalDate datefrom= LocalDate.now();
-        LocalDate dateto=LocalDate.of(2024,5,1);
-        List<Bill> merchandises = mainController.findBillByDate(datefrom,dateto);
+
+        String merchandises = mainController.findPasswordByEmployeeId("E20240418183024");
         System.out.println(merchandises);
     }
 

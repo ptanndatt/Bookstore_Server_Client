@@ -5,7 +5,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
 import models.Account;
-import models.Customer;
 import util.HibernateUtil;
 
 import java.rmi.RemoteException;
@@ -105,7 +104,6 @@ public class AccountDaoImpl extends UnicastRemoteObject implements AccountDao {
         }
         return account;
     }
-
     @Override
     public String findPasswordByEmployeeId(String employeeId) throws RemoteException {
         String password = null;

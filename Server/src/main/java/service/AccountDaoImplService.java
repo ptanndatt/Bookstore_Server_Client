@@ -38,4 +38,5 @@ public class AccountDaoImplService implements Remote {
     public String findPasswordByEmployeeId(String employeeId) throws RemoteException {
         return accountDao.findPasswordByEmployeeId(employeeId);
     }
+
 }

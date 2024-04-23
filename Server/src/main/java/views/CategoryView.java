@@ -177,7 +177,11 @@ public class CategoryView extends JPanel implements ActionListener, KeyListener,
         txtTentheLoai.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                txtIdtheLoai.setText(autoID.autoID("TL"));
+                int row = table.getSelectedRow();
+                if (row == -1)
+                    txtIdtheLoai.setText(autoID.autoID("TL"));
+                else
+                    txtIdtheLoai.setText(model.getValueAt(row, 0).toString());
             }
 
             @Override

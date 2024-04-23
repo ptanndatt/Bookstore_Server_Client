@@ -113,7 +113,11 @@ public class ManagerAdminView extends JPanel implements KeyListener, MouseListen
         txtTenNV.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                txtID.setText(autoID.autoID("E"));
+                int row = tableNhanVien.getSelectedRow();
+                if (row == -1)
+                    txtID.setText(autoID.autoID("NS"));
+                else
+                    txtID.setText(modelNhanVien.getValueAt(row, 0).toString());
             }
 
             @Override

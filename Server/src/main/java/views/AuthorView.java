@@ -209,7 +209,11 @@ public class AuthorView extends JPanel implements ActionListener, MouseListener,
         txtTenTacGia.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                txtIdTacGia.setText(autoID.autoID("TG"));
+                int row = table.getSelectedRow();
+                if (row == -1)
+                    txtIdTacGia.setText(autoID.autoID("TG"));
+                else
+                    txtIdTacGia.setText(model.getValueAt(row, 0).toString());
             }
 
             @Override

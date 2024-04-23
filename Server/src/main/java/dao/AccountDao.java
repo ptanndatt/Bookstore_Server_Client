@@ -17,6 +17,8 @@ public interface AccountDao extends Remote {
 
     Account getAccountById(String id) throws RemoteException;
 
+//    Account updaytePassword(String id, String newPass) throws RemoteException;
+
     /*
      * find password by employeeId
      * */
