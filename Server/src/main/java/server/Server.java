@@ -1,25 +1,41 @@
 package server;
 
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
+import controller.MainController;
+import service.*;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
 
 public class Server {
-    private static final int PORT = 7881;
+    private static final String URL = "rmi://LAPTOP-KHUCRM3L:8888/";
 
     public static void main(String[] args) {
         try {
-            ServerSocket serverSocket = new ServerSocket(PORT);
-            System.out.println("Server is listening on port " + PORT);
-
-            while (true) {
-                Socket socket = serverSocket.accept();
-                System.out.println("New client connected");
-                new ServerThread(socket).start();
-            }
-        } catch (IOException e) {
-            System.out.println("Server exception: " + e.getMessage());
+            Context context = new InitialContext();
+            MainController mainController = new MainController(
+                    new AuthorDaoImplService(),
+                    new CategoryDaoImplService(),
+                    new ProductTypeDaoImplService(),
+                    new SupplierDaoImplService(),
+                    new BookDaoImplService(),
+                    new MerchandiseDaoImplService(),
+                    new CustomerDaoImplService(),
+                    new EmployeeDaoImplService(),
+                    new AccountDaoImplService(),
+                    new RoleDaoImplService(),
+                    new PromotionDaoImplService(),
+                    new ProductSaleDaoImplService(),
+                    new ProductDaoImplService(),
+                    new SaleManagementDaoService()
+            );
+            LocateRegistry.createRegistry(8888);
+            context.rebind(URL + "mainController", mainController);
+            System.out.println("Server is ready.");
+        } catch (Exception e) {
+            System.err.println("Server exception: " + e.toString());
             e.printStackTrace();
         }
     }

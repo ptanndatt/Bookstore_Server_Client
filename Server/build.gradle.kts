@@ -49,6 +49,9 @@ dependencies {
     implementation( "org.netbeans.external:AbsoluteLayout:RELEASE210")
     // https://mvnrepository.com/artifact/org.apache.poi/poi
     implementation ("org.apache.poi:poi:5.2.5")
+    // https://mvnrepository.com/artifact/javax.persistence/persistence-api
+    implementation("javax.persistence:persistence-api:1.0")
+
 
 }
 

@@ -578,6 +578,7 @@ public class BillForEmployeeView extends JPanel implements MouseListener, ItemLi
         lblTxtKhachHang.setText("");
         lblTxtKhachDaDua.setText("");
         lblTxtTongTien.setText("");
+        lbTxtTienTraKhach.setText("");
         tableModel1.setRowCount(0);
         table.clearSelection();
         dateChooserEnd.setDate(new Date());
