@@ -2,15 +2,9 @@ package views;
 
 import controller.MainController;
 import lombok.SneakyThrows;
-import models.Category;
 import models.ProductType;
 import util.DialogUtils;
 import util.GeneratorIDAuto;
-
-import java.awt.*;
-import java.awt.event.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -18,6 +12,10 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import java.awt.*;
+import java.awt.event.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 
 public class ProductTypeView extends JPanel implements ActionListener, KeyListener, MouseListener {
@@ -44,7 +42,6 @@ public class ProductTypeView extends JPanel implements ActionListener, KeyListen
     private Timer timer;
     private MainController mainController;
     private GeneratorIDAuto autoID;
-
     @SneakyThrows
     public ProductTypeView() {
         setLayout(new BorderLayout());
@@ -155,11 +152,7 @@ public class ProductTypeView extends JPanel implements ActionListener, KeyListen
         txtTenLoaiSanPham.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                int row = tableSP.getSelectedRow();
-                if (row == -1)
-                    txtIdLoaiSanPham.setText(autoID.autoID("LSP"));
-                else
-                    txtIdLoaiSanPham.setText(modelSP.getValueAt(row, 0).toString());
+                txtIdLoaiSanPham.setText(autoID.autoID("LSP"));
             }
 
             @Override
@@ -202,7 +195,7 @@ public class ProductTypeView extends JPanel implements ActionListener, KeyListen
                 modelSP.addRow(rowData);
             }
         } else {
-            DialogUtils.showErrorMessage(this, "Lỗi tải dữ liệu");
+            DialogUtils.showErrorMessage(this, "Error loading data");
         }
     }
 
@@ -219,18 +212,18 @@ public class ProductTypeView extends JPanel implements ActionListener, KeyListen
     private void deleteProductType() {
         int row = tableSP.getSelectedRow();
         if (row == -1) {
-            DialogUtils.showErrorMessage(this, "Vui lòng chọn một hàng để xóa!");
+            DialogUtils.showErrorMessage(this, "Please select a row to delete");
         } else {
-            int confirmDialogResult = JOptionPane.showConfirmDialog(this, "bạn có chắc bạn muốn xóa mục này?", "Cảnh báo",
+            int confirmDialogResult = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this item?", "Warning",
                     JOptionPane.YES_NO_OPTION);
             if (confirmDialogResult == JOptionPane.YES_OPTION) {
                 String idProductType = txtIdLoaiSanPham.getText();
                 if (mainController.deleteProductType(idProductType)) {
-                    DialogUtils.showSuccessMessage(this, "Đã xóa mục thành công");
+                    DialogUtils.showSuccessMessage(this, "Item deleted successfully");
                     loadData();
                     refreshForm();
                 } else {
-                    DialogUtils.showErrorMessage(this, "Không thể xóa mục");
+                    DialogUtils.showErrorMessage(this, "Failed to delete item");
                 }
             }
         }
@@ -240,7 +233,7 @@ public class ProductTypeView extends JPanel implements ActionListener, KeyListen
     private void updateProductType() {
         int row = tableSP.getSelectedRow();
         if (row >= 0) {
-            int update = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn cập nhật thông tin này?", "Cảnh báo",
+            int update = JOptionPane.showConfirmDialog(this, "Are you sure you want to update this information?", "Warning",
                     JOptionPane.YES_NO_OPTION);
             if (update == JOptionPane.YES_OPTION) {
 //                if (validateFields()) {
@@ -248,18 +241,18 @@ public class ProductTypeView extends JPanel implements ActionListener, KeyListen
                 String productName = txtTenLoaiSanPham.getText().trim();
                 ProductType productType = new ProductType(idProductType, productName);
                 if (mainController.updateProductType(productType)) {
-                    DialogUtils.showSuccessMessage(this, "Cập nhật thành công");
+                    DialogUtils.showSuccessMessage(this, "Update successful");
                     refreshForm();
                     loadData();
                 } else {
-                    DialogUtils.showErrorMessage(this, "Cập nhật không thành công");
+                    DialogUtils.showErrorMessage(this, "Update failed");
                 }
 //                }
             } else {
-                DialogUtils.showErrorMessage(this, "Cập nhật không thành công");
+                DialogUtils.showErrorMessage(this, "Update failed");
             }
         } else {
-            DialogUtils.showErrorMessage(this, "Vui lòng chọn một hàng");
+            DialogUtils.showErrorMessage(this, "Please select a row");
         }
     }
 
@@ -303,16 +296,16 @@ public class ProductTypeView extends JPanel implements ActionListener, KeyListen
         ProductType productType = new ProductType(idProductType, productName);
 
         if (mainController.checkProductTypeExist(idProductType)) {
-            DialogUtils.showErrorMessage(this, "ID loại sản phẩm trùng lặp. Vui lòng chọn một ID khác.");
+            DialogUtils.showErrorMessage(this, "Duplicate product type ID. Please choose a different ID.");
         } else {
 //            if (validateFields()) {
             if (mainController.addProductType(productType)) {
                 modelSP.addRow(new Object[]{idProductType, productName});
-                DialogUtils.showSuccessMessage(this, "Loại sản phẩm được thêm thành công");
+                DialogUtils.showSuccessMessage(this, "Product type added successfully");
                 loadData();
                 refreshForm();
             } else {
-                DialogUtils.showErrorMessage(this, "Lỗi khi thêm loại sản phẩm");
+                DialogUtils.showErrorMessage(this, "Error adding product type");
             }
         }
 //        }

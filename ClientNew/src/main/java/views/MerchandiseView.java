@@ -1,5 +1,27 @@
 package views;
 
+import controller.MainController;
+import lombok.SneakyThrows;
+import models.Merchandise;
+import models.ProductType;
+import models.Supplier;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import util.DialogUtils;
+import util.GeneratorIDAuto;
+import util.ProductStatusEnum;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -14,30 +36,6 @@ import java.util.ArrayList;
 import java.util.Currency;
 import java.util.Date;
 import java.util.Locale;
-
-import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableRowSorter;
-
-import controller.MainController;
-import lombok.SneakyThrows;
-import models.Merchandise;
-import models.ProductType;
-import models.Supplier;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import util.DialogUtils;
-import util.GeneratorIDAuto;
-import util.ProductStatusEnum;
 
 
 public class MerchandiseView extends JPanel implements ActionListener, ItemListener, MouseListener, KeyListener, ListSelectionListener {
@@ -76,7 +74,7 @@ public class MerchandiseView extends JPanel implements ActionListener, ItemListe
     public MerchandiseView() throws RemoteException {
 
         mainController = new MainController();
-        autoID = new GeneratorIDAuto();
+        autoID=new GeneratorIDAuto();
         currencyFormat.setCurrency(Currency.getInstance("VND"));
         setLayout(new BorderLayout(8, 6));
         tabbedPane = new JTabbedPane();

@@ -11,6 +11,7 @@ package app;/*
  * @version:    1.0
  */
 
+import jakarta.persistence.EntityManager;
 import models.*;
 import util.HibernateUtil;
 import views.LoginView;

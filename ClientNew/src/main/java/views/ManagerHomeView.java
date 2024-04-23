@@ -5,10 +5,8 @@ import controller.MenuItem;
 import lombok.SneakyThrows;
 import models.Employee;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -16,18 +14,6 @@ import java.awt.event.WindowEvent;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-
-import javax.swing.BoxLayout;
-import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-
-import javax.swing.JLabel;
-
-import javax.swing.JOptionPane;
-
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 
 public class ManagerHomeView extends JFrame {
@@ -137,8 +123,8 @@ public class ManagerHomeView extends JFrame {
                 int hoiNhac = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn đăng xuất", "Cảnh báo",
                         JOptionPane.YES_NO_OPTION);
                 if (hoiNhac == JOptionPane.YES_OPTION) {
-                    LoginView view = new LoginView();
-                    view.setVisible(true);
+//                    DangNhapView view = new DangNhapView();
+//                    view.setVisible(true);
                     dispose();
                 }
 
@@ -154,7 +140,7 @@ public class ManagerHomeView extends JFrame {
             }
         }, subQLLoaiSanPham, subQLNhaCungCap, subQLTacGia, subQLTheLoai);
 
-        MenuItem QLNV = new MenuItem(iconNV, "Quản lý nhân sự", new ActionListener() {
+        MenuItem QLNV = new MenuItem(iconNV, "Quản lý Nhân viên", new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -189,18 +175,42 @@ public class ManagerHomeView extends JFrame {
             }
         });
 
-        MenuItem subThongKeDoanhThu = new MenuItem(iconSubMenu, "Thống kê", new ActionListener() {
+        MenuItem subThongKeDoanhThu = new MenuItem(iconSubMenu, "Thống kê doanh thu", new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                switchToPanel(new ManagerHomeStatistics());
+                switchToPanel(new ManagerStatistics());
+//                switchToPanel(new ThongKeDoanhThuNhanVienView());
 
+            }
+        });
+        MenuItem subThongKeSanPham = new MenuItem(iconSubMenu, "Thống kê sản phẩm", new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                switchToPanel(new ThongKeSanPhamQuanLyView());
+            }
+        });
+
+        MenuItem subThongKeSach = new MenuItem(iconSubMenu, "Thống kê sách", new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                switchToPanel(new ThongKeSachQuanLyView());
+            }
+        });
+
+        MenuItem subThongKeKhachHang = new MenuItem(iconSubMenu, "Thống kê khách hàng", new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+//                switchToPanel(new TKKHView());
             }
         });
 
 
-        MenuItem ThongKe = new MenuItem(iconTK, "Thống kê", null, subThongKeDoanhThu
-        );
+        MenuItem ThongKe = new MenuItem(iconTK, "Thống kê", null, subThongKeDoanhThu, subThongKeSanPham, subThongKeSach,
+                subThongKeKhachHang);
 
         MenuItem subGiaoDien = new MenuItem(iconSubMenu, "Giao diện", new ActionListener() {
 
@@ -214,7 +224,7 @@ public class ManagerHomeView extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-//
+//                QuanLy ql = daoQL.getQuanLy(headerQL.getId());
 //                SetPassWordQuanLyView frame = new SetPassWordQuanLyView(ql);
 //                switchToPanel(new HomeView());
 //                frame.setVisible(true);
