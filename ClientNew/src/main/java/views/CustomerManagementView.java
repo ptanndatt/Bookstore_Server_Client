@@ -5,6 +5,9 @@ import com.toedter.calendar.JDateChooser;
 import controller.MainController;
 import lombok.SneakyThrows;
 import models.Customer;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import util.GeneratorIDAuto;
 
 import javax.swing.*;
@@ -14,12 +17,16 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 
-public class CustomerManagementView extends JPanel implements MouseListener, KeyListener,ActionListener {
+public class CustomerManagementView extends JPanel implements MouseListener, KeyListener, ActionListener {
     private JDateChooser chooserNgaySinh;
     private JTextField txtTenKH;
     private JTextField txtsdt;
@@ -51,6 +58,7 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
     private JTable tableKH;
     private JComboBox<Object> cbTimKiem;
     private GeneratorIDAuto autoID;
+
     @SneakyThrows
     public CustomerManagementView() {
         dfNgaySinh = new SimpleDateFormat("dd/MM/yyyy");
@@ -222,7 +230,11 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
         txtTenKH.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                txtId.setText(autoID.autoID("C"));
+                int row = tableKH.getSelectedRow();
+                if (row == -1)
+                    txtId.setText(autoID.autoID("KH"));
+                else
+                    txtId.setText(modelKhachHang.getValueAt(row, 0).toString());
             }
 
             @Override
@@ -235,32 +247,74 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
         });
         loadData();
     }
+
     @SneakyThrows
     private void handleSearch(String text) {
         if (!text.equals("")) {
             for (Customer customer : mainController.findCustomerByText(text)) {
                 String ngaySinh = new SimpleDateFormat("dd/MM/yyyy").format(customer.getBirth());
-                modelKhachHang.addRow(new Object[] {customer.getIdCustomer(), customer.getName(),customer.getPhone(), customer.getEmail(),customer.getAddress(),ngaySinh,customer.getGender().equals("Nam")?"Nam":"Nữ"});
+                modelKhachHang.addRow(new Object[]{customer.getIdCustomer(), customer.getName(), customer.getPhone(), customer.getEmail(), customer.getAddress(), ngaySinh, customer.getGender()});
 
             }
         } else {
             loadData();
         }
     }
+
+    private void exportExecl(String filePath) {
+
+        try {
+            Workbook workbook = new XSSFWorkbook();
+            org.apache.poi.ss.usermodel.Sheet sheet = workbook.createSheet("Khách hàng");
+
+            Row header = sheet.createRow(0);
+            header.createCell(0).setCellValue("ID khách hàng");
+            header.createCell(1).setCellValue("Tên khách hàng");
+            header.createCell(2).setCellValue("Số điện thoại");
+            header.createCell(3).setCellValue("Email");
+            header.createCell(4).setCellValue("Địa chỉ");
+            header.createCell(5).setCellValue("Ngày sinh");
+            header.createCell(6).setCellValue("Giới tính");
+
+            int rowNum = 1;
+            for (Customer kh : mainController.getAllCustomers()) {
+                Row row = sheet.createRow(rowNum++);
+                row.createCell(0).setCellValue(kh.getIdCustomer());
+                row.createCell(1).setCellValue(kh.getName());
+                row.createCell(2).setCellValue(kh.getPhone());
+                row.createCell(3).setCellValue(kh.getEmail());
+                row.createCell(4).setCellValue(kh.getAddress());
+                row.createCell(5).setCellValue(new SimpleDateFormat("dd/MM/yyyy").format(kh.getBirth()));
+                row.createCell(6).setCellValue(kh.getGender());
+
+            }
+            // Hiển thị hộp thoại mở cửa sổ lưu tệp
+            try (FileOutputStream outputStream = new FileOutputStream(filePath)) {
+                workbook.write(outputStream);
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            JOptionPane.showMessageDialog(this, "Xuất dữ liệu thành công");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @SneakyThrows
     private void addCustomer() {
-        String id= txtId.getText();
+        String id = txtId.getText();
         String tenKhachHang = txtTenKH.getText();
-        String email= txtEmail.getText();
-        String sdt=txtsdt.getText();
-        String diaChi=txtDiaChi.getText();
+        String email = txtEmail.getText();
+        String sdt = txtsdt.getText();
+        String diaChi = txtDiaChi.getText();
         java.util.Date date = chooserNgaySinh.getDate();
         Date ngaySinh = new Date(date.getYear(), date.getMonth(), date.getDate());
-        String GioiTinh=rbNam.isSelected()?"Nam":"Nữ";
-        if(valiDate()) {
-            Customer customer=new Customer(id,tenKhachHang,sdt,email,diaChi,GioiTinh,ngaySinh);
+        String GioiTinh = rbNam.isSelected() ? "Nam" : "Nữ";
+        if (valiDate()) {
+            Customer customer = new Customer(id, tenKhachHang, sdt, email, diaChi, GioiTinh, ngaySinh);
             mainController.addCustomer(customer);
-            modelKhachHang.addRow(new Object[] {id, tenKhachHang, sdt, email, diaChi,dfNgaySinh.format(customer.getBirth()),customer.getGender()});
+            modelKhachHang.addRow(new Object[]{id, tenKhachHang, sdt, email, diaChi, dfNgaySinh.format(customer.getBirth()), customer.getGender()});
             JOptionPane.showMessageDialog(this, "Thêm thành công");
             reload();
         }
@@ -269,12 +323,11 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
     private boolean valiDate() {
         String ten = txtTenKH.getText().trim();
 
-        Boolean gioiTinh=null;
-        if(rbNam.isSelected() || rbNu.isSelected()) {
-            gioiTinh=true;
-        }
-        else {
-            gioiTinh=false;
+        Boolean gioiTinh = null;
+        if (rbNam.isSelected() || rbNu.isSelected()) {
+            gioiTinh = true;
+        } else {
+            gioiTinh = false;
         }
         java.util.Date ngaySinh = chooserNgaySinh.getDate();
         String diaChi = txtDiaChi.getText().trim();
@@ -282,7 +335,7 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
         String soDienThoai = txtsdt.getText().trim();
 
 
-        if(ten.equals("") || diaChi.equals("")|| email.equals("") || soDienThoai.equals("")) {
+        if (ten.equals("") || diaChi.equals("") || email.equals("") || soDienThoai.equals("")) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập thông tin đầy đủ!", "Thông báo",
                     JOptionPane.WARNING_MESSAGE);
             txtTenKH.requestFocus();
@@ -310,23 +363,21 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
             txtEmail.selectAll();
             return false;
         }
-        if (!(ngaySinh!=null  && (ngaySinh.before(new java.util.Date())))) {
+        if (!(ngaySinh != null && (ngaySinh.before(new java.util.Date())))) {
             JOptionPane.showMessageDialog(this, "Ngày sinh phải trước ngày hiện tại", "Thông báo",
                     JOptionPane.WARNING_MESSAGE);
             chooserNgaySinh.requestFocus();
 
             return false;
         }
-        if(!(soDienThoai.length()>0 && soDienThoai.matches("^(0|\\+84)[0-9]{9}$")))
-        {
+        if (!(soDienThoai.length() > 0 && soDienThoai.matches("^(0|\\+84)[0-9]{9}$"))) {
             JOptionPane.showMessageDialog(this, "Số điện thoại gồm 10 số và bắt đầu bằng 0 hoặc +84", "Thông báo",
                     JOptionPane.WARNING_MESSAGE);
             txtsdt.requestFocus();
             txtsdt.selectAll();
             return false;
         }
-        if(gioiTinh==false)
-        {
+        if (gioiTinh == false) {
             JOptionPane.showMessageDialog(this, "Vui lòng chọn giới tính", "Thông báo",
                     JOptionPane.WARNING_MESSAGE);
 
@@ -334,27 +385,29 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
         }
         return true;
     }
+
     @SneakyThrows
     private void loadData() {
         modelKhachHang.setRowCount(0);
-        for (Customer customer : mainController.getAllCustomers() ) {
-            modelKhachHang.addRow(new Object[] {customer.getIdCustomer(), customer.getName(),customer.getPhone(), customer.getEmail(),customer.getAddress(),dfNgaySinh.format(customer.getBirth()),customer.getGender().equals("Nam")?"Nam":"Nữ"
+        for (Customer customer : mainController.getAllCustomers()) {
+            modelKhachHang.addRow(new Object[]{customer.getIdCustomer(), customer.getName(), customer.getPhone(), customer.getEmail(), customer.getAddress(), dfNgaySinh.format(customer.getBirth()), customer.getGender()
             });
 
         }
     }
+
     private void updateCustomer() {
-        String id=modelKhachHang.getValueAt(tableKH.getSelectedRow(), 0).toString();
+        String id = modelKhachHang.getValueAt(tableKH.getSelectedRow(), 0).toString();
         String ten = txtTenKH.getText();
         String diaChi = txtDiaChi.getText();
         String soDienThoai = txtsdt.getText();
         String email = txtEmail.getText();
         java.util.Date date = chooserNgaySinh.getDate();
         Date ngaySinh = new Date(date.getYear(), date.getMonth(), date.getDate());
-        String gioiTinh= rbNam.isSelected()?"Nam":"Nữ";
+        String gioiTinh = rbNam.isSelected() ? "Nam" : "Nữ";
 
-        Customer customer = new Customer(id,ten,soDienThoai,email,diaChi,gioiTinh,ngaySinh);
-        if(valiDate()) {
+        Customer customer = new Customer(id, ten, soDienThoai, email, diaChi, gioiTinh, ngaySinh);
+        if (valiDate()) {
             try {
                 mainController.updateCustomer(customer);
                 loadData();
@@ -366,6 +419,7 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
         }
 
     }
+
     private void deleteCustomer() {
         int row = tableKH.getSelectedRow();
         if (row == -1) {
@@ -387,6 +441,7 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
             }
         }
     }
+
     private void reload() {
         loadData();
         txtId.setText("");
@@ -400,6 +455,7 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
         chooserNgaySinh.setDate(new java.util.Date());
         txtTimKiem.setText("");
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Object o = e.getSource();
@@ -415,11 +471,22 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
         if (o.equals(btnCapNhatKH)) {
             updateCustomer();
         }
-        if(o.equals(btnXemTatCa)) {
+        if (o.equals(btnXemTatCa)) {
             txtTimKiem.setText("");
         }
+        if (o.equals(btnXuatExcel)) {
+            JFileChooser fileChooser = new JFileChooser();
+            int returnValue = fileChooser.showOpenDialog(null);
+            if (returnValue == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = fileChooser.getSelectedFile();
+                String selectedFilePath = selectedFile.getAbsolutePath();
+                if (!selectedFilePath.toLowerCase().endsWith(".xlsx")) {
+                    selectedFilePath += ".xlsx";
+                }
+                exportExecl(selectedFilePath);
+            }
+        }
     }
-
 
 
     @Override
@@ -458,6 +525,7 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
         rbNam.setSelected(modelKhachHang.getValueAt(row, 6).toString() == "Nam");
         rbNu.setSelected(modelKhachHang.getValueAt(row, 6).toString() == "Nữ");
     }
+
     @Override
     public void mousePressed(MouseEvent e) {
 

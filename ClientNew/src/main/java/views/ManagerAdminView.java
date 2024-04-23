@@ -18,7 +18,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.*;
-import java.rmi.RemoteException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -62,7 +61,8 @@ public class ManagerAdminView extends JPanel implements KeyListener, MouseListen
     private JTable tbChucVu;
     private DefaultTableModel modelChucVu;
 
-    public ManagerAdminView() throws RemoteException {
+    @SneakyThrows
+    public ManagerAdminView() {
         dfNgaySinh = new SimpleDateFormat("dd/MM/yyyy");
         autoID = new GeneratorIDAuto();
         mainController = new MainController();
@@ -103,7 +103,11 @@ public class ManagerAdminView extends JPanel implements KeyListener, MouseListen
         txtTenNV.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                txtID.setText(autoID.autoID("E"));
+                int row = tableNhanVien.getSelectedRow();
+                if (row == -1)
+                    txtID.setText(autoID.autoID("NS"));
+                else
+                    txtID.setText(modelNhanVien.getValueAt(row, 0).toString());
             }
 
             @Override
@@ -375,11 +379,7 @@ public class ManagerAdminView extends JPanel implements KeyListener, MouseListen
         Object o = e.getSource();
         if (o.equals(btnaddEmployee)) {
             if (valiDate()) {
-                try {
-                    addEmployee();
-                } catch (RemoteException ex) {
-                    throw new RuntimeException(ex);
-                }
+                addEmployee();
             }
         }
         if (o.equals(btnLamMoi)) {
@@ -407,7 +407,8 @@ public class ManagerAdminView extends JPanel implements KeyListener, MouseListen
 //        return sb.toString();
 //    }
 
-    private void addEmployee() throws RemoteException {
+    @SneakyThrows
+    private void addEmployee() {
         String id = txtID.getText();
         String ten = txtTenNV.getText();
         String email = txtEmail.getText();

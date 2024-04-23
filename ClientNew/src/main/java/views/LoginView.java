@@ -2,7 +2,10 @@ package views;
 
 
 import controller.MainController;
-import dao.AccountDao;
+import controller.MainControllerInterface;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.NonUniqueResultException;
+import lombok.SneakyThrows;
 import models.Account;
 import models.Employee;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -11,13 +14,11 @@ import util.DialogUtils;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.rmi.Naming;
-import java.rmi.RemoteException;
 
 public class LoginView extends JFrame implements ActionListener {
-    private MainController mainController;
+    private MainControllerInterface mainController;
 
-    public LoginView(MainController mainController) {
+    public LoginView(MainControllerInterface mainController) {
         this.mainController = mainController;
         initComponents();
         setLocationRelativeTo(null);
@@ -26,14 +27,14 @@ public class LoginView extends JFrame implements ActionListener {
 //        jButton1.addActionListener(e -> login());
 
         setVisible(true);
-        jTextField1.setText("E20240419000848");
+        jTextField1.setText("NS20240423155417");
         jPasswordField1.setText("1111");
 
 
     }
 
-    private void login() throws RemoteException {
-        mainController = new MainController();
+    @SneakyThrows
+    private void login() {
         String id = jTextField1.getText().trim();
         String password = new String(jPasswordField1.getPassword()).trim();
         if (id.isEmpty() || password.isEmpty()) {
@@ -46,25 +47,30 @@ public class LoginView extends JFrame implements ActionListener {
             this.setVisible(false);
         } else {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
-
-            Account account = mainController.getAccountById(id);
-            String pass = mainController.findPasswordByEmployeeId(id);
-            if (!encoder.matches(password, pass)) {
-                DialogUtils.showErrorMessage(this, "Sai ID hoặc Mật khẩu");
-            } else {
-                if (account.getEmployee().getRole().getRoleCode() == 1) {
-                    Employee employee = mainController.findEmployeeById(account.getEmployee().getIdEmployee());
-                    ManagerHomeView view = new ManagerHomeView(employee);
-                    view.setVisible(true);
-                    dispose();
-                    this.setVisible(false);
-                } else if (account.getEmployee().getRole().getRoleCode() == 0) {
-                    Employee employee = mainController.findEmployeeById(account.getEmployee().getIdEmployee());
-                    SaleManagerView view = new SaleManagerView(employee);
-                    view.setVisible(true);
-                    dispose();
-                    this.setVisible(false);
+            try {
+                Account account = mainController.getAccountById(id);
+                String pass = mainController.findPasswordByEmployeeId(id);
+                if (!encoder.matches(password, pass)) {
+                    DialogUtils.showErrorMessage(this, "Sai ID hoặc Mật khẩu");
+                } else {
+                    if (account.getEmployee().getRole().getRoleCode() == 1) {
+                        Employee employee = mainController.findEmployeeById(account.getEmployee().getIdEmployee());
+                        ManagerHomeView view = new ManagerHomeView(employee);
+                        view.setVisible(true);
+                        dispose();
+                        this.setVisible(false);
+                    } else if (account.getEmployee().getRole().getRoleCode() == 0) {
+                        Employee employee = mainController.findEmployeeById(account.getEmployee().getIdEmployee());
+                        EmployeeHomeView view = new EmployeeHomeView(employee);
+                        view.setVisible(true);
+                        dispose();
+                        this.setVisible(false);
+                    }
                 }
+            } catch (NoResultException ex) {
+                DialogUtils.showErrorMessage(this, "Sai ID hoặc Mật khẩu");
+            } catch (NonUniqueResultException ex) {
+                DialogUtils.showErrorMessage(this, "Lỗi xác định người dùng, vui lòng liên hệ với quản trị viên");
             }
         }
     }
@@ -260,11 +266,7 @@ public class LoginView extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object o = e.getSource();
         if (o.equals(jButton1)) {
-            try {
-                login();
-            } catch (RemoteException ex) {
-                throw new RuntimeException(ex);
-            }
+            login();
         }
     }
     // End of variables declaration//GEN-END:variables

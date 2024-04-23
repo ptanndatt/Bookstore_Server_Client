@@ -1,8 +1,17 @@
 package views;
 
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.toedter.calendar.JDateChooser;
 import controller.MainController;
 import lombok.SneakyThrows;
+import models.Bill;
+import models.DetailsBill;
+import models.Product;
+import models.ProductSale;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -12,10 +21,9 @@ import util.DialogUtils;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import java.awt.Font;
 import java.awt.*;
 import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
@@ -23,71 +31,72 @@ import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.rmi.RemoteException;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Currency;
 import java.util.Date;
+import java.util.Locale;
 
-public class BillsManagement extends JPanel implements ListSelectionListener, ItemListener, PropertyChangeListener, ActionListener, KeyListener {
-    private JPanel pnController;
+public class BillsManagement extends JPanel implements MouseListener, ItemListener, PropertyChangeListener, ActionListener, KeyListener {
     private JPanel pnMain;
     private JPanel pnLeft;
     private JPanel pnRight;
-    private JPanel pnLeft_Top;
     private JPanel pnLeft_Bottom;
     private JLabel lblGetSearchBill;
     private JLabel lblGetSearchProduct;
     private JLabel lblManagerBill;
     private JLabel lblSumBill;
     private JLabel lblSumBillValue;
+    private JLabel lbSearchByDate;
     private JButton btnExportExcel;
     private JButton btnRefresh;
-
+    private JDateChooser dateChooserEnd;
+    private JDateChooser dateChooserStart;
     private JTextField txtGetSearchBill;
     private JTextField getTxtGetSearchProduct;
-    private JCheckBox chkFullTime;
-    private JCheckBox chkAnotherChoice;
+    private JCheckBox checkBoxSearchByDate;
 
-    private ButtonGroup checkBoxGroup;
-
-    private JComboBox<Object> cboSearchBillDate;
-    private JDateChooser dateChooser;
 
     private JTextArea txtAreaBillDetail;
 
     private JTable table;
     private DefaultTableModel tableModel, tableModel1;
-
+    private JButton btnSearchByDate;
     private JLabel lblTxtMaHoaDon;
     private JLabel lblTxtThoiGian;
     private JLabel lblTxtNhanVien;
     private JLabel lblTxtKhachHang;
     private JLabel lblTxtGiamGia;
     private JLabel lblTxtKhachDaDua;
-    private JLabel lblTxtKhachDaTra;
+    private JLabel lbTxtTienTraKhach;
     private JLabel lblTxtTongTien;
-
+    private NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
     private JButton btnExportBillExcel;
     private MainController controller;
 
     public BillsManagement() {
         setLayout(null);
-//        setTitle("Bills Management");
-//        setExtendedState(JFrame.MAXIMIZED_BOTH);
-//        setDefaultCloseOperation(EXIT_ON_CLOSE);
+
         init();
+
     }
 
     @SneakyThrows
     public void init() {
         controller = new MainController();
+        currencyFormat.setCurrency(Currency.getInstance("VND"));
         pnLeft = new JPanel();
         pnLeft.setLayout(null);
-        chkFullTime = new JCheckBox();
-        chkAnotherChoice = new JCheckBox();
-        cboSearchBillDate = new JComboBox<>();
-        dateChooser = new JDateChooser();
+        checkBoxSearchByDate = new JCheckBox();
+        JLabel lbFrom = new JLabel("Từ:");
+        JLabel lbTo = new JLabel("Đến:");
+        btnSearchByDate = new JButton("Lọc");
         table = new JTable();
         tableModel = new DefaultTableModel();
         pnMain = new JPanel();
@@ -98,15 +107,15 @@ public class BillsManagement extends JPanel implements ListSelectionListener, It
         lblSumBill = new JLabel();
         lblSumBillValue = new JLabel();
         pnLeft.setBorder(BorderFactory.createTitledBorder("Tim kiem"));
-        pnLeft.setBounds(10, 10, 300, 200);
+        pnLeft.setBounds(10, 10, 230, 200);
         lblGetSearchBill = new JLabel("Mã hóa đơn");
-        lblGetSearchBill.setBounds(10, 30, 100, 30);
+        lblGetSearchBill.setBounds(10, 30, 150, 30);
         txtGetSearchBill = new JTextField();
-        txtGetSearchBill.setBounds(10, 60, 260, 30);
-        lblGetSearchProduct = new JLabel("Mã khách hàng/Tên khách hàng/SDT");
-        lblGetSearchProduct.setBounds(10, 100, 300, 30);
+        txtGetSearchBill.setBounds(10, 60, 200, 30);
+        lblGetSearchProduct = new JLabel("Mã/Tên khách hàng");
+        lblGetSearchProduct.setBounds(10, 100, 200, 30);
         getTxtGetSearchProduct = new JTextField(20);
-        getTxtGetSearchProduct.setBounds(10, 130, 260, 30);
+        getTxtGetSearchProduct.setBounds(10, 130, 200, 30);
         pnLeft.add(lblGetSearchBill);
         pnLeft.add(txtGetSearchBill);
         pnLeft.add(lblGetSearchProduct);
@@ -114,45 +123,65 @@ public class BillsManagement extends JPanel implements ListSelectionListener, It
 
         pnLeft_Bottom = new JPanel();
         pnLeft_Bottom.setLayout(null);
-        pnLeft_Bottom.setBounds(10, 220, 300, 150);
+        pnLeft_Bottom.setBounds(10, 220, 230, 200);
         pnLeft_Bottom.setBorder(BorderFactory.createTitledBorder("Tim kiem theo ngay"));
-        chkFullTime = new JCheckBox();
-        cboSearchBillDate = new JComboBox<>();
-        cboSearchBillDate.addItem("Tất cả");
-        cboSearchBillDate.addItem("Hôm nay");
-        cboSearchBillDate.addItem("Hôm qua");
-        cboSearchBillDate.addItem("Tuần nay");
-        cboSearchBillDate.addItem("Tháng nay");
-        cboSearchBillDate.addItem("Năm nay");
-        cboSearchBillDate.setBounds(70, 100, 200, 30);
 
-        chkFullTime.setBounds(10, 100, 20, 30);
-        chkAnotherChoice = new JCheckBox();
-        chkAnotherChoice.setBounds(10, 50, 20, 30);
-        dateChooser.setBounds(70, 50, 200, 30);
-        dateChooser.getCalendarButton().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        dateChooser.setDateFormatString("dd/MM/yyyy");
-        dateChooser.setBorder(new LineBorder(new Color(114, 23, 153), 1, true));
-        dateChooser.setFont(new Font("SansSerif", Font.PLAIN, 15));
-        dateChooser.getCalendarButton().setPreferredSize(new Dimension(30, 24));
-        dateChooser.getCalendarButton().setBackground(new Color(102, 0, 153));
-        dateChooser.setDate(Date.from(LocalDate.now().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+        checkBoxSearchByDate = new JCheckBox();
+        checkBoxSearchByDate.setBounds(10, 20, 20, 30);
+        lbSearchByDate = new JLabel("Lọc theo thời gian");
+        lbSearchByDate.setBounds(50, 20, 150, 30);
+        lbFrom.setBounds(10, 70, 50, 30);
+        lbTo.setBounds(10, 120, 50, 30);
+        btnSearchByDate.setBounds(10, 160, 100, 30);
+        dateChooserStart = new JDateChooser();
+        dateChooserEnd = new JDateChooser();
+        dateChooserStart.setBounds(50, 70, 170, 30);
+        dateChooserStart.getCalendarButton().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        dateChooserStart.setDateFormatString("dd/MM/yyyy");
+        dateChooserStart.setBorder(new LineBorder(new Color(114, 23, 153), 1, true));
+        dateChooserStart.setFont(new Font("SansSerif", Font.PLAIN, 15));
+        dateChooserStart.getCalendarButton().setPreferredSize(new Dimension(30, 24));
+        dateChooserStart.getCalendarButton().setBackground(new Color(102, 0, 153));
+        dateChooserStart.setDate(Date.from(LocalDate.now().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
 
-
-        chkFullTime.setSelected(dateChooser.getDate() == null);
-        chkAnotherChoice.setSelected(dateChooser.getDate() != null);
-        cboSearchBillDate.setEnabled(false);
+        dateChooserEnd.setDate(Date.from(LocalDate.now().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+        dateChooserEnd.setBounds(50, 120, 170, 30);
+        dateChooserEnd.getCalendarButton().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        dateChooserEnd.setDateFormatString("dd/MM/yyyy");
+        dateChooserEnd.setBorder(new LineBorder(new Color(114, 23, 153), 1, true));
+        dateChooserEnd.setFont(new Font("SansSerif", Font.PLAIN, 15));
+        dateChooserEnd.getCalendarButton().setPreferredSize(new Dimension(30, 24));
+        dateChooserEnd.getCalendarButton().setBackground(new Color(102, 0, 153));
+        dateChooserEnd.setDate(Date.from(LocalDate.now().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
+        dateChooserEnd.setEnabled(false);
+        dateChooserStart.setEnabled(false);
+        btnSearchByDate.setEnabled(false);
+        checkBoxSearchByDate.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    // Nếu JCheckBox được chọn, kích hoạt JDateChooser
+                    dateChooserEnd.setEnabled(true);
+                    dateChooserStart.setEnabled(true);
+                    btnSearchByDate.setEnabled(true);
+                } else {
+                    // Nếu JCheckBox không được chọn, làm mờ JDateChooser
+                    dateChooserEnd.setEnabled(false);
+                    dateChooserStart.setEnabled(false);
+                    btnSearchByDate.setEnabled(false);
+                }
+            }
+        });
 
         pnMain = new JPanel(null);
-        pnMain.setBounds(320, 10, 1000, 900);
+        pnMain.setBounds(250, 10, 620, 900);
         pnMain.setBorder(BorderFactory.createTitledBorder("Danh sách hóa đơn"));
         lblManagerBill = new JLabel("Hóa đơn");
         lblManagerBill.setFont(new Font("Arial", Font.BOLD, 35));
         lblManagerBill.setBounds(40, 70, 200, 30);
         btnExportExcel = new JButton("Luư trữ");
-        btnExportExcel.setBounds(850, 70, 130, 30);
+        btnExportExcel.setBounds(460, 70, 100, 20);
         btnRefresh = new JButton("Làm mới");
-        btnRefresh.setBounds(700, 70, 130, 30);
+        btnRefresh.setBounds(350, 70, 100, 20);
         lblSumBill = new JLabel("Tổng số hóa đơn:");
         lblSumBill.setBounds(800, 865, 150, 30);
         lblSumBillValue = new JLabel();
@@ -170,29 +199,27 @@ public class BillsManagement extends JPanel implements ListSelectionListener, It
         tableModel.addColumn("Thời gian");
         tableModel.addColumn("Nhân viên");
         tableModel.addColumn("Khách hàng");
-        tableModel.addColumn("Giảm giá (VNĐ)");
-        tableModel.addColumn("Khách đã đưa (VNĐ)");
-        tableModel.addColumn("Tổng tiền hàng (VNĐ)");
+        tableModel.addColumn("Khách đã đưa");
+        tableModel.addColumn("Tổng tiền hàng");
 
         table.setModel(tableModel);
         JScrollPane sp = new JScrollPane(table);
-        sp.setBounds(10, 110, 970, 760);
+        sp.setBounds(10, 110, 600, 760);
         pnMain.add(sp);
-        calculateTotalPayment();
+//        calculateTotalPayment();
 
 
-        checkBoxGroup = new ButtonGroup();
-        checkBoxGroup.add(chkFullTime);
-        checkBoxGroup.add(chkAnotherChoice);
-
-        pnLeft_Bottom.add(chkFullTime);
-        pnLeft_Bottom.add(cboSearchBillDate);
-        pnLeft_Bottom.add(chkAnotherChoice);
-        pnLeft_Bottom.add(dateChooser);
+        pnLeft_Bottom.add(checkBoxSearchByDate);
+        pnLeft_Bottom.add(dateChooserStart);
+        pnLeft_Bottom.add(lbSearchByDate);
+        pnLeft_Bottom.add(dateChooserEnd);
+        pnLeft_Bottom.add(btnSearchByDate);
+        pnLeft_Bottom.add(lbFrom);
+        pnLeft_Bottom.add(lbTo);
 
 
         pnRight = new JPanel();
-        pnRight.setBounds(1330, 10, 570, 900);
+        pnRight.setBounds(870, 10, 420, 900);
         pnRight.setBorder(BorderFactory.createTitledBorder("Chi tiết hóa đơn"));
         pnRight.setLayout(null);
 
@@ -200,10 +227,11 @@ public class BillsManagement extends JPanel implements ListSelectionListener, It
         JLabel lblThoiGian = new JLabel("Thời gian:");
         JLabel lblNhanVien = new JLabel("Nhân viên:");
         JLabel lblKhachHang = new JLabel("Khách hàng:");
-        JLabel lblGiamGia = new JLabel("Giảm giá (VNĐ):");
-        JLabel lblKhachDaDua = new JLabel("Khách đã đưa (VNĐ):");
-        JLabel lblTongTien = new JLabel("Tổng tiền hàng (VNĐ):");
-
+        JLabel lblKhachDaDua = new JLabel("Tiền khách đưa:");
+        JLabel lblTienTraKhach = new JLabel("Tiền trả lại khách:");
+        JLabel lblTongTien = new JLabel("TỔNG TIỀN (bao gồm thuế VAT 10%):");
+        lblTongTien.setFont(new Font("SansSerif", Font.PLAIN, 15));
+        lblTongTien.setForeground(Color.RED);
         lblTxtMaHoaDon = new JLabel();
         lblTxtThoiGian = new JLabel();
         lblTxtNhanVien = new JLabel();
@@ -211,6 +239,8 @@ public class BillsManagement extends JPanel implements ListSelectionListener, It
         lblTxtGiamGia = new JLabel();
         lblTxtKhachDaDua = new JLabel();
         lblTxtTongTien = new JLabel();
+        lbTxtTienTraKhach = new JLabel();
+        lblTxtTongTien.setFont(new Font("SansSerif", Font.BOLD, 15));
 
         JTable table1 = new JTable();
         tableModel1 = new DefaultTableModel();
@@ -218,14 +248,14 @@ public class BillsManagement extends JPanel implements ListSelectionListener, It
         tableModel1.addColumn("Mã sản phẩm");
         tableModel1.addColumn("Tên sản phẩm");
         tableModel1.addColumn("Số lượng");
-        tableModel1.addColumn("Đơn giá (VNĐ)");
-        tableModel1.addColumn("Thành tiền (VNĐ)");
+        tableModel1.addColumn("Đơn giá");
+        tableModel1.addColumn("Thành tiền");
         table1.setModel(tableModel1);
         JScrollPane cthd = new JScrollPane(table1);
-        cthd.setBounds(10, 300, 540, 500);
+        cthd.setBounds(10, 240, 405, 450);
 
         btnExportBillExcel = new JButton("In hóa đơn");
-        btnExportBillExcel.setBounds(397, 820, 150, 30);
+        btnExportBillExcel.setBounds(200, 700, 150, 30);
         int y = 30;
         int verticalGap = 10;
 //        txtAreaBillDetail.setBounds(10, y, 369, 160); // Đ?ặt vị trí và kích thước cho JTextArea
@@ -242,24 +272,22 @@ public class BillsManagement extends JPanel implements ListSelectionListener, It
         lblKhachHang.setBounds(10, y, 369, 20);
         lblTxtKhachHang.setBounds(190, y, 369, 20);
         y += 20 + verticalGap;
-        lblGiamGia.setBounds(10, y, 369, 20);
-        lblTxtGiamGia.setBounds(190, y, 369, 20);
-        y += 20 + verticalGap;
         lblKhachDaDua.setBounds(10, y, 369, 20);
         lblTxtKhachDaDua.setBounds(190, y, 369, 20);
         y += 20 + verticalGap;
-
+        lblTienTraKhach.setBounds(10, y, 369, 20);
+        lbTxtTienTraKhach.setBounds(190, y, 369, 20);
+        y += 20 + verticalGap;
         lblTongTien.setBounds(10, y, 369, 20);
-        lblTxtTongTien.setBounds(190, y, 369, 20);
-
+        lblTxtTongTien.setBounds(290, y, 369, 20);
         pnRight.add(lblTongTien);
         pnRight.add(lblMaHoaDon);
         pnRight.add(lblThoiGian);
         pnRight.add(lblNhanVien);
         pnRight.add(lblKhachHang);
-        pnRight.add(lblGiamGia);
         pnRight.add(lblKhachDaDua);
-
+        pnRight.add(lblTienTraKhach);
+        pnRight.add(lbTxtTienTraKhach);
         pnRight.add(lblTxtMaHoaDon);
         pnRight.add(lblTxtThoiGian);
         pnRight.add(lblTxtNhanVien);
@@ -279,16 +307,14 @@ public class BillsManagement extends JPanel implements ListSelectionListener, It
         add(pnRight);
 
         loadData();
-
-        table.getSelectionModel().addListSelectionListener(this);
-        chkFullTime.addItemListener(this);
-        chkAnotherChoice.addItemListener(this);
-        dateChooser.addPropertyChangeListener(this);
+        table.addMouseListener(this);
+        checkBoxSearchByDate.addItemListener(this);
         btnRefresh.addActionListener(this);
         btnExportExcel.addActionListener(this);
         btnExportBillExcel.addActionListener(this);
         txtGetSearchBill.addKeyListener(this);
         getTxtGetSearchProduct.addKeyListener(this);
+        btnSearchByDate.addActionListener(this);
     }
 
     @SneakyThrows
@@ -297,83 +323,124 @@ public class BillsManagement extends JPanel implements ListSelectionListener, It
         return controller.sumTotalBill();
     }
 
-    public void calculateTotalPayment() {
-        int totalPayment = 0;
-        int totalPaymentCustomer = 0;
+    private void exportToPdf(String filePath) throws DocumentException {
+        OutputStream file = null;
+        try {
+            file = new FileOutputStream(filePath);
+            // Create a new Document object
+            Document document = new Document();
 
-        for (int i = 0; i < tableModel.getRowCount(); i++) {
-            double totalForRow = Double.parseDouble(tableModel.getValueAt(i, 6).toString());
-            double paymentCustomer = Double.parseDouble(tableModel.getValueAt(i, 5).toString());
+            // You need PdfWriter to generate PDF document
+            PdfWriter.getInstance(document, file);
+            // You need PdfWriter to generate PDF document
 
-            totalPayment += totalForRow;
-            totalPaymentCustomer += paymentCustomer;
-        }
-        Object[] totalRow = new Object[]{
-                "",
-                "",
-                "",
-                "",
-                "",
-                "<html><b>" + totalPaymentCustomer + "</b></html>",
-                "<html><b>" + totalPayment + "</b></html>"
-        };
-        tableModel.insertRow(0, totalRow);
-    }
+            // Opening document for writing PDF
+            document.open();
+            String idHD = lblTxtMaHoaDon.getText();
+            Bill bill = controller.getBillById(idHD);
+            LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            String dateTimeString = now.format(formatter);
+            // Writing content
+            String filePath2 = System.getProperty("user.dir") + "/Server/src/main/resources/database/vuArial.ttf";
+            BaseFont bf = BaseFont.createFont(filePath2, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            Paragraph tieuDe = new Paragraph("HÓA ĐƠN", new com.itextpdf.text.Font(bf, 30, 1, BaseColor.BLUE));
+            Paragraph tenKH = new Paragraph("Tên khách hàng : " + bill.getCustomer().getName(), new com.itextpdf.text.Font(bf, 15));
+            Paragraph idKH2 = new Paragraph("ID khách hàng   : " + bill.getCustomer().getIdCustomer(), new com.itextpdf.text.Font(bf, 15));
+            Paragraph idHD2 = new Paragraph("ID hóa đơn      : " + lblTxtMaHoaDon.getText().toString(), new com.itextpdf.text.Font(bf, 15, Font.BOLD));
+            String ngay = new SimpleDateFormat("dd").format(new Date());
+            String thang = new SimpleDateFormat("MM").format(new Date());
+            String nam = new SimpleDateFormat("yyyy").format(new Date());
+            Paragraph DateTime = new Paragraph("Ngày " + ngay + " tháng " + thang + " năm " + nam, new com.itextpdf.text.Font(bf, 15, Font.ITALIC));
+            tieuDe.setAlignment(Element.ALIGN_CENTER);
+            DateTime.setAlignment(Element.ALIGN_RIGHT);
+            document.add(tieuDe);
+            document.add(DateTime);
+            document.add(idHD2);
+            document.add(tenKH);
+            document.add(idKH2);
+            document.add(new Paragraph("SDT khách hàng: " + bill.getCustomer().getPhone(), new com.itextpdf.text.Font(bf, 15)));
+            document.add(new Paragraph("Tên nhân viên    : " + lblTxtNhanVien.getText(), new com.itextpdf.text.Font(bf, 15)));
+            document.add(new Paragraph("Ngày lập            : " + dateTimeString, new com.itextpdf.text.Font(bf, 15)));
+            document.add(new Paragraph(" "));
+            // Add meta data information to PDF file
 
-//    public static void main(String[] args) {
-//        SwingUtilities.invokeLater(() -> {
-//            BillsManagement view = new BillsManagement();
-//            view.setVisible(true);
-//        });
-//    }
+            PdfPTable table = new PdfPTable(6);
+            //Khởi tạo ô header
+            PdfPCell header1 = new PdfPCell(new Paragraph("ID sản phẩm", new com.itextpdf.text.Font(bf, 12)));
+            PdfPCell header2 = new PdfPCell(new Paragraph("Tên sản phẩm", new com.itextpdf.text.Font(bf, 12)));
+            PdfPCell header3 = new PdfPCell(new Paragraph("Số lượng", new com.itextpdf.text.Font(bf, 12)));
+            PdfPCell header4 = new PdfPCell(new Paragraph("Thành tiền", new com.itextpdf.text.Font(bf, 12)));
+            PdfPCell header5 = new PdfPCell(new Paragraph("Giá niêm yết", new com.itextpdf.text.Font(bf, 12)));
+            PdfPCell header6 = new PdfPCell(new Paragraph("Giá khuyến mãi", new com.itextpdf.text.Font(bf, 12)));
 
-    @SneakyThrows
-    @Override
-    public void valueChanged(ListSelectionEvent e) {
-        if (!e.getValueIsAdjusting()) {
-            int selectedRow = table.getSelectedRow();
-            if (selectedRow != -1) {
-                Object maHoaDonObj = table.getValueAt(selectedRow, 0);
-                Object thoiGianObj = table.getValueAt(selectedRow, 1);
-                Object nhanVienObj = table.getValueAt(selectedRow, 2);
-                Object khachHangObj = table.getValueAt(selectedRow, 3);
-                Object giamGiaObj = table.getValueAt(selectedRow, 4);
-                Object khachDaDuaObj = table.getValueAt(selectedRow, 5);
-                Object tongTienObj = table.getValueAt(selectedRow, 6);
+            header1.setMinimumHeight(70f); // Kích thước tối thiểu là 50
+            header2.setMinimumHeight(70f);
+            header3.setMinimumHeight(70f);
+            header4.setMinimumHeight(70f);
+            header5.setMinimumHeight(70f);
+            header6.setMinimumHeight(70f);
+            //Thêm 4 ô header vào table
+            table.addCell(header1);
+            table.addCell(header2);
+            table.addCell(header5);
+            table.addCell(header6);
+            table.addCell(header3);
+            table.addCell(header4);
 
 
-                String maHoaDon = maHoaDonObj != null ? maHoaDonObj.toString() : "";
-                String thoiGian = thoiGianObj != null ? thoiGianObj.toString() : "";
-                String nhanVien = nhanVienObj != null ? nhanVienObj.toString() : "";
-                String khachHang = khachHangObj != null ? khachHangObj.toString() : "";
-                String giamGia = giamGiaObj != null ? giamGiaObj.toString() : "";
-                String khachDaDua = khachDaDuaObj != null ? khachDaDuaObj.toString() : "";
-                String tongTien = tongTienObj != null ? tongTienObj.toString() : "";
+            for (DetailsBill cthd : controller.findDetailsBillByBillId(idHD)) {
+                String idSP = cthd.getProduct().getProductId();
+                ProductSale productSale = controller.getProductSale(idSP);
+                Product product = controller.getProductById(idSP);
+                String giaBanSauKM;
+                if (productSale != null) {
+                    giaBanSauKM = currencyFormat.format(productSale.getGiaBan()) + "(-" + productSale.getDescription().replaceAll("[^0-9%]", "") + ")";
+                } else {
+                    giaBanSauKM = currencyFormat.format(product.sellingPrice());
+                }
 
-                lblTxtMaHoaDon.setText(maHoaDon);
-                lblTxtThoiGian.setText(thoiGian);
-                lblTxtNhanVien.setText(nhanVien);
-                lblTxtKhachHang.setText(khachHang);
-                lblTxtGiamGia.setText(giamGia);
-                lblTxtKhachDaDua.setText(khachDaDua);
-                lblTxtTongTien.setText(tongTien);
+                String tenSP = product.getProductName();
+                String soLuong = String.valueOf(cthd.getQuantity());
+                String thanhTien = currencyFormat.format(cthd.getTotal());
+                String giaBan = currencyFormat.format(product.sellingPrice());
 
-                tableModel1.setRowCount(0);
-                controller.loadDataProduct(maHoaDon).forEach(product -> {
-                    Object[] rowData = new Object[]{
-                            product[0],
-                            product[1],
-                            product[2],
-                            product[3],
-                            product[4]
-                    };
-                    tableModel1.addRow(rowData);
-                });
+                table.addCell(new PdfPCell(new Paragraph(idSP)));
+                table.addCell(new PdfPCell(new Paragraph(tenSP, new com.itextpdf.text.Font(bf, 12))));
+                table.addCell(new PdfPCell(new Paragraph(giaBan)));
+                table.addCell(new PdfPCell(new Paragraph(giaBanSauKM)));
+                table.addCell(new PdfPCell(new Paragraph(soLuong)));
+                table.addCell(new PdfPCell(new Paragraph(thanhTien)));
+            }
+
+            document.add(table);
+
+            Paragraph tongTien = new Paragraph("TỔNG TIỀN : " + lblTxtTongTien.getText(), new com.itextpdf.text.Font(bf, 25, 1, BaseColor.RED));
+            Paragraph tienKhachDua = new Paragraph("Tiền khách đưa  : " + lblTxtKhachDaDua.getText(), new com.itextpdf.text.Font(bf, 20));
+            Paragraph tienTraKhach = new Paragraph("Tiền trả khách    : ", new com.itextpdf.text.Font(bf, 20));
+            document.add(tongTien);
+            document.add(tienKhachDua);
+            document.add(tienTraKhach);
+            // close the document
+            document.close();
+            Desktop.getDesktop().open(new File(filePath));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        } finally {
+
+            // closing FileOutputStream
+            try {
+                if (file != null) {
+                    file.close();
+                }
+            } catch (IOException io) {/*Failed to close*/
 
             }
+
         }
     }
-
 
     @SneakyThrows
     public void loadData() {
@@ -385,45 +452,33 @@ public class BillsManagement extends JPanel implements ListSelectionListener, It
                     bill[1],
                     bill[2],
                     bill[3],
-                    bill[4],
-                    bill[5],
-                    bill[6]
+                    currencyFormat.format(bill[4]),
+                    currencyFormat.format(bill[5])
             };
             tableModel.addRow(rowData);
         });
-        calculateTotalPayment();
+    }
+
+    @SneakyThrows
+    public void loadDataByDate(LocalDate dateFrom, LocalDate dateTo) {
+        // Load data from database
+        tableModel.setRowCount(0);
+        controller.findBillByDate(dateFrom, dateTo).forEach(bill -> {
+            Object[] rowData = new Object[]{
+                    bill.getBillId(), bill.getBillDate(), bill.getEmployee().getName(), bill.getCustomer().getName(), currencyFormat.format(bill.getAmountReceived()), currencyFormat.format(bill.getAmounttotal())
+            };
+            tableModel.addRow(rowData);
+        });
     }
 
 
     @Override
     public void itemStateChanged(ItemEvent e) {
-        if (e.getSource() == chkFullTime) {
-            if (chkFullTime.isSelected()) {
-                chkAnotherChoice.setSelected(false);
-                dateChooser.setEnabled(false);
-//                System.out.println("Full time");
-            } else {
-                dateChooser.setEnabled(true);
-            }
-        } else if (e.getSource() == chkAnotherChoice) {
-            if (chkAnotherChoice.isSelected()) {
-                cboSearchBillDate.setSelectedIndex(0);
-                chkFullTime.setSelected(false);
-                dateChooser.setEnabled(true);
-                cboSearchBillDate.setEnabled(false);
-//                System.out.println("Another choice");
-            } else {
-                cboSearchBillDate.setEnabled(true);
-            }
-        }
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        if ("date".equals(evt.getPropertyName())) {
-            chkFullTime.setSelected(false);
-            chkAnotherChoice.setSelected(true);
-        }
+
     }
 
     @Override
@@ -436,9 +491,33 @@ public class BillsManagement extends JPanel implements ListSelectionListener, It
         } else if (e.getSource() == btnRefresh) {
             refreshForm();
         } else if (e.getSource() == btnExportBillExcel) {
-            // Export bill excel
-        } else if (e.getSource() == cboSearchBillDate) {
-            // Search bill by date
+            JFileChooser fileChooser = new JFileChooser();
+            int returnValue = fileChooser.showOpenDialog(null);
+            if (returnValue == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = fileChooser.getSelectedFile();
+                String selectedFilePath = selectedFile.getAbsolutePath();
+                if (!selectedFilePath.toLowerCase().endsWith(".pdf")) {
+                    selectedFilePath += ".pdf";
+                }
+                try {
+                    exportToPdf(selectedFilePath);
+                } catch (DocumentException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
+        } else if (e.getSource() == btnSearchByDate) {
+            Date dateFrom = dateChooserStart.getDate();
+            Date dateTo = dateChooserEnd.getDate();
+            if (dateFrom.after(dateTo)) {
+                JOptionPane.showMessageDialog(this, "Ngày kết thúc không được trước ngày bắt đầu");
+                dateChooserStart.setDate(new Date());
+                dateChooserEnd.setDate(new Date());
+            } else {
+                LocalDate localDateFrom = dateFrom.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate localDateTo = dateTo.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                loadDataByDate(localDateFrom, localDateTo);
+            }
+
         }
     }
 
@@ -490,10 +569,6 @@ public class BillsManagement extends JPanel implements ListSelectionListener, It
 
     private void refreshForm() {
         loadData();
-        cboSearchBillDate.setSelectedIndex(0);
-        chkFullTime.setSelected(false);
-        chkAnotherChoice.setSelected(true);
-        dateChooser.setDate(Date.from(LocalDate.now().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
         txtGetSearchBill.setText("");
         getTxtGetSearchProduct.setText("");
         txtGetSearchBill.requestFocus();
@@ -501,12 +576,13 @@ public class BillsManagement extends JPanel implements ListSelectionListener, It
         lblTxtThoiGian.setText("");
         lblTxtNhanVien.setText("");
         lblTxtKhachHang.setText("");
-        lblTxtGiamGia.setText("");
         lblTxtKhachDaDua.setText("");
         lblTxtTongTien.setText("");
+        lbTxtTienTraKhach.setText("");
         tableModel1.setRowCount(0);
         table.clearSelection();
-
+        dateChooserEnd.setDate(new Date());
+        dateChooserStart.setDate(new Date());
     }
 
     @Override
@@ -565,6 +641,49 @@ public class BillsManagement extends JPanel implements ListSelectionListener, It
 
     @Override
     public void keyReleased(KeyEvent e) {
+
+    }
+
+    @SneakyThrows
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        int row = table.getSelectedRow();
+        lblTxtMaHoaDon.setText(tableModel.getValueAt(row, 0).toString());
+        lblTxtThoiGian.setText(tableModel.getValueAt(row, 1).toString());
+        lblTxtNhanVien.setText(tableModel.getValueAt(row, 2).toString());
+        lblTxtKhachHang.setText(tableModel.getValueAt(row, 3).toString());
+        lblTxtKhachDaDua.setText(tableModel.getValueAt(row, 4).toString());
+        lblTxtTongTien.setText(tableModel.getValueAt(row, 5).toString());
+        double tienKhachDua = Double.parseDouble(tableModel.getValueAt(row, 4).toString().trim().replace("\u00A0", "").replaceAll("[.,₫]", ""));
+        double tienHoaDon = Double.parseDouble(tableModel.getValueAt(row, 5).toString().trim().replace("\u00A0", "").replaceAll("[.,₫]", ""));
+        double tienTraKhach = tienKhachDua - tienHoaDon;
+        lbTxtTienTraKhach.setText(currencyFormat.format(tienTraKhach));
+        tableModel1.setRowCount(0);
+        for (DetailsBill detailsBill : controller.findDetailsBillByBillId(lblTxtMaHoaDon.getText())) {
+            tableModel1.addRow(new Object[]{
+                    detailsBill.getBill().getBillId(), detailsBill.getProduct().getProductName(), detailsBill.getQuantity(), currencyFormat.format(detailsBill.getPrice()), currencyFormat.format(detailsBill.getTotal())
+            });
+        }
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
 
     }
 }

@@ -21,12 +21,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
-public class ManagerStatistics extends JPanel implements ItemListener, ActionListener {
+public class ManagerHomeStatistics extends JPanel implements ItemListener, ActionListener {
     private JPanel pnTop, pnTop_1, pnTop_2;
     private JPanel pnCenter;
     private JPanel pnBottom;
@@ -49,8 +52,10 @@ public class ManagerStatistics extends JPanel implements ItemListener, ActionLis
     private ChartPanel pieDataset;
     private JPanel pnCenter_4;
     private JPanel pnCenter_5;
+    private NumberFormat currencyFormat;
 
-    public ManagerStatistics() {
+
+    public ManagerHomeStatistics() {
         initComponents();
     }
 
@@ -124,12 +129,12 @@ public class ManagerStatistics extends JPanel implements ItemListener, ActionLis
 //        lblDonHangValue.setText(String.valueOf(mainController.sumTotalBill()));
         lblDonHangValue.setBounds(10, 40, 200, 30);
         lblDonHangValue.setForeground(Color.WHITE);
-        lblDonHangValue.setFont(new Font("SansSerif", Font.BOLD, 30));
+        lblDonHangValue.setFont(new Font("SansSerif", Font.BOLD, 20));
         JLabel lblGiaTriDonHang = new JLabel("Giá trị đơn hàng");
         lblGiaTriDonHangValue = new JLabel("1000000");
         lblGiaTriDonHang.setBounds(10, 10, 200, 30);
         lblGiaTriDonHang.setForeground(Color.WHITE);
-        lblGiaTriDonHangValue.setFont(new Font("SansSerif", Font.BOLD, 30));
+        lblGiaTriDonHangValue.setFont(new Font("SansSerif", Font.BOLD, 20));
         lblGiaTriDonHangValue.setBounds(10, 40, 200, 30);
         lblGiaTriDonHangValue.setForeground(Color.WHITE);
         JLabel lblThucThu = new JLabel("Thực thu");
@@ -138,31 +143,31 @@ public class ManagerStatistics extends JPanel implements ItemListener, ActionLis
         lblThucThuValue = new JLabel("1000000");
         lblThucThuValue.setBounds(10, 40, 200, 30);
         lblThucThuValue.setForeground(Color.WHITE);
-        lblThucThuValue.setFont(new Font("SansSerif", Font.BOLD, 30));
+        lblThucThuValue.setFont(new Font("SansSerif", Font.BOLD, 20));
         lblDoanhThu = new JLabel("Doanh thu");
         lblDoanhThu.setBounds(10, 10, 200, 30);
         lblDoanhThu.setForeground(Color.WHITE);
         lblDoanhThuValue = new JLabel("1000000");
         lblDoanhThuValue.setBounds(10, 40, 200, 30);
         lblDoanhThuValue.setForeground(Color.WHITE);
-        lblDoanhThuValue.setFont(new Font("SansSerif", Font.BOLD, 30));
+        lblDoanhThuValue.setFont(new Font("SansSerif", Font.BOLD, 20));
 
-        pn_1.setBounds(10, 10, 400, 80);
+        pn_1.setBounds(50, 10, 200, 80);
         pn_1.setBackground(new Color(66, 109, 189));
         pn_1.add(lblDonHang);
         pn_1.add(lblDonHangValue);
 
-        pn_2.setBounds(420, 10, 400, 80);
+        pn_2.setBounds(340, 10, 200, 80);
         pn_2.setBackground(new Color(66, 109, 189));
         pn_2.add(lblGiaTriDonHang);
         pn_2.add(lblGiaTriDonHangValue);
 
-        pn_3.setBounds(830, 10, 400, 80);
+        pn_3.setBounds(660, 10, 200, 80);
         pn_3.setBackground(new Color(66, 109, 189));
         pn_3.add(lblThucThu);
         pn_3.add(lblThucThuValue);
 
-        pn_4.setBounds(1240, 10, 400, 80);
+        pn_4.setBounds(950, 10, 200, 80);
         pn_4.setBackground(new Color(66, 109, 189));
         pn_4.add(lblDoanhThu);
         pn_4.add(lblDoanhThuValue);
@@ -170,7 +175,7 @@ public class ManagerStatistics extends JPanel implements ItemListener, ActionLis
         pnCenter = new JPanel();
         pnCenter.setLayout(null);
         pnCenter.setBorder(BorderFactory.createTitledBorder("Sản phẩm bán chạy"));
-        pnCenter.setBounds(50, 160, 500, 350);
+        pnCenter.setBounds(50, 160, 350, 290);
 
         model.addColumn("Mã sản phẩm");
         model.addColumn("Tên sản phẩm");
@@ -179,53 +184,54 @@ public class ManagerStatistics extends JPanel implements ItemListener, ActionLis
         model.addColumn("Tỷ lệ bán ra");
         table.setModel(model);
         JScrollPane sp = new JScrollPane(table);
-        sp.setBounds(0, 20, 500, 320);
+        sp.setBounds(0, 20, 350, 260);
         pnCenter.add(sp);
 
         pnCenter_2 = new JPanel();
         pnCenter_2.setLayout(null);
         pnCenter_2.setBorder(BorderFactory.createTitledBorder("Doanh số theo hàng hoá"));
-        pnCenter_2.setBounds(600, 160, 500, 350);
+        pnCenter_2.setBounds(450, 160, 400, 290);
         Date today = Calendar.getInstance().getTime();
         dcFrom.setDate(today);
         dcTo.setDate(today);
         JFreeChart pieChart = createChart(createDataset(today, today));
         ChartPanel chartPanel = new ChartPanel(pieChart);
-        chartPanel.setBounds(0, 20, 500, 320);
+        chartPanel.setBounds(0, 20, 400, 270);
         pnCenter_2.add(chartPanel);
 
 
         pnCenter_3 = new JPanel();
         pnCenter_3.setLayout(null);
         pnCenter_3.setBorder(BorderFactory.createTitledBorder("Doanh thu và lợi nhuận theo thời gian"));
-        pnCenter_3.setBounds(1150, 160, 500, 350);
+        pnCenter_3.setBounds(900, 160, 400, 290);
         JFreeChart chart = createChartBar(createBarChartDataset(today, today));
         ChartPanel panel = new ChartPanel(chart);
-        panel.setBounds(0, 20, 500, 320);
+        panel.setBounds(0, 20, 400, 270);
         pnCenter_3.add(panel);
 
         pnCenter_4 = new JPanel();
         pnCenter_4.setLayout(null);
         pnCenter_4.setBorder(BorderFactory.createTitledBorder("Sản phẩm bán chậm"));
-        pnCenter_4.setBounds(50, 560, 500, 350);
+        pnCenter_4.setBounds(50, 470, 350, 260);
         model1 = new DefaultTableModel();
         model1.addColumn("Mã sản phẩm");
         model1.addColumn("Tên sản phẩm");
         model1.addColumn("Giá bán");
+        model1.addColumn("So luong");
         model1.addColumn("Tỷ lệ bán ra");
         table1 = new JTable();
         table1.setModel(model1);
         JScrollPane sp1 = new JScrollPane(table1);
-        sp1.setBounds(0, 20, 500, 320);
+        sp1.setBounds(0, 20, 350, 240);
         pnCenter_4.add(sp1);
 
         pnCenter_5 = new JPanel();
         pnCenter_5.setLayout(null);
         pnCenter_5.setBorder(BorderFactory.createTitledBorder("Doanh số theo nhân viên"));
-        pnCenter_5.setBounds(600, 560, 1020, 350);
+        pnCenter_5.setBounds(450, 470, 800, 260);
         JFreeChart chart1 = createChartBar1(createBarChartDataset1(today, today));
         ChartPanel panel1 = new ChartPanel(chart1);
-        panel1.setBounds(0, 20, 1020, 320);
+        panel1.setBounds(0, 20, 800, 240);
         pnCenter_5.add(panel1);
 
 
@@ -253,31 +259,57 @@ public class ManagerStatistics extends JPanel implements ItemListener, ActionLis
 
         loadDataProductSales(dcFrom.getDate(), dcTo.getDate());
         loadDataProductWorstSeller(dcFrom.getDate(), dcTo.getDate());
+
+        currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+
         lblDonHangValue.setText(String.valueOf(mainController.sumTotalBillDate(dcFrom.getDate(), dcTo.getDate())));
-        lblDoanhThuValue.setText(String.valueOf(mainController.sumTotalAmount(dcFrom.getDate(), dcTo.getDate())));
-        lblThucThuValue.setText(String.valueOf(mainController.sumProfit(dcFrom.getDate(), dcTo.getDate())));
-        lblGiaTriDonHangValue.setText(String.valueOf(mainController.sumTotalBillValue(dcFrom.getDate(), dcTo.getDate())));
+
+        double doanhThuValue = mainController.sumTotalAmount(dcFrom.getDate(), dcTo.getDate());
+        lblDoanhThuValue.setText(currencyFormat.format(doanhThuValue));
+
+        double thucThuValue = mainController.sumProfit(dcFrom.getDate(), dcTo.getDate());
+        lblThucThuValue.setText(currencyFormat.format(thucThuValue));
+
+        double giaTriDonHangValue = mainController.sumTotalBillValue(dcFrom.getDate(), dcTo.getDate());
+        lblGiaTriDonHangValue.setText(currencyFormat.format(giaTriDonHangValue));
+
+
+//        lblDonHangValue.setText(String.valueOf(mainController.sumTotalBillDate(dcFrom.getDate(), dcTo.getDate())));
+//        lblDoanhThuValue.setText(String.valueOf(mainController.sumTotalAmount(dcFrom.getDate(), dcTo.getDate())));
+//        lblThucThuValue.setText(String.valueOf(mainController.sumProfit(dcFrom.getDate(), dcTo.getDate())));
+//        lblGiaTriDonHangValue.setText(String.valueOf(mainController.sumTotalBillValue(dcFrom.getDate(), dcTo.getDate())));
 
         cbFilter.addItemListener(this);
     }
 
     @SneakyThrows
     public void loadDataProductWorstSeller(Date from, Date to) {
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
         List<Object[]> list = mainController.findProductWorstSeller(from, to);
         model1.setRowCount(0);
         for (Object[] obj : list) {
+            if (obj[2] != null) {
+                double price = Double.parseDouble(obj[2].toString());
+                obj[2] = currencyFormat.format(price);
+            }
             model1.addRow(obj);
         }
     }
 
     @SneakyThrows
     public void loadDataProductSales(Date from, Date to) {
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
         List<Object[]> list = mainController.findProductBestSeller(from, to);
         model.setRowCount(0);
         for (Object[] obj : list) {
+            if (obj[2] != null) {
+                double price = Double.parseDouble(obj[2].toString());
+                obj[2] = currencyFormat.format(price);
+            }
             model.addRow(obj);
         }
     }
+
 
     @SneakyThrows
     private PieDataset createDataset(Date startDate, Date endDate) {
@@ -299,18 +331,22 @@ public class ManagerStatistics extends JPanel implements ItemListener, ActionLis
     @SneakyThrows
     private DefaultCategoryDataset createBarChartDataset(Date startDate, Date endDate) {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-
         mainController.sumTotalBillValueByDate(startDate, endDate).forEach(objects -> {
             if (objects[0] != null && objects[1] != null) {
-                String time = new SimpleDateFormat("yyyy-MM-dd").format((Date) objects[0]);
+                LocalDate localDate = (LocalDate) objects[0];
+                Date date = java.sql.Date.valueOf(localDate);
+                String time = new SimpleDateFormat("yyyy-MM-dd").format(date);
                 double value = Double.parseDouble(objects[1].toString());
                 dataset.addValue(value, "Doanh Thu", time);
             }
         });
 
+
         mainController.sumTotalBillValueByDateLoiNhuan(startDate, endDate).forEach(objects -> {
             if (objects[0] != null && objects[1] != null) {
-                String time = new SimpleDateFormat("yyyy-MM-dd").format((Date) objects[0]);
+                LocalDate localDate = (LocalDate) objects[0];
+                Date date = java.sql.Date.valueOf(localDate);
+                String time = new SimpleDateFormat("yyyy-MM-dd").format(date);
                 double value = Double.parseDouble(objects[1].toString());
                 dataset.addValue(value, "Lợi Nhuận", time);
             }
@@ -358,7 +394,7 @@ public class ManagerStatistics extends JPanel implements ItemListener, ActionLis
             if (objects[0] != null && objects[1] != null) {
                 String name = objects[0].toString();
                 double value = Double.parseDouble(objects[1].toString());
-                dataset.addValue(value, "Số lượng", name);
+                dataset.addValue(value, "Doanh Thu", name);
             }
         });
 
@@ -438,10 +474,19 @@ public class ManagerStatistics extends JPanel implements ItemListener, ActionLis
 
     @SneakyThrows
     public void updateUI(Date startDate, Date endDate) {
-        lblDonHangValue.setText(String.valueOf(mainController.sumTotalBillDate(startDate, endDate)));
-        lblDoanhThuValue.setText(String.valueOf(mainController.sumTotalAmount(startDate, endDate)));
-        lblThucThuValue.setText(String.valueOf(mainController.sumProfit(startDate, endDate)));
-        lblGiaTriDonHangValue.setText(String.valueOf(mainController.sumTotalBillValue(startDate, endDate)));
+        currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+
+        lblDonHangValue.setText(String.valueOf(mainController.sumTotalBillDate(dcFrom.getDate(), dcTo.getDate())));
+
+        double doanhThuValue = mainController.sumTotalAmount(dcFrom.getDate(), dcTo.getDate());
+        lblDoanhThuValue.setText(currencyFormat.format(doanhThuValue));
+
+        double thucThuValue = mainController.sumProfit(dcFrom.getDate(), dcTo.getDate());
+        lblThucThuValue.setText(currencyFormat.format(thucThuValue));
+
+        double giaTriDonHangValue = mainController.sumTotalBillValue(dcFrom.getDate(), dcTo.getDate());
+        lblGiaTriDonHangValue.setText(currencyFormat.format(giaTriDonHangValue));
+
     }
 
 
@@ -475,7 +520,7 @@ public class ManagerStatistics extends JPanel implements ItemListener, ActionLis
 
     private void updateBarChart1(Date startDate, Date endDate) {
         DefaultCategoryDataset updatedDataset = createBarChartDataset1(startDate, endDate);
-        Component[] components = pnCenter_5.getComponents();
+        Component[] components = pnCenter_3.getComponents();
         for (Component component : components) {
             if (component instanceof ChartPanel) {
                 ChartPanel chartPanel = (ChartPanel) component;

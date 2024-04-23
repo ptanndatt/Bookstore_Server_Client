@@ -346,7 +346,7 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
     @SneakyThrows
     private void loadDataRoleTabble() {
         modelChucVu.setRowCount(0);
-        for (Role role : mainController.getAllRole()) {
+        for (Role role : mainController.getRolesByRoleCode(ROLE)) {
             modelChucVu.addRow(new Object[]{role.getIdRole(), role.getRoleName()
             });
         }

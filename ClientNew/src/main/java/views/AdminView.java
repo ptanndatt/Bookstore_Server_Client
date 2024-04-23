@@ -2,13 +2,11 @@ package views;
 
 import controller.MainController;
 import controller.MenuItem;
-import lombok.SneakyThrows;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class AdminView extends JFrame {
@@ -19,8 +17,7 @@ public class AdminView extends JFrame {
     private JPanel panelMenu;
     private JPanel paneCu;
     private MainController mainController;
-    public AdminView() throws RemoteException {
-        mainController = new MainController();
+    public AdminView() {
         initComponents();
         setTitle("Quản trị");
         setSize(new Dimension(871, 473));
@@ -44,7 +41,6 @@ public class AdminView extends JFrame {
 
         MenuItem QL = new MenuItem(iconNV, "THÔNG TIN QUẢN LÝ", new ActionListener() {
 
-            @SneakyThrows
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub

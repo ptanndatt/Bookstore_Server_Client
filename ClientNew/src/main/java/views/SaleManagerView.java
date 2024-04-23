@@ -1,6 +1,10 @@
 package views;
 
-import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import controller.MainController;
 import lombok.SneakyThrows;
 import models.*;
@@ -9,19 +13,27 @@ import util.GeneratorIDAuto;
 import javax.swing.*;
 import javax.swing.event.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.Font;
+import java.awt.Rectangle;
 import java.awt.*;
 import java.awt.Window.Type;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Currency;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 
-public class SaleManagerView extends JPanel implements ActionListener, MouseListener{
+public class SaleManagerView extends JPanel implements ActionListener, MouseListener, KeyListener {
     private JPanel pnLeft;
     private JPanel pnRight;
     private JTextField txtMaSP;
@@ -41,6 +53,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
     private JTextField txtThue;
     private JTextField txtCapNhatSoLuong;
     private JTextField txtTongTienHoaDon;
+    private JTextField txtTimKiemHDCho;
     private JTable tblSanPham;
     private JTable tblGioHang;
     private JTable tblkhachHang;
@@ -65,7 +78,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
     private JButton btnChonMaSanPham;
     private JButton btnCapNhatSoLuong;
     private JButton btnXacNhanCapNhat;
-    private JButton btnTaoMaHoaDon;
+    private JButton btnXemTatCaHDC;
     private DefaultTableModel modelSP;
     private DefaultTableModel modelKH;
     private DefaultTableModel modelGioHang;
@@ -86,11 +99,12 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
     private MainController mainController;
     private GeneratorIDAuto autoID;
     private Employee employee;
+
     @SneakyThrows
     public SaleManagerView(Employee e) {
         this.employee = e;
-        mainController=new MainController();
-        autoID=new GeneratorIDAuto();
+        mainController = new MainController();
+        autoID = new GeneratorIDAuto();
         // Xóa logo Eclipse ở phía trên hộp thoại
         UIManager.put("OptionPane.windowIcons", new ImageIcon[0]);
         currencyFormat.setCurrency(Currency.getInstance("VND"));
@@ -213,14 +227,14 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         btnChonKH = new JButton("Chọn khách hàng");
         btnXemTatCaSanPham = new JButton("Xem tất cả");
         tblkhachHang = new JTable();
-        modelKH = new DefaultTableModel(){
+        modelKH = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false; // Không cho phép chỉnh sửa các ô trong bảng
             }
         };
         tblSanPham = new JTable();
-        modelSP = new DefaultTableModel(){
+        modelSP = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -229,7 +243,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
 
 
         tblMaSp = new JTable();
-        modelMaSP = new DefaultTableModel(){
+        modelMaSP = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -245,7 +259,6 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         pnChonMaSanPham.add(btnChonMaSanPham);
         windowMaSP.add(scrollTblSP, BorderLayout.CENTER);
         windowMaSP.add(pnChonMaSanPham, BorderLayout.SOUTH);
-
 
 
         ImageIcon iconThem = new ImageIcon(getClass().getResource("/icons/add.png"));
@@ -270,7 +283,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         pnHeaderLeft.add(pn1, BorderLayout.CENTER);
         pnHeaderLeft.add(pn7, BorderLayout.SOUTH);
         tblGioHang = new JTable();
-        modelGioHang = new DefaultTableModel(){
+        modelGioHang = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false; // Không cho phép chỉnh sửa các ô trong bảng
@@ -321,8 +334,15 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         pnHeaderRight.add(pn2, BorderLayout.CENTER);
         pnHeaderRight.add(pnTimKiemKH, BorderLayout.SOUTH);
 
+        JPanel pnTimKiemHDC = new JPanel(new GridLayout(1, 4, 5, 5));
+        txtTimKiemHDCho = new JTextField();
+        JLabel lbTimKiemHDC = new JLabel("Tìm kiếm hóa đơn chờ:");
+        btnXemTatCaHDC = new JButton("Xem tất cả hóa đơn chờ");
+        pnTimKiemHDC.add(lbTimKiemHDC);
+        pnTimKiemHDC.add(txtTimKiemHDCho);
+        pnTimKiemHDC.add(btnXemTatCaHDC);
         tblHangCho = new JTable();
-        modelHangCho = new DefaultTableModel(){
+        modelHangCho = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -348,6 +368,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
 
         pnChucNangHangCho.add(btnXoaHangCho);
         pnChucNangHangCho.add(btnLamMoiHangCho);
+        pnTblHangCho.add(pnTimKiemHDC, BorderLayout.NORTH);
         pnTblHangCho.add(scrollTblHangDoi, BorderLayout.CENTER);
         pnTblHangCho.add(pnChucNangHangCho, BorderLayout.SOUTH);
 
@@ -388,7 +409,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.weightx = 0.5;
+        gbc.weightx = 0.3;
         gbc.weighty = 1.0;
         gbc.fill = GridBagConstraints.BOTH;
         add(pnLeft, gbc);
@@ -396,7 +417,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
 
         gbc.gridx = 1;
         gbc.gridy = 0;
-        gbc.weightx = 0.5;
+        gbc.weightx = 0.7;
         gbc.weighty = 1.0;
         gbc.fill = GridBagConstraints.BOTH;
         add(pnRight, gbc);
@@ -424,8 +445,9 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         btnXacNhanCapNhat.addActionListener(this);
         btnXemTatCaKhachHang.addActionListener(this);
         btnChonKH.addActionListener(this);
-//        btnTaoMaHoaDon.addActionListener(this);
+        btnXemTatCaHDC.addActionListener(this);
         btnXemTatCaSanPham.addActionListener(this);
+
         txtTienKhachDua.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -444,7 +466,6 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         });
 
 
-
         txtMaSP.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -453,7 +474,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
                 if (!txtMaSP.getText().equals("")) {
                     windowMaSP.setLocation(txtMaSP.getLocationOnScreen().x, txtMaSP.getLocationOnScreen().y + txtMaSP.getHeight());
                     windowMaSP.pack();
-                    windowMaSP.setSize(txtMaSP.getWidth(), windowMaSP.getHeight()/2);
+                    windowMaSP.setSize(txtMaSP.getWidth(), windowMaSP.getHeight() / 2);
                     windowMaSP.setVisible(true);
                 } else {
                     windowMaSP.setVisible(false);
@@ -467,7 +488,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
                 if (!txtMaSP.getText().equals("")) {
                     windowMaSP.setLocation(txtMaSP.getLocationOnScreen().x, txtMaSP.getLocationOnScreen().y + txtMaSP.getHeight());
                     windowMaSP.pack();
-                    windowMaSP.setSize(txtMaSP.getWidth(), windowMaSP.getHeight()/2);
+                    windowMaSP.setSize(txtMaSP.getWidth(), windowMaSP.getHeight() / 2);
                     windowMaSP.setVisible(true);
                 } else {
                     windowMaSP.setVisible(false);
@@ -524,7 +545,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
             public void insertUpdate(DocumentEvent e) {
                 if (!txtTienKhachDua.getText().equals("") && txtTienKhachDua.getText().matches("\\d+")) {
                     tinhTienTraKhach();
-                } else if (txtTienKhachDua.getText().equals("")){
+                } else if (txtTienKhachDua.getText().equals("")) {
                     txtTienTraKhach.setText(currencyFormat.format(0.0));
                 }
             }
@@ -533,7 +554,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
             public void removeUpdate(DocumentEvent e) {
                 if (!txtTienKhachDua.getText().equals("") && txtTienKhachDua.getText().matches("\\d+")) {
                     tinhTienTraKhach();
-                } else if (txtTienKhachDua.getText().equals("")){
+                } else if (txtTienKhachDua.getText().equals("")) {
                     txtTienTraKhach.setText(currencyFormat.format(0.0));
                 }
             }
@@ -543,8 +564,41 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
 
             }
         });
+        txtTimKiemHDCho.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                modelHangCho.setRowCount(0);
+                handleSearchBillPending(txtTimKiemHDCho.getText().trim());
+            }
 
-    loadBillPending();
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                modelHangCho.setRowCount(0);
+                handleSearchBillPending(txtTimKiemHDCho.getText().trim());
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+
+            }
+        });
+        loadBillPending();
+    }
+
+    @SneakyThrows
+    private void handleSearchBillPending(String cond) {
+        if (!cond.equals("")) {
+            for (BillPending billPending : mainController.findBillPendingByText(cond)) {
+                String ngayLap = new SimpleDateFormat("dd/MM/yyyy").format(billPending.getNgayLap());
+                modelHangCho.addRow(new Object[]{
+                        billPending.getBillId(), billPending.getCustomer().getName(),
+                        billPending.getCustomer().getIdCustomer(), billPending.getCustomer().getPhone(),
+                        ngayLap
+                });
+            }
+        } else {
+            loadBillPending();
+        }
     }
 
     private void tinhTienTraKhach() {
@@ -589,41 +643,35 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
             txtTongTienGioHang.setText(currencyFormat.format(0.0));
         }
     }
+
     @SneakyThrows
     private void loadCustomer() {
         for (Customer customer : mainController.getAllCustomers()) {
             String ngaySinh = new SimpleDateFormat("dd/MM/yyyy").format(customer.getBirth());
-            modelKH.addRow(new String[] { customer.getIdCustomer(), customer.getName(),customer.getPhone(), customer.getEmail(),customer.getAddress(),ngaySinh,customer.getGender()
+            modelKH.addRow(new String[]{customer.getIdCustomer(), customer.getName(), customer.getPhone(), customer.getEmail(), customer.getAddress(), ngaySinh, customer.getGender()
             });
         }
     }
+
     @SneakyThrows
     private void loadProduct() {
         modelSP.setRowCount(0);
         List<Merchandise> merchandise = mainController.getAllMerchandise();
         for (Merchandise sanPham : merchandise) {
-
             String idSanPham = sanPham.getProductId();
             String tenSanPham = sanPham.getProductName();
-            String tenLoaiSanPham = sanPham.getProductTypeId().getProductTypeId();
-            String tenNhaCungCap = sanPham.getSupplierId().getSupplierId();
+            String tenLoaiSanPham = sanPham.getProductTypeId().getProductTypeName();
+            String tenNhaCungCap = sanPham.getSupplierId().getSupplierName();
             double kichThuoc = sanPham.getSize();
             String mauSac = sanPham.getColor();
-            String trangThai = sanPham.getStatus().getDescription()+"";
-            double thue = sanPham.tax();
+            String trangThai = sanPham.getStatus().getDescription() + "";
             int soLuong = sanPham.getQuantity();
             double giaBan = sanPham.sellingPrice();
-            modelSP.addRow(new Object[] { idSanPham, tenSanPham, tenLoaiSanPham, tenNhaCungCap, kichThuoc, mauSac,
-                    trangThai,soLuong, currencyFormat.format(giaBan)});
+            modelSP.addRow(new Object[]{idSanPham, tenSanPham, tenLoaiSanPham, tenNhaCungCap, kichThuoc, mauSac,
+                    trangThai, soLuong, currencyFormat.format(giaBan)});
         }
     }
-//    private ProductSale checkProductSale(String id)
-//    {
-//        ProductSale productSale = mainController.getProductSale(id);
-//        if(productSale != null)
-//            return productSale;
-//        return null;
-//    }
+
     @SneakyThrows
     private void loadBook() {
         modelSP.setRowCount(0);
@@ -641,21 +689,21 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
             double kichThuoc = s.getSize();
             String mauSac = s.getColor();
             String trangThai = s.getStatus().getDescription();
-            double thue = s.tax();
             int soLuong = s.getQuantity();
             double giaBan = s.sellingPrice();
 //
-            modelSP.addRow(new Object[] { idSanPham, tenSanPham, tenTacGia, tenTheLoai, namXuatBan, ISBN, soTrang,
+            modelSP.addRow(new Object[]{idSanPham, tenSanPham, tenTacGia, tenTheLoai, namXuatBan, ISBN, soTrang,
                     loaiSanPham, nhaCungCap, kichThuoc, mauSac, trangThai, soLuong
                     , currencyFormat.format(giaBan)});
         }
     }
+
     @SneakyThrows
     private void handleSearchCustomer(String cond) {
         if (!cond.equals("")) {
             for (Customer customer : mainController.findCustomerByText(cond)) {
                 String ngaySinh = new SimpleDateFormat("dd/MM/yyyy").format(customer.getBirth());
-                modelKH.addRow(new String[] { customer.getIdCustomer(), customer.getName(),customer.getPhone(), customer.getEmail(),customer.getAddress(),ngaySinh,customer.getGender()
+                modelKH.addRow(new String[]{customer.getIdCustomer(), customer.getName(), customer.getPhone(), customer.getEmail(), customer.getAddress(), ngaySinh, customer.getGender()
                 });
             }
         } else {
@@ -699,6 +747,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
             txtTimKiemSP.setText("");
         }
     }
+
     @SneakyThrows
     private void handleSearchProduct(String cond) {
         if (!cond.equals("")) {
@@ -711,23 +760,23 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
                 String tenNhaCungCap = sanPham.getSupplierId().getSupplierId();
                 double kichThuoc = sanPham.getSize();
                 String mauSac = sanPham.getColor();
-                String trangThai = sanPham.getStatus().getDescription()+"";
+                String trangThai = sanPham.getStatus().getDescription() + "";
                 double thue = sanPham.tax();
                 int soLuong = sanPham.getQuantity();
                 double giaBan = sanPham.sellingPrice();
                 ProductSale spKM = mainController.getProductSale(sanPham.getProductId());
                 double giaKM;
-                if(spKM!=null){
+                if (spKM != null) {
                     giaKM = spKM.getGiaBan();
+                } else {
+                    giaKM = giaBan;
                 }
-                else{
-                    giaKM=giaBan;
-                }
-                modelSP.addRow(new Object[] { idSanPham, tenSanPham, tenLoaiSanPham, tenNhaCungCap, kichThuoc, mauSac,
-                        trangThai, currencyFormat.format(thue), soLuong, currencyFormat.format(giaBan),  currencyFormat.format(giaKM)});
+                modelSP.addRow(new Object[]{idSanPham, tenSanPham, tenLoaiSanPham, tenNhaCungCap, kichThuoc, mauSac,
+                        trangThai, currencyFormat.format(thue), soLuong, currencyFormat.format(giaBan), currencyFormat.format(giaKM)});
             }
         }
     }
+
     private void handleChooseCustomer() {
         int rowKH = tblkhachHang.getSelectedRow();
         if (rowKH >= 0) {
@@ -741,6 +790,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
             JOptionPane.showMessageDialog(this, "Vui lòng chọn khách hàng");
         }
     }
+
     @SneakyThrows
     private void handleSearchBook(String cond) {
         if (!cond.equals("")) {
@@ -764,18 +814,18 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
                 double giaBan = s.sellingPrice();
                 ProductSale spKM = mainController.getProductSale(s.getProductId());
                 double giaKM;
-                if(spKM!=null){
+                if (spKM != null) {
                     giaKM = spKM.getGiaBan();
+                } else {
+                    giaKM = giaBan;
                 }
-                else{
-                    giaKM=giaBan;
-                }
-                modelSP.addRow(new Object[] { idSanPham, tenSanPham, tenTacGia, tenTheLoai, namXuatBan, ISBN, soTrang,
+                modelSP.addRow(new Object[]{idSanPham, tenSanPham, tenTacGia, tenTheLoai, namXuatBan, ISBN, soTrang,
                         loaiSanPham, nhaCungCap, kichThuoc, mauSac, trangThai, currencyFormat.format(thue), soLuong
-                        , currencyFormat.format(giaBan), currencyFormat.format(giaKM) });
+                        , currencyFormat.format(giaBan), currencyFormat.format(giaKM)});
             }
         }
     }
+
     private void showThongBao(String message) {
         frameThongBao = new JFrame();
         frameThongBao.setUndecorated(true);
@@ -846,28 +896,29 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         timer.setInitialDelay(100);
         timer.start();
     }
+
     @SneakyThrows
     private void addCartBySearch(int row) {
         String soLuong = String.valueOf(spinnerSoLuong2.getValue());
         if (cbLocSanPham.getSelectedIndex() == 0) {
             int soLuongTrongKho = Integer.parseInt(modelSP.getValueAt(row, 7).toString());
             if (Integer.parseInt(soLuong) <= soLuongTrongKho) {
-                ProductSale productSale=mainController.getProductSale( modelSP.getValueAt(row, 0).toString());
+                ProductSale productSale = mainController.getProductSale(modelSP.getValueAt(row, 0).toString());
                 String idSP = modelSP.getValueAt(row, 0).toString();
                 String tenSP = modelSP.getValueAt(row, 1).toString();
-                String giaBanValue=modelSP.getValueAt(row, 8).toString();
+                String giaBanValue = modelSP.getValueAt(row, 8).toString();
                 String giaBanDouble = giaBanValue.trim().replace("\u00A0", "").replaceAll("[.,₫]", "");
                 Double giaBan = Double.parseDouble(giaBanDouble);
                 double giaKM = 0;
-                if(productSale!=null){
+                if (productSale != null) {
                     giaKM = productSale.getGiaBan();
-                }
-                else if(productSale==null) {
-                    giaKM=giaBan;
+                } else if (productSale == null) {
+                    giaKM = giaBan;
+
                 }
                 String thanhTien = currencyFormat.format(giaKM * Integer.parseInt(soLuong));
-                modelGioHang.addRow(new String[] {
-                        idSP, tenSP, currencyFormat.format(giaBan),currencyFormat.format(giaKM), soLuong, thanhTien
+                modelGioHang.addRow(new Object[]{
+                        idSP, tenSP, currencyFormat.format(giaBan), currencyFormat.format(giaKM), soLuong, thanhTien
                 });
                 showThongBao("Đã thêm vào giỏ hàng");
                 spinnerSoLuong2.setValue(1);
@@ -877,18 +928,24 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
                 JOptionPane.showMessageDialog(dialogSanPham, "Số lượng sản phẩm trong kho không đủ");
             }
         } else {
-            int soLuongTrongKho = Integer.parseInt(modelSP.getValueAt(row, 13).toString());
+            int soLuongTrongKho = Integer.parseInt(modelSP.getValueAt(row, 12).toString());
             if (Integer.parseInt(soLuong) <= soLuongTrongKho) {
+                ProductSale productSale = mainController.getProductSale(modelSP.getValueAt(row, 0).toString());
                 String idSP = modelSP.getValueAt(row, 0).toString();
                 String tenSP = modelSP.getValueAt(row, 1).toString();
-                String giaBan = modelSP.getValueAt(row, 14).toString();
-                String giaKM = modelSP.getValueAt(row, 15).toString();
-                String giaKMDouble = giaKM.trim().replace("\u00A0", "").replaceAll("[.,₫]", "");
-                String giaBanDouble = giaBan.trim().replace("\u00A0", "").replaceAll("[.,₫]", "");
-                double giaCuoi = Double.parseDouble(giaBanDouble) - Double.parseDouble(giaKMDouble);
-                String thanhTien = currencyFormat.format(giaCuoi * Integer.parseInt(soLuong));
-                modelGioHang.addRow(new String[] {
-                        idSP, tenSP, giaBan, "-"+giaKM, currencyFormat.format(giaCuoi), soLuong, thanhTien
+                String giaBanValue = modelSP.getValueAt(row, 13).toString();
+                String giaBanDouble = giaBanValue.trim().replace("\u00A0", "").replaceAll("[.,₫]", "");
+                Double giaBan = Double.parseDouble(giaBanDouble);
+                double giaKM = 0;
+                if (productSale != null) {
+                    giaKM = productSale.getGiaBan();
+                } else if (productSale == null) {
+                    giaKM = giaBan;
+
+                }
+                String thanhTien = currencyFormat.format(giaKM * Integer.parseInt(soLuong));
+                modelGioHang.addRow(new Object[]{
+                        idSP, tenSP, currencyFormat.format(giaBan), currencyFormat.format(giaKM), soLuong, thanhTien
                 });
                 showThongBao("Đã thêm vào giỏ hàng");
                 spinnerSoLuong2.setValue(1);
@@ -900,26 +957,28 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
 
         }
     }
+
     @SneakyThrows
     private void addCartById() {
-        Product product= mainController.getProductById(txtMaSP.getText().trim());
+        Product product = mainController.getProductById(txtMaSP.getText().trim());
         int soLuong = (int) spinnerSoLuong.getValue();
 
         if (product != null) {
             if (soLuong <= product.getQuantity()) {
-                ProductSale productSale=mainController.getProductSale(txtMaSP.getText().trim());
+                ProductSale productSale = mainController.getProductSale(txtMaSP.getText().trim());
                 String idSP = product.getProductId();
                 String tenSP = product.getProductName();
                 Double giaBan = product.sellingPrice();
                 double giaKM = 0;
-                if(productSale!=null){
+                ;
+                if (productSale != null) {
                     giaKM = productSale.getGiaBan();
-                }
-                else if(productSale==null) {
-                    giaKM=giaBan;
+                } else if (productSale == null) {
+                    giaKM = giaBan;
+
                 }
                 String thanhTien = currencyFormat.format(giaKM * soLuong);
-                modelGioHang.addRow(new Object[] {
+                modelGioHang.addRow(new Object[]{
                         idSP, tenSP, currencyFormat.format(giaBan), currencyFormat.format(giaKM), soLuong, thanhTien
                 });
                 spinnerSoLuong.setValue(1);
@@ -936,6 +995,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
             txtMaSP.setText("");
         }
     }
+
     private void handleAddCartBySearch() {
         if (!txtMaKH.getText().equals("")) {
             int row = tblSanPham.getSelectedRow();
@@ -976,8 +1036,8 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         }
 
 
-
     }
+
     private void handleAddCartById() {
         if (!txtMaKH.getText().equals("")) {
             if (!txtMaSP.getText().equals("")) {
@@ -1013,6 +1073,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
             showDialogKhachHang();
         }
     }
+
     private void deleteCart() {
         int rowSelectedGioHang = tblGioHang.getSelectedRow();
         int rowCountGioHang = modelGioHang.getRowCount();
@@ -1027,6 +1088,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         }
 
     }
+
     private void totalCart() {
         int row = modelGioHang.getRowCount();
         if (row > 0) {
@@ -1039,6 +1101,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
             }
         }
     }
+
     private void showDialogSanPham() {
         dialogSanPham = new JDialog();
         dialogSanPham.setLayout(new BorderLayout());
@@ -1101,7 +1164,6 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         scrollTblSP.setBorder(BorderFactory.createTitledBorder("Sản phẩm"));
         pnMain.add(scrollTblSP, BorderLayout.CENTER);
         handleSelectiveProduct();
-        loadProduct();
 
         pnMa.add(lblMaSP);
         pnMa.add(Box.createHorizontalStrut(20));
@@ -1179,6 +1241,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         dialogSanPham.setLocationRelativeTo(this);
         dialogSanPham.setVisible(true);
     }
+
     private void chonMaSanPham() {
         if (modelMaSP.getRowCount() > 0) {
             int rowSP = tblMaSp.getSelectedRow();
@@ -1189,23 +1252,25 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
                 JOptionPane.showMessageDialog(this, "Vui lòng chọn mã sản phẩm");
                 windowMaSP.setLocation(txtMaSP.getLocationOnScreen().x, txtMaSP.getLocationOnScreen().y + txtMaSP.getHeight());
                 windowMaSP.pack();
-                windowMaSP.setSize(txtMaSP.getWidth(), windowMaSP.getHeight()/2);
+                windowMaSP.setSize(txtMaSP.getWidth(), windowMaSP.getHeight() / 2);
                 windowMaSP.setVisible(true);
             }
         } else {
             JOptionPane.showMessageDialog(this, "Mã sản phẩm không tồn tại");
         }
     }
+
     @SneakyThrows
     private void handleSearchProductById(String cond) {
         if (!cond.equals("")) {
             List<Product> ds = mainController.getProductByText(cond);
             for (Product sanPham : ds) {
                 String idSanPham = sanPham.getProductId();
-                modelMaSP.addRow(new Object[] { idSanPham });
+                modelMaSP.addRow(new Object[]{idSanPham});
             }
         }
     }
+
     private void showDialogKhachHang() {
         dialogKhachHang = new JDialog();
         dialogKhachHang.setLayout(new BorderLayout());
@@ -1309,6 +1374,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         dialogKhachHang.setVisible(true);
         loadCustomer();
     }
+
     private void reloadCart() {
         int rowCountGioHang = modelGioHang.getRowCount();
         if (rowCountGioHang > 0) {
@@ -1317,33 +1383,35 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
             showThongBao("Giỏ hàng rỗng");
         }
     }
+
     @SneakyThrows
     private void submitUpdateQuantity(String idSanPham) {
         Product sp = mainController.getProductById(idSanPham);
-            if (txtCapNhatSoLuong.getText().equals("")) {
-                JOptionPane.showMessageDialog(this, "Chưa nhập số lượng cập nhật");
-                dialogSoLuong.setVisible(false);
-                showDialogUpdateQuantity();
-            } else if (!txtCapNhatSoLuong.getText().matches("\\d+")) {
-                JOptionPane.showMessageDialog(this, "Số lượng nhập sai định dạng");
-                dialogSoLuong.setVisible(false);
-                showDialogUpdateQuantity();
-            } else if (Integer.parseInt(txtCapNhatSoLuong.getText()) <= 0) {
-                JOptionPane.showMessageDialog(this, "Số lượng không được âm");
-                dialogSoLuong.setVisible(false);
-                showDialogUpdateQuantity();
-            } else if (Integer.parseInt(txtCapNhatSoLuong.getText()) <= sp.getQuantity()) {
-                modelGioHang.setValueAt(txtCapNhatSoLuong.getText(), tblGioHang.getSelectedRow(), 4);
-                totalCart();
-                dialogSoLuong.setVisible(false);
-            } else {
-                JOptionPane.showMessageDialog(this, "Số lượng sản phẩm trong kho không đủ");
-                dialogSoLuong.setVisible(false);
-                showDialogUpdateQuantity();
-            }
+        if (txtCapNhatSoLuong.getText().equals("")) {
+            JOptionPane.showMessageDialog(this, "Chưa nhập số lượng cập nhật");
+            dialogSoLuong.setVisible(false);
+            showDialogUpdateQuantity();
+        } else if (!txtCapNhatSoLuong.getText().matches("\\d+")) {
+            JOptionPane.showMessageDialog(this, "Số lượng nhập sai định dạng");
+            dialogSoLuong.setVisible(false);
+            showDialogUpdateQuantity();
+        } else if (Integer.parseInt(txtCapNhatSoLuong.getText()) <= 0) {
+            JOptionPane.showMessageDialog(this, "Số lượng không được âm");
+            dialogSoLuong.setVisible(false);
+            showDialogUpdateQuantity();
+        } else if (Integer.parseInt(txtCapNhatSoLuong.getText()) <= sp.getQuantity()) {
+            modelGioHang.setValueAt(txtCapNhatSoLuong.getText(), tblGioHang.getSelectedRow(), 4);
+            totalCart();
+            dialogSoLuong.setVisible(false);
+        } else {
+            JOptionPane.showMessageDialog(this, "Số lượng sản phẩm trong kho không đủ");
+            dialogSoLuong.setVisible(false);
+            showDialogUpdateQuantity();
+        }
 
 
     }
+
     private void showDialogUpdateQuantity() {
         int rowSelectedGioHang = tblGioHang.getSelectedRow();
         int rowCountGioHang = modelGioHang.getRowCount();
@@ -1375,6 +1443,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
             showThongBao("Giỏ hàng rỗng");
         }
     }
+
     @SneakyThrows
     private void saveBillPending() {
         String maHD = txtMaHD.getText();
@@ -1386,7 +1455,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         try {
             mainController.addBillPending(hdc);
             String ngayLap = new SimpleDateFormat("dd/MM/yyyy").format(ngayNhap);
-            modelHangCho.addRow(new Object[] {
+            modelHangCho.addRow(new Object[]{
                     maHD, kh.getName(), kh.getIdCustomer(), kh.getPhone(), ngayLap
 
             });
@@ -1397,35 +1466,36 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         for (int i = 0; i < rowCountGioHang; i++) {
             String maSP = modelGioHang.getValueAt(i, 0).toString();
             int soLuong = Integer.parseInt(modelGioHang.getValueAt(i, 4).toString());
-                Product sp = mainController.getProductById(maSP);
-                String giaBanSauKM = modelGioHang.getValueAt(i, 3).toString();
-                double giaBanSauKMDouble = Double.parseDouble(giaBanSauKM.trim().replace("\u00A0", "").replaceAll("[.,₫]", ""));
-                String thanhTien = modelGioHang.getValueAt(i, 5).toString();
-                double thanhTienDouble = Double.parseDouble(thanhTien.trim().replace("\u00A0", "").replaceAll("[.,₫]", ""));
-                DetailsBillPending cthdc = new DetailsBillPending(hdc,sp,maHD, soLuong, giaBanSauKMDouble, thanhTienDouble);
-                try {
-                    mainController.addDetailBillPending(cthdc);
-                    int quantityNew=sp.getQuantity()-soLuong;
-                    mainController.updateProductQuantity(maSP,quantityNew);
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(this, "Thêm chi tiết hoá đơn chờ thất bại");
-                }
+            Product sp = mainController.getProductById(maSP);
+            String giaBanSauKM = modelGioHang.getValueAt(i, 3).toString();
+            double giaBanSauKMDouble = Double.parseDouble(giaBanSauKM.trim().replace("\u00A0", "").replaceAll("[.,₫]", ""));
+            String thanhTien = modelGioHang.getValueAt(i, 5).toString();
+            double thanhTienDouble = Double.parseDouble(thanhTien.trim().replace("\u00A0", "").replaceAll("[.,₫]", ""));
+            DetailsBillPending cthdc = new DetailsBillPending(hdc, sp, maHD, soLuong, giaBanSauKMDouble, thanhTienDouble);
+            try {
+                mainController.addDetailBillPending(cthdc);
+                int quantityNew = sp.getQuantity() - soLuong;
+                mainController.updateProductQuantity(maSP, quantityNew);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Thêm chi tiết hoá đơn chờ thất bại");
+            }
 
         }
         modelGioHang.setRowCount(0);
         reloadBill();
     }
+
     @SneakyThrows
     private void submitPay(int rowSelectedDonHangCho) {
         txtMaHD.setText(modelHangCho.getValueAt(rowSelectedDonHangCho, 0).toString());
         txtTenKH.setText(modelHangCho.getValueAt(rowSelectedDonHangCho, 1).toString());
         txtMaKH.setText(modelHangCho.getValueAt(rowSelectedDonHangCho, 2).toString());
-        List<DetailsBillPending> dsChiTietSanPham =mainController.getDetailBillPendingByIdBill(modelHangCho.getValueAt(rowSelectedDonHangCho, 0).toString());
+        List<DetailsBillPending> dsChiTietSanPham = mainController.getDetailBillPendingByIdBill(modelHangCho.getValueAt(rowSelectedDonHangCho, 0).toString());
         modelHangCho.removeRow(rowSelectedDonHangCho);
         if (dsChiTietSanPham.size() != 0) {
             for (DetailsBillPending cthdc : dsChiTietSanPham) {
-                Product product= mainController.getProductById(cthdc.getProduct().getProductId());
-                modelGioHang.addRow(new Object[] {
+                Product product = mainController.getProductById(cthdc.getProduct().getProductId());
+                modelGioHang.addRow(new Object[]{
                         cthdc.getProduct().getProductId(), product.getProductName(),
                         currencyFormat.format(product.sellingPrice()),
                         currencyFormat.format(cthdc.getPrice()), cthdc.getQuantity(), currencyFormat.format(cthdc.getTotal())
@@ -1435,6 +1505,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         mainController.deleteDetailsBillPendingById(txtMaHD.getText());
         mainController.deleteBillPendingById(txtMaHD.getText());
     }
+
     @SneakyThrows
     private void reloadBillPending() {
         int hoiNhac = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xoá toàn bộ hàng chờ không", "Cảnh báo",
@@ -1445,6 +1516,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
             modelHangCho.setRowCount(0);
         }
     }
+
     @SneakyThrows
     private void handleXoaHangCho() {
         if (modelHangCho.getRowCount() > 0) {
@@ -1494,6 +1566,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
             JOptionPane.showMessageDialog(this, "Hàng chờ rỗng");
         }
     }
+
     private void reloadBill() {
         if (modelGioHang.getRowCount() == 0) {
             txtMaHD.setText("");
@@ -1515,6 +1588,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         }
 
     }
+
     private void handleReloadBill() {
         if (modelGioHang.getRowCount() == 0) {
             txtMaHD.setText("");
@@ -1536,6 +1610,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         }
 
     }
+
     @Override
     public void mouseClicked(MouseEvent e) {
         int rowSP = tblSanPham.getSelectedRow();
@@ -1554,13 +1629,14 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
             txtTenKH2.setText("");
         }
     }
+
     @SneakyThrows
     private void loadBillPending() {
         List<BillPending> dsHoaDonCho = mainController.getAllBillPending();
         if (dsHoaDonCho.size() > 0) {
             for (BillPending hdc : dsHoaDonCho) {
                 String ngayLap = new SimpleDateFormat("dd/MM/yyyy").format(hdc.getNgayLap());
-                modelHangCho.addRow(new Object[] {
+                modelHangCho.addRow(new Object[]{
                         hdc.getBillId(), hdc.getCustomer().getName(),
                         hdc.getCustomer().getIdCustomer(), hdc.getCustomer().getPhone(),
                         ngayLap
@@ -1568,6 +1644,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
             }
         }
     }
+
     @SneakyThrows
     private void saveBill() {
         String idHD = txtMaHD.getText();
@@ -1577,7 +1654,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         double tienKhachDuaDouble = Double.parseDouble(tienKhachDua.trim().replace("\u00A0", "").replaceAll("[.,₫]", ""));
         String tongTienHoaDon = txtTongTienHoaDon.getText();
         double tongTienHoaDonDouble = Double.parseDouble(tongTienHoaDon.trim().replace("\u00A0", "").replaceAll("[.,₫]", ""));
-        java.sql.Date ngayNhapSql = new java.sql.Date(ngayNhap.getTime());
+        LocalDate ngayTaoHD = LocalDate.now();
         double tongLoiNhuan = 0;
         int gioHangRowCount = modelGioHang.getRowCount();
 
@@ -1589,7 +1666,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
             tongLoiNhuan += loiNhuan;
         }
 
-        Bill hd = new Bill(idHD,ngayNhapSql, kh, nv, tienKhachDuaDouble, tongTienHoaDonDouble, tongLoiNhuan);
+        Bill hd = new Bill(idHD, ngayTaoHD, kh, nv, tienKhachDuaDouble, tongTienHoaDonDouble, tongLoiNhuan);
         try {
             mainController.addBill(hd);
         } catch (Exception e) {
@@ -1602,20 +1679,21 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
 
             String thanhTien = modelGioHang.getValueAt(i, 5).toString();
             double thanhTienDouble = Double.parseDouble(thanhTien.trim().replace("\u00A0", "").replaceAll("[.,₫]", ""));
-            Product product= mainController.getProductById(maSP);
+            Product product = mainController.getProductById(maSP);
             String giaBan = modelGioHang.getValueAt(i, 3).toString();
             double giaBanDouble = Double.parseDouble(giaBan.trim().replace("\u00A0", "").replaceAll("[.,₫]", ""));
 
-            DetailsBill cthd = new DetailsBill(hd,product,soLuong,giaBanDouble,thanhTienDouble);
+            DetailsBill cthd = new DetailsBill(hd, product, soLuong, giaBanDouble, thanhTienDouble);
             try {
                 mainController.addDetailsBill(cthd);
-                int quantityNew=product.getQuantity()-soLuong;
-                mainController.updateProductQuantity(maSP,quantityNew);
+                int quantityNew = product.getQuantity() - soLuong;
+                mainController.updateProductQuantity(maSP, quantityNew);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "Thêm chi tiết hoá đơn thất bại");
             }
         }
     }
+
     private void handLePayment() throws DocumentException {
         if (!txtMaKH.getText().equals("")) {
             if (modelGioHang.getRowCount() >= 0) {
@@ -1640,7 +1718,7 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
                 double tongTienHoaDonDouble = Double.parseDouble(tongTienHoaDon.trim().replace("\u00A0", "").replaceAll("[.,₫]", ""));
                 double tienKhachDua = Double.parseDouble(txtTienKhachDua.getText());
 
-                if (tienKhachDua < tongTienHoaDonDouble){
+                if (tienKhachDua < tongTienHoaDonDouble) {
                     JOptionPane.showMessageDialog(this, "Tiền khách đưa bé hơn tổng tiền hoá đơn");
                     txtTienKhachDua.requestFocus();
                     txtTienKhachDua.setSelectionStart(0);
@@ -1649,8 +1727,8 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
                 }
                 saveBill();
                 String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-                String filePath = System.getProperty("user.dir") + "/src/main/resources/DataExports/HoaDonPDF/HD_"+timeStamp+".pdf" ;
-//                exportToPdf(filePath);
+                String filePath = System.getProperty("user.dir") + "/Server/src/main/resources/DataExports/HoaDonPDF/HD_" + timeStamp + ".pdf";
+                exportToPdf(filePath);
                 reloadCart();
                 handleReloadBill();
                 txtTienKhachDua.setText("");
@@ -1663,6 +1741,134 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         }
 
     }
+
+    private void exportToPdf(String filePath) throws DocumentException {
+        OutputStream file = null;
+        try {
+            file = new FileOutputStream(filePath);
+            // Create a new Document object
+            Document document = new Document();
+
+            // You need PdfWriter to generate PDF document
+            PdfWriter.getInstance(document, file);
+            // You need PdfWriter to generate PDF document
+
+            // Opening document for writing PDF
+            document.open();
+            String idKH = txtMaKH.getText();
+            Customer customer = mainController.findCustomerById(idKH);
+            String idHD = txtMaHD.getText();
+            Bill bill = mainController.getBillById(idHD);
+            LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            String dateTimeString = now.format(formatter);
+            // Writing content
+            String filePath2 = System.getProperty("user.dir") + "/Server/src/main/resources/database/vuArial.ttf";
+            BaseFont bf = BaseFont.createFont(filePath2, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            Paragraph tieuDe = new Paragraph("HÓA ĐƠN", new com.itextpdf.text.Font(bf, 30, 1, BaseColor.BLUE));
+            Paragraph tenKH = new Paragraph("Tên khách hàng : " + customer.getName(), new com.itextpdf.text.Font(bf, 15));
+            Paragraph idKH2 = new Paragraph("ID khách hàng   : " + customer.getIdCustomer(), new com.itextpdf.text.Font(bf, 15));
+            Paragraph idHD2 = new Paragraph("ID hóa đơn      : " + txtMaHD.getText().toString(), new com.itextpdf.text.Font(bf, 15, Font.BOLD));
+            String ngay = new SimpleDateFormat("dd").format(new Date());
+            String thang = new SimpleDateFormat("MM").format(new Date());
+            String nam = new SimpleDateFormat("yyyy").format(new Date());
+            Paragraph DateTime = new Paragraph("Ngày " + ngay + " tháng " + thang + " năm " + nam, new com.itextpdf.text.Font(bf, 15, Font.ITALIC));
+            tieuDe.setAlignment(Element.ALIGN_CENTER);
+            DateTime.setAlignment(Element.ALIGN_RIGHT);
+            document.add(tieuDe);
+            document.add(DateTime);
+            document.add(idHD2);
+            document.add(tenKH);
+            document.add(idKH2);
+            document.add(new Paragraph("SDT khách hàng: " + customer.getPhone(), new com.itextpdf.text.Font(bf, 15)));
+            document.add(new Paragraph("Tên nhân viên    : " + employee.getName().toString(), new com.itextpdf.text.Font(bf, 15)));
+            document.add(new Paragraph("ID nhân viên      : " + employee.getIdEmployee(), new com.itextpdf.text.Font(bf, 15)));
+            document.add(new Paragraph("Ngày lập            : " + dateTimeString, new com.itextpdf.text.Font(bf, 15)));
+            document.add(new Paragraph(" "));
+            // Add meta data information to PDF file
+
+            PdfPTable table = new PdfPTable(6);
+            //Khởi tạo ô header
+            PdfPCell header1 = new PdfPCell(new Paragraph("ID sản phẩm", new com.itextpdf.text.Font(bf, 12)));
+            PdfPCell header2 = new PdfPCell(new Paragraph("Tên sản phẩm", new com.itextpdf.text.Font(bf, 12)));
+            PdfPCell header3 = new PdfPCell(new Paragraph("Số lượng", new com.itextpdf.text.Font(bf, 12)));
+            PdfPCell header4 = new PdfPCell(new Paragraph("Thành tiền", new com.itextpdf.text.Font(bf, 12)));
+            PdfPCell header5 = new PdfPCell(new Paragraph("Giá niêm yết", new com.itextpdf.text.Font(bf, 12)));
+            PdfPCell header6 = new PdfPCell(new Paragraph("Giá khuyến mãi", new com.itextpdf.text.Font(bf, 12)));
+
+            header1.setMinimumHeight(70f); // Kích thước tối thiểu là 50
+            header2.setMinimumHeight(70f);
+            header3.setMinimumHeight(70f);
+            header4.setMinimumHeight(70f);
+            header5.setMinimumHeight(70f);
+            header6.setMinimumHeight(70f);
+            //Thêm 4 ô header vào table
+            table.addCell(header1);
+            table.addCell(header2);
+            table.addCell(header5);
+            table.addCell(header6);
+            table.addCell(header3);
+            table.addCell(header4);
+
+
+            for (DetailsBill cthd : mainController.findDetailsBillByBillId(idHD)) {
+                String idSP = cthd.getProduct().getProductId();
+                ProductSale productSale = mainController.getProductSale(idSP);
+                Product product = mainController.getProductById(idSP);
+                String giaBanSauKM;
+                if (productSale != null) {
+                    giaBanSauKM = currencyFormat.format(productSale.getGiaBan()) + "(-" + productSale.getDescription().replaceAll("[^0-9%]", "") + ")";
+                } else {
+                    giaBanSauKM = currencyFormat.format(product.sellingPrice());
+                }
+
+                String tenSP = product.getProductName();
+                String soLuong = String.valueOf(cthd.getQuantity());
+                String thanhTien = currencyFormat.format(cthd.getTotal());
+                String giaBan = currencyFormat.format(product.sellingPrice());
+
+                table.addCell(new PdfPCell(new Paragraph(idSP)));
+                table.addCell(new PdfPCell(new Paragraph(tenSP, new com.itextpdf.text.Font(bf, 12))));
+                table.addCell(new PdfPCell(new Paragraph(giaBan)));
+                table.addCell(new PdfPCell(new Paragraph(giaBanSauKM)));
+                table.addCell(new PdfPCell(new Paragraph(soLuong)));
+                table.addCell(new PdfPCell(new Paragraph(thanhTien)));
+            }
+
+            document.add(table);
+            String StrtienKhachDua = currencyFormat.format(bill.getAmountReceived());
+
+            Paragraph tongTien = new Paragraph("TỔNG TIỀN : " + txtTongTienHoaDon.getText(), new com.itextpdf.text.Font(bf, 25, 1, BaseColor.RED));
+            Paragraph tienKhachDua = new Paragraph("Tiền khách đưa  : " + StrtienKhachDua, new com.itextpdf.text.Font(bf, 20));
+            Paragraph tienTraKhach = new Paragraph("Tiền trả khách    : " + txtTienTraKhach.getText(), new com.itextpdf.text.Font(bf, 20));
+            Paragraph tienGioHang = new Paragraph("Tổng thành tiền  : " + txtTongTienGioHang.getText(), new com.itextpdf.text.Font(bf, 20, Font.BOLD));
+            Paragraph thue = new Paragraph("Thuế VAT (10%): " + txtThue.getText(), new com.itextpdf.text.Font(bf, 20));
+            document.add(tienGioHang);
+            document.add(thue);
+            document.add(tongTien);
+            document.add(tienKhachDua);
+            document.add(tienTraKhach);
+            // close the document
+            document.close();
+            Desktop.getDesktop().open(new File(filePath));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        } finally {
+
+            // closing FileOutputStream
+            try {
+                if (file != null) {
+                    file.close();
+                }
+            } catch (IOException io) {/*Failed to close*/
+
+            }
+
+        }
+    }
+
     @Override
     public void mousePressed(MouseEvent e) {
         // TODO Auto-generated method stub
@@ -1691,12 +1897,12 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         if (o.equals(btnThemGioHang)) {
             handleAddCartById();
         }
-         if (o.equals(btnThemGioHang2)) {
+        if (o.equals(btnThemGioHang2)) {
             handleAddCartBySearch();
-         }
-         if (o.equals(cbLocSanPham)) {
+        }
+        if (o.equals(cbLocSanPham)) {
             handleSelectiveProduct();
-            }
+        }
         if (o.equals(btnXoaGioHang)) {
             deleteCart();
         }
@@ -1706,60 +1912,76 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         if (o.equals(btnLamMoiGioHang)) {
             reloadCart();
         }
-        if(o.equals(btnLamMoiDonHang)) {
+        if (o.equals(btnLamMoiDonHang)) {
             handleReloadBill();
         }
-            if (o.equals(btnTimKiemSanPham)) {
-                showDialogSanPham();
-                loadProduct();
+        if (o.equals(btnXemTatCaHDC)) {
+            txtTimKiemHDCho.setText("");
+        }
+        if (o.equals(btnTimKiemSanPham)) {
+            showDialogSanPham();
+        }
+        if (o.equals(btnTimKhachHang)) {
+            showDialogKhachHang();
+        }
+        if (o.equals(btnDongKhachHang)) {
+            dialogKhachHang.dispose();
+            modelKH.setColumnCount(0);
+            modelKH.setRowCount(0);
+        }
+        if (o.equals(btnDongSanPham)) {
+            dialogSanPham.dispose();
+            cbLocSanPham.setSelectedItem(0);
+        } else if (o.equals(btnChonKH)) {
+            handleChooseCustomer();
+        }
+        if (o.equals(btnChonMaSanPham)) {
+            chonMaSanPham();
+        }
+        if (o.equals(btnXacNhanCapNhat)) {
+            int rowSelected = tblGioHang.getSelectedRow();
+            submitUpdateQuantity(modelGioHang.getValueAt(rowSelected, 0).toString());
+        }
+        if (o.equals(btnXemTatCaKhachHang)) {
+            txtTimKiemKH.setText("");
+        }
+        if (o.equals(btnLuuHoaDon)) {
+            saveBillPending();
+        }
+        if (o.equals(btnXoaHangCho)) {
+            handleXoaHangCho();
+        }
+        if (o.equals(btnLamMoiHangCho)) {
+            reloadBillPending();
+        }
+        if (o.equals(btnChonThanhToan)) {
+            handleSubmitPayBillPending();
+        }
+        if (o.equals(btnThanhToan)) {
+            try {
+                handLePayment();
+            } catch (DocumentException ex) {
+                throw new RuntimeException(ex);
             }
-            if (o.equals(btnTimKhachHang))
-            {
-                showDialogKhachHang();
-            }
-            if (o.equals(btnDongKhachHang)) {
-                dialogKhachHang.dispose();
-                modelKH.setColumnCount(0);
-                modelKH.setRowCount(0);
-            }
-             if (o.equals(btnDongSanPham)) {
-                 dialogSanPham.dispose();
-             }
-            else if (o.equals(btnChonKH)) {
-                 handleChooseCustomer();
-            }
-            if (o.equals(btnChonMaSanPham)) {
-                chonMaSanPham();
-            }
-            if (o.equals(btnXacNhanCapNhat)) {
-                int rowSelected = tblGioHang.getSelectedRow();
-                submitUpdateQuantity(modelGioHang.getValueAt(rowSelected, 0).toString());
-            }
-            if (o.equals(btnXemTatCaKhachHang)) {
-                txtTimKiemKH.setText("");
-            }
-            if (o.equals(btnLuuHoaDon)) {
-                saveBillPending();
-            }
-            if (o.equals(btnXoaHangCho)) {
-                handleXoaHangCho();
-            }
-            if (o.equals(btnLamMoiHangCho)) {
-                reloadBillPending();
-            }
-            if (o.equals(btnChonThanhToan)) {
-                handleSubmitPayBillPending();
-            }
-            if (o.equals(btnThanhToan)) {
-                try {
-                    handLePayment();
-                } catch (DocumentException ex) {
-                    throw new RuntimeException(ex);
-                }
-            }
-            if (o.equals(btnXemTatCaSanPham)) {
-                txtTimKiemSP.setText("");
-            }
+        }
+        if (o.equals(btnXemTatCaSanPham)) {
+            txtTimKiemSP.setText("");
+        }
+
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
 
     }
 }

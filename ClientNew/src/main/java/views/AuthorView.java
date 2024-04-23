@@ -68,10 +68,11 @@ public class AuthorView extends JPanel implements ActionListener, MouseListener,
     private Timer timer;
     private MainController mainController;
     private GeneratorIDAuto autoID;
+
     @SneakyThrows
     public AuthorView() {
         setLayout(new BorderLayout(8, 6));
-        autoID= new GeneratorIDAuto();
+        autoID = new GeneratorIDAuto();
         mainController = new MainController();
         init();
 
@@ -199,7 +200,11 @@ public class AuthorView extends JPanel implements ActionListener, MouseListener,
         txtTenTacGia.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                txtIdTacGia.setText(autoID.autoID("TG"));
+                int row = table.getSelectedRow();
+                if (row == -1)
+                    txtIdTacGia.setText(autoID.autoID("TG"));
+                else
+                    txtIdTacGia.setText(model.getValueAt(row, 0).toString());
             }
 
             @Override
@@ -253,7 +258,7 @@ public class AuthorView extends JPanel implements ActionListener, MouseListener,
         LocalDate date = chooserNgaySinh.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
         if (authorId.isEmpty() || authorName.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please enter full author information.");
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập đầy đủ thông tin tác giả.");
             return;
         }
 
@@ -261,11 +266,11 @@ public class AuthorView extends JPanel implements ActionListener, MouseListener,
         boolean success = mainController.addAuthor(author);
 
         if (success) {
-            JOptionPane.showMessageDialog(this, "Add author successfully");
+            JOptionPane.showMessageDialog(this, "Thêm tác giả thành công");
             loadData();
             lamMoi();
         } else {
-            JOptionPane.showMessageDialog(this, "Add author failed");
+            JOptionPane.showMessageDialog(this, "Thêm tác giả không thành công");
         }
     }
 
@@ -273,24 +278,24 @@ public class AuthorView extends JPanel implements ActionListener, MouseListener,
     private void deleteAuthor() {
         int row = table.getSelectedRow();
         if (row == -1) {
-            JOptionPane.showMessageDialog(this, "Please select a row to delete");
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một hàng để xóa");
         } else {
             try {
-                int confirmDialogResult = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete?", "Warning",
+                int confirmDialogResult = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa?", "Cảnh báo",
                         JOptionPane.YES_NO_OPTION);
                 if (confirmDialogResult == JOptionPane.YES_OPTION) {
                     String authorId = txtIdTacGia.getText();
                     boolean deletionResult = mainController.deleteAuthor(authorId);
                     if (deletionResult) {
-                        JOptionPane.showMessageDialog(this, "Successfully deleted information");
+                        JOptionPane.showMessageDialog(this, "Xóa thông tin thành công");
                         loadData();
                         lamMoi();
                     } else {
-                        JOptionPane.showMessageDialog(this, "Failed to delete information");
+                        JOptionPane.showMessageDialog(this, "Không thể xóa thông tin");
                     }
                 }
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Failed to delete information");
+                JOptionPane.showMessageDialog(this, "Không thể xóa thông tin");
             }
         }
     }
@@ -300,7 +305,7 @@ public class AuthorView extends JPanel implements ActionListener, MouseListener,
     private void updateAuhtor() {
         int selectedRow = table.getSelectedRow();
         if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(this, "Please select a row to update", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một hàng để cập nhật", "Cảnh báo", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -312,10 +317,10 @@ public class AuthorView extends JPanel implements ActionListener, MouseListener,
         Author author = new Author(authorId, authorName, dateOfBirth);
         boolean success = mainController.updateAuthor(author);
         if (success) {
-            JOptionPane.showMessageDialog(this, "Author information updated successfully");
+            JOptionPane.showMessageDialog(this, "Thông tin tác giả được cập nhật thành công");
             loadData();
         } else {
-            JOptionPane.showMessageDialog(this, "Failed to update author information", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Không thể cập nhật thông tin tác giả", "Lỗi", JOptionPane.ERROR_MESSAGE);
         }
     }
 

@@ -218,8 +218,8 @@ public class ManagerHomeStatistics extends JPanel implements ItemListener, Actio
         model1 = new DefaultTableModel();
         model1.addColumn("Mã sản phẩm");
         model1.addColumn("Tên sản phẩm");
-        model1.addColumn("So luong");
         model1.addColumn("Giá bán");
+        model1.addColumn("So luong");
         model1.addColumn("Tỷ lệ bán ra");
         table1 = new JTable();
         table1.setModel(model1);

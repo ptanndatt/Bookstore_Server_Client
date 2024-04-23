@@ -20,15 +20,14 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import javax.swing.text.MaskFormatter;
-import java.awt.*;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.rmi.RemoteException;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -109,14 +108,15 @@ public class BookView extends JPanel
     private MainController mainController;
     private DecimalFormat df;
     private GeneratorIDAuto autoID;
-    public BookView() throws RemoteException{
-        autoID=new GeneratorIDAuto();
+
+    public BookView() {
+        autoID = new GeneratorIDAuto();
         init();
     }
 
 
-
-    private void init() throws RemoteException {
+    @SneakyThrows
+    private void init() {
         setLayout(new BorderLayout());
 
 
@@ -358,7 +358,11 @@ public class BookView extends JPanel
         txtTenSanPham.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                txtIdSanPham.setText(autoID.autoID("SP"));
+                int row = table.getSelectedRow();
+                if (row == -1)
+                    txtIdSanPham.setText(autoID.autoID("SP"));
+                else
+                    txtIdSanPham.setText(model.getValueAt(row, 0).toString());
             }
 
             @Override
@@ -377,24 +381,12 @@ public class BookView extends JPanel
                 if (e.getID() == KeyEvent.KEY_RELEASED) {
                     if (e.getKeyCode() == KeyEvent.VK_F5) {
                         refreshForm();
-                        try {
-                            loadData();
-                        } catch (RemoteException ex) {
-                            throw new RuntimeException(ex);
-                        }
+                        loadData();
                     }
                 } else if (e.getKeyCode() == KeyEvent.VK_DELETE || e.getKeyCode() == KeyEvent.VK_INSERT) {
-                    try {
-                        deleteBook();
-                    } catch (RemoteException ex) {
-                        throw new RuntimeException(ex);
-                    }
+                    deleteBook();
                 } else if (e.getKeyCode() == KeyEvent.VK_F2) {
-                    try {
-                        updateBook();
-                    } catch (RemoteException ex) {
-                        throw new RuntimeException(ex);
-                    }
+                    updateBook();
                 } else if ((e.getModifiers() & KeyEvent.CTRL_MASK) != 0 && e.getKeyCode() == KeyEvent.VK_S) {
                     txtTuKhoa.requestFocusInWindow();
                 }
@@ -410,30 +402,14 @@ public class BookView extends JPanel
         if (o.equals(btnLamMoi)) {
             refreshForm();
         } else if (o.equals(btnThemSP)) {
-            try {
-                addBook();
-            } catch (RemoteException ex) {
-                throw new RuntimeException(ex);
-            }
+            addBook();
         } else if (o.equals(btnCapNhatSP)) {
-            try {
-                updateBook();
-            } catch (RemoteException ex) {
-                throw new RuntimeException(ex);
-            }
+            updateBook();
         } else if (o.equals(btndeleteBook)) {
-            try {
-                deleteBook();
-            } catch (RemoteException ex) {
-                throw new RuntimeException(ex);
-            }
+            deleteBook();
         } else if (o.equals(btnXemTatCa)) {
             refreshForm();
-            try {
-                loadData();
-            } catch (RemoteException ex) {
-                throw new RuntimeException(ex);
-            }
+            loadData();
         } else if (o.equals(btnXuatExCel)) {
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
             String filePath = System.getProperty("user.dir") + "/src/main/resources/DataExports/Sach/S_" + timeStamp
@@ -449,7 +425,8 @@ public class BookView extends JPanel
         }
     }
 
-    private void loadComboBoxByTheLoai() throws RemoteException {
+    @SneakyThrows
+    private void loadComboBoxByTheLoai() {
         java.util.List<Category> categories = mainController.getAllCategory();
         cbLoaiTheLoai.removeAllItems();
         cbTheLoaiSearch.addItem("Tất cả");
@@ -459,7 +436,8 @@ public class BookView extends JPanel
         }
     }
 
-    private void loadData() throws RemoteException {
+    @SneakyThrows
+    private void loadData() {
         model.setRowCount(0);
         java.util.List<Book> dsSach = mainController.getAllBook();
         for (Book s : dsSach) {
@@ -490,7 +468,8 @@ public class BookView extends JPanel
         }
     }
 
-    private void loadComBoBoxByTacGia() throws RemoteException {
+    @SneakyThrows
+    private void loadComBoBoxByTacGia() {
         java.util.List<Author> authors = mainController.getAllAuthor();
         cbLoaiTacGia.removeAllItems();
         cbTacGiaSearch.addItem("Tất cả");
@@ -559,7 +538,8 @@ public class BookView extends JPanel
         }
     }
 
-    private void xulyTrangSanPhamCon(Sheet sheet) throws SQLException, RemoteException {
+    @SneakyThrows
+    private void xulyTrangSanPhamCon(Sheet sheet) throws SQLException {
         for (int rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
             Row row = sheet.getRow(rowIndex);
             if (row != null) {
@@ -816,8 +796,9 @@ public class BookView extends JPanel
 
             LocalDate date = (LocalDate) model.getValueAt(i, 4);
             String dateString = date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             LocalDate localDate = LocalDate.parse(dateString, formatter);
+
 
             String isbn = (String) model.getValueAt(i, 5);
             int soTrang = (int) model.getValueAt(i, 6);
@@ -877,44 +858,44 @@ public class BookView extends JPanel
                     "Số lượng", "Giá nhập", "Giá bán"};
 
             for (int i = 0; i < columnNames.length; i++) {
-                org.apache.poi.ss.usermodel.Cell cell = headerRow.createCell(i);
+                Cell cell = headerRow.createCell(i);
                 cell.setCellValue(columnNames[i]);
             }
             int rowNumber = 1;
             for (Book s : dsSach) {
                 Row row = sheet.createRow(rowNumber++);
-                org.apache.poi.ss.usermodel.Cell idSanPhamCell = row.createCell(0);
+                Cell idSanPhamCell = row.createCell(0);
                 idSanPhamCell.setCellValue(s.getProductId());
-                org.apache.poi.ss.usermodel.Cell tenSanPhamCell = row.createCell(1);
+                Cell tenSanPhamCell = row.createCell(1);
                 tenSanPhamCell.setCellValue(s.getProductName());
-                org.apache.poi.ss.usermodel.Cell tacGia = row.createCell(2);
+                Cell tacGia = row.createCell(2);
                 tacGia.setCellValue(s.getAuthorId() != null ? s.getAuthorId().getAuthorName() : "");
-                org.apache.poi.ss.usermodel.Cell theLoai = row.createCell(3);
+                Cell theLoai = row.createCell(3);
                 theLoai.setCellValue(s.getCategoryId() != null ? s.getCategoryId().getCategoryName() : "");
-                org.apache.poi.ss.usermodel.Cell namXuatBan = row.createCell(4);
+                Cell namXuatBan = row.createCell(4);
                 namXuatBan.setCellValue(s.getPublicationYear());
-                org.apache.poi.ss.usermodel.Cell ISBN = row.createCell(5);
+                Cell ISBN = row.createCell(5);
                 ISBN.setCellValue(s.getISBN());
-                org.apache.poi.ss.usermodel.Cell soTrang = row.createCell(6);
+                Cell soTrang = row.createCell(6);
                 soTrang.setCellValue(s.getNumberOfPages());
-                org.apache.poi.ss.usermodel.Cell loaiSanPhamCell = row.createCell(7);
+                Cell loaiSanPhamCell = row.createCell(7);
                 loaiSanPhamCell
                         .setCellValue(s.getProductTypeId() != null ? s.getProductTypeId().getProductTypeName() : "");
-                org.apache.poi.ss.usermodel.Cell nhaCungCapCell = row.createCell(8);
+                Cell nhaCungCapCell = row.createCell(8);
                 nhaCungCapCell.setCellValue(s.getSupplierId() != null ? s.getSupplierId().getSupplierName() : "");
-                org.apache.poi.ss.usermodel.Cell kichThuocCell = row.createCell(9);
+                Cell kichThuocCell = row.createCell(9);
                 kichThuocCell.setCellValue(s.getSize());
-                org.apache.poi.ss.usermodel.Cell mauSacCell = row.createCell(10);
+                Cell mauSacCell = row.createCell(10);
                 mauSacCell.setCellValue(s.getColor());
-                org.apache.poi.ss.usermodel.Cell trangThaiCell = row.createCell(11);
+                Cell trangThaiCell = row.createCell(11);
                 trangThaiCell.setCellValue(s.getStatus() != null ? s.getStatus().getDescription() : "");
-                org.apache.poi.ss.usermodel.Cell thueCell = row.createCell(12);
+                Cell thueCell = row.createCell(12);
                 thueCell.setCellValue(s.tax());
-                org.apache.poi.ss.usermodel.Cell soLuongCell = row.createCell(13);
+                Cell soLuongCell = row.createCell(13);
                 soLuongCell.setCellValue(s.getSize());
-                org.apache.poi.ss.usermodel.Cell giaNhapCell = row.createCell(14);
+                Cell giaNhapCell = row.createCell(14);
                 giaNhapCell.setCellValue(s.getImportPrice());
-                org.apache.poi.ss.usermodel.Cell giaBanCell = row.createCell(15);
+                Cell giaBanCell = row.createCell(15);
                 giaBanCell.setCellValue(s.sellingPrice());
                 tongGiaNhap += s.getImportPrice();
                 tongSoLuong += s.getQuantity();
@@ -924,16 +905,16 @@ public class BookView extends JPanel
                 sheet.autoSizeColumn(i);
             }
             sheet.createRow(rowNumber);
-            org.apache.poi.ss.usermodel.Cell summaryCell = sheet.getRow(rowNumber).createCell(0);
+            Cell summaryCell = sheet.getRow(rowNumber).createCell(0);
             summaryCell.setCellValue("Tổng cộng");
 
-            org.apache.poi.ss.usermodel.Cell tongGiaNhapCell = sheet.getRow(rowNumber).createCell(14);
+            Cell tongGiaNhapCell = sheet.getRow(rowNumber).createCell(14);
             tongGiaNhapCell.setCellValue(tongGiaNhap);
 
-            org.apache.poi.ss.usermodel.Cell tongSoLuongCell = sheet.getRow(rowNumber).createCell(13);
+            Cell tongSoLuongCell = sheet.getRow(rowNumber).createCell(13);
             tongSoLuongCell.setCellValue(tongSoLuong);
 
-            org.apache.poi.ss.usermodel.Cell tongGiaBanCell = sheet.getRow(rowNumber).createCell(15);
+            Cell tongGiaBanCell = sheet.getRow(rowNumber).createCell(15);
             tongGiaBanCell.setCellValue(tongGiaBan);
             try (FileOutputStream outputStream = new FileOutputStream(filePath)) {
                 workbook.write(outputStream);
@@ -946,7 +927,8 @@ public class BookView extends JPanel
     }
 
 
-    private void deleteBook() throws RemoteException {
+    @SneakyThrows
+    private void deleteBook() {
         int row = table.getSelectedRow();
         if (row == -1) {
             JOptionPane.showMessageDialog(this, "Please select a row to delete.");
@@ -967,14 +949,15 @@ public class BookView extends JPanel
     }
 
 
-    private void updateBook() throws RemoteException {
+    @SneakyThrows
+    private void updateBook() {
         int row = table.getSelectedRow();
         if (row == -1) {
-            JOptionPane.showMessageDialog(this, "Please select a row to update", "Warning",
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn một hàng để cập nhật", "Cảnh báo",
                     JOptionPane.WARNING_MESSAGE);
             return;
         } else {
-            int confirmation = JOptionPane.showConfirmDialog(this, "Do you want to update this product's information?", "Notification",
+            int confirmation = JOptionPane.showConfirmDialog(this, "Bạn có muốn cập nhật thông tin của sản phẩm này?", "Thông báo",
                     JOptionPane.YES_NO_OPTION);
             if (confirmation == JOptionPane.YES_OPTION) {
                 if (validateFieldsAndShowErrors()) {
@@ -982,10 +965,10 @@ public class BookView extends JPanel
                         Book book = getBookInfo();
                         String productId = txtIdSanPham.getText();
                         mainController.updateBook(book);
-                        JOptionPane.showMessageDialog(this, "Book updated successfully!");
+                        JOptionPane.showMessageDialog(this, "Cập nhật sách thành công!");
                         loadData();
                     } catch (NumberFormatException e) {
-                        JOptionPane.showMessageDialog(this, "Please check the number format", "Error",
+                        JOptionPane.showMessageDialog(this, "Vui lòng kiểm tra định dạng số", "Lỗi",
                                 JOptionPane.ERROR_MESSAGE);
                     }
                 }
@@ -994,7 +977,8 @@ public class BookView extends JPanel
     }
 
 
-    private Book getBookInfo() throws NumberFormatException, RemoteException {
+    @SneakyThrows
+    private Book getBookInfo() throws NumberFormatException {
         String idSanPham = txtIdSanPham.getText().trim();
         String tenSanPham = txtTenSanPham.getText().trim();
         String tacGia = (String) cbLoaiTacGia.getSelectedItem();
@@ -1068,37 +1052,37 @@ public class BookView extends JPanel
 
 
         if (!isValidName(txtTenSanPham.getText().trim())) {
-            showErrorAndFocus(this, "Invalid product name. Only letters and numbers without special characters are allowed", txtTenSanPham);
+            showErrorAndFocus(this, "Tên sản phẩm không hợp lệ. Chỉ cho phép các chữ cái và số không có ký tự đặc biệt", txtTenSanPham);
             return false;
         }
 
         if (!isValidISBN(isbnField.getText().trim())) {
-            showErrorAndFocus(this, "Invalid ISBN format", isbnField);
+            showErrorAndFocus(this, "Định dạng ISBN không hợp lệ", isbnField);
             return false;
         }
 
         if (!isValidInt(txtSoTrang.getText().trim())) {
-            showErrorAndFocus(this, "Invalid number of pages. Please enter an integer.", txtSoTrang);
+            showErrorAndFocus(this, "Số trang không hợp lệ. Vui lòng nhập một số nguyên.", txtSoTrang);
             return false;
         }
 
         if (!isValidColor(txtMauSac.getText().trim())) {
-            showErrorAndFocus(this, "Invalid color. Only letters are allowed", txtMauSac);
+            showErrorAndFocus(this, "Màu không hợp lệ. Chỉ cho phép chữ cái", txtMauSac);
             return false;
         }
 
         if (!isValidDouble(txtKichThuoc.getText().trim())) {
-            showErrorAndFocus(this, "Invalid size format. Please enter a decimal number.", txtKichThuoc);
+            showErrorAndFocus(this, "Định dạng kích thước không hợp lệ. Vui lòng nhập số thập phân.", txtKichThuoc);
             return false;
         }
 
         if (!isValidDouble(txtGiaNhap.getText().trim())) {
-            showErrorAndFocus(this, "Invalid import price format. Please enter a decimal number.", txtGiaNhap);
+            showErrorAndFocus(this, "Định dạng giá nhập không hợp lệ. Vui lòng nhập số thập phân.", txtGiaNhap);
             return false;
         }
 
         if (!isValidInt(txtSoLuong.getText().trim())) {
-            showErrorAndFocus(this, "Invalid quantity format. Please enter an integer.", txtSoLuong);
+            showErrorAndFocus(this, "Định dạng số lượng không hợp lệ. Vui lòng nhập một số nguyên.", txtSoLuong);
             return false;
         }
 
@@ -1108,7 +1092,7 @@ public class BookView extends JPanel
             return false;
         }
         if (emptyTextField != null) {
-            showErrorAndFocus(this, "Please fill in all fields", emptyTextField);
+            showErrorAndFocus(this, "Vui lòng điền vào tất cả các lĩnh vực", emptyTextField);
             return false;
         }
 
@@ -1144,13 +1128,13 @@ public class BookView extends JPanel
     private boolean validateDateChooser(JDateChooser dateChooser) {
         Date selectedDate = dateChooser.getDate();
         if (selectedDate == null) {
-            showErrorDialog("Please select a publication year");
+            showErrorDialog("Vui lòng chọn năm xuất bản");
             return false;
         }
 
         Date currentDate = new Date();
         if (selectedDate.after(currentDate)) {
-            showErrorDialog("Publication year cannot be later than the current date!");
+            showErrorDialog("Năm xuất bản không thể muộn hơn ngày hiện tại!");
             return false;
         }
 
@@ -1179,7 +1163,7 @@ public class BookView extends JPanel
             Double.parseDouble(input);
             return true;
         } catch (NumberFormatException e) {
-            showErrorDialog("Invalid value format. Please enter a valid decimal number.");
+            showErrorDialog("Định dạng giá trị không hợp lệ. Vui lòng nhập số thập phân hợp lệ.");
             return false;
         }
     }
@@ -1194,20 +1178,21 @@ public class BookView extends JPanel
             Integer.parseInt(input);
             return true;
         } catch (NumberFormatException e) {
-            showErrorDialog("Invalid value format. Please enter a valid integer.");
+            showErrorDialog("Định dạng giá trị không hợp lệ. Vui lòng nhập một số nguyên hợp lệ.");
             return false;
         }
     }
 
     private void showErrorDialog(String message) {
-        JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, message, "Lỗi", JOptionPane.ERROR_MESSAGE);
     }
 
 
-    private void addBook() throws RemoteException {
+    @SneakyThrows
+    private void addBook() {
         String idSanPham = txtIdSanPham.getText();
         if (mainController.checkIdBook(idSanPham)) {
-            JOptionPane.showMessageDialog(this, "Duplicate product ID. Please choose another ID.");
+            JOptionPane.showMessageDialog(this, "ID sản phẩm trùng lặp. Vui lòng chọn ID khác.");
             return;
         }
         if (!validateFieldsAndShowErrors()) {
@@ -1218,20 +1203,20 @@ public class BookView extends JPanel
             if (book != null) {
                 boolean check = mainController.addBook(book);
                 if (check) {
-                    DialogUtils.showSuccessMessage(this, "Add book successfully");
+                    DialogUtils.showSuccessMessage(this, "Thêm sách thành công");
                     mainController.increaseNumberOfBooks(book.getAuthorId().getAuthorId());
                     mainController.increaseNumberOfCategory(book.getCategoryId().getIdCategory());
                     loadData();
                     refreshForm();
                 } else {
-                    DialogUtils.showErrorMessage(this, "Add book failed");
+                    DialogUtils.showErrorMessage(this, "Thêm sách không thành công");
                 }
             }
 
         } catch (NumberFormatException e) {
-            DialogUtils.showErrorMessage(this, "Please enter valid numeric values.");
+            DialogUtils.showErrorMessage(this, "Vui lòng nhập các giá trị số hợp lệ.");
         } catch (NullPointerException e) {
-            DialogUtils.showErrorMessage(this, "Some fields contain null values. Please check your input.");
+            DialogUtils.showErrorMessage(this, "Một số trường chứa giá trị null. Vui lòng kiểm tra đầu vào của bạn.");
         }
     }
 
@@ -1286,11 +1271,7 @@ public class BookView extends JPanel
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             Object o = e.getSource();
             if (o == txtTenSanPham) {
-                try {
-                    addBook();
-                } catch (RemoteException ex) {
-                    throw new RuntimeException(ex);
-                }
+                addBook();
             }
         }
 
@@ -1386,7 +1367,6 @@ public class BookView extends JPanel
 
     }
 
-    @SneakyThrows
     @Override
     public void itemStateChanged(ItemEvent e) {
         Object o = e.getSource();
@@ -1394,49 +1374,29 @@ public class BookView extends JPanel
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 String selectedLoaiSanPham = (String) cbLoaiSanPhamSearch.getSelectedItem();
                 if (selectedLoaiSanPham.equals("Tất cả")) {
-                    try {
-                        loadData();
-                    } catch (RemoteException ex) {
-                        throw new RuntimeException(ex);
-                    }
+                    loadData();
                 } else if (selectedLoaiSanPham != null && !selectedLoaiSanPham.isEmpty()) {
                     loadtableByProductType(selectedLoaiSanPham);
                 } else {
-                    try {
-                        loadData();
-                    } catch (RemoteException ex) {
-                        throw new RuntimeException(ex);
-                    }
+                    loadData();
                 }
             }
         } else if (o == cbNhaCungCapSearch) {
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 String selectedNhaCungCap = (String) cbNhaCungCapSearch.getSelectedItem();
                 if (selectedNhaCungCap.equals("Tất cả")) {
-                    try {
-                        loadData();
-                    } catch (RemoteException ex) {
-                        throw new RuntimeException(ex);
-                    }
+                    loadData();
                 } else if (selectedNhaCungCap != null && !selectedNhaCungCap.isEmpty()) {
                     loadtableBySupplier(selectedNhaCungCap);
                 } else {
-                    try {
-                        loadData();
-                    } catch (RemoteException ex) {
-                        throw new RuntimeException(ex);
-                    }
+                    loadData();
                 }
             }
         } else if (o == cbTheLoaiSearch) {
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 String selectedTheLoai = (String) cbTheLoaiSearch.getSelectedItem();
                 if (selectedTheLoai.equals("Tất cả")) {
-                    try {
-                        loadData();
-                    } catch (RemoteException ex) {
-                        throw new RuntimeException(ex);
-                    }
+                    loadData();
                 } else if (selectedTheLoai != null && !selectedTheLoai.isEmpty()) {
                     loadTableByCategory(selectedTheLoai);
                 } else {

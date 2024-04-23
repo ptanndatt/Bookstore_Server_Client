@@ -10,7 +10,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
 public class Server {
-    private static final String URL = "rmi://LAPTOP-KHUCRM3L:8888/";
+    private static final String URL = "rmi://ashleynguci:7881/";
 
     public static void main(String[] args) {
         try {
@@ -31,7 +31,7 @@ public class Server {
                     new ProductDaoImplService(),
                     new SaleManagementDaoService()
             );
-            LocateRegistry.createRegistry(8888);
+            LocateRegistry.createRegistry(7881);
             context.rebind(URL + "mainController", mainController);
             System.out.println("Server is ready.");
         } catch (Exception e) {

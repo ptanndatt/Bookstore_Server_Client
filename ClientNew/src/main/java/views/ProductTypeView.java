@@ -42,6 +42,7 @@ public class ProductTypeView extends JPanel implements ActionListener, KeyListen
     private Timer timer;
     private MainController mainController;
     private GeneratorIDAuto autoID;
+
     @SneakyThrows
     public ProductTypeView() {
         setLayout(new BorderLayout());
@@ -152,7 +153,11 @@ public class ProductTypeView extends JPanel implements ActionListener, KeyListen
         txtTenLoaiSanPham.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                txtIdLoaiSanPham.setText(autoID.autoID("LSP"));
+                int row = tableSP.getSelectedRow();
+                if (row == -1)
+                    txtIdLoaiSanPham.setText(autoID.autoID("LSP"));
+                else
+                    txtIdLoaiSanPham.setText(modelSP.getValueAt(row, 0).toString());
             }
 
             @Override
@@ -195,7 +200,7 @@ public class ProductTypeView extends JPanel implements ActionListener, KeyListen
                 modelSP.addRow(rowData);
             }
         } else {
-            DialogUtils.showErrorMessage(this, "Error loading data");
+            DialogUtils.showErrorMessage(this, "Lỗi tải dữ liệu");
         }
     }
 
@@ -212,18 +217,18 @@ public class ProductTypeView extends JPanel implements ActionListener, KeyListen
     private void deleteProductType() {
         int row = tableSP.getSelectedRow();
         if (row == -1) {
-            DialogUtils.showErrorMessage(this, "Please select a row to delete");
+            DialogUtils.showErrorMessage(this, "Vui lòng chọn một hàng để xóa!");
         } else {
-            int confirmDialogResult = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this item?", "Warning",
+            int confirmDialogResult = JOptionPane.showConfirmDialog(this, "bạn có chắc bạn muốn xóa mục này?", "Cảnh báo",
                     JOptionPane.YES_NO_OPTION);
             if (confirmDialogResult == JOptionPane.YES_OPTION) {
                 String idProductType = txtIdLoaiSanPham.getText();
                 if (mainController.deleteProductType(idProductType)) {
-                    DialogUtils.showSuccessMessage(this, "Item deleted successfully");
+                    DialogUtils.showSuccessMessage(this, "Đã xóa mục thành công");
                     loadData();
                     refreshForm();
                 } else {
-                    DialogUtils.showErrorMessage(this, "Failed to delete item");
+                    DialogUtils.showErrorMessage(this, "Không thể xóa mục");
                 }
             }
         }
@@ -233,7 +238,7 @@ public class ProductTypeView extends JPanel implements ActionListener, KeyListen
     private void updateProductType() {
         int row = tableSP.getSelectedRow();
         if (row >= 0) {
-            int update = JOptionPane.showConfirmDialog(this, "Are you sure you want to update this information?", "Warning",
+            int update = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn cập nhật thông tin này?", "Cảnh báo",
                     JOptionPane.YES_NO_OPTION);
             if (update == JOptionPane.YES_OPTION) {
 //                if (validateFields()) {
@@ -241,18 +246,18 @@ public class ProductTypeView extends JPanel implements ActionListener, KeyListen
                 String productName = txtTenLoaiSanPham.getText().trim();
                 ProductType productType = new ProductType(idProductType, productName);
                 if (mainController.updateProductType(productType)) {
-                    DialogUtils.showSuccessMessage(this, "Update successful");
+                    DialogUtils.showSuccessMessage(this, "Cập nhật thành công");
                     refreshForm();
                     loadData();
                 } else {
-                    DialogUtils.showErrorMessage(this, "Update failed");
+                    DialogUtils.showErrorMessage(this, "Cập nhật không thành công");
                 }
 //                }
             } else {
-                DialogUtils.showErrorMessage(this, "Update failed");
+                DialogUtils.showErrorMessage(this, "Cập nhật không thành công");
             }
         } else {
-            DialogUtils.showErrorMessage(this, "Please select a row");
+            DialogUtils.showErrorMessage(this, "Vui lòng chọn một hàng");
         }
     }
 
@@ -296,16 +301,16 @@ public class ProductTypeView extends JPanel implements ActionListener, KeyListen
         ProductType productType = new ProductType(idProductType, productName);
 
         if (mainController.checkProductTypeExist(idProductType)) {
-            DialogUtils.showErrorMessage(this, "Duplicate product type ID. Please choose a different ID.");
+            DialogUtils.showErrorMessage(this, "ID loại sản phẩm trùng lặp. Vui lòng chọn một ID khác.");
         } else {
 //            if (validateFields()) {
             if (mainController.addProductType(productType)) {
                 modelSP.addRow(new Object[]{idProductType, productName});
-                DialogUtils.showSuccessMessage(this, "Product type added successfully");
+                DialogUtils.showSuccessMessage(this, "Loại sản phẩm được thêm thành công");
                 loadData();
                 refreshForm();
             } else {
-                DialogUtils.showErrorMessage(this, "Error adding product type");
+                DialogUtils.showErrorMessage(this, "Lỗi khi thêm loại sản phẩm");
             }
         }
 //        }

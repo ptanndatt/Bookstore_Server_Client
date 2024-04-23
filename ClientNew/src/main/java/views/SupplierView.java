@@ -48,7 +48,6 @@ public class SupplierView extends JPanel implements ActionListener, MouseListene
     private GeneratorIDAuto autoID;
 
 
-
     @SneakyThrows
     public SupplierView() {
         mainController = new MainController();
@@ -189,7 +188,11 @@ public class SupplierView extends JPanel implements ActionListener, MouseListene
         txtTenLoaiSanPham.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                txtIdLoaiSanPham.setText(autoID.autoID("NCC"));
+                int row = tableSP.getSelectedRow();
+                if (row == -1)
+                    txtIdLoaiSanPham.setText(autoID.autoID("NCC"));
+                else
+                    txtIdLoaiSanPham.setText(modelSP.getValueAt(row, 0).toString());
             }
 
             @Override
@@ -232,7 +235,7 @@ public class SupplierView extends JPanel implements ActionListener, MouseListene
                 modelSP.addRow(rowData);
             }
         } else {
-            DialogUtils.showErrorMessage(this, "Error loading data");
+            DialogUtils.showErrorMessage(this, "Lỗi tải dữ liệu");
         }
     }
 
@@ -249,19 +252,19 @@ public class SupplierView extends JPanel implements ActionListener, MouseListene
     private void deleteSupplier() {
         int row = tableSP.getSelectedRow();
         if (row == -1) {
-            DialogUtils.showErrorMessage(this, "Please select a row to delete");
+            DialogUtils.showErrorMessage(this, "Vui lòng chọn một hàng để xóa");
         } else {
-            int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this supplier's information?", "Warning",
+            int confirm = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa thông tin của nhà cung cấp này?", "Cảnh báo",
                     JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
                 String idSupplier = txtIdLoaiSanPham.getText();
                 boolean isSuccess = mainController.deleteSupplier(idSupplier);
                 if (isSuccess) {
-                    JOptionPane.showMessageDialog(this, "Supplier information deleted successfully");
+                    JOptionPane.showMessageDialog(this, "Thông tin nhà cung cấp đã được xóa thành công");
                     loadData();
                     refreshForm();
                 } else {
-                    JOptionPane.showMessageDialog(this, "Failed to delete supplier information");
+                    JOptionPane.showMessageDialog(this, "Không xóa được thông tin nhà cung cấp");
                 }
             }
         }
@@ -272,7 +275,7 @@ public class SupplierView extends JPanel implements ActionListener, MouseListene
     private void updateSupplier() {
         int row = tableSP.getSelectedRow();
         if (row >= 0) {
-            int update = JOptionPane.showConfirmDialog(this, "Are you sure you want to update this supplier's information?", "Warning",
+            int update = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn cập nhật thông tin của nhà cung cấp này?", "Cảnh báo",
                     JOptionPane.YES_NO_OPTION);
             if (update == JOptionPane.YES_OPTION) {
                 String idSupplier = txtIdLoaiSanPham.getText().trim();
@@ -282,15 +285,15 @@ public class SupplierView extends JPanel implements ActionListener, MouseListene
                 Supplier supplier = new Supplier(idSupplier, address, phoneNumber, supplierName);
                 boolean isSuccess = mainController.updateSupplier(supplier);
                 if (isSuccess) {
-                    JOptionPane.showMessageDialog(this, "Supplier information updated successfully");
+                    JOptionPane.showMessageDialog(this, "Thông tin nhà cung cấp được cập nhật thành công");
                     loadData();
                     refreshForm();
                 }
             } else {
-                JOptionPane.showMessageDialog(this, "Update failed");
+                JOptionPane.showMessageDialog(this, "Cập nhật không thành công");
             }
         } else {
-            DialogUtils.showErrorMessage(this, "Please select a row to update");
+            DialogUtils.showErrorMessage(this, "Vui lòng chọn một hàng để cập nhật");
         }
     }
 
@@ -314,7 +317,7 @@ public class SupplierView extends JPanel implements ActionListener, MouseListene
         String phoneNumber = txtSoDienThoai.getText().trim();
 
         if (mainController.checkSupplierId(supplierId)) {
-            DialogUtils.showErrorMessage(this, "Supplier ID already exists");
+            DialogUtils.showErrorMessage(this, "ID nhà cung cấp đã tồn tại");
             return;
         }
 
@@ -326,12 +329,12 @@ public class SupplierView extends JPanel implements ActionListener, MouseListene
                 modelSP.addRow(new Object[]{supplierId, address, phoneNumber, supplierName});
                 loadData();
                 refreshForm();
-                DialogUtils.showSuccessMessage(this, "Supplier added successfully");
+                DialogUtils.showSuccessMessage(this, "Đã thêm nhà cung cấp thành công");
             } else {
-                DialogUtils.showErrorMessage(this, "Error adding supplier");
+                DialogUtils.showErrorMessage(this, "Lỗi thêm nhà cung cấp");
             }
         } catch (Exception e) {
-            DialogUtils.showErrorMessage(this, "Error adding supplier");
+            DialogUtils.showErrorMessage(this, "Lỗi thêm nhà cung cấp");
             e.printStackTrace();
         }
 //        }

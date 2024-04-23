@@ -377,7 +377,7 @@ public class ManagerAdminView extends JPanel implements KeyListener, MouseListen
     @SneakyThrows
     public void loadRole() {
 //        modelChucVu.setRowCount(0);
-        List<Role> roles = mainController.getAllRole();
+        List<Role> roles = mainController.getRolesByRoleCode(ROLE);
         for (Role role : roles) {
             modelChucVu.addRow(new Object[]{role.getIdRole(), role.getRoleName()});
         }

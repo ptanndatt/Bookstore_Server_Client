@@ -6,7 +6,11 @@ import lombok.SneakyThrows;
 import models.Account;
 import models.Employee;
 import models.Role;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import util.DialogUtils;
 import util.GeneratorIDAuto;
 
 import javax.swing.*;
@@ -16,6 +20,10 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -263,7 +271,11 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         txtTenNV.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                txtID.setText(autoID.autoID("E"));
+                int row = tableNhanVien.getSelectedRow();
+                if (row == -1)
+                    txtID.setText(autoID.autoID("NS"));
+                else
+                    txtID.setText(modelNhanVien.getValueAt(row, 0).toString());
             }
 
             @Override
@@ -274,9 +286,40 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
             public void changedUpdate(DocumentEvent e) {
             }
         });
+        txtTimKiem.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                modelNhanVien.setRowCount(0);
+                handleSearch(txtTimKiem.getText().trim());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                modelNhanVien.setRowCount(0);
+                handleSearch(txtTimKiem.getText().trim());
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+
+            }
+        });
         loadComboxBoxRole();
         loadDataRoleTabble();
         loadData();
+    }
+
+    @SneakyThrows
+    private void handleSearch(String text) {
+        if (!text.equals("")) {
+            for (Employee employee : mainController.findEmployeeByText(text)) {
+                String ngaySinh = new SimpleDateFormat("dd/MM/yyyy").format(employee.getBirth());
+                modelNhanVien.addRow(new Object[]{employee.getIdEmployee(), employee.getName(), employee.getPhone(), employee.getEmail(), employee.getAddress(), ngaySinh, employee.getGender()});
+
+            }
+        } else {
+            loadData();
+        }
     }
 
     @SneakyThrows
@@ -438,13 +481,6 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         return true;
     }
 
-    private void showDialog(JFrame FrameParent, JDialog dialog) {
-
-        dialog.pack();
-        dialog.setLocationRelativeTo(null);
-        dialog.setVisible(true);
-    }
-
     @SneakyThrows
     private void loadComboxBoxRole() {
         cbChucVu.removeAllItems();
@@ -468,11 +504,154 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         loadData();
     }
 
+    private void showAddRoleDialog() {
+        loadDataRoleTabble();
+        JDialog dialog = new JDialog();
+        dialog.setTitle("Thêm chức vụ");
+        dialog.setSize(400, 300);
+        dialog.setLocationRelativeTo(null);
+        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        dialog.setLayout(new BorderLayout());
+
+        JPanel pnCenter = new JPanel(new BorderLayout());
+
+        JLabel lblTenChucVu = new JLabel("Tên chức vụ:");
+        JTextField txtTenChucVu = new JTextField();
+        txtTenChucVu.setColumns(15);
+
+        JPanel pnInput = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(10, 10, 10, 10);
+        pnInput.add(lblTenChucVu, gbc);
+        gbc.gridx = 1;
+        gbc.gridwidth = 2;
+        pnInput.add(txtTenChucVu, gbc);
+
+        pnCenter.add(pnInput, BorderLayout.NORTH);
+
+        tbChucVu = new JTable();
+        modelChucVu = new DefaultTableModel();
+        modelChucVu.addColumn("ID");
+        modelChucVu.addColumn("Tên chức vụ");
+        tbChucVu.setModel(modelChucVu);
+        JScrollPane scrollTbChucVu = new JScrollPane(tbChucVu);
+        pnCenter.add(scrollTbChucVu, BorderLayout.CENTER);
+
+        JPanel pnBottom = new JPanel(new BorderLayout());
+
+        JPanel pnButtons = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        JButton btnAdd = new JButton("Thêm");
+        JButton btnEdit = new JButton("Sửa");
+        JButton btnDelete = new JButton("Xóa");
+        JButton btnCancel = new JButton("Hủy");
+
+        pnButtons.add(btnAdd);
+        pnButtons.add(btnCancel);
+
+        pnBottom.add(pnButtons, BorderLayout.SOUTH);
+
+        btnAdd.addActionListener(new ActionListener() {
+            @SneakyThrows
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String roleName = txtTenChucVu.getText();
+                if (roleName.isEmpty()) {
+                    DialogUtils.showErrorMessage(dialog, "Tên chức vụ không được để trống");
+                    return;
+                }
+
+                Role role = new Role(roleName, ROLE);
+                mainController.addRole(role);
+                modelChucVu.addRow(new Object[]{role.getIdRole(), role.getRoleName()});
+                loadComboxBoxRole();
+                txtTenChucVu.setText("");
+                DialogUtils.showSuccessMessage(dialog, "Thêm chức vụ thành công");
+                dialog.dispose();
+                loadDataRoleTabble();
+                loadComboxBoxRole();
+            }
+        });
+
+        btnCancel.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dialog.dispose();
+            }
+        });
+        btnDelete.addActionListener(new ActionListener() {
+            @SneakyThrows
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int row = tbChucVu.getSelectedRow();
+                if (row == -1) {
+                    DialogUtils.showErrorMessage(dialog, "Vui lòng chọn chức vụ cần xóa");
+                    return;
+                }
+                String idRole = modelChucVu.getValueAt(row, 0).toString();
+                mainController.deleteRole(idRole);
+                modelChucVu.removeRow(row);
+                loadComboxBoxRole();
+                loadDataRoleTabble();
+                DialogUtils.showSuccessMessage(dialog, "Xóa chức vụ thành công");
+            }
+        });
+
+
+        dialog.add(pnCenter, BorderLayout.CENTER);
+        dialog.add(pnBottom, BorderLayout.SOUTH);
+        loadDataRoleTabble();
+        dialog.setVisible(true);
+    }
+
+    private void exportExecl(String filePath) {
+
+        try {
+            Workbook workbook = new XSSFWorkbook();
+            org.apache.poi.ss.usermodel.Sheet sheet = workbook.createSheet("Nhan sự");
+
+            Row header = sheet.createRow(0);
+            header.createCell(0).setCellValue("ID nhân sự");
+            header.createCell(1).setCellValue("Tên nhân sự");
+            header.createCell(2).setCellValue("Số điện thoại");
+            header.createCell(3).setCellValue("Email");
+            header.createCell(4).setCellValue("Địa chỉ");
+            header.createCell(5).setCellValue("Ngày sinh");
+            header.createCell(6).setCellValue("Giới tính");
+            header.createCell(7).setCellValue("Chức vụ");
+            header.createCell(8).setCellValue("Trạng thái");
+            int rowNum = 1;
+            for (Employee kh : mainController.getAllEmployees()) {
+                Row row = sheet.createRow(rowNum++);
+                row.createCell(0).setCellValue(kh.getIdEmployee());
+                row.createCell(1).setCellValue(kh.getName());
+                row.createCell(2).setCellValue(kh.getPhone());
+                row.createCell(3).setCellValue(kh.getEmail());
+                row.createCell(4).setCellValue(kh.getAddress());
+                row.createCell(5).setCellValue(new SimpleDateFormat("dd/MM/yyyy").format(kh.getBirth()));
+                row.createCell(6).setCellValue(kh.getGender());
+                row.createCell(7).setCellValue(kh.getRole().getRoleName());
+                row.createCell(8).setCellValue(kh.getStatus());
+            }
+            // Hiển thị hộp thoại mở cửa sổ lưu tệp
+            try (FileOutputStream outputStream = new FileOutputStream(filePath)) {
+                workbook.write(outputStream);
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+            JOptionPane.showMessageDialog(this, "Xuất dữ liệu thành công");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Object o = e.getSource();
         if (o.equals(btnMoBangThemChucVu)) {
-            showDialog(frameThemChucVu, dlogThemChucVu);
+            showAddRoleDialog();
         }
         if (o.equals(btnThemChucVu)) {
             addRole();
@@ -485,6 +664,18 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         }
         if (o.equals(btnLamMoi)) {
             reload();
+        }
+        if (o.equals(btnXuatExecl)) {
+            JFileChooser fileChooser = new JFileChooser();
+            int returnValue = fileChooser.showOpenDialog(null);
+            if (returnValue == JFileChooser.APPROVE_OPTION) {
+                File selectedFile = fileChooser.getSelectedFile();
+                String selectedFilePath = selectedFile.getAbsolutePath();
+                if (!selectedFilePath.toLowerCase().endsWith(".xlsx")) {
+                    selectedFilePath += ".xlsx";
+                }
+                exportExecl(selectedFilePath);
+            }
         }
     }
 
@@ -546,12 +737,4 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
 
     }
 
-//    public static void main(String[] args) {
-//        JFrame frame = new JFrame();
-//        frame.add(new EmployeeManagementView());
-//        frame.setSize(1000, 700);
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        frame.setLocationRelativeTo(null);
-//        frame.setVisible(true);
-//    }
 }

@@ -13,7 +13,6 @@ import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
-import java.rmi.RemoteException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -65,7 +64,6 @@ public class CategoryView extends JPanel implements ActionListener, KeyListener,
         init();
     }
 
-    @SneakyThrows
     private void init() {
         pnContainer = new JPanel(new BorderLayout());
         pnMain = new JPanel(new BorderLayout());
@@ -177,7 +175,11 @@ public class CategoryView extends JPanel implements ActionListener, KeyListener,
         txtTentheLoai.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                txtIdtheLoai.setText(autoID.autoID("TL"));
+                int row = table.getSelectedRow();
+                if (row == -1)
+                    txtIdtheLoai.setText(autoID.autoID("TL"));
+                else
+                    txtIdtheLoai.setText(model.getValueAt(row, 0).toString());
             }
 
             @Override
@@ -191,7 +193,6 @@ public class CategoryView extends JPanel implements ActionListener, KeyListener,
     }
 
 
-    @SneakyThrows
     @Override
     public void actionPerformed(ActionEvent e) {
         Object o = e.getSource();
@@ -216,7 +217,8 @@ public class CategoryView extends JPanel implements ActionListener, KeyListener,
         }
     }
 
-    private void loadData() throws RemoteException {
+    @SneakyThrows
+    private void loadData() {
         model.setRowCount(0);
         java.util.List<Category> categories = mainController.getAllCategory();
 
@@ -226,26 +228,26 @@ public class CategoryView extends JPanel implements ActionListener, KeyListener,
                 model.addRow(rowData);
             }
         } else {
-            DialogUtils.showErrorMessage(this, "Error loading data");
+            DialogUtils.showErrorMessage(this, "Lỗi tải dữ liệu");
         }
     }
 
     private void updateCategory() {
         int row = table.getSelectedRow();
         if (row < 0) {
-            DialogUtils.showErrorMessage(this, "Please select a row to update.");
+            DialogUtils.showErrorMessage(this, "Vui lòng chọn một hàng để cập nhật.");
         } else {
             try {
                 Category category = getCategory();
                 if (mainController.updateCategory(category)) {
-                    DialogUtils.showSuccessMessage(this, "Updated successfully.");
+                    DialogUtils.showSuccessMessage(this, "Cập nhật thành công.");
                     loadData();
                     refreshForm();
                 } else {
-                    DialogUtils.showErrorMessage(this, "Update failed.");
+                    DialogUtils.showErrorMessage(this, "Cập nhật không thành công.");
                 }
             } catch (Exception e) {
-                DialogUtils.showErrorMessage(this, "Error updating category: " + e.getMessage());
+                DialogUtils.showErrorMessage(this, "Lỗi cập nhật danh mục: " + e.getMessage());
                 e.printStackTrace();
             }
         }
@@ -254,26 +256,26 @@ public class CategoryView extends JPanel implements ActionListener, KeyListener,
     private void deleteCategory() {
         int row = table.getSelectedRow();
         if (row == -1) {
-            DialogUtils.showErrorMessage(this, "Please select a row to delete.");
+            DialogUtils.showErrorMessage(this, "Vui lòng chọn một hàng để xóa.");
         } else {
-            int confirmDialog = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this row?", "Warning",
+            int confirmDialog = JOptionPane.showConfirmDialog(this, "Bạn có chắc chắn muốn xóa hàng này không?", "Cảnh báo",
                     JOptionPane.YES_NO_OPTION);
             if (confirmDialog == JOptionPane.YES_OPTION) {
                 try {
                     String categoryId = txtIdtheLoai.getText();
                     if (mainController.deleteCategory(categoryId)) {
-                        DialogUtils.showSuccessMessage(this, "Deleted successfully.");
+                        DialogUtils.showSuccessMessage(this, "Đã xoá thành công.");
                         loadData();
                         refreshForm();
                     } else {
-                        DialogUtils.showErrorMessage(this, "Deletion failed.");
+                        DialogUtils.showErrorMessage(this, "Xóa không thành công.");
                     }
                 } catch (Exception e) {
-                    DialogUtils.showErrorMessage(this, "Error deleting category: " + e.getMessage());
+                    DialogUtils.showErrorMessage(this, "Lỗi xóa danh mục: " + e.getMessage());
                     e.printStackTrace();
                 }
             } else {
-                DialogUtils.showErrorMessage(this, "Deletion canceled.");
+                DialogUtils.showErrorMessage(this, "Việc xóa đã bị hủy.");
             }
         }
     }
@@ -298,29 +300,30 @@ public class CategoryView extends JPanel implements ActionListener, KeyListener,
         return category;
     }
 
-    private void addCategory() throws RemoteException {
+    @SneakyThrows
+    private void addCategory() {
         String idTheLoai = txtIdtheLoai.getText();
         String tenTheLoai = txtTentheLoai.getText();
         int soLuongSach = 0;
         String moTa = txtMoTa.getText();
 
         if (tenTheLoai.isEmpty() || moTa.isEmpty()) {
-            DialogUtils.showErrorMessage(this, "Please fill in all fields");
+            DialogUtils.showErrorMessage(this, "Vui lòng điền vào tất cả các lĩnh vực");
             return;
         }
         Category category = new Category(idTheLoai, tenTheLoai, soLuongSach, moTa);
 
         if (mainController.checkIdCategory(category.getIdCategory())) {
-            DialogUtils.showErrorMessage(this, "Duplicate category ID. Please choose a different ID.");
+            DialogUtils.showErrorMessage(this, "ID danh mục trùng lặp. Vui lòng chọn một ID khác.");
             return;
         }
 
         if (mainController.addCategory(category)) {
-            DialogUtils.showSuccessMessage(this, "Category added successfully");
+            DialogUtils.showSuccessMessage(this, "Đã thêm danh mục thành công");
             loadData();
             refreshForm();
         } else {
-            DialogUtils.showErrorMessage(this, "Error adding category");
+            DialogUtils.showErrorMessage(this, "Lỗi khi thêm danh mục");
         }
     }
 

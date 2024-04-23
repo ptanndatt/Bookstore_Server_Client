@@ -5,6 +5,7 @@ import lombok.SneakyThrows;
 import models.Merchandise;
 import models.ProductType;
 import models.Supplier;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -74,7 +75,7 @@ public class MerchandiseView extends JPanel implements ActionListener, ItemListe
     public MerchandiseView() throws RemoteException {
 
         mainController = new MainController();
-        autoID=new GeneratorIDAuto();
+        autoID = new GeneratorIDAuto();
         currencyFormat.setCurrency(Currency.getInstance("VND"));
         setLayout(new BorderLayout(8, 6));
         tabbedPane = new JTabbedPane();
@@ -634,36 +635,36 @@ public class MerchandiseView extends JPanel implements ActionListener, ItemListe
                     "Màu sắc", "Trạng thái", "Thuế", "Giá nhập", "Số lượng", "Giá bán"};
 
             for (int i = 0; i < columnNames.length; i++) {
-                org.apache.poi.ss.usermodel.Cell cell = headerRow.createCell(i);
+                Cell cell = headerRow.createCell(i);
                 cell.setCellValue(columnNames[i]);
             }
 
             int rowNumber = 1;
             for (Merchandise spc : merchandiseList) {
                 Row row = sheet.createRow(rowNumber++);
-                org.apache.poi.ss.usermodel.Cell idSanPhamCell = row.createCell(0);
+                Cell idSanPhamCell = row.createCell(0);
                 idSanPhamCell.setCellValue(spc.getProductId());
-                org.apache.poi.ss.usermodel.Cell tenSanPhamCell = row.createCell(1);
+                Cell tenSanPhamCell = row.createCell(1);
                 tenSanPhamCell.setCellValue(spc.getProductName());
-                org.apache.poi.ss.usermodel.Cell loaiSanPhamCell = row.createCell(2);
+                Cell loaiSanPhamCell = row.createCell(2);
                 loaiSanPhamCell
                         .setCellValue(spc.getProductTypeId() != null ? spc.getProductTypeId().getProductTypeName() : "");
-                org.apache.poi.ss.usermodel.Cell nhaCungCapCell = row.createCell(3);
+                Cell nhaCungCapCell = row.createCell(3);
                 nhaCungCapCell
                         .setCellValue(spc.getSupplierId() != null ? spc.getSupplierId().getSupplierName() : "");
-                org.apache.poi.ss.usermodel.Cell kichThuocCell = row.createCell(4);
+                Cell kichThuocCell = row.createCell(4);
                 kichThuocCell.setCellValue(spc.getSize());
-                org.apache.poi.ss.usermodel.Cell mauSacCell = row.createCell(5);
+                Cell mauSacCell = row.createCell(5);
                 mauSacCell.setCellValue(spc.getColor());
-                org.apache.poi.ss.usermodel.Cell trangThaiCell = row.createCell(6);
+                Cell trangThaiCell = row.createCell(6);
                 trangThaiCell.setCellValue(spc.getStatus() != null ? spc.getStatus().getDescription() : "");
-                org.apache.poi.ss.usermodel.Cell thueCell = row.createCell(7);
+                Cell thueCell = row.createCell(7);
                 thueCell.setCellValue(spc.tax());
-                org.apache.poi.ss.usermodel.Cell giaNhapCell = row.createCell(8);
+                Cell giaNhapCell = row.createCell(8);
                 giaNhapCell.setCellValue(spc.getImportPrice());
-                org.apache.poi.ss.usermodel.Cell soLuongCell = row.createCell(9);
+                Cell soLuongCell = row.createCell(9);
                 soLuongCell.setCellValue(spc.getQuantity());
-                org.apache.poi.ss.usermodel.Cell giaBanCell = row.createCell(10);
+                Cell giaBanCell = row.createCell(10);
                 giaBanCell.setCellValue(spc.sellingPrice());
             }
             for (int i = 0; i < columnNames.length; i++) {
