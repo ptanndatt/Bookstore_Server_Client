@@ -8,7 +8,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 public class BookDaoImplService implements Remote {
-    private BookDaoImpl bookDaoImpl = new BookDaoImpl();
+    private final BookDaoImpl bookDaoImpl = new BookDaoImpl();
 
     public BookDaoImplService() throws RemoteException {
     }

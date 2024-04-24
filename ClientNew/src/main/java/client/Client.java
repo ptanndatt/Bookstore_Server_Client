@@ -6,7 +6,7 @@ import views.LoginView;
 import java.rmi.Naming;
 
 public class Client {
-    private static final String SERVER_IP = "192.168.89.111";
+    private static final String SERVER_IP = "192.168.1.95";
     private static final int PORT = 7881;
     private static final String URL = "rmi://" + SERVER_IP + ":" + PORT + "/";
 

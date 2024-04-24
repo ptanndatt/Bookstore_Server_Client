@@ -10,7 +10,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 public class AccountDaoImplService implements Remote {
-    private AccountDaoImpl accountDao = new AccountDaoImpl();
+    private final AccountDaoImpl accountDao = new AccountDaoImpl();
 
     public AccountDaoImplService() throws RemoteException {
     }

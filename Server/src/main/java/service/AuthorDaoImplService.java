@@ -3,11 +3,12 @@ package service;
 import dao.impl.AuthorDaoImpl;
 import models.Author;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
-public class AuthorDaoImplService {
-    private AuthorDaoImpl authorDaoImpl = new AuthorDaoImpl();
+public class AuthorDaoImplService implements Remote {
+    private final AuthorDaoImpl authorDaoImpl = new AuthorDaoImpl();
 
     public AuthorDaoImplService() throws RemoteException {
     }

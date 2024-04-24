@@ -4,11 +4,12 @@ import dao.impl.CategoryDaoImpl;
 import models.Category;
 import models.Merchandise;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
-public class CategoryDaoImplService {
-    private CategoryDaoImpl categoryDaoImpl = new CategoryDaoImpl();
+public class CategoryDaoImplService implements Remote {
+    private final CategoryDaoImpl categoryDaoImpl = new CategoryDaoImpl();
 
     public CategoryDaoImplService() throws RemoteException {
     }

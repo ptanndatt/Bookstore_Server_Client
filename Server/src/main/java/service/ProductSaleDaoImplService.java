@@ -5,11 +5,12 @@ import dao.impl.ProductSaleDaoImpl;
 import models.Account;
 import models.ProductSale;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
-public class ProductSaleDaoImplService {
-    private ProductSaleDao productSaleDao = new ProductSaleDaoImpl();
+public class ProductSaleDaoImplService implements Remote {
+    private final ProductSaleDao productSaleDao = new ProductSaleDaoImpl();
 
     public ProductSaleDaoImplService() throws RemoteException {
     }

@@ -4,10 +4,11 @@ package service;
 import dao.impl.PromotionDaoImpl;
 import models.Promotion;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
-public class PromotionDaoImplService {
+public class PromotionDaoImplService implements Remote {
     PromotionDaoImpl promotionDao = new PromotionDaoImpl();
 
     public PromotionDaoImplService() throws RemoteException {

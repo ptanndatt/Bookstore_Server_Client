@@ -6,11 +6,12 @@ import models.Customer;
 import models.Employee;
 import models.Role;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
-public class EmployeeDaoImplService {
-    private EmployeeDaoImpl employeeDao = new EmployeeDaoImpl();
+public class EmployeeDaoImplService implements Remote {
+    private final EmployeeDaoImpl employeeDao = new EmployeeDaoImpl();
 
     public EmployeeDaoImplService() throws RemoteException {
     }

@@ -7,13 +7,14 @@ import models.BillPending;
 import models.DetailsBill;
 import models.DetailsBillPending;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
-public class SaleManagementDaoService {
-    private SaleManagementDao dao = new SaleManagementDaoImpl();
+public class SaleManagementDaoService implements Remote {
+    private final SaleManagementDao dao = new SaleManagementDaoImpl();
 
     public SaleManagementDaoService() throws RemoteException {
     }
