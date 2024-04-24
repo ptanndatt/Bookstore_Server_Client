@@ -18,6 +18,9 @@ import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -46,6 +49,7 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
     private JButton btnThem;
     private JButton btnXoaKM;
     private JButton btnLamMoi;
+    private JButton btnCapNhat;
     private JTable tblSP;
     private DefaultTableModel modelSP2;
     private JTable tblSach;
@@ -57,7 +61,6 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
 
     private DefaultTableModel modelSPKM;
     private JTable tableSPKM;
-    private SimpleDateFormat dfNgay;
     private JButton btnMoTbSP;
     private JButton btnMoTbSach;
     private JButton btnXoaSPKM;
@@ -70,6 +73,7 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
     private GeneratorIDAuto autoID;
     private MainController mainController;
 
+    private DateTimeFormatter dayFormat;
 
     @SneakyThrows
     public PromotionView() {
@@ -77,7 +81,7 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
         mainController = new MainController();
         vietnameseFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
         autoID = new GeneratorIDAuto();
-        dfNgay = new SimpleDateFormat("dd/MM/yyyy");
+        dayFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         JLabel lbTieuDe = new JLabel("CHƯƠNG TRÌNH KHUYẾN MÃI");
         lbTieuDe.setFont(new Font("Tahoma", Font.BOLD, 25));
         lbTieuDe.setForeground(new Color(26, 102, 227));
@@ -96,7 +100,7 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
         chooserngayBatDau.getCalendarButton().setPreferredSize(new Dimension(20, 24));
         chooserngayBatDau.getCalendarButton().setBackground(new Color(102, 0, 153));
         chooserngayBatDau.getCalendarButton().setToolTipText("Chọn ngày bắt đầu");
-
+        chooserngayBatDau.setDate(Date.from(LocalDate.now().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
         chooserngayKetThuc = new JDateChooser();
         chooserngayKetThuc.getCalendarButton().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         chooserngayKetThuc.setBounds(100, 310, 200, 40);
@@ -106,6 +110,7 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
         chooserngayKetThuc.getCalendarButton().setPreferredSize(new Dimension(20, 24));
         chooserngayKetThuc.getCalendarButton().setBackground(new Color(102, 0, 153));
         chooserngayKetThuc.getCalendarButton().setToolTipText("Chọn ngày kết thúc");
+        chooserngayKetThuc.setDate(Date.from(LocalDate.now().atStartOfDay().atZone(ZoneId.systemDefault()).toInstant()));
         lbID = new JLabel("ID khuyến mãi:");
         txtID = new JTextField();
         lbTenKM = new JLabel("Tên khuyến mãi:");
@@ -133,6 +138,8 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
         btnLamMoi.setIcon(iconLamMoi);
         btnXoaKM = new JButton("XÓA KHUYẾN MÃI");
         btnXoaKM.setIcon(iconXoa);
+        btnCapNhat = new JButton("CẬP NHẬT");
+        btnCapNhat.setIcon(iconCapNhat);
         lbTimKiemSPKM = new JLabel("Tìm kiếm sản phẩm khuyến mãi:");
         txtTimKiemSPKM = new JTextField();
         lbTimKiemKM = new JLabel("Tìm kiếm khuyến mãi:");
@@ -170,6 +177,7 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
         pnKM.setBorder(BorderFactory.createTitledBorder("Thông tin khuyến mãi"));
 
         pnChucNang.add(btnThem);
+        pnChucNang.add(btnCapNhat);
         pnChucNang.add(btnXoaKM);
         pnChucNang.add(btnLamMoi);
 
@@ -291,7 +299,7 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
         chooserngayKetThuc.setToolTipText("Sau ngày bắt đầu");
         chooserngayKetThuc.setDate(new java.util.Date());
 
-
+        btnCapNhat.addActionListener(this);
         btnLamMoi.addActionListener(this);
         btnXoaKM.addActionListener(this);
         btnChonSP.addActionListener(this);
@@ -361,14 +369,14 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
         });
         loadProductSale();
         loadData();
-        deletePromotionEnd();
+//        deletePromotionEnd();
     }
 
     @SneakyThrows
     private void handleSearchPromotion(String cond) {
         if (!cond.equals("")) {
             for (Promotion promotion : mainController.findPromotionByText(cond)) {
-                modelKM.addRow(new Object[]{promotion.getPromotionId(), promotion.getPromotionName(), promotion.getPromotionDiscount(), dfNgay.format(promotion.getPromotionStartDate()), dfNgay.format(promotion.getPromotionEndDate())
+                modelKM.addRow(new Object[]{promotion.getPromotionId(), promotion.getPromotionName(), promotion.getPromotionDiscount(), dayFormat.format(promotion.getPromotionStartDate()), dayFormat.format(promotion.getPromotionEndDate())
                 });
             }
         } else {
@@ -391,7 +399,7 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
     @SneakyThrows
     private void deletePromotionEnd() {
         for (Promotion promotion : mainController.getAllPromotion()) {
-            if (promotion.getPromotionEndDate().before(new Date())) {
+            if (promotion.getPromotionEndDate().isBefore(LocalDate.now())) {
                 mainController.deleteProductSaleByPromotionId(promotion.getPromotionId());
                 mainController.deletePromotion(promotion.getPromotionId());
             }
@@ -548,25 +556,33 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
 
 
     private void updatePromotion() {
-        String id = modelKM.getValueAt(tableKM.getSelectedRow(), 0).toString();
-        String ten = txtTen.getText();
-        java.util.Date dateBatDau = chooserngayBatDau.getDate();
-        Date ngayBD = new Date(dateBatDau.getYear(), dateBatDau.getMonth(), dateBatDau.getDate());
-        java.util.Date dateKetThuc = chooserngayKetThuc.getDate();
-        Date ngayKT = new Date(dateKetThuc.getYear(), dateKetThuc.getMonth(), dateKetThuc.getDate());
-        SaleTypeEnum selectedValue = (SaleTypeEnum) cbLoai.getSelectedItem();
-        String LoaiDescription = selectedValue.getDescription();
-        Promotion promotion = new Promotion(id, ten, LoaiDescription, ngayBD, ngayKT);
-        if (valiDate()) {
-            try {
-                mainController.updatePromotion(promotion);
-                loadData();
-                JOptionPane.showMessageDialog(this, "Cập nhật thành công");
-            } catch (Exception e) {
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(this, "Cập nhật thất bại");
+        int row = tableKM.getSelectedRow();
+
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Phải chọn dòng cần xoá");
+        } else {
+            String id = modelKM.getValueAt(tableKM.getSelectedRow(), 0).toString();
+            String ten = txtTen.getText();
+            Date dateBatDau = chooserngayBatDau.getDate();
+            Date dateKetThuc = chooserngayKetThuc.getDate();
+            LocalDate localDateFrom = dateBatDau.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate localDateTo = dateKetThuc.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            SaleTypeEnum selectedValue = (SaleTypeEnum) cbLoai.getSelectedItem();
+            String LoaiDescription = selectedValue.getDescription();
+            Promotion promotion = new Promotion(id, ten, LoaiDescription, localDateFrom, localDateTo);
+            if (valiDate()) {
+                try {
+                    mainController.updatePromotion(promotion);
+                    loadData();
+                    JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+                    cbLoai.setEnabled(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(this, "Cập nhật thất bại");
+                }
             }
         }
+
 
     }
 
@@ -574,16 +590,16 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
     private void addPromotion() {
         String id = txtID.getText();
         String tenKM = txtTen.getText();
-        java.util.Date dateBatDau = chooserngayBatDau.getDate();
-        Date ngayBD = new Date(dateBatDau.getYear(), dateBatDau.getMonth(), dateBatDau.getDate());
-        java.util.Date dateKetThuc = chooserngayKetThuc.getDate();
-        Date ngayKT = new Date(dateKetThuc.getYear(), dateKetThuc.getMonth(), dateKetThuc.getDate());
+        Date dateBatDau = chooserngayBatDau.getDate();
+        Date dateKetThuc = chooserngayKetThuc.getDate();
+        LocalDate localDateFrom = dateBatDau.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate localDateTo = dateKetThuc.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         SaleTypeEnum selectedValue = (SaleTypeEnum) cbLoai.getSelectedItem();
         String LoaiDescription = selectedValue.getDescription();
         if (valiDate()) {
-            Promotion promotion = new Promotion(id, tenKM, LoaiDescription, ngayBD, ngayKT);
+            Promotion promotion = new Promotion(id, tenKM, LoaiDescription, localDateFrom, localDateTo);
             mainController.addPromotion(promotion);
-            modelKM.addRow(new Object[]{promotion.getPromotionId(), promotion.getPromotionName(), LoaiDescription, dfNgay.format(promotion.getPromotionStartDate()), dfNgay.format(promotion.getPromotionEndDate())});
+            modelKM.addRow(new Object[]{promotion.getPromotionId(), promotion.getPromotionName(), LoaiDescription, promotion.getPromotionStartDate(), promotion.getPromotionEndDate()});
             reload();
         }
 
@@ -602,9 +618,9 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
                         JOptionPane.YES_NO_OPTION);
                 if (HopThoai == JOptionPane.YES_OPTION) {
                     mainController.deleteProductSaleByPromotionId(id);
-                    modelSPKM.removeRow(row);
                     mainController.deletePromotion(id);
                     modelKM.removeRow(row);
+                    loadProductSale();
                     reload();
                     JOptionPane.showMessageDialog(this, "Xoá chương trình khuyến mãi thành công");
                 }
@@ -625,42 +641,42 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
         chooserngayBatDau.setDate(new java.util.Date());
         chooserngayKetThuc.setDate(new java.util.Date());
         cbLoai.setSelectedItem(SaleTypeEnum.Giam_10);
+        btnThem.setEnabled(true);
+        cbLoai.setEnabled(true);
     }
 
     public boolean valiDate() {
 
         String ten = txtTen.getText().trim();
-        java.util.Date ngayBD = chooserngayBatDau.getDate();
-        java.util.Date ngayKT = chooserngayKetThuc.getDate();
+        Date ngayBD = chooserngayBatDau.getDate();
+        Date ngayKT = chooserngayKetThuc.getDate();
         if (ten.equals("")) {
             JOptionPane.showMessageDialog(this, "Vui lòng nhập thông tin đầy đủ!", "Thông báo",
                     JOptionPane.WARNING_MESSAGE);
             txtTen.requestFocus();
 
             return false;
-        }
-
-        if (ngayBD == null && (ngayBD.after(ngayKT))) {
+        } else if (ngayBD.after(ngayKT)) {
             JOptionPane.showMessageDialog(this, "Ngày bắt đầu phải trước ngày ket thúc", "Thông báo",
                     JOptionPane.WARNING_MESSAGE);
             chooserngayBatDau.requestFocus();
 
             return false;
         }
-        if (ngayKT == null && (ngayKT.before(ngayBD))) {
-            JOptionPane.showMessageDialog(this, "Ngày kết thúc phải sau ngày bắt đầu", "Thông báo",
-                    JOptionPane.WARNING_MESSAGE);
-            chooserngayKetThuc.requestFocus();
-
-            return false;
-        }
-        if (!(ngayKT != null && (ngayKT.after(new Date())))) {
-            JOptionPane.showMessageDialog(this, "Ngày kết thúc phải sau ngày hiện tại", "Thông báo",
-                    JOptionPane.WARNING_MESSAGE);
-            chooserngayKetThuc.requestFocus();
-
-            return false;
-        }
+//        if (ngayKT == null && (ngayKT.before(ngayBD))) {
+//            JOptionPane.showMessageDialog(this, "Ngày kết thúc phải sau ngày bắt đầu", "Thông báo",
+//                    JOptionPane.WARNING_MESSAGE);
+//            chooserngayKetThuc.requestFocus();
+//
+//            return false;
+//        }
+//        if (!(ngayBD.before(new Date()))) {
+//            JOptionPane.showMessageDialog(this, "Ngày bắt đầu không được trước ngày hiện tại", "Thông báo",
+//                    JOptionPane.WARNING_MESSAGE);
+//            chooserngayKetThuc.requestFocus();
+//
+//            return false;
+//        }
         return true;
     }
 
@@ -668,7 +684,7 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
     private void loadData() {
         modelKM.setRowCount(0);
         for (Promotion promotion : mainController.getAllPromotion()) {
-            modelKM.addRow(new Object[]{promotion.getPromotionId(), promotion.getPromotionName(), promotion.getPromotionDiscount(), dfNgay.format(promotion.getPromotionStartDate()), dfNgay.format(promotion.getPromotionEndDate())
+            modelKM.addRow(new Object[]{promotion.getPromotionId(), promotion.getPromotionName(), promotion.getPromotionDiscount(), dayFormat.format(promotion.getPromotionStartDate()), dayFormat.format(promotion.getPromotionEndDate())
             });
 
         }
@@ -691,9 +707,9 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
         if (o.equals(btnXoaKM)) {
             deletePromotion();
         }
-//        if (o.equals(btnCapNhat)) {
-//            updatePromotion();
-//        }
+        if (o.equals(btnCapNhat)) {
+            updatePromotion();
+        }
         if (o.equals(btnLamMoi)) {
             reload();
         }
@@ -739,26 +755,15 @@ public class PromotionView extends JPanel implements ActionListener, MouseListen
         String loaiSelectd = modelKM.getValueAt(row, 2).toString();
         SaleTypeEnum loaiKm = SaleTypeEnum.getByDescription(loaiSelectd);
         cbLoai.setSelectedItem(loaiKm);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.ENGLISH);
         String ngayBatDau = modelKM.getValueAt(row, 3).toString();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        java.util.Date valueNgayBD = null;
-        try {
-            valueNgayBD = dateFormat.parse(ngayBatDau);
-        } catch (ParseException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
-        chooserngayBatDau.setDate(valueNgayBD);
+        LocalDate dateFrom = LocalDate.parse(ngayBatDau, formatter);
+        chooserngayBatDau.setDate(java.sql.Date.valueOf(dateFrom));
         String ngayKetThuc = modelKM.getValueAt(row, 4).toString();
-        java.util.Date valueNgayKT = null;
-        try {
-            valueNgayKT = dateFormat.parse(ngayKetThuc);
-        } catch (ParseException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
-        chooserngayKetThuc.setDate(valueNgayKT);
-
+        LocalDate dateTo = LocalDate.parse(ngayKetThuc, formatter);
+        chooserngayKetThuc.setDate(java.sql.Date.valueOf(dateTo));
+        cbLoai.setEnabled(false);
+        btnThem.setEnabled(false);
 
     }
 

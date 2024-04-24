@@ -8,6 +8,7 @@ import lombok.Setter;
 import util.SaleTypeEnum;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -27,8 +28,8 @@ public class Promotion implements Serializable {
     private String promotionName;
     @Column(name = "promotionDiscount", columnDefinition = "NVARCHAR(255)")
     private String promotionDiscount;
-    private Date promotionStartDate;
-    private Date promotionEndDate;
+    private LocalDate promotionStartDate;
+    private LocalDate promotionEndDate;
     @OneToMany(mappedBy = "promotion", cascade = CascadeType.ALL)
     private List<ProductSale> productSales;
 
@@ -36,7 +37,7 @@ public class Promotion implements Serializable {
         this.promotionId = promotionId;
     }
 
-    public Promotion(String promotionId, String promotionName, String promotionDiscount, Date promotionStartDate, Date promotionEndDate) {
+    public Promotion(String promotionId, String promotionName, String promotionDiscount, LocalDate promotionStartDate, LocalDate promotionEndDate) {
         this.promotionId = promotionId;
         this.promotionName = promotionName;
         this.promotionDiscount = promotionDiscount;

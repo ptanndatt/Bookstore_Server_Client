@@ -23,6 +23,11 @@ public class PromotionDaoImpl extends UnicastRemoteObject implements PromotionDa
     }
 
     @Override
+    public Promotion getPromotionById(String id) throws RemoteException {
+        return em.find(Promotion.class, id);
+    }
+
+    @Override
     public boolean addPromotion(Promotion promotion) throws RemoteException {
         EntityTransaction entityTransaction = em.getTransaction();
         try {

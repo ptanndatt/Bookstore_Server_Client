@@ -274,6 +274,10 @@ public class MainController extends UnicastRemoteObject implements MainControlle
         return promotionDaoImplService.deletePromotion(id);
     }
 
+    public Promotion findPromotionById(String id) throws RemoteException {
+        return promotionDaoImplService.findPromotionById(id);
+    }
+
     public List<Promotion> findPromotionByText(String text) throws RemoteException {
         return promotionDaoImplService.findPromotionByText(text);
     }

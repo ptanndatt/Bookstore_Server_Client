@@ -939,59 +939,84 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         String soLuong = String.valueOf(spinnerSoLuong2.getValue());
         if (cbLocSanPham.getSelectedIndex() == 0) {
             int soLuongTrongKho = Integer.parseInt(modelSP.getValueAt(row, 7).toString());
-            if (Integer.parseInt(soLuong) <= soLuongTrongKho) {
-                ProductSale productSale = mainController.getProductSale(modelSP.getValueAt(row, 0).toString());
-                String idSP = modelSP.getValueAt(row, 0).toString();
-                String tenSP = modelSP.getValueAt(row, 1).toString();
-                String giaBanValue = modelSP.getValueAt(row, 8).toString();
-                String giaBanDouble = giaBanValue.trim().replace("\u00A0", "").replaceAll("[.,₫]", "");
-                Double giaBan = Double.parseDouble(giaBanDouble);
-                double giaKM = 0;
-                if (productSale != null) {
-                    giaKM = productSale.getGiaBan();
-                } else if (productSale == null) {
-                    giaKM = giaBan;
+            String trangThaiKinhDoanh = modelSP.getValueAt(row, 6).toString();
+            if (trangThaiKinhDoanh.equals("Đang kinh doanh")) {
+                if (Integer.parseInt(soLuong) <= soLuongTrongKho) {
+                    ProductSale productSale = mainController.getProductSale(modelSP.getValueAt(row, 0).toString());
 
+                    String idSP = modelSP.getValueAt(row, 0).toString();
+                    String tenSP = modelSP.getValueAt(row, 1).toString();
+                    String giaBanValue = modelSP.getValueAt(row, 8).toString();
+                    String giaBanDouble = giaBanValue.trim().replace("\u00A0", "").replaceAll("[.,₫]", "");
+                    Double giaBan = Double.parseDouble(giaBanDouble);
+                    double giaKM = 0;
+                    if (productSale != null) {
+                        Promotion promotion = mainController.findPromotionById(productSale.getPromotion().getPromotionId());
+                        LocalDate dateStartPromotion = promotion.getPromotionStartDate();
+                        LocalDate dateEndPromotion = promotion.getPromotionEndDate();
+                        if (dateStartPromotion.isAfter(LocalDate.now()) || dateEndPromotion.isBefore(LocalDate.now())) {
+                            giaKM = giaBan;
+                        } else {
+                            giaKM = productSale.getGiaBan();
+                        }
+                    } else {
+                        giaKM = giaBan;
+
+                    }
+                    String thanhTien = currencyFormat.format(giaKM * Integer.parseInt(soLuong));
+                    modelGioHang.addRow(new Object[]{
+                            idSP, tenSP, currencyFormat.format(giaBan), currencyFormat.format(giaKM), soLuong, thanhTien
+                    });
+                    showThongBao("Đã thêm vào giỏ hàng");
+                    spinnerSoLuong2.setValue(1);
+                    txtTimKiemSP.setText("");
+                    txtMaSP2.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(dialogSanPham, "Số lượng sản phẩm trong kho không đủ");
                 }
-                String thanhTien = currencyFormat.format(giaKM * Integer.parseInt(soLuong));
-                modelGioHang.addRow(new Object[]{
-                        idSP, tenSP, currencyFormat.format(giaBan), currencyFormat.format(giaKM), soLuong, thanhTien
-                });
-                showThongBao("Đã thêm vào giỏ hàng");
-                spinnerSoLuong2.setValue(1);
-                txtTimKiemSP.setText("");
-                txtMaSP2.setText("");
             } else {
-                JOptionPane.showMessageDialog(dialogSanPham, "Số lượng sản phẩm trong kho không đủ");
+                JOptionPane.showMessageDialog(dialogSanPham, "Sản phẩm đã ngừng kinh doanh");
             }
+
         } else {
             int soLuongTrongKho = Integer.parseInt(modelSP.getValueAt(row, 12).toString());
-            if (Integer.parseInt(soLuong) <= soLuongTrongKho) {
-                ProductSale productSale = mainController.getProductSale(modelSP.getValueAt(row, 0).toString());
-                String idSP = modelSP.getValueAt(row, 0).toString();
-                String tenSP = modelSP.getValueAt(row, 1).toString();
-                String giaBanValue = modelSP.getValueAt(row, 13).toString();
-                String giaBanDouble = giaBanValue.trim().replace("\u00A0", "").replaceAll("[.,₫]", "");
-                Double giaBan = Double.parseDouble(giaBanDouble);
-                double giaKM = 0;
-                if (productSale != null) {
-                    giaKM = productSale.getGiaBan();
-                } else if (productSale == null) {
-                    giaKM = giaBan;
+            String trangThaiKinhDoanh = modelSP.getValueAt(row, 11).toString();
+            if (trangThaiKinhDoanh.equals("Đang kinh doanh")) {
+                if (Integer.parseInt(soLuong) <= soLuongTrongKho) {
+                    ProductSale productSale = mainController.getProductSale(modelSP.getValueAt(row, 0).toString());
+                    String idSP = modelSP.getValueAt(row, 0).toString();
+                    String tenSP = modelSP.getValueAt(row, 1).toString();
+                    String giaBanValue = modelSP.getValueAt(row, 13).toString();
+                    String giaBanDouble = giaBanValue.trim().replace("\u00A0", "").replaceAll("[.,₫]", "");
+                    Double giaBan = Double.parseDouble(giaBanDouble);
+                    double giaKM = 0;
+                    if (productSale != null) {
+                        Promotion promotion = mainController.findPromotionById(productSale.getPromotion().getPromotionId());
+                        LocalDate dateStartPromotion = promotion.getPromotionStartDate();
+                        LocalDate dateEndPromotion = promotion.getPromotionEndDate();
+                        if (dateStartPromotion.isAfter(LocalDate.now()) || dateEndPromotion.isBefore(LocalDate.now())) {
+                            giaKM = giaBan;
+                        } else {
+                            giaKM = productSale.getGiaBan();
+                        }
+                    } else {
+                        giaKM = giaBan;
 
+                    }
+                    String thanhTien = currencyFormat.format(giaKM * Integer.parseInt(soLuong));
+                    modelGioHang.addRow(new Object[]{
+                            idSP, tenSP, currencyFormat.format(giaBan), currencyFormat.format(giaKM), soLuong, thanhTien
+                    });
+                    showThongBao("Đã thêm vào giỏ hàng");
+                    spinnerSoLuong2.setValue(1);
+                    txtTimKiemSP.setText("");
+                    txtMaSP2.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(dialogSanPham, "Số lượng sách trong kho không đủ");
                 }
-                String thanhTien = currencyFormat.format(giaKM * Integer.parseInt(soLuong));
-                modelGioHang.addRow(new Object[]{
-                        idSP, tenSP, currencyFormat.format(giaBan), currencyFormat.format(giaKM), soLuong, thanhTien
-                });
-                showThongBao("Đã thêm vào giỏ hàng");
-                spinnerSoLuong2.setValue(1);
-                txtTimKiemSP.setText("");
-                txtMaSP2.setText("");
             } else {
-                JOptionPane.showMessageDialog(dialogSanPham, "Số lượng sách trong kho không đủ");
+                JOptionPane.showMessageDialog(dialogSanPham, "Sách đã ngừng kinh doanh");
             }
-
         }
     }
 
@@ -1001,32 +1026,42 @@ public class SaleManagerView extends JPanel implements ActionListener, MouseList
         int soLuong = (int) spinnerSoLuong.getValue();
 
         if (product != null) {
-            if (soLuong <= product.getQuantity()) {
-                ProductSale productSale = mainController.getProductSale(txtMaSP.getText().trim());
-                String idSP = product.getProductId();
-                String tenSP = product.getProductName();
-                Double giaBan = product.sellingPrice();
-                double giaKM = 0;
-                ;
-                if (productSale != null) {
-                    giaKM = productSale.getGiaBan();
-                } else if (productSale == null) {
-                    giaKM = giaBan;
+            if (product.getStatus().getDescription().equals("Đang kinh doanh")) {
+                if (soLuong <= product.getQuantity()) {
+                    ProductSale productSale = mainController.getProductSale(txtMaSP.getText().trim());
+                    String idSP = product.getProductId();
+                    String tenSP = product.getProductName();
+                    Double giaBan = product.sellingPrice();
+                    double giaKM = 0;
 
+                    if (productSale != null) {
+                        Promotion promotion = mainController.findPromotionById(productSale.getPromotion().getPromotionId());
+                        LocalDate dateStartPromotion = promotion.getPromotionStartDate();
+                        LocalDate dateEndPromotion = promotion.getPromotionEndDate();
+                        if (dateStartPromotion.isAfter(LocalDate.now()) || dateEndPromotion.isBefore(LocalDate.now())) {
+                            giaKM = giaBan;
+                        } else {
+                            giaKM = productSale.getGiaBan();
+                        }
+                    } else {
+                        giaKM = giaBan;
+
+                    }
+                    String thanhTien = currencyFormat.format(giaKM * soLuong);
+                    modelGioHang.addRow(new Object[]{
+                            idSP, tenSP, currencyFormat.format(giaBan), currencyFormat.format(giaKM), soLuong, thanhTien
+                    });
+                    spinnerSoLuong.setValue(1);
+                    txtMaSP.setText("");
+                    showThongBao("Đã thêm vào giỏ hàng");
+                    spinnerSoLuong.setValue(1);
+                    txtMaSP.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Số lượng trong kho không đủ");
                 }
-                String thanhTien = currencyFormat.format(giaKM * soLuong);
-                modelGioHang.addRow(new Object[]{
-                        idSP, tenSP, currencyFormat.format(giaBan), currencyFormat.format(giaKM), soLuong, thanhTien
-                });
-                spinnerSoLuong.setValue(1);
-                txtMaSP.setText("");
-                showThongBao("Đã thêm vào giỏ hàng");
-                spinnerSoLuong.setValue(1);
-                txtMaSP.setText("");
             } else {
-                JOptionPane.showMessageDialog(this, "Số lượng trong kho không đủ");
+                JOptionPane.showMessageDialog(this, "Sản phẩm đã ngừng kinh doanh");
             }
-
         } else {
             JOptionPane.showMessageDialog(this, "Mã sản phẩm không tồn tại");
             txtMaSP.setText("");

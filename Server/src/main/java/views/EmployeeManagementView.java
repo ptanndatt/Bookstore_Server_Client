@@ -28,7 +28,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.rmi.RemoteException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -336,21 +335,12 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
     private void addRole() {
         String tenChucVu = txtTenChucVu.getText();
         Role role = new Role(tenChucVu, ROLE);
-        try {
-            boolean success = mainController.addRole(role);
-            if (success) {
-                JOptionPane.showMessageDialog(this, "Thêm thành công");
-                modelChucVu.addRow(new Object[]{role.getIdRole(), role.getRoleName()});
-                loadComboxBoxRole();
-                loadDataRoleTabble();
-                txtTenChucVu.setText("");
-            } else {
-                JOptionPane.showMessageDialog(this, "Chức vụ đã tồn tại", "Lỗi", JOptionPane.ERROR_MESSAGE);
-            }
-        } catch (RemoteException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(this, "Lỗi khi thêm chức vụ", "Lỗi", JOptionPane.ERROR_MESSAGE);
-        }
+        mainController.addRole(role);
+        JOptionPane.showMessageDialog(this, "Thêm thành công");
+        modelChucVu.addRow(new Object[]{role.getIdRole(), role.getRoleName()});
+        loadComboxBoxRole();
+        loadDataRoleTabble();
+        txtTenChucVu.setText("");
     }
 
     @SneakyThrows
@@ -406,29 +396,33 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
 
     @SneakyThrows
     private void updateEmployee() {
-        String id = modelNhanVien.getValueAt(tableNhanVien.getSelectedRow(), 0).toString();
-        String ten = txtTenNV.getText();
-        String diaChi = txtDiaChi.getText();
-        String soDienThoai = txtsdt.getText();
-        String email = txtEmail.getText();
-        java.util.Date date = chooserNgaySinh.getDate();
-        Date ngaySinh = new Date(date.getYear(), date.getMonth(), date.getDate());
-        String gioiTinh = rbNam.isSelected() ? "Nam" : "Nữ";
-        String trangThaiValue = cbTrangThai.getSelectedItem().toString();
-        String chucVuSelected = cbChucVu.getSelectedItem().toString();
-        Role chucVu = mainController.findRoleByText(chucVuSelected);
-        Employee employee = new Employee(id, ten, soDienThoai, diaChi, email, ngaySinh, gioiTinh, trangThaiValue, chucVu);
-        if (valiDate()) {
-            try {
-                mainController.updateEmployee(employee);
-                loadData();
-                JOptionPane.showMessageDialog(this, "Cập nhật thành công");
-            } catch (Exception e) {
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(this, "Cập nhật thất bại");
+        int row = tableNhanVien.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Phải chọn dòng cần cập nhật");
+        } else {
+            String id = modelNhanVien.getValueAt(tableNhanVien.getSelectedRow(), 0).toString();
+            String ten = txtTenNV.getText();
+            String diaChi = txtDiaChi.getText();
+            String soDienThoai = txtsdt.getText();
+            String email = txtEmail.getText();
+            java.util.Date date = chooserNgaySinh.getDate();
+            Date ngaySinh = new Date(date.getYear(), date.getMonth(), date.getDate());
+            String gioiTinh = rbNam.isSelected() ? "Nam" : "Nữ";
+            String trangThaiValue = cbTrangThai.getSelectedItem().toString();
+            String chucVuSelected = cbChucVu.getSelectedItem().toString();
+            Role chucVu = mainController.findRoleByText(chucVuSelected);
+            Employee employee = new Employee(id, ten, soDienThoai, diaChi, email, ngaySinh, gioiTinh, trangThaiValue, chucVu);
+            if (valiDate()) {
+                try {
+                    mainController.updateEmployee(employee);
+                    loadData();
+                    JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(this, "Cập nhật thất bại");
+                }
             }
         }
-
     }
 
     public boolean valiDate() {
@@ -522,6 +516,7 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         chooserNgaySinh.setDate(new java.util.Date());
         txtTenNV.requestFocus();
         loadData();
+        btnThemNV.setEnabled(true);
     }
 
     private void showAddRoleDialog() {
@@ -536,7 +531,7 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         JPanel pnCenter = new JPanel(new BorderLayout());
 
         JLabel lblTenChucVu = new JLabel("Tên chức vụ:");
-        txtTenChucVu = new JTextField();
+        JTextField txtTenChucVu = new JTextField();
         txtTenChucVu.setColumns(15);
 
         JPanel pnInput = new JPanel(new GridBagLayout());
@@ -583,12 +578,7 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
                 }
 
                 Role role = new Role(roleName, ROLE);
-                boolean susscess = mainController.addRole(role);
-                if (!susscess) {
-                    DialogUtils.showErrorMessage(dialog, "Chức vụ đã tồn tại");
-                    txtTenChucVu.setText("");
-                    return;
-                }
+                mainController.addRole(role);
                 modelChucVu.addRow(new Object[]{role.getIdRole(), role.getRoleName()});
                 loadComboxBoxRole();
                 txtTenChucVu.setText("");
@@ -672,6 +662,28 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         }
     }
 
+    private void deleteEmployee() {
+        int row = tableNhanVien.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Phải chọn dòng cần xoá");
+        } else {
+            try {
+                int HopThoai = JOptionPane.showConfirmDialog(this, "Bạn có muốn xoá dòng này không?", "Cảnh báo",
+                        JOptionPane.YES_NO_OPTION);
+                if (HopThoai == JOptionPane.YES_OPTION) {
+                    String manv = txtID.getText();
+                    mainController.deleteAccount(manv);
+                    mainController.deleteEmployee(manv);
+                    modelNhanVien.removeRow(row);
+                    JOptionPane.showMessageDialog(this, "Xoá nhân viên thành công");
+                }
+            } catch (Exception e2) {
+                e2.printStackTrace();
+                JOptionPane.showMessageDialog(this, "Xoá nhân viên thất bại");
+            }
+        }
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Object o = e.getSource();
@@ -690,6 +702,10 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         if (o.equals(btnLamMoi)) {
             reload();
         }
+        if (o.equals(btnXoaNV)) {
+            deleteEmployee();
+            reload();
+        }
         if (o.equals(btnXuatExecl)) {
             JFileChooser fileChooser = new JFileChooser();
             int returnValue = fileChooser.showOpenDialog(null);
@@ -701,6 +717,10 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
                 }
                 exportExecl(selectedFilePath);
             }
+        }
+        if (o.equals(btnXemTatCa)) {
+            txtTimKiem.setText("");
+            reload();
         }
     }
 
@@ -736,10 +756,11 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
             throw new RuntimeException(ex);
         }
         chooserNgaySinh.setDate(valueNgaySinh);
-        rbNam.setSelected(modelNhanVien.getValueAt(row, 6).toString() == "Nam");
-        rbNu.setSelected(modelNhanVien.getValueAt(row, 6).toString() == "Nữ");
+        rbNam.setSelected(modelNhanVien.getValueAt(row, 6).toString().equals("Nam"));
+        rbNu.setSelected(modelNhanVien.getValueAt(row, 6).toString().equals("Nữ"));
         cbChucVu.setSelectedItem(modelNhanVien.getValueAt(row, 7).toString());
         cbTrangThai.setSelectedItem(modelNhanVien.getValueAt(row, 8).toString());
+        btnThemNV.setEnabled(false);
     }
 
     @Override
