@@ -253,5 +253,5 @@ public interface MainControllerInterface extends Remote {
 
     List<Merchandise> findSupplierByNameMerchandise(String name) throws RemoteException;
 
-
+    void notifyServer(String message) throws RemoteException;
 }

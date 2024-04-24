@@ -572,4 +572,9 @@ public class MainController extends UnicastRemoteObject implements MainControlle
     public List<Merchandise> findSupplierByNameMerchandise(String name) throws RemoteException {
         return merchandiseDaoImplService.findSupplierByNameMerchandise(name);
     }
+
+    @Override
+    public void notifyServer(String message) throws RemoteException {
+        System.out.println(message);
+    }
 }

@@ -110,7 +110,7 @@ public class EmployeeHomeView extends JFrame {
                 int hoiNhac = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn đăng xuất", "Cảnh báo",
                         JOptionPane.YES_NO_OPTION);
                 if (hoiNhac == JOptionPane.YES_OPTION) {
-                    LoginView view = new LoginView();
+                    LoginView view = new LoginView(mainController);
                     view.setVisible(true);
                     dispose();
                 }

@@ -71,16 +71,16 @@ public class Main {
 //            }
 //        }
 
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-
-                LoginView view = new LoginView();
-//                Employee employee = new Employee();
-//                ManagerHomeView view = new ManagerHomeView(employee);
-//                MenuDemo view = new MenuDemo();
-                view.setVisible(true);
-            }
-        });
+//        EventQueue.invokeLater(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                LoginView view = new LoginView();
+////                Employee employee = new Employee();
+////                ManagerHomeView view = new ManagerHomeView(employee);
+////                MenuDemo view = new MenuDemo();
+//                view.setVisible(true);
+//            }
+//        });
     }
 }
