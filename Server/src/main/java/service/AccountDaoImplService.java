@@ -39,4 +39,7 @@ public class AccountDaoImplService implements Remote {
         return accountDao.findPasswordByEmployeeId(employeeId);
     }
 
+    public boolean updatePassword(String employeeId, String passNew) throws RemoteException {
+        return accountDao.updatePassword(employeeId, passNew);
+    }
 }

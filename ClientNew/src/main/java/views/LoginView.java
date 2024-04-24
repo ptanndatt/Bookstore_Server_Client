@@ -27,7 +27,7 @@ public class LoginView extends JFrame implements ActionListener {
 //        jButton1.addActionListener(e -> login());
 
         setVisible(true);
-        jTextField1.setText("NS20240423155417");
+        jTextField1.setText("NS20240424111704");
         jPasswordField1.setText("1111");
 
 
@@ -35,6 +35,7 @@ public class LoginView extends JFrame implements ActionListener {
 
     @SneakyThrows
     private void login() {
+        mainController = new MainController();
         String id = jTextField1.getText().trim();
         String password = new String(jPasswordField1.getPassword()).trim();
         if (id.isEmpty() || password.isEmpty()) {

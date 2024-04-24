@@ -122,14 +122,14 @@ public class EmployeeHomeView extends JFrame {
             }
         });
 
-        MenuItem ThongKe = new MenuItem(iconTK, "Thống kê", new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // TODO Auto-generated method stub
-                switchToPanel(new ManagerHomeStatistics());
-            }
-        });
+//        MenuItem ThongKe = new MenuItem(iconTK, "Thống kê", new ActionListener() {
+//
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                // TODO Auto-generated method stub
+//                switchToPanel(new ManagerHomeStatistics());
+//            }
+//        });
 
         MenuItem subGiaoDien = new MenuItem(iconSubMenu, "Giao diện", new ActionListener() {
 
@@ -143,20 +143,19 @@ public class EmployeeHomeView extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-//                QuanLy ql = daoQL.getQuanLy(headerQL.getId());
-//                SetPassWordQuanLyView frame = new SetPassWordQuanLyView(ql);
-//                switchToPanel(new HomeView());
-//                frame.setVisible(true);
+                SetPasswordView frame = new SetPasswordView(employee);
+                switchToPanel(new HomeView());
+                frame.setVisible(true);
+                ;
             }
         });
         MenuItem subCaiDatHDSD = new MenuItem(iconSubMenu, "Hướng dẫn sử dụng", null);
         MenuItem CaiDat = new MenuItem(iconSetting, "Cài đặt", null, subGiaoDien, subCaiDatDMK);
 
-        addMenu(QLBH, QLKH, QLHD, ThongKe, CaiDat, DangXuat);
+        addMenu(QLBH, QLKH, QLHD, CaiDat, DangXuat);
         QLBH.setBackground(new Color(153, 255, 255));
         QLKH.setBackground(new Color(153, 255, 255));
         QLHD.setBackground(new Color(153, 255, 255));
-        ThongKe.setBackground(new Color(153, 255, 255));
         CaiDat.setBackground(new Color(153, 255, 255));
         DangXuat.setBackground(new Color(153, 255, 255));
 //		QLBH.setBackground(new Color(153,255,255));

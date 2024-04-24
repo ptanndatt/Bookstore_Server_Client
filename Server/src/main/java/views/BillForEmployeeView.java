@@ -347,7 +347,7 @@ public class BillForEmployeeView extends JPanel implements MouseListener, ItemLi
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             String dateTimeString = now.format(formatter);
             // Writing content
-            String filePath2 = System.getProperty("user.dir") + "/Server/src/main/resources/database/vuArial.ttf";
+            String filePath2 = System.getProperty("user.dir") + "/src/main/resources/database/vuArial.ttf";
             BaseFont bf = BaseFont.createFont(filePath2, BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
             Paragraph tieuDe = new Paragraph("HÓA ĐƠN", new com.itextpdf.text.Font(bf, 30, 1, BaseColor.BLUE));
             Paragraph tenKH = new Paragraph("Tên khách hàng : " + bill.getCustomer().getName(), new com.itextpdf.text.Font(bf, 15));

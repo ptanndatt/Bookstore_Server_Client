@@ -177,6 +177,10 @@ public class MainController extends UnicastRemoteObject implements MainControlle
         return saleManagementDaoImplService.findEmployeeBestSeller(from, to);
     }
 
+    public boolean updatePassword(String employeeId, String passNew) throws RemoteException {
+        return accountDaoImplService.updatePassword(employeeId, passNew);
+    }
+
     public List<DetailsBill> findDetailsBillByBillId(String id) throws RemoteException {
         return saleManagementDaoImplService.findDetailsBillByBillId(id);
     }

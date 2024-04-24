@@ -380,6 +380,7 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
             mainController.addAccount(tk);
             modelNhanVien.addRow(new Object[]{employee.getIdEmployee(), ten, sdt, email, diaChi, dfNgaySinh.format(employee.getBirth()), employee.getGender(), chucVu.getRoleName(), trangThai});
             JOptionPane.showMessageDialog(this, "Thêm thành công");
+            reload();
         }
     }
 

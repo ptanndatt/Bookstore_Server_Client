@@ -11,6 +11,8 @@ package app;/*
  * @version:    1.0
  */
 
+import controller.MainController;
+import controller.MainControllerInterface;
 import jakarta.persistence.EntityManager;
 import models.*;
 import util.HibernateUtil;
@@ -19,8 +21,11 @@ import views.ManagerHomeView;
 import views.MenuDemo;
 
 import java.awt.*;
+import java.rmi.RemoteException;
 
 public class Main {
+    private MainControllerInterface maincontroller;
+
     public static void main(String[] args) {
 //        EntityManager em = null;
 //        try {
@@ -69,7 +74,13 @@ public class Main {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                LoginView view = new LoginView();
+                MainControllerInterface maincontroller;
+                try {
+                    maincontroller = new MainController();
+                } catch (RemoteException e) {
+                    throw new RuntimeException(e);
+                }
+                LoginView view = new LoginView(maincontroller);
 //                Employee employee = new Employee();
 //                ManagerHomeView view = new ManagerHomeView(employee);
 //                MenuDemo view = new MenuDemo();

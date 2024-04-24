@@ -13322,3 +13322,409 @@ Caused by: com.microsoft.sqlserver.jdbc.SQLServerException: The index 'UK_r5u6pr
 [WARN ] 24-04-2024 00:55:06 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
 [INFO ] 24-04-2024 00:55:07 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
 [INFO ] 24-04-2024 00:55:07 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@57c6d197] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 24-04-2024 09:47:50 [main] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
+[INFO ] 24-04-2024 09:47:50 [main] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 24-04-2024 09:47:50 [main] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 24-04-2024 09:47:50 [main] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 24-04-2024 09:47:50 [main] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 24-04-2024 09:47:50 [main] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 24-04-2024 09:47:50 [main] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 24-04-2024 09:47:50 [main] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 24-04-2024 09:47:50 [main] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 24-04-2024 09:47:51 [main] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 24-04-2024 09:47:51 [main] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 24-04-2024 09:47:51 [main] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 24-04-2024 09:47:51 [main] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[WARN ] 24-04-2024 09:47:51 [main] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
+[WARN ] 24-04-2024 09:47:51 [main] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
+[WARN ] 24-04-2024 09:47:51 [main] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
+[WARN ] 24-04-2024 09:47:51 [main] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
+[INFO ] 24-04-2024 09:47:52 [main] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 24-04-2024 09:47:52 [main] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@4b360972] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 24-04-2024 09:53:02 [main] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
+[INFO ] 24-04-2024 09:53:02 [main] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 24-04-2024 09:53:02 [main] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 24-04-2024 09:53:02 [main] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 24-04-2024 09:53:02 [main] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 24-04-2024 09:53:02 [main] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 24-04-2024 09:53:02 [main] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 24-04-2024 09:53:02 [main] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 24-04-2024 09:53:02 [main] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 24-04-2024 09:53:03 [main] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 24-04-2024 09:53:03 [main] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 24-04-2024 09:53:03 [main] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 24-04-2024 09:53:03 [main] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[WARN ] 24-04-2024 09:53:03 [main] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
+[WARN ] 24-04-2024 09:53:03 [main] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
+[WARN ] 24-04-2024 09:53:03 [main] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
+[WARN ] 24-04-2024 09:53:03 [main] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
+[INFO ] 24-04-2024 09:53:04 [main] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 24-04-2024 09:53:04 [main] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@65d90b7f] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 24-04-2024 11:00:45 [main] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
+[INFO ] 24-04-2024 11:00:45 [main] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 24-04-2024 11:00:45 [main] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 24-04-2024 11:00:45 [main] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 24-04-2024 11:00:45 [main] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 24-04-2024 11:00:45 [main] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 24-04-2024 11:00:45 [main] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 24-04-2024 11:00:45 [main] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 24-04-2024 11:00:45 [main] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 24-04-2024 11:00:46 [main] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 24-04-2024 11:00:46 [main] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 24-04-2024 11:00:46 [main] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 24-04-2024 11:00:46 [main] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[WARN ] 24-04-2024 11:00:46 [main] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
+[WARN ] 24-04-2024 11:00:46 [main] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
+[WARN ] 24-04-2024 11:00:46 [main] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
+[WARN ] 24-04-2024 11:00:46 [main] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
+[INFO ] 24-04-2024 11:00:47 [main] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 24-04-2024 11:00:47 [main] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@65d90b7f] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 24-04-2024 11:16:35 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
+[INFO ] 24-04-2024 11:16:35 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 24-04-2024 11:16:35 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 24-04-2024 11:16:36 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 24-04-2024 11:16:36 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 24-04-2024 11:16:36 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 24-04-2024 11:16:36 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 24-04-2024 11:16:36 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 24-04-2024 11:16:36 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 24-04-2024 11:16:36 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 24-04-2024 11:16:36 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 24-04-2024 11:16:36 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 24-04-2024 11:16:36 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[WARN ] 24-04-2024 11:16:36 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
+[WARN ] 24-04-2024 11:16:36 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
+[WARN ] 24-04-2024 11:16:36 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
+[WARN ] 24-04-2024 11:16:36 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
+[INFO ] 24-04-2024 11:16:37 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 24-04-2024 11:16:37 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@1635419e] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 24-04-2024 11:18:41 [AWT-EventQueue-0] Log - Retrieved all categories successfully
+[ERROR] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category not found
+[ERROR] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category not found
+[INFO ] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:05 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:06 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:07 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:08 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:09 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:09 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:09 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:09 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:09 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:09 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:09 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:09 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:09 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:34 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:19:59 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:20:24 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:20:49 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:21:14 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:21:39 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:22:04 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:22:29 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:22:54 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:23:19 [AWT-EventQueue-0] Log - Category found
+[INFO ] 24-04-2024 11:23:44 [AWT-EventQueue-0] Log - Retrieved all categories successfully
+[INFO ] 24-04-2024 11:24:02 [AWT-EventQueue-0] Log - Retrieved all categories successfully
+[INFO ] 24-04-2024 11:32:30 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
+[INFO ] 24-04-2024 11:32:30 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 24-04-2024 11:32:30 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 24-04-2024 11:32:30 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 24-04-2024 11:32:30 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 24-04-2024 11:32:30 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 24-04-2024 11:32:30 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 24-04-2024 11:32:30 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 24-04-2024 11:32:30 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 24-04-2024 11:32:31 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 24-04-2024 11:32:31 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 24-04-2024 11:32:31 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 24-04-2024 11:32:31 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[WARN ] 24-04-2024 11:32:31 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
+[WARN ] 24-04-2024 11:32:31 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
+[WARN ] 24-04-2024 11:32:31 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
+[WARN ] 24-04-2024 11:32:31 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
+[INFO ] 24-04-2024 11:32:31 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 24-04-2024 11:32:31 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@27bc8d8d] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 24-04-2024 12:22:47 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
+[INFO ] 24-04-2024 12:22:47 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 24-04-2024 12:22:47 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 24-04-2024 12:22:48 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 24-04-2024 12:22:48 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 24-04-2024 12:22:48 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 24-04-2024 12:22:48 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 24-04-2024 12:22:48 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 24-04-2024 12:22:48 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 24-04-2024 12:22:48 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 24-04-2024 12:22:48 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 24-04-2024 12:22:48 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 24-04-2024 12:22:48 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[WARN ] 24-04-2024 12:22:48 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
+[WARN ] 24-04-2024 12:22:48 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
+[WARN ] 24-04-2024 12:22:48 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
+[WARN ] 24-04-2024 12:22:48 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
+[INFO ] 24-04-2024 12:22:49 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 24-04-2024 12:22:49 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6e6c5dfb] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 24-04-2024 12:23:22 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
+[INFO ] 24-04-2024 12:23:22 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 24-04-2024 12:23:22 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 24-04-2024 12:23:22 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 24-04-2024 12:23:22 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 24-04-2024 12:23:22 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 24-04-2024 12:23:22 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 24-04-2024 12:23:22 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 24-04-2024 12:23:22 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 24-04-2024 12:23:23 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 24-04-2024 12:23:23 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 24-04-2024 12:23:23 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 24-04-2024 12:23:23 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[WARN ] 24-04-2024 12:23:23 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
+[WARN ] 24-04-2024 12:23:23 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
+[WARN ] 24-04-2024 12:23:23 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
+[WARN ] 24-04-2024 12:23:23 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
+[INFO ] 24-04-2024 12:23:23 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 24-04-2024 12:23:23 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@666f191c] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 24-04-2024 12:28:58 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
+[INFO ] 24-04-2024 12:28:58 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 24-04-2024 12:28:58 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 24-04-2024 12:28:58 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 24-04-2024 12:28:58 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 24-04-2024 12:28:58 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 24-04-2024 12:28:58 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 24-04-2024 12:28:58 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 24-04-2024 12:28:58 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 24-04-2024 12:28:59 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 24-04-2024 12:28:59 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 24-04-2024 12:28:59 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 24-04-2024 12:28:59 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[WARN ] 24-04-2024 12:28:59 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
+[WARN ] 24-04-2024 12:28:59 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
+[WARN ] 24-04-2024 12:28:59 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
+[WARN ] 24-04-2024 12:28:59 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
+[INFO ] 24-04-2024 12:28:59 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 24-04-2024 12:28:59 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@55a2962d] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[WARN ] 24-04-2024 12:29:01 [AWT-EventQueue-0] BCryptPasswordEncoder - Empty encoded password
+[INFO ] 24-04-2024 12:32:06 [AWT-EventQueue-0] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
+[INFO ] 24-04-2024 12:32:06 [AWT-EventQueue-0] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 24-04-2024 12:32:06 [AWT-EventQueue-0] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 24-04-2024 12:32:06 [AWT-EventQueue-0] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 24-04-2024 12:32:06 [AWT-EventQueue-0] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 24-04-2024 12:32:06 [AWT-EventQueue-0] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 24-04-2024 12:32:06 [AWT-EventQueue-0] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 24-04-2024 12:32:06 [AWT-EventQueue-0] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 24-04-2024 12:32:06 [AWT-EventQueue-0] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 24-04-2024 12:32:07 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 24-04-2024 12:32:07 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 24-04-2024 12:32:07 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 24-04-2024 12:32:07 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[WARN ] 24-04-2024 12:32:07 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
+[WARN ] 24-04-2024 12:32:07 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
+[WARN ] 24-04-2024 12:32:07 [AWT-EventQueue-0] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
+[WARN ] 24-04-2024 12:32:07 [AWT-EventQueue-0] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
+[INFO ] 24-04-2024 12:32:08 [AWT-EventQueue-0] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 24-04-2024 12:32:08 [AWT-EventQueue-0] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@670d36c5] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+[INFO ] 24-04-2024 12:38:37 [main] LogHelper - HHH000204: Processing PersistenceUnitInfo [name: JPA_ORM_Bookstore MSSQL]
+[INFO ] 24-04-2024 12:38:37 [main] Version - HHH000412: Hibernate ORM core version 6.4.4.Final
+[INFO ] 24-04-2024 12:38:37 [main] RegionFactoryInitiator - HHH000026: Second-level cache disabled
+[WARN ] 24-04-2024 12:38:37 [main] pooling - HHH10001002: Using built-in connection pool (not intended for production use)
+[INFO ] 24-04-2024 12:38:37 [main] pooling - HHH10001005: Loaded JDBC driver class: com.microsoft.sqlserver.jdbc.SQLServerDriver
+[INFO ] 24-04-2024 12:38:37 [main] pooling - HHH10001012: Connecting with JDBC URL [jdbc:sqlserver://localhost:1433;databaseName=QLHieuSach;trustServerCertificate=true]
+[INFO ] 24-04-2024 12:38:37 [main] pooling - HHH10001001: Connection properties: {password=****, user=sa}
+[INFO ] 24-04-2024 12:38:37 [main] pooling - HHH10001003: Autocommit mode: false
+[INFO ] 24-04-2024 12:38:37 [main] pooling - HHH10001115: Connection pool size: 20 (min=1)
+[WARN ] 24-04-2024 12:38:38 [main] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBill
+[WARN ] 24-04-2024 12:38:38 [main] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBill
+[WARN ] 24-04-2024 12:38:38 [main] RootClass - HHH000038: Composite-id class does not override equals(): models.Account
+[WARN ] 24-04-2024 12:38:38 [main] RootClass - HHH000039: Composite-id class does not override hashCode(): models.Account
+[WARN ] 24-04-2024 12:38:38 [main] RootClass - HHH000038: Composite-id class does not override equals(): models.DetailsBillPending
+[WARN ] 24-04-2024 12:38:38 [main] RootClass - HHH000039: Composite-id class does not override hashCode(): models.DetailsBillPending
+[WARN ] 24-04-2024 12:38:38 [main] RootClass - HHH000038: Composite-id class does not override equals(): models.ProductSale
+[WARN ] 24-04-2024 12:38:38 [main] RootClass - HHH000039: Composite-id class does not override hashCode(): models.ProductSale
+[INFO ] 24-04-2024 12:38:39 [main] JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+[INFO ] 24-04-2024 12:38:39 [main] access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@65d90b7f] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.

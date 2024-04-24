@@ -17,6 +17,7 @@ public class AdminView extends JFrame {
     private JPanel panelMenu;
     private JPanel paneCu;
     private MainController mainController;
+
     public AdminView() {
         initComponents();
         setTitle("Quản trị");

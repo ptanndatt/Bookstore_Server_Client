@@ -1,22 +1,13 @@
 package views;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
+import controller.MainController;
+import controller.MenuItem;
+
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
-import javax.swing.BoxLayout;
-import javax.swing.GroupLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.WindowConstants;
-
-import controller.MenuItem;
 
 public class AdminView extends JFrame {
     private JScrollPane jScrollPane1;
@@ -25,6 +16,7 @@ public class AdminView extends JFrame {
     private JPanel panelHeader;
     private JPanel panelMenu;
     private JPanel paneCu;
+    private MainController mainController;
 
     public AdminView() {
         initComponents();
@@ -65,7 +57,7 @@ public class AdminView extends JFrame {
                 int hoiNhac = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn đăng xuất",
                         "Cảnh báo", JOptionPane.YES_NO_OPTION);
                 if (hoiNhac == JOptionPane.YES_OPTION) {
-                    LoginView view = new LoginView();
+                    LoginView view = new LoginView(mainController);
                     view.setVisible(true);
                     dispose();
                 }

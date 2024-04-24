@@ -183,7 +183,7 @@ public class ManagerHomeStatistics extends JPanel implements ItemListener, Actio
         model.addColumn("Tên sản phẩm");
         model.addColumn("Giá bán");
         model.addColumn("So luong");
-        model.addColumn("Tỷ lệ bán ra");
+//        model.addColumn("Tỷ lệ bán ra");
         table.setModel(model);
         JScrollPane sp = new JScrollPane(table);
         sp.setBounds(0, 20, 350, 260);
@@ -220,7 +220,7 @@ public class ManagerHomeStatistics extends JPanel implements ItemListener, Actio
         model1.addColumn("Tên sản phẩm");
         model1.addColumn("Giá bán");
         model1.addColumn("So luong");
-        model1.addColumn("Tỷ lệ bán ra");
+//        model1.addColumn("Tỷ lệ bán ra");
         table1 = new JTable();
         table1.setModel(model1);
         JScrollPane sp1 = new JScrollPane(table1);
@@ -443,10 +443,18 @@ public class ManagerHomeStatistics extends JPanel implements ItemListener, Actio
                 dcFrom.setDate(calendar.getTime());
                 dcTo.setDate(Calendar.getInstance().getTime());
                 loadDataProductWorstSeller(dcFrom.getDate(), dcTo.getDate());
-                lblDonHangValue.setText(String.valueOf(mainController.sumTotalBillDate(dcTo.getDate(), dcFrom.getDate())));
-                lblDoanhThuValue.setText(String.valueOf(mainController.sumTotalAmount(dcTo.getDate(), dcFrom.getDate())));
-                lblThucThuValue.setText(String.valueOf(mainController.sumProfit(dcTo.getDate(), dcFrom.getDate())));
-                lblGiaTriDonHangValue.setText(String.valueOf(mainController.sumTotalBillValue(dcTo.getDate(), dcFrom.getDate())));
+                currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+
+                lblDonHangValue.setText(String.valueOf(mainController.sumTotalBillDate(dcFrom.getDate(), dcTo.getDate())));
+
+                double doanhThuValue = mainController.sumTotalAmount(dcFrom.getDate(), dcTo.getDate());
+                lblDoanhThuValue.setText(currencyFormat.format(doanhThuValue));
+
+                double thucThuValue = mainController.sumProfit(dcFrom.getDate(), dcTo.getDate());
+                lblThucThuValue.setText(currencyFormat.format(thucThuValue));
+
+                double giaTriDonHangValue = mainController.sumTotalBillValue(dcFrom.getDate(), dcTo.getDate());
+                lblGiaTriDonHangValue.setText(currencyFormat.format(giaTriDonHangValue));
             } else if ("3 tháng".equals(selectedOption)) {
                 dcTo.setEnabled(false);
                 dcFrom.setEnabled(false);
@@ -548,10 +556,23 @@ public class ManagerHomeStatistics extends JPanel implements ItemListener, Actio
             dcFrom.setDate(Calendar.getInstance().getTime());
             dcTo.setDate(Calendar.getInstance().getTime());
             loadDataProductSales(dcFrom.getDate(), dcTo.getDate());
+            currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+
             lblDonHangValue.setText(String.valueOf(mainController.sumTotalBillDate(dcFrom.getDate(), dcTo.getDate())));
-            lblDoanhThuValue.setText(String.valueOf(mainController.sumTotalAmount(dcFrom.getDate(), dcTo.getDate())));
-            lblThucThuValue.setText(String.valueOf(mainController.sumProfit(dcFrom.getDate(), dcTo.getDate())));
-            lblGiaTriDonHangValue.setText(String.valueOf(mainController.sumTotalBillValue(dcFrom.getDate(), dcTo.getDate())));
+
+            double doanhThuValue = mainController.sumTotalAmount(dcFrom.getDate(), dcTo.getDate());
+            lblDoanhThuValue.setText(currencyFormat.format(doanhThuValue));
+
+            double thucThuValue = mainController.sumProfit(dcFrom.getDate(), dcTo.getDate());
+            lblThucThuValue.setText(currencyFormat.format(thucThuValue));
+
+            double giaTriDonHangValue = mainController.sumTotalBillValue(dcFrom.getDate(), dcTo.getDate());
+            lblGiaTriDonHangValue.setText(currencyFormat.format(giaTriDonHangValue));
+//            lblDonHangValue.setText(String.valueOf(mainController.sumTotalBillDate(dcFrom.getDate(), dcTo.getDate())));
+//            lblDoanhThuValue.setText(String.valueOf(mainController.sumTotalAmount(dcFrom.getDate(), dcTo.getDate())));
+//            lblThucThuValue.setText(String.valueOf(mainController.sumProfit(dcFrom.getDate(), dcTo.getDate())));
+//            lblGiaTriDonHangValue.setText(String.valueOf(mainController.sumTotalBillValue(dcFrom.getDate(), dcTo.getDate())));
+            updateUI();
             table.clearSelection();
         }
     }

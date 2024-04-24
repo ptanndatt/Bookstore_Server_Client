@@ -175,17 +175,13 @@ public class ManagerHomeView extends JFrame {
             }
         });
 
-        MenuItem subThongKeDoanhThu = new MenuItem(iconSubMenu, "Thống kê", new ActionListener() {
 
+        MenuItem ThongKe = new MenuItem(iconTK, "Thống kê", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 switchToPanel(new ManagerHomeStatistics());
-
             }
-        });
-
-
-        MenuItem ThongKe = new MenuItem(iconTK, "Thống kê", null, subThongKeDoanhThu
+        }
         );
 
         MenuItem subGiaoDien = new MenuItem(iconSubMenu, "Giao diện", new ActionListener() {
@@ -200,10 +196,9 @@ public class ManagerHomeView extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-//
-//                SetPassWordQuanLyView frame = new SetPassWordQuanLyView(ql);
-//                switchToPanel(new HomeView());
-//                frame.setVisible(true);
+                SetPasswordView frame = new SetPasswordView(employee);
+                switchToPanel(new HomeView());
+                frame.setVisible(true);
             }
         });
         MenuItem subCaiDatHDSD = new MenuItem(iconSubMenu, "Hướng dẫn sử dụng", null);

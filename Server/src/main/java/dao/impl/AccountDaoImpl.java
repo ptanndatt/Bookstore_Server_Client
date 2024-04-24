@@ -104,6 +104,7 @@ public class AccountDaoImpl extends UnicastRemoteObject implements AccountDao {
         }
         return account;
     }
+
     @Override
     public String findPasswordByEmployeeId(String employeeId) throws RemoteException {
         String password = null;
@@ -124,5 +125,22 @@ public class AccountDaoImpl extends UnicastRemoteObject implements AccountDao {
         return password;
     }
 
+    @Override
+    public boolean updatePassword(String id, String passNew) throws RemoteException {
+        EntityTransaction tr = em.getTransaction();
+        try {
+            tr.begin();
+            em.createQuery("UPDATE Account p SET p.password = :passNew WHERE p.employee.id = :id")
+                    .setParameter("id", id)
+                    .setParameter("passNew", passNew)
+                    .executeUpdate();
+            tr.commit();
+            return true;
+        } catch (Exception e) {
+            tr.rollback();
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 }
