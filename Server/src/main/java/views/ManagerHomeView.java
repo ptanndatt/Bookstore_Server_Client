@@ -137,7 +137,7 @@ public class ManagerHomeView extends JFrame {
                 int hoiNhac = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn đăng xuất", "Cảnh báo",
                         JOptionPane.YES_NO_OPTION);
                 if (hoiNhac == JOptionPane.YES_OPTION) {
-                    LoginView view = new LoginView(mainController);
+                    LoginView view = new LoginView();
                     view.setVisible(true);
                     dispose();
                 }

@@ -74,13 +74,8 @@ public class Main {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                MainControllerInterface maincontroller;
-                try {
-                    maincontroller = new MainController();
-                } catch (RemoteException e) {
-                    throw new RuntimeException(e);
-                }
-                LoginView view = new LoginView(maincontroller);
+
+                LoginView view = new LoginView();
 //                Employee employee = new Employee();
 //                ManagerHomeView view = new ManagerHomeView(employee);
 //                MenuDemo view = new MenuDemo();

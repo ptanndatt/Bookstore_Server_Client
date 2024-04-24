@@ -18,7 +18,7 @@ import java.awt.event.ActionListener;
 public class LoginView extends JFrame implements ActionListener {
     private MainControllerInterface mainController;
 
-    public LoginView(MainControllerInterface mainController) {
+    public LoginView() {
         this.mainController = mainController;
         initComponents();
         setLocationRelativeTo(null);
