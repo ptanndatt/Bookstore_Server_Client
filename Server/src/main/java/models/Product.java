@@ -15,6 +15,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.GenericGenerator;
 import util.ProductStatusEnum;
 
@@ -34,10 +35,10 @@ public abstract class Product implements Serializable {
     protected String productId;
     @Column(name = "productName", columnDefinition = "NVARCHAR(255)")
     protected String productName;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "productTypeId")
     protected ProductType productTypeId;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "supplierId")
     protected Supplier supplierId;
     protected double size;
@@ -48,9 +49,11 @@ public abstract class Product implements Serializable {
     protected double importPrice;
     @OneToOne(mappedBy = "product")
     private ProductSale productSale;
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @BatchSize(size = 10)
     private Set<DetailsBillPending> detailsBillPendings;
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @BatchSize(size = 10)
     private Set<DetailsBill> detailsBills;
 
     public Product(String productId) {

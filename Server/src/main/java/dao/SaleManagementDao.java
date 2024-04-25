@@ -74,4 +74,10 @@ public interface SaleManagementDao extends Remote {
     List<Bill> findBillByEmployee(String employeeID) throws RemoteException;
 
     List<Bill> findBillByDate(LocalDate dateFrom, LocalDate dateTo) throws RemoteException;
+
+    boolean findBillExist(Date dateFrom, Date dateTo) throws RemoteException;
+
+    List<Object[]> dialogThongNhanVien(Date dateFrom, Date dateTo) throws RemoteException;
+
+    List<Object[]> dialogLoiNhuanDoanhThu(Date dateFrom, Date dateTo) throws RemoteException;
 }

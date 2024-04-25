@@ -254,4 +254,10 @@ public interface MainControllerInterface extends Remote {
     List<Merchandise> findSupplierByNameMerchandise(String name) throws RemoteException;
 
     void notifyServer(String message) throws RemoteException;
+
+    boolean findBillExist(Date dateFrom, Date dateTo) throws RemoteException;
+
+    public List<Object[]> dialogThongNhanVien(Date dateFrom, Date dateTo) throws RemoteException;
+
+    public List<Object[]> dialogLoiNhuanDoanhThu(Date dateFrom, Date dateTo) throws RemoteException;
 }

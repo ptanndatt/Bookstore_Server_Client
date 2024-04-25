@@ -577,4 +577,19 @@ public class MainController extends UnicastRemoteObject implements MainControlle
     public void notifyServer(String message) throws RemoteException {
         System.out.println(message);
     }
+
+    @Override
+    public boolean findBillExist(Date dateFrom, Date dateTo) throws RemoteException {
+        return saleManagementDaoImplService.findBillExist(dateFrom, dateTo);
+    }
+
+    @Override
+    public List<Object[]> dialogThongNhanVien(Date dateFrom, Date dateTo) throws RemoteException {
+        return saleManagementDaoImplService.dialogThongNhanVien(dateFrom, dateTo);
+    }
+
+    @Override
+    public List<Object[]> dialogLoiNhuanDoanhThu(Date dateFrom, Date dateTo) throws RemoteException {
+        return saleManagementDaoImplService.dialogLoiNhuanDoanhThu(dateFrom, dateTo);
+    }
 }

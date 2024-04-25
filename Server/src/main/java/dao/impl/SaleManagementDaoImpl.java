@@ -235,6 +235,27 @@ group by p.productId, p.productName, db.quantity, db.price
         return Collections.emptyList();
     }
 
+    /*
+    * SELECT
+    p.productId,
+    p.productName,
+    db.price,
+    db.quantity AS quantity,
+    (COUNT(*) * 100.0 / (SELECT COUNT(*) FROM Bill b2 WHERE b2.billDate BETWEEN '2024/04/24' AND '2024/04/24')) AS percentSold
+FROM
+    Bill b
+JOIN
+    DetailsBill db ON b.billId = db.billId
+JOIN
+    Product p ON db.productId = p.productId
+WHERE
+    b.billDate BETWEEN '2024/04/24' AND '2024/04/24'
+GROUP BY
+    p.productId, p.productName, db.price, db.quantity
+ORDER BY
+    quantity DESC;
+
+    * */
     @Override
     public List<Object[]> findProductBestSeller(Date from, Date to) throws RemoteException {
         try {
@@ -250,6 +271,7 @@ group by p.productId, p.productName, db.quantity, db.price
             TypedQuery<Object[]> query = em.createQuery(hql, Object[].class);
             query.setParameter("from", fromDate);
             query.setParameter("to", toDate);
+            query.setMaxResults(10);
             return query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
@@ -273,6 +295,7 @@ group by p.productId, p.productName, db.quantity, db.price
             TypedQuery<Object[]> query = em.createQuery(hql, Object[].class);
             query.setParameter("from", fromDate);
             query.setParameter("to", toDate);
+            query.setMaxResults(10);
             return query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
@@ -509,5 +532,81 @@ group by p.productId, p.productName, db.quantity, db.price
                 .setParameter("dateFrom", dateFrom)
                 .setParameter("dateTo", dateTo)// %text% for similarity
                 .getResultList();
+    }
+
+    @Override
+    public boolean findBillExist(Date dateFrom, Date dateTo) throws RemoteException {
+        try {
+            LocalDate fromDate = dateFrom.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate toDate = dateTo.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            String hql = "SELECT COUNT(*) FROM Bill b WHERE b.billDate BETWEEN :dateFrom AND :dateTo";
+            TypedQuery<Long> query = em.createQuery(hql, Long.class);
+            query.setParameter("dateFrom", fromDate);
+            query.setParameter("dateTo", toDate);
+            Long count = query.getSingleResult();
+            return count != null && count > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /*
+    * SELECT e.employeeId, e.employeeName, b.billDate, b.amounttotal, COUNT(*) AS totalbill
+FROM Bill b
+JOIN Employee e ON b.employeeId = e.employeeId
+WHERE b.billDate BETWEEN :startDate AND :endDate
+GROUP BY e.employeeId, e.employeeName, b.billDate, b.amounttotal
+
+    * */
+    @Override
+    public List<Object[]> dialogThongNhanVien(Date dateFrom, Date dateTo) throws RemoteException {
+        try {
+            LocalDate fromDate = dateFrom.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate toDate = dateTo.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            String hql = "SELECT e.idEmployee, e.name,c.idCustomer,c.name, b.billDate, b.amounttotal, COUNT(*) AS totalbill " +
+                    "FROM Bill b " +
+                    "JOIN b.employee e " +
+                    "JOIN b.customer c " +
+                    "WHERE b.billDate BETWEEN :startDate AND :endDate " +
+                    "GROUP BY e.idEmployee, e.name, c.idCustomer,c.name,b.billDate, b.amounttotal " +
+                    "ORDER BY totalbill DESC ";
+            TypedQuery<Object[]> query = em.createQuery(hql, Object[].class);
+            query.setParameter("startDate", fromDate);
+            query.setParameter("endDate", toDate);
+            return query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Collections.emptyList();
+    }
+
+    /*
+    *  String hql = "SELECT b.billDate, sum(b.amounttotal) as DoanhThu " +
+                    "from Bill b where b.billDate BETWEEN :from AND :to " +
+                    " GROUP BY b.billDate ";
+                    *
+                    *   String hql = "SELECT b.billDate, sum(b.profitTotal) as LoiNhuan " +
+                    "from Bill b where b.billDate BETWEEN :from AND :to " +
+                    " GROUP BY b.billDate ";
+    * */
+    @Override
+    public List<Object[]> dialogLoiNhuanDoanhThu(Date dateFrom, Date dateTo) throws RemoteException {
+        try {
+            LocalDate fromDate = dateFrom.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate toDate = dateTo.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            String hql = "SELECT b.billDate, sum(b.profitTotal) as LoiNhuan, " +
+                    " sum(b.amounttotal) as DoanhThu " +
+                    "from Bill b where b.billDate BETWEEN :from AND :to " +
+                    " GROUP BY b.billDate " +
+                    " ORDER BY DoanhThu DESC ";
+            TypedQuery<Object[]> query = em.createQuery(hql, Object[].class);
+            query.setParameter("from", fromDate);
+            query.setParameter("to", toDate);
+            return query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Collections.emptyList();
     }
 }

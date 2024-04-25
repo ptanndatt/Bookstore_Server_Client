@@ -8,6 +8,7 @@ import jakarta.persistence.NonUniqueResultException;
 import lombok.SneakyThrows;
 import models.Account;
 import models.Employee;
+import models.Merchandise;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import util.DialogUtils;
 
@@ -27,7 +28,7 @@ public class LoginView extends JFrame implements ActionListener {
 //        jButton1.addActionListener(e -> login());
 
         setVisible(true);
-        jTextField1.setText("NS20240423155417");
+        jTextField1.setText("NS20240424111704");
         jPasswordField1.setText("1111");
 
 
@@ -77,6 +78,7 @@ public class LoginView extends JFrame implements ActionListener {
     }
 
 
+    @SneakyThrows
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

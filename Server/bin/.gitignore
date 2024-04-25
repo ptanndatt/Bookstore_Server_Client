@@ -7,17 +7,4 @@
 .gradle/
 build/
 /build/
-/.gitignore
-/.settings/
-/QuanLyHieuSach.iml
-/build.gradle.kts
-/fsddfs
-/gradle/
-/gradlew
-/gradlew.bat
-/lib/
-/pom.xml
-/settings.gradle.kts
 /src/
-/main/
-/test/

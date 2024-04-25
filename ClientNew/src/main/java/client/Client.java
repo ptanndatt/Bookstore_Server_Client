@@ -16,8 +16,7 @@ public class Client {
             LoginView loginView = new LoginView(mainController);
             loginView.setVisible(true);
             System.out.println("Client connected successfully.");
-            // notify the server that the client has connected
-
+            mainController.notifyServer("Client connected successfully to server.");
         } catch (Exception e) {
             System.err.println("Client exception: " + e.toString());
             e.printStackTrace();
