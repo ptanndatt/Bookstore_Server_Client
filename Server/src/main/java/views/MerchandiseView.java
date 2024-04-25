@@ -230,6 +230,16 @@ public class MerchandiseView extends JPanel implements ActionListener, ItemListe
         tabbedPane.add("Sách", sachPanel);
         add(tabbedPane);
 
+//        SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+//            @Override
+//            protected Void doInBackground() throws Exception {
+//                loadData();
+//                loadComboxBoxLoaiSanPham();
+//                loadComboxBoxNhaCungCap();
+//                return null;
+//            }
+//        };
+//        worker.execute();
         loadData();
         loadComboxBoxLoaiSanPham();
         loadComboxBoxNhaCungCap();

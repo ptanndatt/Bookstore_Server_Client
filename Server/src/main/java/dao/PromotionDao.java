@@ -17,4 +17,7 @@ public interface PromotionDao extends Remote {
     List<Promotion> getAllPromotion() throws RemoteException;
 
     List<Promotion> findPromotionByText(String text) throws RemoteException;
+
+    Promotion getPromotionById(String id) throws RemoteException;
+
 }

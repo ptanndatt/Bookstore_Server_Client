@@ -5,9 +5,8 @@
 plugins {
     `java-library`
     `maven-publish`
-    kotlin("jvm") version "1.6.10"
-    kotlin("kapt") version "1.6.10"
 }
+
 
 
 repositories {
@@ -31,27 +30,28 @@ dependencies {
     api(libs.org.kordamp.ikonli.ikonli.swing)
     api(libs.org.kordamp.ikonli.ikonli.materialdesign.pack)
     api(libs.com.itextpdf.itextpdf)
-    // https://mvnrepository.com/artifact/org.hibernate/hibernate-core
     implementation("org.hibernate:hibernate-core:6.4.4.Final")
-// https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-testing
     testImplementation("org.hibernate.orm:hibernate-testing:6.4.4.Final")
-// https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.1")
-// https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine
-    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.10.1")
-// https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc
-//    implementation("com.microsoft.sqlserver:mssql-jdbc:12.3.0.jre20-preview")
-// https://mvnrepository.com/artifact/org.projectlombok/lombok
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.9.2")
     compileOnly("org.projectlombok:lombok:1.18.24")
-    kapt("org.projectlombok:lombok:1.18.8")
-    // https://mvnrepository.com/artifact/log4j/log4j
+    annotationProcessor("org.projectlombok:lombok:1.18.24")
+
+    testCompileOnly("org.projectlombok:lombok:1.18.24")
+    testAnnotationProcessor("org.projectlombok:lombok:1.18.24")
     implementation("log4j:log4j:1.2.17")
-// https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api
     implementation("org.apache.logging.log4j:log4j-api:2.17.1")
-// https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
     implementation("org.apache.logging.log4j:log4j-core:2.17.1")
-// https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc
     implementation("com.microsoft.sqlserver:mssql-jdbc:11.2.2.jre17")
+// https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api
+    implementation("javax.xml.bind:jaxb-api:2.3.1")
+
+    implementation( "org.netbeans.external:AbsoluteLayout:RELEASE210")
+    // https://mvnrepository.com/artifact/org.apache.poi/poi
+    implementation ("org.apache.poi:poi:5.2.5")
+    // https://mvnrepository.com/artifact/javax.persistence/persistence-api
+    implementation("javax.persistence:persistence-api:1.0")
+
 
 }
 
@@ -72,4 +72,9 @@ tasks.withType<JavaCompile>() {
 
 tasks.withType<Javadoc>() {
     options.encoding = "UTF-8"
+}
+
+tasks.test {
+    useJUnitPlatform()
+    include("**/*Test.*")
 }

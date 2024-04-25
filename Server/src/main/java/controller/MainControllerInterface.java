@@ -17,6 +17,8 @@ public interface MainControllerInterface extends Remote {
 
     List<DetailsBillPending> getDetailBillPendingByIdBill(String idBill) throws RemoteException;
 
+    Promotion findPromotionById(String id) throws RemoteException;
+
     boolean deleteDetailsBillPendingById(String idBill) throws RemoteException;
 
     boolean deleteBillPendingById(String idBill) throws RemoteException;
@@ -254,4 +256,10 @@ public interface MainControllerInterface extends Remote {
     List<Merchandise> findSupplierByNameMerchandise(String name) throws RemoteException;
 
     void notifyServer(String message) throws RemoteException;
+
+    boolean findBillExist(Date dateFrom, Date dateTo) throws RemoteException;
+
+    public List<Object[]> dialogThongNhanVien(Date dateFrom, Date dateTo) throws RemoteException;
+
+    public List<Object[]> dialogLoiNhuanDoanhThu(Date dateFrom, Date dateTo) throws RemoteException;
 }

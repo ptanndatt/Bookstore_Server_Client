@@ -258,6 +258,14 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
             }
         });
         loadData();
+
+//        int row = tableKH.getSelectedRow();
+//        if(row==-1){
+//            btnThemKH.setEnabled(true);
+//        }
+//        else{
+//            btnThemKH.setEnabled(false);
+//        }
     }
 
     @SneakyThrows
@@ -409,26 +417,32 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
     }
 
     private void updateCustomer() {
-        String id = modelKhachHang.getValueAt(tableKH.getSelectedRow(), 0).toString();
-        String ten = txtTenKH.getText();
-        String diaChi = txtDiaChi.getText();
-        String soDienThoai = txtsdt.getText();
-        String email = txtEmail.getText();
-        java.util.Date date = chooserNgaySinh.getDate();
-        Date ngaySinh = new Date(date.getYear(), date.getMonth(), date.getDate());
-        String gioiTinh = rbNam.isSelected() ? "Nam" : "Nữ";
+        int row = tableKH.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "Phải chọn dòng cần cập nhật");
+        } else {
+            String id = modelKhachHang.getValueAt(tableKH.getSelectedRow(), 0).toString();
+            String ten = txtTenKH.getText();
+            String diaChi = txtDiaChi.getText();
+            String soDienThoai = txtsdt.getText();
+            String email = txtEmail.getText();
+            java.util.Date date = chooserNgaySinh.getDate();
+            Date ngaySinh = new Date(date.getYear(), date.getMonth(), date.getDate());
+            String gioiTinh = rbNam.isSelected() ? "Nam" : "Nữ";
 
-        Customer customer = new Customer(id, ten, soDienThoai, email, diaChi, gioiTinh, ngaySinh);
-        if (valiDate()) {
-            try {
-                mainController.updateCustomer(customer);
-                loadData();
-                JOptionPane.showMessageDialog(this, "Cập nhật thành công");
-            } catch (Exception e) {
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(this, "Cập nhật thất bại");
+            Customer customer = new Customer(id, ten, soDienThoai, email, diaChi, gioiTinh, ngaySinh);
+            if (valiDate()) {
+                try {
+                    mainController.updateCustomer(customer);
+                    loadData();
+                    JOptionPane.showMessageDialog(this, "Cập nhật thành công");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(this, "Cập nhật thất bại");
+                }
             }
         }
+
 
     }
 
@@ -466,6 +480,7 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
         txtTenKH.requestFocus();
         chooserNgaySinh.setDate(new java.util.Date());
         txtTimKiem.setText("");
+        btnThemKH.setEnabled(true);
     }
 
     @Override
@@ -485,6 +500,7 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
         }
         if (o.equals(btnXemTatCa)) {
             txtTimKiem.setText("");
+            loadData();
         }
         if (o.equals(btnXuatExcel)) {
             JFileChooser fileChooser = new JFileChooser();
@@ -534,8 +550,9 @@ public class CustomerManagementView extends JPanel implements MouseListener, Key
         }
         chooserNgaySinh.setDate(valueNgaySinh);
 //        System.out.println(modelKhachHang.getValueAt(row, 6).toString());
-        rbNam.setSelected(modelKhachHang.getValueAt(row, 6).toString() == "Nam");
-        rbNu.setSelected(modelKhachHang.getValueAt(row, 6).toString() == "Nữ");
+        rbNam.setSelected(modelKhachHang.getValueAt(row, 6).toString().equals("Nam"));
+        rbNu.setSelected(modelKhachHang.getValueAt(row, 6).toString().equals("Nữ"));
+        btnThemKH.setEnabled(false);
     }
 
     @Override

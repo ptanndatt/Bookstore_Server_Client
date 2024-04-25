@@ -141,4 +141,16 @@ public class SaleManagementDaoService {
     public List<Bill> findBillByDate(LocalDate from, LocalDate to) throws RemoteException {
         return dao.findBillByDate(from, to);
     }
+
+    public boolean findBillExist(Date dateFrom, Date dateTo) throws RemoteException {
+        return dao.findBillExist(dateFrom, dateTo);
+    }
+
+    public List<Object[]> dialogThongNhanVien(Date dateFrom, Date dateTo) throws RemoteException {
+        return dao.dialogThongNhanVien(dateFrom, dateTo);
+    }
+
+    public List<Object[]> dialogLoiNhuanDoanhThu(Date dateFrom, Date dateTo) throws RemoteException {
+        return dao.dialogLoiNhuanDoanhThu(dateFrom, dateTo);
+    }
 }

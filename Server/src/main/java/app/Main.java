@@ -14,6 +14,7 @@ package app;/*
 import controller.MainController;
 import controller.MainControllerInterface;
 import jakarta.persistence.EntityManager;
+import lombok.SneakyThrows;
 import models.*;
 import util.HibernateUtil;
 import views.LoginView;
@@ -45,20 +46,37 @@ public class Main {
 //            Role role = new Role();
 //            Promotion promotion = new Promotion();
 //            DetailsBill detailsBill = new DetailsBill();
-//            em.persist(author);
-//            em.persist(category);
-//            em.persist(productType);
-//            em.persist(merchandise);
-//            em.persist(supplier);
-//            em.persist(book);
-//            em.persist(bill);
-//            em.persist(customer);
-//            em.persist(employee);
-//            em.persist(account);
-//            em.persist(role);
-//            em.persist(promotion);
-//            em.persist(detailsBill);
-//            em.getTransaction().commit();
+//            if (em.contains(author) || em.contains(category) || em.contains(productType) || em.contains(merchandise) || em.contains(supplier) || em.contains(book) || em.contains(bill) || em.contains(customer) || em.contains(employee) || em.contains(account) || em.contains(role) || em.contains(promotion) || em.contains(detailsBill)) {
+//                em.merge(author);
+//                em.merge(category);
+//                em.merge(productType);
+//                em.merge(merchandise);
+//                em.merge(supplier);
+//                em.merge(book);
+//                em.merge(bill);
+//                em.merge(customer);
+//                em.merge(employee);
+//                em.merge(account);
+//                em.merge(role);
+//                em.merge(promotion);
+//                em.merge(detailsBill);
+//                em.getTransaction().commit();
+//            } else {
+//                em.persist(author);
+//                em.persist(category);
+//                em.persist(productType);
+//                em.persist(merchandise);
+//                em.persist(supplier);
+//                em.persist(book);
+//                em.persist(bill);
+//                em.persist(customer);
+//                em.persist(employee);
+//                em.persist(account);
+//                em.persist(role);
+//                em.persist(promotion);
+//                em.persist(detailsBill);
+//                em.getTransaction().commit();
+//            }
 //        } catch (
 //                Exception e) {
 //            if (em != null && em.getTransaction().isActive()) {
@@ -71,16 +89,15 @@ public class Main {
 //            }
 //        }
 
-//        EventQueue.invokeLater(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//                LoginView view = new LoginView();
-////                Employee employee = new Employee();
-////                ManagerHomeView view = new ManagerHomeView(employee);
-////                MenuDemo view = new MenuDemo();
-//                view.setVisible(true);
-//            }
-//        });
+        EventQueue.invokeLater(new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                MainControllerInterface mainController = null;
+                mainController = new MainController();
+                LoginView view = new LoginView(mainController);
+                view.setVisible(true);
+            }
+        });
     }
 }

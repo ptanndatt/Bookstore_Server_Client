@@ -3,6 +3,7 @@ package dao.impl;
 import dao.RoleDao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import models.Customer;
 import models.Role;
@@ -26,18 +27,27 @@ public class RoleDaoImpl extends UnicastRemoteObject implements RoleDao {
         EntityTransaction entityTransaction = em.getTransaction();
         try {
             entityTransaction.begin();
-            if (!em.contains(role)) {
-                role = em.merge(role);
+
+            Query query = em.createQuery("SELECT r FROM Role r WHERE LOWER(r.roleName) = LOWER(:roleName)");
+            query.setParameter("roleName", role.getRoleName());
+            List<Role> existingRoles = query.getResultList();
+            if (existingRoles.isEmpty()) {
+                if (!em.contains(role)) {
+                    role = em.merge(role);
+                }
+                em.persist(role);
+                entityTransaction.commit();
+                return true;
+            } else {
+                System.out.println("Role with name '" + role.getRoleName() + "' already exists.");
             }
-            em.persist(role);
-            entityTransaction.commit();
-            return true;
         } catch (Exception e) {
             entityTransaction.rollback();
             e.printStackTrace();
         }
         return false;
     }
+
 
     @Override
     public boolean deleteRole(String roleId) throws RemoteException {
@@ -99,16 +109,25 @@ public class RoleDaoImpl extends UnicastRemoteObject implements RoleDao {
         List<Role> roles = new ArrayList<>();
         EntityTransaction tr = em.getTransaction();
         try {
-            tr.begin();
+            if (!tr.isActive()) {
+                tr.begin();
+            }
+
             String hql = "FROM Role r WHERE r.roleCode = :roleCode";
             TypedQuery<Role> query = em.createQuery(hql, Role.class);
             query.setParameter("roleCode", roleCode);
             roles = query.getResultList();
-            tr.commit();
+
+            if (tr.isActive()) {
+                tr.commit();
+            }
         } catch (Exception e) {
-            tr.rollback();
+            if (tr.isActive()) {
+                tr.rollback();
+            }
             e.printStackTrace();
         }
         return roles;
     }
+
 }
