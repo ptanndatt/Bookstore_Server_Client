@@ -3,6 +3,11 @@ package views;
 import com.toedter.calendar.JDateChooser;
 import controller.MainController;
 import lombok.SneakyThrows;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -13,6 +18,7 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PiePlot;
 
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.renderer.category.LineAndShapeRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
@@ -23,15 +29,15 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.rmi.RemoteException;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 import java.util.List;
-import java.util.Locale;
 
 public class ManagerHomeStatistics extends JPanel implements ItemListener, ActionListener, MouseListener {
     private JPanel pnTop, pnTop_1, pnTop_2;
@@ -59,6 +65,7 @@ public class ManagerHomeStatistics extends JPanel implements ItemListener, Actio
     private NumberFormat currencyFormat;
     private JButton btnLuu;
     private ChartPanel chartPanel, panel, panel1;
+    private List<Object[]> productData, employeeData, valueByProduct;
 
     public ManagerHomeStatistics() {
         initComponents();
@@ -269,6 +276,7 @@ public class ManagerHomeStatistics extends JPanel implements ItemListener, Actio
         btnLuu.addActionListener(this);
         panel1.addMouseListener(this);
         panel.addMouseListener(this);
+        chartPanel.addMouseListener(this);
 
         loadDataProductSales(dcFrom.getDate(), dcTo.getDate());
         loadDataProductWorstSeller(dcFrom.getDate(), dcTo.getDate());
@@ -328,7 +336,7 @@ public class ManagerHomeStatistics extends JPanel implements ItemListener, Actio
     private PieDataset createDataset(Date startDate, Date endDate) {
         DefaultPieDataset dataset = new DefaultPieDataset();
         mainController.sumTotalBillValueByProduct(startDate, endDate).forEach(objects -> {
-            dataset.setValue(objects[0].toString(), Double.parseDouble(objects[1].toString()));
+            dataset.setValue(objects[1].toString(), Double.parseDouble(objects[2].toString()));
         });
         return dataset;
     }
@@ -382,6 +390,7 @@ public class ManagerHomeStatistics extends JPanel implements ItemListener, Actio
         chart.setBackgroundPaint(Color.WHITE);
         return chart;
     }
+
 
     private static JFreeChart createChartBar1(DefaultCategoryDataset dataset) {
         JFreeChart chart = ChartFactory.createBarChart(
@@ -623,8 +632,80 @@ public class ManagerHomeStatistics extends JPanel implements ItemListener, Actio
             }
         } else if (o.equals(btnRefresh)) {
             refresh();
+        } else if (o.equals(btnLuu)) {
+            exportDataToExcel();
         }
     }
+
+    @SneakyThrows
+    private void exportDataToExcel() {
+        Date dateFrom = dcFrom.getDate();
+        Date dateTo = dcTo.getDate();
+
+        List<Object[]> employeeData = mainController.dialogThongNhanVien(dateFrom, dateTo);
+        List<Object[]> productData = mainController.dialogLoiNhuanDoanhThu(dateFrom, dateTo);
+        List<Object[]> productWorstSeller = mainController.findProductWorstSeller(dateFrom, dateTo);
+        List<Object[]> productBestSeller = mainController.findProductBestSeller(dateFrom, dateTo);
+        List<Object[]> productValueByProduct = mainController.sumTotalBillValueByProduct(dateFrom, dateTo);
+
+        Workbook workbook = new XSSFWorkbook();
+        try {
+            List<String> employeeColumnNames = Arrays.asList("ID", "Name", "ID Khach Hang", "Ten Khach Hang", "Bill Date", "Total Amount", "Total Bill");
+            saveToExcel(workbook, employeeColumnNames, employeeData, "EmployeeInformation");
+
+            List<String> productColumnNames = Arrays.asList("Ngày", "Loi nhuan", "Doanh thu");
+            saveToExcel(workbook, productColumnNames, productData, "ProductInformation");
+
+            List<String> productWorstSellerColumnNames = Arrays.asList("Mã sản phẩm", "Tên sản phẩm", "Giá bán", "So luong");
+            saveToExcel(workbook, productWorstSellerColumnNames, productWorstSeller, "ProductWorstSeller");
+
+
+            List<String> productDataColumnNames = Arrays.asList("Mã sản phẩm", "Tên sản phẩm", "Giá bán", "So luong");
+            saveToExcel(workbook, productDataColumnNames, productBestSeller, "ProductData");
+
+
+            List<String> valueByProductColumnNames = Arrays.asList("Mã sản phẩm", "Tên sản phẩm", "Giá bán", "So luong");
+            saveToExcel(workbook, valueByProductColumnNames, productValueByProduct, "ValueByProduct");
+
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+            String filePath = System.getProperty("user.dir") + "/src/main/resources/DataStatisticals/S_" + timeStamp + ".xlsx";
+            FileOutputStream fileOut = new FileOutputStream(filePath);
+            workbook.write(fileOut);
+            fileOut.close();
+            workbook.close();
+
+            JOptionPane.showMessageDialog(null, "Xuất Excel thành công.");
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Lỗi khi lưu dữ liệu vào tệp Excel: " + ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+
+
+    public void saveToExcel(Workbook workbook, List<String> columnNames, List<Object[]> data, String sheetName) {
+        Sheet sheet = workbook.createSheet(sheetName);
+
+
+        Row headerRow = sheet.createRow(0);
+        for (int i = 0; i < columnNames.size(); i++) {
+            Cell cell = headerRow.createCell(i);
+            cell.setCellValue(columnNames.get(i));
+        }
+
+        for (int i = 0; i < data.size(); i++) {
+            Row row = sheet.createRow(i + 1);
+            Object[] rowData = data.get(i);
+            for (int j = 0; j < rowData.length; j++) {
+                Cell cell = row.createCell(j);
+                if (rowData[j] instanceof Double) {
+                    cell.setCellValue(Double.parseDouble(rowData[j].toString()));
+                } else {
+                    cell.setCellValue(rowData[j].toString());
+                }
+            }
+        }
+    }
+
 
     public void refresh() throws RemoteException {
         cbFilter.setSelectedIndex(0);
@@ -668,6 +749,11 @@ public class ManagerHomeStatistics extends JPanel implements ItemListener, Actio
             Date dateTo = dcTo.getDate();
             List<Object[]> productData = mainController.dialogLoiNhuanDoanhThu(dateFrom, dateTo);
             showProductDialog(productData);
+        } else if (e.getSource() == chartPanel && e.getClickCount() == 2) {
+            Date dateFrom = dcFrom.getDate();
+            Date dateTo = dcTo.getDate();
+            List<Object[]> valueByProduct = mainController.sumTotalBillValueByProduct(dateFrom, dateTo);
+            showSumTotalBillValueByProductDialog(valueByProduct);
         }
     }
 
@@ -729,6 +815,63 @@ public class ManagerHomeStatistics extends JPanel implements ItemListener, Actio
         dialog.setSize(600, 400);
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
+    }
+
+    public void showSumTotalBillValueByProductDialog(List<Object[]> valueByProduct) {
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+        JDialog dialog = new JDialog();
+        dialog.setLayout(new BorderLayout());
+
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Mã sản phẩm");
+        model.addColumn("Tên sản phẩm");
+        model.addColumn("Giá bán");
+        model.addColumn("Số lượng");
+
+        for (Object[] row : valueByProduct) {
+            if (row[2] != null) {
+                double price = Double.parseDouble(row[2].toString());
+                row[2] = currencyFormat.format(price);
+            }
+            model.addRow(row);
+        }
+        JTable table = new JTable(model);
+        JScrollPane scrollPane = new JScrollPane(table);
+        dialog.add(scrollPane, BorderLayout.CENTER);
+
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        JButton closeButton = new JButton("Đóng");
+        closeButton.addActionListener(e -> dialog.dispose());
+        JButton exportButton = new JButton("Xuất Excel");
+        buttonPanel.add(closeButton);
+        buttonPanel.add(exportButton);
+        dialog.add(buttonPanel, BorderLayout.SOUTH);
+        exportButton.addActionListener(e -> exportToExcelSumTotalBillValueByProduct(model));
+
+        dialog.setSize(600, 400);
+        dialog.setLocationRelativeTo(null);
+        dialog.setVisible(true);
+    }
+
+    @SneakyThrows
+    private void exportToExcelSumTotalBillValueByProduct(DefaultTableModel model) {
+        Date dateFrom = dcFrom.getDate();
+        Date dateTo = dcTo.getDate();
+
+        Workbook workbook = new XSSFWorkbook();
+        List<Object[]> productValueByProduct = mainController.sumTotalBillValueByProduct(dateFrom, dateTo);
+        List<String> columnNames = Arrays.asList("Mã sản phẩm", "Tên sản phẩm", "Giá bán", "Số lượng");
+        saveToExcel(workbook, columnNames, productValueByProduct, "ValueByProduct");
+
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String filePath = System.getProperty("user.dir") + "/src/main/resources/DataStatisticals/ValueByProduct/P_" + timeStamp + ".xlsx";
+        FileOutputStream fileOut = new FileOutputStream(filePath);
+        workbook.write(fileOut);
+        fileOut.close();
+        workbook.close();
+
+        JOptionPane.showMessageDialog(null, "Xuất Excel thành công.");
+
     }
 
     @Override

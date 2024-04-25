@@ -28,6 +28,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -335,12 +336,21 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
     private void addRole() {
         String tenChucVu = txtTenChucVu.getText();
         Role role = new Role(tenChucVu, ROLE);
-        mainController.addRole(role);
-        JOptionPane.showMessageDialog(this, "Thêm thành công");
-        modelChucVu.addRow(new Object[]{role.getIdRole(), role.getRoleName()});
-        loadComboxBoxRole();
-        loadDataRoleTabble();
-        txtTenChucVu.setText("");
+        try {
+            boolean success = mainController.addRole(role);
+            if (success) {
+                JOptionPane.showMessageDialog(this, "Thêm thành công");
+                modelChucVu.addRow(new Object[]{role.getIdRole(), role.getRoleName()});
+                loadComboxBoxRole();
+                loadDataRoleTabble();
+                txtTenChucVu.setText("");
+            } else {
+                JOptionPane.showMessageDialog(this, "Chức vụ đã tồn tại", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (RemoteException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Lỗi khi thêm chức vụ", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     @SneakyThrows
@@ -526,7 +536,7 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         JPanel pnCenter = new JPanel(new BorderLayout());
 
         JLabel lblTenChucVu = new JLabel("Tên chức vụ:");
-        JTextField txtTenChucVu = new JTextField();
+        txtTenChucVu = new JTextField();
         txtTenChucVu.setColumns(15);
 
         JPanel pnInput = new JPanel(new GridBagLayout());
@@ -573,7 +583,12 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
                 }
 
                 Role role = new Role(roleName, ROLE);
-                mainController.addRole(role);
+                boolean susscess = mainController.addRole(role);
+                if (!susscess) {
+                    DialogUtils.showErrorMessage(dialog, "Chức vụ đã tồn tại");
+                    txtTenChucVu.setText("");
+                    return;
+                }
                 modelChucVu.addRow(new Object[]{role.getIdRole(), role.getRoleName()});
                 loadComboxBoxRole();
                 txtTenChucVu.setText("");

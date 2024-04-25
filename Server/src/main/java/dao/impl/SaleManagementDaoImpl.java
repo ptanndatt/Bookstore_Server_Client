@@ -261,12 +261,11 @@ ORDER BY
         try {
             LocalDate fromDate = from.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             LocalDate toDate = to.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            String hql = "SELECT p.productId, p.productName, db.price, db.quantity as quantity, COUNT(*) * 100.0 / (SELECT COUNT(*) FROM Bill) AS percentSold " +
+            String hql = "SELECT p.productId, p.productName, db.price, db.quantity as quantity " +
                     "FROM Bill b " +
                     "JOIN b.detailsBills db " +
                     "JOIN db.product p " +
                     "WHERE b.billDate BETWEEN :from AND :to " +
-                    "GROUP BY p.productId, p.productName, db.price , db.quantity " +
                     "ORDER BY quantity DESC";
             TypedQuery<Object[]> query = em.createQuery(hql, Object[].class);
             query.setParameter("from", fromDate);
@@ -285,12 +284,11 @@ ORDER BY
             LocalDate fromDate = from.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             LocalDate toDate = to.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-            String hql = "SELECT p.productId, p.productName, db.price, db.quantity AS quantity, COUNT(*) * 100.0 / (SELECT COUNT(*) FROM Bill) AS percentSold " +
+            String hql = "SELECT p.productId, p.productName, db.price, db.quantity AS quantity " +
                     "FROM Bill b " +
                     "JOIN b.detailsBills db " +
                     "JOIN db.product p " +
                     "WHERE b.billDate BETWEEN :from AND :to " +
-                    "GROUP BY p.productId, p.productName, db.price, db.quantity " +
                     "ORDER BY quantity ASC";
             TypedQuery<Object[]> query = em.createQuery(hql, Object[].class);
             query.setParameter("from", fromDate);
@@ -387,12 +385,14 @@ ORDER BY
             LocalDate fromDate = from.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             LocalDate toDate = to.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-            String hql = "SELECT p.productName, SUM(db.quantity * db.price) as totalValue " +
+            String hql = "SELECT p.productId, p.productName, SUM(db.total) as totalValue, " +
+                    "SUM(db.quantity) AS totalQuantity " +
                     "FROM Bill b " +
                     "JOIN b.detailsBills db " +
                     "JOIN db.product p " +
                     "WHERE b.billDate BETWEEN :from AND :to " +
-                    "GROUP BY p.productName";
+                    "GROUP BY p.productId, p.productName " +
+                    "ORDER BY totalQuantity DESC";
 
             TypedQuery<Object[]> query = em.createQuery(hql, Object[].class);
             query.setParameter("from", fromDate);

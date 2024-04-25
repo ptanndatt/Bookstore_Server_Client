@@ -46,11 +46,13 @@ dependencies {
 // https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api
     implementation("javax.xml.bind:jaxb-api:2.3.1")
 
-    implementation( "org.netbeans.external:AbsoluteLayout:RELEASE210")
+    implementation("org.netbeans.external:AbsoluteLayout:RELEASE210")
     // https://mvnrepository.com/artifact/org.apache.poi/poi
-    implementation ("org.apache.poi:poi:5.2.5")
+    implementation("org.apache.poi:poi:5.2.5")
     // https://mvnrepository.com/artifact/javax.persistence/persistence-api
     implementation("javax.persistence:persistence-api:1.0")
+// https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml
+    implementation("org.apache.poi:poi-ooxml:5.2.5")
 
 
 }

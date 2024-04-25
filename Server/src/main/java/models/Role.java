@@ -27,7 +27,7 @@ public class Role implements Serializable {
     @Column(name = "roleId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idRole;
-    @Column(name = "roleName", columnDefinition = "NVARCHAR(255)")
+    @Column(name = "roleName", columnDefinition = "NVARCHAR(255)", unique = true)
     private String roleName;
 
     @Column(name = "roleCode")
