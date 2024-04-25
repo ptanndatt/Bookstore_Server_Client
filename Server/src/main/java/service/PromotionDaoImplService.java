@@ -17,6 +17,10 @@ public class PromotionDaoImplService {
         return promotionDao.getAllPromotion();
     }
 
+    public Promotion findPromotionById(String id) throws RemoteException {
+        return promotionDao.getPromotionById(id);
+    }
+
     public boolean addPromotion(Promotion promotion) throws RemoteException {
         return promotionDao.addPromotion(promotion);
     }

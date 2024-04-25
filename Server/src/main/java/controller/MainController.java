@@ -274,6 +274,10 @@ public class MainController extends UnicastRemoteObject implements MainControlle
         return promotionDaoImplService.deletePromotion(id);
     }
 
+    public Promotion findPromotionById(String id) throws RemoteException {
+        return promotionDaoImplService.findPromotionById(id);
+    }
+
     public List<Promotion> findPromotionByText(String text) throws RemoteException {
         return promotionDaoImplService.findPromotionByText(text);
     }
@@ -576,5 +580,20 @@ public class MainController extends UnicastRemoteObject implements MainControlle
     @Override
     public void notifyServer(String message) throws RemoteException {
         System.out.println(message);
+    }
+
+    @Override
+    public boolean findBillExist(Date dateFrom, Date dateTo) throws RemoteException {
+        return saleManagementDaoImplService.findBillExist(dateFrom, dateTo);
+    }
+
+    @Override
+    public List<Object[]> dialogThongNhanVien(Date dateFrom, Date dateTo) throws RemoteException {
+        return saleManagementDaoImplService.dialogThongNhanVien(dateFrom, dateTo);
+    }
+
+    @Override
+    public List<Object[]> dialogLoiNhuanDoanhThu(Date dateFrom, Date dateTo) throws RemoteException {
+        return saleManagementDaoImplService.dialogLoiNhuanDoanhThu(dateFrom, dateTo);
     }
 }

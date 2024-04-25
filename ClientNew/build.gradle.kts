@@ -1,4 +1,3 @@
-
 plugins {
     `java-library`
     `maven-publish`
@@ -39,7 +38,7 @@ dependencies {
     implementation("org.apache.logging.log4j:log4j-api:2.17.1")
     implementation("org.apache.logging.log4j:log4j-core:2.17.1")
     implementation("com.microsoft.sqlserver:mssql-jdbc:11.2.2.jre17")
-    implementation(files("lib/lib3.jar"))
+    implementation(files("lib/lib.jar"))
 
     api("org.kordamp.ikonli:ikonli-swing:12.3.1")
     api("org.kordamp.ikonli:ikonli-materialdesign-pack:12.3.1")
