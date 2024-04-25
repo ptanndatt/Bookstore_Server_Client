@@ -370,10 +370,10 @@ public class EmployeeManagementView extends JPanel implements KeyListener, Mouse
         Date ngayLap = new Date(System.currentTimeMillis());
         String matkhau = "1111";
         Employee employee = new Employee(id, ten, sdt, diaChi, email, ngaySinh, GioiTinh, trangThai, chucVu);
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
-        String hasdPassword = passwordEncoder.encode(matkhau);
-        Account tk = new Account(employee, hasdPassword, ngayLap);
-        System.out.println(hasdPassword);
+//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
+//        String hasdPassword = passwordEncoder.encode(matkhau);
+        Account tk = new Account(employee, matkhau, ngayLap);
+        System.out.println(matkhau);
 
         if (valiDate()) {
             mainController.addEmployee(employee);

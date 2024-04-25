@@ -53,8 +53,6 @@ dependencies {
     implementation("javax.persistence:persistence-api:1.0")
 // https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml
     implementation("org.apache.poi:poi-ooxml:5.2.5")
-
-
 }
 
 group = "vn.N10_PTUD_v1"

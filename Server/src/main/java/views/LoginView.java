@@ -19,7 +19,7 @@ import java.awt.event.ActionListener;
 public class LoginView extends JFrame implements ActionListener {
     private MainControllerInterface mainController;
 
-    public LoginView(MainControllerInterface mainController) {
+    public LoginView() {
         this.mainController = mainController;
         initComponents();
         setLocationRelativeTo(null);
@@ -48,11 +48,10 @@ public class LoginView extends JFrame implements ActionListener {
             view.setVisible(true);
             this.setVisible(false);
         } else {
-            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(12);
             try {
                 Account account = mainController.getAccountById(id);
                 String pass = mainController.findPasswordByEmployeeId(id);
-                if (!encoder.matches(password, pass)) {
+                if (!password.matches(pass)) {
                     DialogUtils.showErrorMessage(this, "Sai ID hoặc Mật khẩu");
                 } else {
                     if (account.getEmployee().getRole().getRoleCode() == 1) {

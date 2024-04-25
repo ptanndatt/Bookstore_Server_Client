@@ -3,12 +3,15 @@ package service;
 
 import dao.impl.PromotionDaoImpl;
 import models.Promotion;
+import service.serviceImpl.ProductSaleDaoService;
+import service.serviceImpl.PromotionDaoService;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-public class PromotionDaoImplService implements Remote {
+public class PromotionDaoImplService extends UnicastRemoteObject implements PromotionDaoService {
     PromotionDaoImpl promotionDao = new PromotionDaoImpl();
 
     public PromotionDaoImplService() throws RemoteException {

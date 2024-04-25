@@ -442,8 +442,8 @@ public class ManagerAdminView extends JPanel implements KeyListener, MouseListen
         }
         String matkhau = "1111";
         Employee e = new Employee();
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
-        String hasdPassword = passwordEncoder.encode(matkhau);
+//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
+//        String hasdPassword = passwordEncoder.encode(matkhau);
         e.setIdEmployee(id);
         e.setName(ten);
         e.setPhone(sdt);
@@ -456,7 +456,7 @@ public class ManagerAdminView extends JPanel implements KeyListener, MouseListen
 
         Account account = new Account();
         account.setEmployee(e);
-        account.setPassword(hasdPassword);
+        account.setPassword(matkhau);
         account.setStarDate(ngayLap);
         if (valiDate()) {
             mainController.addEmployee(e);

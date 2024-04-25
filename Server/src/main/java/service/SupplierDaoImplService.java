@@ -2,14 +2,17 @@ package service;
 
 import dao.impl.SupplierDaoImpl;
 import models.Supplier;
+import service.serviceImpl.AccountDaoService;
+import service.serviceImpl.SupplierDaoService;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-public class SupplierDaoImplService implements Remote {
+public class SupplierDaoImplService extends UnicastRemoteObject implements SupplierDaoService {
     private final SupplierDaoImpl supplierDaoImpl = new SupplierDaoImpl();
-
+    
     public SupplierDaoImplService() throws RemoteException {
     }
 

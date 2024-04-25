@@ -3,12 +3,15 @@ package service;
 import dao.impl.CategoryDaoImpl;
 import models.Category;
 import models.Merchandise;
+import service.serviceImpl.BookDaoService;
+import service.serviceImpl.CategoryDaolService;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-public class CategoryDaoImplService implements Remote {
+public class CategoryDaoImplService extends UnicastRemoteObject implements CategoryDaolService {
     private final CategoryDaoImpl categoryDaoImpl = new CategoryDaoImpl();
 
     public CategoryDaoImplService() throws RemoteException {

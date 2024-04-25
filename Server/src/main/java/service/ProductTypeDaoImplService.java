@@ -2,12 +2,15 @@ package service;
 
 import dao.impl.ProductTypeDaoImpl;
 import models.ProductType;
+import service.serviceImpl.ProductDaoService;
+import service.serviceImpl.ProductTypeDaoService;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-public class ProductTypeDaoImplService implements Remote {
+public class ProductTypeDaoImplService extends UnicastRemoteObject implements ProductTypeDaoService {
     private final ProductTypeDaoImpl productTypeDaoImpl = new ProductTypeDaoImpl();
 
     public ProductTypeDaoImplService() throws RemoteException {

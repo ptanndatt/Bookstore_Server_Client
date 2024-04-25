@@ -4,12 +4,14 @@ import dao.impl.AccountDaoImpl;
 import dao.impl.CustomerDaoImpl;
 import models.Account;
 import models.Customer;
+import service.serviceImpl.AccountDaoService;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-public class AccountDaoImplService implements Remote {
+public class AccountDaoImplService extends UnicastRemoteObject implements AccountDaoService {
     private final AccountDaoImpl accountDao = new AccountDaoImpl();
 
     public AccountDaoImplService() throws RemoteException {
