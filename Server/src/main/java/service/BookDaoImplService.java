@@ -2,13 +2,16 @@ package service;
 
 import dao.impl.BookDaoImpl;
 import models.Book;
+import service.serviceImpl.AuthorDaoService;
+import service.serviceImpl.BookDaoService;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-public class BookDaoImplService implements Remote {
-    private BookDaoImpl bookDaoImpl = new BookDaoImpl();
+public class BookDaoImplService extends UnicastRemoteObject implements BookDaoService {
+    private final BookDaoImpl bookDaoImpl = new BookDaoImpl();
 
     public BookDaoImplService() throws RemoteException {
     }

@@ -3,12 +3,16 @@ package service;
 import dao.RoleDao;
 import dao.impl.RoleDaoImpl;
 import models.Role;
+import service.serviceImpl.PromotionDaoService;
+import service.serviceImpl.RoleDaoService;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RoleDaoImplService {
+public class RoleDaoImplService extends UnicastRemoteObject implements RoleDaoService {
     RoleDaoImpl roleDao = new RoleDaoImpl();
 
     public RoleDaoImplService() throws RemoteException {

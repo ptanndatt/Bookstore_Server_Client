@@ -95,7 +95,7 @@ public class Main {
             public void run() {
                 MainControllerInterface mainController = null;
                 mainController = new MainController();
-                LoginView view = new LoginView(mainController);
+                LoginView view = new LoginView();
                 view.setVisible(true);
             }
         });

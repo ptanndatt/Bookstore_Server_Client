@@ -5,12 +5,15 @@ import dao.impl.EmployeeDaoImpl;
 import models.Customer;
 import models.Employee;
 import models.Role;
+import service.serviceImpl.EmployeeDaoService;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
-public class EmployeeDaoImplService {
-    private EmployeeDaoImpl employeeDao = new EmployeeDaoImpl();
+public class EmployeeDaoImplService extends UnicastRemoteObject implements EmployeeDaoService {
+    private final EmployeeDaoImpl employeeDao = new EmployeeDaoImpl();
 
     public EmployeeDaoImplService() throws RemoteException {
     }

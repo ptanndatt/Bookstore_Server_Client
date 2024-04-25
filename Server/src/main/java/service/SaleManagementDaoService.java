@@ -6,14 +6,18 @@ import models.Bill;
 import models.BillPending;
 import models.DetailsBill;
 import models.DetailsBillPending;
+import service.serviceImpl.RoleDaoService;
+import service.serviceImpl.SaleManagementDaoService1;
 
+import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
-public class SaleManagementDaoService {
-    private SaleManagementDao dao = new SaleManagementDaoImpl();
+public class SaleManagementDaoService extends UnicastRemoteObject implements SaleManagementDaoService1 {
+    private final SaleManagementDao dao = new SaleManagementDaoImpl();
 
     public SaleManagementDaoService() throws RemoteException {
     }

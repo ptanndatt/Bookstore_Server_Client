@@ -9,12 +9,13 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import java.awt.*;
+import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 
 public class Server {
-    private static final String SERVER_IP = "192.168.89.111";
-    private static final int PORT = 7881;
+    private static final String SERVER_IP = "10.70.185.226";
+    private static final int PORT = 6969;
     private static final String URL = "rmi://" + SERVER_IP + ":" + PORT + "/";
 
     public static void main(String[] args) {
@@ -43,11 +44,10 @@ public class Server {
             EventQueue.invokeLater(new Runnable() {
                 @Override
                 public void run() {
-                    LoginView view = new LoginView(mainController);
+                    LoginView view = new LoginView();
                     view.setVisible(true);
                 }
             });
-
         } catch (Exception e) {
             System.err.println("Server exception: " + e.toString());
             e.printStackTrace();
